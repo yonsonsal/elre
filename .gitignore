@@ -30,9 +30,13 @@ server/geoserver/data_dir/tmp/
 # Compilación Java
 target/
 *.war
-*.jar
 *.ear
 *.class
+
+# Archivos ZIP (grandes archivos binarios - plugins y distribuciones)
+server/*.zip
+code/backend/GeoMvd-DFR/WebContent/plugins/**/*.zip
+code/frontend/*.zip
 
 # Temporales
 tmp/
