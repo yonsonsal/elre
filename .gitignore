@@ -1,0 +1,85 @@
+# Archivos de progreso y documentación temporal (no versionar)
+PROGRESO_SANITIZACION.md
+ENTORNO_LOCAL_LISTO.md
+CONFIGURACION_GEOSERVER_PERSISTENTE.md
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Variables de entorno con datos sensibles
+.env.local
+.env.production
+
+# Configuraciones locales (solo versionar .example)
+*.local.properties
+config.local.properties
+
+# Logs
+*.log
+logs/
+server/wildfly/log/
+server/geoserver/data_dir/logs/
+server/geoserver/data_dir/temp/
+server/geoserver/data_dir/tmp/
+
+# Compilación Java
+target/
+*.war
+*.jar
+*.ear
+*.class
+
+# Temporales
+tmp/
+temp/
+*.tmp
+.vfs/
+
+# Node modules (si hay frontend JS)
+node_modules/
+package-lock.json
+
+# Python cache (plugin QGIS)
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Docker volúmenes (se crean automáticamente)
+# No ignorar docker-compose.yml ni Dockerfiles
+
+# Maven wrapper
+.mvn/wrapper/maven-wrapper.jar
+
+# Configuraciones de servidor local de desarrollo
+server/wildfly-10.1.0.Final/
+server/wildfly/deployments/*.deployed
+server/wildfly/deployments/*.failed
+server/wildfly/deployments/*.isdeploying
+server/wildfly/deployments/*.isundeploying
+server/wildfly/deployments/*.undeployed
+
+# GeoServer cache y temporales
+server/geoserver/gwc/**/*.png
+server/geoserver/gwc/**/*.jpeg
+server/geoserver/gwc/**/*.jpg
+server/geoserver/gwc/**/*.pbf
+server/geoserver/gwc/diskquota_page_store*
+server/geoserver/data_dir/monitoring/*.db
+server/geoserver/data_dir/monitoring/*.h2.db
+
+# Backups
+*.backup
+*.bak
+*~
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini

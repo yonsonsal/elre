@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="e_ep_bebederos" grupo="Capas editables">
+	<atributo nombre="modeloBebedero" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Modelos Bebederos" nillable="true"/>
+	<atributo nombre="descripcion" tipo="java.lang.String"/>	
+	<atributo nombre="fabricante" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Fabricantes" nillable="true"/>	
+	<atributo nombre="proveedor" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Proveedores" nillable="true"/>
+	<atributo nombre="instaladoPor" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Instaladores" nillable="true"/>
+	<atributo nombre="fecha" tipo="java.util.Date"/>	
+	<atributo nombre="CCZ" tipo="java.lang.Integer"/>
+	<atributo nombre="activo" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Estado" nillable="true"/>	
+	
+	<atributo nombre="idauditoria" tipo="java.lang.String"/>	
+    <atributo nombre="Ucrea" tipo="java.lang.String" />
+	<atributo nombre="Fcrea" tipo="java.util.Date" />
+	<atributo nombre="Uact" tipo="java.lang.String" />
+    <atributo nombre="Fact" tipo="java.util.Date" nillable="true"/>	
+		
+    <atributo nombre="the_geom" tipo="com.vividsolutions.jts.geom.Point"/>	 	
+  		
+	<origen_datos>
+		<workspace nombre="gep" tipo="WFS">
+			<style strokeColor="#0000FF"  strokeWidth="3"  fillColor="#000000AA" />
+			<capapublicada nombre="e_ep_bebederos" nombre_mostrar="Bebederos">
+			</capapublicada>
+		</workspace>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="ep_bebederos" pk="gid" esquema="ciudadanos" secuencia="ciudadanos.s_ep_bebe">	
+			<atributo_tabla nombre_bd="gid" nombre_capa="gid"/>
+			<atributo_tabla nombre_bd="cod_modelo" nombre_capa="modeloBebedero"/>
+			<atributo_tabla nombre_bd="descripcion" nombre_capa="descripcion"/>
+			<atributo_tabla nombre_bd="cod_fabricante" nombre_capa="fabricante"/>
+			<atributo_tabla nombre_bd="cod_proveedor" nombre_capa="proveedor"/>
+			<atributo_tabla nombre_bd="cod_instalador" nombre_capa="instaladoPor"/>
+			<atributo_tabla nombre_bd="fecha" nombre_capa="fecha"/>			
+			<atributo_tabla nombre_bd="ccz" nombre_capa="CCZ"/>
+			<atributo_tabla nombre_bd="activo" nombre_capa="activo"/>
+			
+			<atributo_tabla nombre_bd="idauditoria" nombre_capa="idauditoria"/>			
+			<atributo_tabla nombre_bd="ucrea" nombre_capa="Ucrea"/>
+			<atributo_tabla nombre_bd="fcrea" nombre_capa="Fcrea"/>
+			<atributo_tabla nombre_bd="uact" nombre_capa="Uact"/>
+			<atributo_tabla nombre_bd="fact" nombre_capa="Fact"/>				
+  			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

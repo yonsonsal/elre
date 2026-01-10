@@ -1,0 +1,6 @@
+<layer>
+	<attribute name="cod_tipo_conductor" query_capable = "true" show="true"/>
+	<attribute name="tipo_conductor" query_capable = "true" show="true"/>
+	<attribute name="desc_corta_tipo_conductor" query_capable = "true" show="true"/>
+	<attribute name="desc_tipo_conductor" query_capable = "true" show="true"/>
+</layer>

@@ -1,0 +1,16 @@
+<layer>
+	<attribute name="gid" query_capable="false" label="GID" show="false" />
+	<attribute name="categoria" usage="LOV" query_capable="true" label="Categoría" show="true"/>
+	<attribute name="subcat" usage="LOV" query_capable="true" label="Subcategoría" show="true"/>
+	<attribute name="areadif" query_capable="true" label="Area Diferenciada" show="true"/>
+        <attribute name="normativa" query_capable = "false" show="true"  label="Normativa"/>	
+	<attribute name="analisis" query_capable="true" label="Análisis" show="true"/>
+        <attribute name="info_int" query_capable = "false" show="true"  label="Información Interna"/>	
+        <attribute name="idauditoria" query_capable = "false" show="false"/>	
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+	<attribute name="the_geom" query_capable="false" show="false"/>			
+	
+</layer>	

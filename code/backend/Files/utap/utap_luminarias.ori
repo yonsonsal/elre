@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="e_utap_luminaria">
+
+	<atributo nombre="id_puesta" tipo="imm.gis.core.feature.FeatureReferenceAttribute" capa_referenciada="utap:e_utap_puesta"/>
+	<atributo nombre="desc_tipo_lampara" tipo="imm.gis.core.feature.ExternalAttribute" valorCalculado="python::getTipoLampara()" persistible="true" capa_referenciada="Tipo Lampara"/>
+	<atributo nombre="desc_modelo"     tipo="imm.gis.core.feature.ExternalAttribute" valorCalculado="python::getModeloLuminaria()" persistible="true" capa_referenciada="Modelo Luminaria"/>	
+	<atributo nombre="desc_marca" tipo="imm.gis.core.feature.ExternalAttribute" valorCalculado="python::getMarcaLuminaria()" persistible="true" capa_referenciada="Marca Luminaria"/>
+	<atributo nombre="desc_fabricante" tipo="imm.gis.core.feature.ExternalAttribute" valorCalculado="python::getFabricanteLuminaria()" persistible="true" capa_referenciada="Fabricante Luminaria"/>
+	<atributo nombre="cod_serie_luminaria" tipo="java.lang.String" nillable="true" />
+	<atributo nombre="compra_luminaria" tipo="java.lang.String" nillable="true" /> 
+	<atributo nombre="lote_luminaria" tipo="java.lang.String" nillable="true" /> 
+	
+	<atributo nombre="desc_modelo_brazo" tipo="imm.gis.core.feature.ExternalAttribute" valorCalculado="python::getModeloBrazo()" persistible="true" capa_referenciada="Modelo Brazos"/>
+	<atributo nombre="codserie_brazo" tipo="java.lang.String" nillable="true" /> 
+	<atributo nombre="fabricante_brazo" tipo="java.lang.String" nillable="true" /> 
+	<atributo nombre="compra_brazo" tipo="java.lang.String" nillable="true" /> 
+	<atributo nombre="lote_brazo" tipo="java.lang.String" nillable="true" /> 
+
+	<atributo nombre="flujo_luminico" tipo="java.lang.Integer" nillable="true" />
+	<atributo nombre="tension_nominal" tipo="java.lang.Integer" nillable="true" />
+	<atributo nombre="tipo_fotometria" tipo="java.lang.String" nillable="true" /> 	
+
+	<atributo nombre="desc_tipologia" tipo="imm.gis.core.feature.ExternalAttribute" valorCalculado="python::getTipologia()" persistible="true" capa_referenciada="Tipologia"/>
+	<atributo nombre="desc_instalador" tipo="imm.gis.core.feature.ExternalAttribute" valorCalculado="python::getInstalador()" persistible="true" capa_referenciada="Instalador"/>	
+
+
+	<atributo nombre="potencia_luminaria_W" tipo="java.lang.Integer" nillable="true" /> 	
+	<atributo nombre="horas_uso" tipo="java.lang.Integer" nillable="true" /> 
+
+	<atributo nombre="desc_tipo_control" tipo="imm.gis.core.feature.ExternalAttribute" valorCalculado="python::getTipoControl()" persistible="true" capa_referenciada="Tipo Control"/>
+	<atributo nombre="desc_temp_color" tipo="imm.gis.core.feature.ExternalAttribute" valorCalculado="python::getTemperaturaColor()" persistible="true" capa_referenciada="Temperatura Color"/>
+	<atributo nombre="desc_color" tipo="imm.gis.core.feature.ExternalAttribute" valorCalculado="python::getColorCarcasa()" persistible="true" capa_referenciada="Color Carcasa"/>
+
+	<atributo nombre="id_nodo_controlador" tipo="imm.gis.core.feature.FeatureReferenceAttribute" capa_referenciada="utap:e_utap_nodo_controlador" nillable="true"/>
+
+	<atributo nombre="fecha_instalado" tipo="java.util.Date" nillable="true" />
+	<atributo nombre="fecha_desinstalado" tipo="java.util.Date" nillable="true" />
+
+
+	<atributo nombre="the_geom" tipo="com.vividsolutions.jts.geom.Point"/>	
+	<atributo nombre="anio_inactivo" tipo="java.lang.Integer" />
+	<atributo nombre="idauditoria" tipo="java.lang.String"/>	
+	<atributo nombre="Ucrea" tipo="java.lang.String" />
+	<atributo nombre="Fcrea" tipo="java.util.Date" />
+	<atributo nombre="Uact" tipo="java.lang.String" />
+    	<atributo nombre="Fact" tipo="java.util.Date"/>
+
+ 
+	<origen_datos>
+		<workspace nombre="utap" tipo="WFS">
+			<style strokeColor="#FF00A6" strokeWidth="1" fillColor="#000000BA" />
+			<capapublicada nombre="e_utap_luminaria" nombre_mostrar="e_utap_luminaria"></capapublicada>
+		</workspace>
+		<fuente nombre="nucleoDS" tipo="POSTGIS" />		
+		
+		<tabla nombre="utap_luminaria" pk="gid" esquema="public">
+			<atributo_tabla nombre_bd="gid" nombre_capa="gid" />
+			<atributo_tabla nombre_bd="id_puesta" nombre_capa="id_puesta"/>
+			<atributo_tabla nombre_bd="cod_tipo_lampara" nombre_capa="desc_tipo_lampara"/>
+
+			<atributo_tabla nombre_bd="cod_modelo_brazo" nombre_capa="desc_modelo_brazo"/>
+
+			<atributo_tabla nombre_bd="tension_nominal" nombre_capa="tension_nominal"/>		
+			<atributo_tabla nombre_bd="flujo_luminico" nombre_capa="flujo_luminico"/>		
+			<atributo_tabla nombre_bd="fecha_alta" nombre_capa="fecha_instalado"/>		
+			<atributo_tabla nombre_bd="fecha_baja" nombre_capa="fecha_desinstalado"/>		
+			<atributo_tabla nombre_bd="cod_serie_luminaria" nombre_capa="cod_serie_luminaria"/>	
+
+			<atributo_tabla nombre_bd="cod_marca" nombre_capa="desc_marca"/>
+			<atributo_tabla nombre_bd="cod_fabricante" nombre_capa="desc_fabricante"/>
+			<atributo_tabla nombre_bd="cod_tipologia" nombre_capa="desc_tipologia"/>
+			<atributo_tabla nombre_bd="cod_instalador" nombre_capa="desc_instalador"/>
+			<atributo_tabla nombre_bd="anio_inactivo" nombre_capa="anio_inactivo"/>
+			<atributo_tabla nombre_bd="codmodelo" nombre_capa="desc_modelo"/>
+
+			<atributo_tabla nombre_bd="cod_tipo_control" nombre_capa="desc_tipo_control"/>
+			<atributo_tabla nombre_bd="cod_temp_color" nombre_capa="desc_temp_color"/>	
+			<atributo_tabla nombre_bd="cod_color_carcasa" nombre_capa="desc_color"/>			
+
+			<atributo_tabla nombre_bd="id_nodo_controlador" nombre_capa="id_nodo_controlador"/>		
+			<atributo_tabla nombre_bd="potencia_luminica" nombre_capa="potencia_luminaria_W" /> 	
+			
+			<atributo_tabla nombre_bd="idauditoria" nombre_capa="idauditoria"/>			
+			<atributo_tabla nombre_bd="ucrea" nombre_capa="Ucrea"/>
+			<atributo_tabla nombre_bd="fcrea" nombre_capa="Fcrea"/>
+			<atributo_tabla nombre_bd="uact" nombre_capa="Uact"/>
+			<atributo_tabla nombre_bd="fact" nombre_capa="Fact"/>	
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>
+
+
+

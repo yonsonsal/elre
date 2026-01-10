@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(docker-compose up:*)",
+      "Bash(docker-compose ps:*)",
+      "Bash(docker-compose logs:*)",
+      "Bash(docker inspect:*)",
+      "Bash(lsof:*)",
+      "Bash(docker exec:*)",
+      "Bash(docker cp:*)",
+      "Bash(__NEW_LINE_8414367775983c65__ echo \"\")",
+      "Bash(du -sh:*)",
+      "Bash(__NEW_LINE_176d334457725fc9__ echo \"\")",
+      "Bash(curl:*)",
+      "Bash(__NEW_LINE_8d937493f3c86119__ echo \"\")",
+      "Bash(python3:*)",
+      "Bash(__NEW_LINE_9fcd534fcfc508ba__ echo \"\")"
+    ]
+  }
+}

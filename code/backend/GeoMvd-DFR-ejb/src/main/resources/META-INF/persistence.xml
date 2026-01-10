@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+	<persistence-unit name="brfDS">
+		<jta-data-source>java:jboss/datasources/brfDS</jta-data-source>
+		<properties>
+		<property name="hibernate.show_sql" value="false" /> 
+		<property name="hibernate.format_sql" value="true" /> 
+		<property name="hibernate.use_sql_comments" value="false" /> 
+		<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle9Dialect"/>		 
+		</properties>
+	</persistence-unit>
+	<persistence-unit name="stmDS">
+		<jta-data-source>java:jboss/datasources/stmDS</jta-data-source>
+		<properties>
+		<property name="hibernate.show_sql" value="false" /> 
+		<property name="hibernate.format_sql" value="true" /> 
+		<property name="hibernate.use_sql_comments" value="false" /> 
+		<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle9Dialect"/>		 
+		</properties>
+	</persistence-unit>
+	<persistence-unit name="nucleoDS">
+		<jta-data-source>java:jboss/datasources/nucleoDS</jta-data-source>
+		<properties>
+			<property name="hibernate.show_sql" value="false" /> 
+		  	<property name="hibernate.format_sql" value="true" /> 
+		  	<property name="hibernate.use_sql_comments" value="false" /> 
+		  	<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" /> 
+		</properties>
+	</persistence-unit>
+</persistence>

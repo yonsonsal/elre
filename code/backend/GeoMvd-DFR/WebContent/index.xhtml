@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Limpieza - Inicio</title>
+
+	<link rel="stylesheet" href="external/css/ol.css" type="text/css"/>
+	<link rel="stylesheet" href="external/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="external/css/alertify/alertify.min.css"/>
+	<link rel="stylesheet" href="external/css/alertify/themes/default.min.css"/>
+	<link rel="stylesheet" href="external/css/jquery.datetimepicker.min.css"/>
+	<link rel="stylesheet" href="external/css/ol-ext.min.css"/>
+	<link rel="stylesheet" href="external/css/font-awesome-all.css"/>
+
+	<script type="text/javascript" src="external/js/modernizr.js"></script>
+	<script type="text/javascript" src="external/js/dateformat.js"></script>
+	<script type="text/javascript" src="external/js/jquery-3.4.1.js"></script>
+	<script type="text/javascript" src="external/js/jquery-ui.js"></script>
+	<script type="text/javascript" src="external/js/jquery.datetimepicker.full.min.js"></script>
+	<script type="text/javascript" src="external/js/font-awesome-all.js"></script>
+
+    <script type="text/javascript" src="js/version.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+	<!-- Scripts especificos de la app -->
+	<script src="js/filtros-app.js" type=""></script>
+	<script src="js/services-app.js" type=""></script>
+	<script src="js/validaciones-app.js" type=""></script>
+	<script src="js/menu-app.js" type=""></script>
+</head>
+<body>
+    <wc-map
+    	id="wc-map"
+    	hideResetButton="false"
+    	hideMeasureButton="false"
+    	hideSelectButton="false"
+    	hideAssistedSelectButton="false"
+		authenticationToken="#{sessionBean.getToken()}"
+		timeOut="#{sessionBean.getTimeOut()}"
+		loggedUser="#{sessionBean.getUsername()}"
+    ></wc-map>
+
+</body>
+</html>

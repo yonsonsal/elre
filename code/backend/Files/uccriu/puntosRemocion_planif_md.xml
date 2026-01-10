@@ -1,0 +1,42 @@
+<layer>
+	<attribute name="gid" query_capable="false" label="GID" show="false"/>
+	<attribute name="desc_remocion" usage="LOV" query_capable = "true" label="Desc. Remoción" show="true"/>
+	
+  	<attribute name="nro_obra" query_capable = "true" label="Nro. de Obra" show="true"/>	
+	<attribute name="nro_permiso" query_capable="true" label="Nro. de Permiso" show="true"/>
+	
+	<attribute name="motivo_remocion" usage="LOV" query_capable="false" label="Motivo de Remoción"/>			
+	
+	<attribute name="motivo_obra" query_capable="true" read_only="true" label="Motivo de Obra" show="true"/>		
+	<attribute name="tipo_obra"	query_capable="true" read_only="true" label="Tipo de Obra" show="true"/>		
+	<attribute name="tipo_remocion" query_capable="true" read_only="true" label="Tipo de Remoción" show="true"/>		
+	<attribute name="fecha_inicio" query_capable="true" read_only="true" label="Fecha de Inicio" show="true"/>		
+	<attribute name="fecha_fin" query_capable="true" read_only="true" label="Fecha de Finalización" show="true"/>		
+	<attribute name="propietario"  query_capable="true" read_only="true" label="Propietario" show="true"/>		
+	<attribute name="adjudicatario"		query_capable="true" read_only="true" label="Adjudicatario" show="true"/>		
+	<attribute name="ejecutante" query_capable="true" read_only="true" label="Ejecutante" show="true"/>		
+	<attribute name="nro_cont_o_lici"  query_capable="true" read_only="true" label="Nro. de Contrato" show="true"/>		
+	<attribute name="ubicacion" query_capable="true" read_only="true" label="Ubicación" show="true"/>		
+	<attribute name="fecha_solicitud" query_capable="true" read_only="true" label="Fecha de Solicitud" show="true"/>		
+	<attribute name="fecha_autorizacion" query_capable="true" read_only="true" label="Fecha de Autorización" show="true"/>		
+	<attribute name="plazo_autorizado" query_capable="true" read_only="true" label="Plazo de Autorización" show="true"/>		
+	<attribute name="fecha_recepcion_provisoria" query_capable="true" read_only="true" label="Fecha Recep. Provisoria" show="true"/>		
+	<attribute name="fecha_recepcion_definitiva" query_capable="true" read_only="true" label="Fecha Recep. Definitiva" show="true"/>		
+	<attribute name="inspector" query_capable="false" read_only="true" label="Inspector" show="true"/>		
+	<attribute name="cantidad" 	query_capable="true" read_only="true" label="Cantidad" show="true"/>		
+	<attribute name="longitud" query_capable="true" read_only="true" label="Longitud" show="true"/>		
+	<attribute name="ancho" query_capable="true" read_only="true" label="Ancho" show="true"/>		
+	<attribute name="diametro" query_capable="true" read_only="true" label="Diámetro" show="true"/>		 
+	<attribute name="tipo_pavimento" query_capable="true" read_only="true" label="Tipo de Pavimento" show="true"/>		
+	<attribute name="tipo_equipo"	query_capable="true" read_only="true" label="Tipo de Equipo" show="true"/>		
+	<attribute name="plazo_total"	query_capable="true" read_only="true" label="Plazo Total" show="true"/>
+	<attribute name="vigente"	query_capable="true" read_only="true" label="Vigente" show="true"/>
+			
+  	<attribute name="fecha_alta" query_capable = "true" label="Fecha Alta" show="true"/>
+
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+
+</layer>

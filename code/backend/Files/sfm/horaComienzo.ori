@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="Hora comienzo">
+	<atributo nombre="Hora_comienzo" tipo="java.lang.String"/>
+
+	<origen_datos>
+		<fuente nombre="brfDS" tipo="ORACLE" />
+		<tabla nombre="V_SF_HORA_COMIENZO" pk="COD_COMIENZO" comboValue="COD_COMIENZO" comboLabel="DESCRIPCION">	
+			<atributo_tabla nombre_bd="DESCRIPCION" nombre_capa="Hora_comienzo"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

@@ -1,0 +1,13 @@
+<layer>
+	<attribute name="id" query_capable="false" label="Id" show="false" />
+	<attribute name="padron" query_capable="true" label="Padron" show="true"/>
+	<attribute name="estado" usage="LOV" query_capable = "false" show="true" label="Estado"/>	
+	<attribute name="id_ap" usage="LOV" query_capable = "false" show="true" label="Area Pat"/>	
+	<attribute name="decreto" query_capable = "false" show="true" label="Decreto"/>	
+        <attribute name="info_int" query_capable = "false" show="true"  label="Información Interna"/>
+	<attribute name="idauditoria" query_capable = "false" show="false"/>	
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+</layer>	

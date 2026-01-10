@@ -1,0 +1,19 @@
+<layer>
+
+    <attribute name="gid" query_capable="false" label="GID" show="false"/>
+    <attribute name="padron" query_capable="false" label="Padrón" show="true"/>
+    <attribute name="area_dnc" query_capable="false" label="AreaDNC" show="true"/>
+    <attribute name="solcarph"  query_capable = "false" label="SolCarPH" show="true"/>
+    <attribute name="solcarp"  query_capable = "false" label="SolCarP" show="true"/>
+    <attribute name="solregimen"  query_capable = "false" label="SolRegimen" show="true"/>
+    <attribute name="solley"  query_capable = "false" label="SolLey" show="true"/>
+    <attribute name="the_geom" query_capable = "false" show="false"/>
+    <attribute name="realidad"  query_capable = "false" label="Realidad" show="true"/>
+    <attribute name="estado"  query_capable = "false" label="Estado" show="true"/>
+    <attribute name="fcrea"  query_capable = "false" show="false"/>
+    <attribute name="ucrea"  query_capable = "false" show="false"/>
+    <attribute name="fact"  query_capable = "false" show="false"/>
+    <attribute name="uact"  query_capable = "false" show="false"/>
+    <attribute name="idauditoria" query_capable = "false" show="false"/>
+
+</layer>

@@ -1,0 +1,23 @@
+<layer >
+	<attribute name="gid" query_capable="false" label="GID" show="false" />
+	<attribute name="desc_modelo" usage="LOV" label="modelo" show="true"/>	
+	<attribute name="desc_marca" usage="LOV" label="marca" show="true"/>
+	<attribute name="desc_fabricante" usage="LOV" label="fabricante" show="true"/>
+	<attribute name="desc_tecno" usage="LOV" label="tecnologia" show="true"/>
+	<attribute name="desc_tipo_control" usage="LOV" label="tipo_control" show="true"/>
+	
+	<attribute name="fecha_instalado" label="fecha_instalado" show="true"/>
+	<attribute name="fecha_desinstalado" label="fecha_desinstalado" show="true"/>
+	<attribute name="cod_serie_nodo" show="true"/>
+	<attribute name="compra_nodo" show="true"/>
+	<attribute name="lote_nodo" show="true"/>
+	<attribute name="mac" show="true"/>
+	<attribute name="anio_inactivo" show="false"/>
+
+	<attribute name="idauditoria" query_capable = "false" show="false"/>
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+	<attribute name="the_geom" query_capable="false" show="false"/>	
+</layer>

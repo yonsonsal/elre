@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Cod Pat Regulacion">
+	
+	<atributo nombre="reg" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="citimDS" tipo="POSTGIS"/>
+		<tabla nombre="citim_cod_pat_regulacion" esquema="public" pk="id_reg" comboValue="id_reg" comboLabel="desc_reg">	
+					
+			<atributo_tabla nombre_bd="desc_reg" nombre_capa="reg"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

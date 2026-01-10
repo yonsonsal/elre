@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="Tipos de feria">
+	<atributo nombre="Tipo_de_feria" tipo="java.lang.String"/>
+
+	<origen_datos>
+		<fuente nombre="brfDS" tipo="ORACLE"/>
+		<tabla nombre="SF_TIPOFERIA" pk="COD_TIPO" comboValue="COD_TIPO" comboLabel="DESCRIPCION">
+			<atributo_tabla nombre_bd="DESCRIPCION" nombre_capa="Tipo_de_feria"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

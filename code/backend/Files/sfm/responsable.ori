@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="Responsable">
+	<atributo nombre="Responsable" tipo="java.lang.String"/>
+
+	<origen_datos>
+		<fuente nombre="brfDS" tipo="ORACLE" proxy="false"/>
+		<tabla nombre="SF_RESPONSABLE"  pk="COD_RESPONSABLE" comboValue="COD_RESPONSABLE" comboLabel="DESCRIPCION">
+			<atributo_tabla nombre_bd="DESCRIPCION" nombre_capa="Responsable"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

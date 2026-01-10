@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Cod Estado">
+	
+	<atributo nombre="estado" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="citimDS" tipo="POSTGIS"/>
+		<tabla nombre="citim_cod_estado" esquema="public" pk="id_estado" comboValue="id_estado" comboLabel="desc_estado">	
+					
+			<atributo_tabla nombre_bd="desc_estado" nombre_capa="estado"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+	<capa nombre="e_ai_ocupaciones_irregulares_monitoreo" grupo="Capas editables">
+
+		<atributo nombre="nombre" tipo="java.lang.String" nillable="true"/>
+		<atributo nombre="tipo" tipo="java.lang.String" nillable="true"/>
+		<atributo nombre="municipio" tipo="java.lang.String" valorCalculado="uy.gub.montevideo.gis.geomvd.piai.fields.OcupacionesIrregularesCalcs::getMunicipio(the_geom)" persistible="true"/>
+		<atributo nombre="ccz" tipo="java.lang.Integer" nillable="true" valorCalculado="uy.gub.montevideo.gis.geomvd.piai.fields.OcupacionesIrregularesCalcs::getCcz(the_geom)" persistible="true"/>
+		<atributo nombre="dirección" tipo="java.lang.String" nillable="true"/>
+		<atributo nombre="padrones" tipo="java.lang.String" nillable="true"/>
+		<atributo nombre="observacio" tipo="java.lang.String" nillable="true"/>
+		<atributo nombre="cod_previo" tipo="java.lang.String" nillable="true"/>
+		<atributo nombre="cod_prev_1" tipo="java.lang.String" nillable="true"/>
+		<atributo nombre="visita" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Cod Visita Ocu" nillable="true"/>
+		<atributo nombre="visita_fec" tipo="java.util.Date" nillable="true"/>
+		<atributo nombre="visita_obs" tipo="java.lang.String" nillable="true"/>
+		<atributo nombre="info_regis" tipo="java.lang.String" nillable="true"/>
+		<atributo nombre="info_reg_1" tipo="java.lang.String" nillable="true"/>
+		<atributo nombre="estado" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Cod Estado Ocu" nillable="true"/>
+		<atributo nombre="codigo_gip" tipo="java.lang.Integer" nillable="true"/>
+		<atributo nombre="idauditoria" tipo="java.lang.String"/>
+		<atributo nombre="Ucrea" tipo="java.lang.String" />
+		<atributo nombre="Fcrea" tipo="java.util.Date" />
+		<atributo nombre="Uact" tipo="java.lang.String" />
+		<atributo nombre="Fact" tipo="java.util.Date" nillable="true"/>
+		<atributo nombre="gid" tipo="java.lang.Integer" nillable="true"/>
+
+		<atributo nombre="the_geom" tipo="com.vividsolutions.jts.geom.Point"/>
+
+		<origen_datos>
+			<workspace nombre="piai" tipo="WFS">
+				<style strokeColor="#FF00A6" strokeWidth="1" fillColor="#000000BA" />
+				<capapublicada nombre="e_ai_ocupaciones_irregulares_monitoreo" nombre_mostrar="e_ai_ocupaciones_irregulares_monitoreo"></capapublicada>
+			</workspace>
+			<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+			<tabla nombre="ai_ocupaciones_irregulares_monitoreo" esquema="public" pk="gid" secuencia="ai_ocupaciones_irregulares_monitoreo_gid_seq">
+				<atributo_tabla nombre_bd="gid" nombre_capa="gid" />
+				<atributo_tabla nombre_bd="nombre" nombre_capa="nombre"/>
+				<atributo_tabla nombre_bd="tipo" nombre_capa="tipo"/>
+				<atributo_tabla nombre_bd="municipio" nombre_capa="municipio"/>
+				<atributo_tabla nombre_bd="ccz" nombre_capa="ccz"/>
+				<atributo_tabla nombre_bd="dirección" nombre_capa="dirección"/>
+				<atributo_tabla nombre_bd="padrones" nombre_capa="padrones"/>
+				<atributo_tabla nombre_bd="observacio" nombre_capa="observacio"/>
+				<atributo_tabla nombre_bd="cod_previo" nombre_capa="cod_previo"/>
+				<atributo_tabla nombre_bd="cod_prev_1" nombre_capa="cod_prev_1"/>
+				<atributo_tabla nombre_bd="visita" nombre_capa="visita"/>
+				<atributo_tabla nombre_bd="visita_fec" nombre_capa="visita_fec"/>
+				<atributo_tabla nombre_bd="visita_obs" nombre_capa="visita_obs"/>
+				<atributo_tabla nombre_bd="info_regis" nombre_capa="info_regis"/>
+				<atributo_tabla nombre_bd="info_reg_1" nombre_capa="info_reg_1"/>
+				<atributo_tabla nombre_bd="estado" nombre_capa="estado"/>
+				<atributo_tabla nombre_bd="codigo_gip" nombre_capa="codigo_gip"/>
+				<atributo_tabla nombre_bd="idauditoria" nombre_capa="idauditoria"/>
+				<atributo_tabla nombre_bd="ucrea" nombre_capa="Ucrea"/>
+				<atributo_tabla nombre_bd="fcrea" nombre_capa="Fcrea"/>
+				<atributo_tabla nombre_bd="uact" nombre_capa="Uact"/>
+				<atributo_tabla nombre_bd="fact" nombre_capa="Fact"/>
+
+			</tabla>
+		</origen_datos>
+	</capa>
+</tema>
+

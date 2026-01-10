@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Estado2">
+	
+	<atributo nombre="noGenerizados" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="ep_banios_no_generizados" esquema="ciudadanos" pk="cod_banio_ng" comboValue="cod_banio_ng" comboLabel="desc_banio_ng">	
+					
+			<atributo_tabla nombre_bd="desc_banio_ng" nombre_capa="noGenerizados"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

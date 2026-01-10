@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="e_sf_estacionamiento"  grupo="Capas editables">		
+        <atributo nombre="Feria" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Detalle ferias" nillable="true"/> 	
+        <atributo nombre="Ubicacion" tipo="java.lang.String"/> 	
+        <atributo nombre="Observaciones" tipo="java.lang.String"/>
+	<atributo nombre="idauditoria" tipo="java.lang.String"/>		
+        <atributo nombre="Ucrea" tipo="java.lang.String" />
+	<atributo nombre="Fcrea" tipo="java.util.Date" />
+	<atributo nombre="Uact" tipo="java.lang.String" />
+        <atributo nombre="Fact" tipo="java.util.Date"/>		
+        <atributo nombre="the_geom" tipo="com.vividsolutions.jts.geom.Polygon"/>		
+      
+	<origen_datos>
+	<workspace nombre="sfm" tipo="WFS">
+			<style strokeColor="#0000FF"  strokeWidth="3"  fillColor="#000000AA" />
+			<capapublicada nombre="e_sf_estacionamiento" nombre_mostrar="e_sf_estacionamiento">
+			</capapublicada>
+		</workspace>
+		<fuente nombre="brfDS" tipo="ORACLE"/>
+		<tabla nombre="SF_ESTACIONAMIENTO"  pk="GID" secuencia="s_sfesta">	
+		
+		<atributo_tabla nombre_bd="COD_FERIA" nombre_capa="Feria"/>
+		<atributo_tabla nombre_bd="UBICACION" nombre_capa="Ubicacion"/>	
+		<atributo_tabla nombre_bd="OBSERVACIONES" nombre_capa="Observaciones"/>		
+  		<atributo_tabla nombre_bd="IDAUDITORIA" nombre_capa="idauditoria"/>			
+		<atributo_tabla nombre_bd="UCREA" nombre_capa="Ucrea"/>
+		<atributo_tabla nombre_bd="FCREA" nombre_capa="Fcrea"/>
+		<atributo_tabla nombre_bd="UACT" nombre_capa="Uact"/>
+		<atributo_tabla nombre_bd="FACT" nombre_capa="Fact"/>		
+		
+		</tabla>
+	</origen_datos>
+	</capa>
+</tema>
+
+

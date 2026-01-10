@@ -1,0 +1,24 @@
+<dataStore>
+  <id>DataStoreInfoImpl-145653fa:19ba9b2aa3f:-7ff4</id>
+  <name>plugineta-db</name>
+  <type>PostGIS</type>
+  <enabled>true</enabled>
+  <workspace>
+    <id>WorkspaceInfoImpl-145653fa:19ba9b2aa3f:-7ff6</id>
+  </workspace>
+  <connectionParameters>
+    <entry key="schema">example_data</entry>
+    <entry key="Estimated extends">true</entry>
+    <entry key="database">gis_database</entry>
+    <entry key="port">5432</entry>
+    <entry key="passwd">crypt2:FaVCJwmZ6e7gl2lbWMP8LWaopAW9Udb2lFG9mwa3Fx8=</entry>
+    <entry key="Expose primary keys">true</entry>
+    <entry key="host">db</entry>
+    <entry key="dbtype">postgis</entry>
+    <entry key="namespace">http://plugineta</entry>
+    <entry key="user">gis_user</entry>
+  </connectionParameters>
+  <__default>false</__default>
+  <dateCreated>2026-01-10 20:59:11.667 UTC</dateCreated>
+  <disableOnConnFailure>false</disableOnConnFailure>
+</dataStore>

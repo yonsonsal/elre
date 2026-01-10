@@ -1,0 +1,6 @@
+<jboss-deployment-structure>
+    <deployment>
+        <exclusions>
+        </exclusions>
+    </deployment>
+</jboss-deployment-structure>

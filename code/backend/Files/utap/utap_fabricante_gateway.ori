@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="Fabricante Gateway">
+	<atributo nombre="desc_fabricante" tipo="java.lang.String"/>
+
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS" />
+
+		<tabla nombre="utap_fabricante_gateway" esquema="public" pk="cod_fabricante" comboValue="cod_fabricante" comboLabel="desc_fabricante">	
+			<atributo_tabla nombre_bd="desc_fabricante" nombre_capa="desc_fabricante"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

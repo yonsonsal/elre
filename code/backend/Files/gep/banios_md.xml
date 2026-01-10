@@ -1,0 +1,40 @@
+﻿<layer>
+	<attribute name="gid"  query_capable="false" label="gid" show="false"/>
+        <attribute name="nombreLocal" query_capable="true" columns="50" label="Nombre" show="true"/>
+        <attribute name="direccion" query_capable="true" columns="50" label="Dirección" show="true"/>
+        <attribute name="activo" usage="LOV" query_capable="true" columns="50" label="Activo" show="true"/>
+        <attribute name="vigenciaDesde" query_capable="true" columns="50" label="Vigencia desde" show="true"/>
+        <attribute name="vigenciaHasta" query_capable="true" columns="50" label="Vigencia hasta" show="true"/>
+        <attribute name="tipoBanio"  usage="LOV" query_capable="true" columns="50" label="Ubicado en" show="true"/>	        
+        <attribute name="modeloBanio"  usage="LOV" query_capable="true" columns="50" label="Modelo" show="true"/>
+	<attribute name="descripcion" query_capable="true" columns="50" label="Descripcion" show="true"/>
+	<attribute name="fabricante"  usage="LOV" query_capable="true" columns="50" label="Fabricante" show="true"/>
+	<attribute name="proveedor" usage="LOV" query_capable="true" columns="50" label="Proveedor" show="true"/>
+	<attribute name="instaladoPor" usage="LOV" query_capable="true" columns="50" label="Instalado por" show="true"/>
+        <attribute name="horarioFunc" query_capable="true" columns="50" label="Horario de funcionamiento" show="true"/>
+        <attribute name="tipoDia"  usage="LOV" query_capable="true" columns="50" label="Días abierto" show="true"/>
+        <attribute name="tipoHorario"  usage="LOV" query_capable="true" columns="50" label="Horario abierto" show="true"/>
+        <attribute name="tipoDia2"  usage="LOV" query_capable="true" columns="50" label="Días abierto 2" show="true"/>
+        <attribute name="tipoHorario2"  usage="LOV" query_capable="true" columns="50" label="Horario abierto 2" show="true"/>
+        <attribute name="foto" query_capable="true" presentation="URL" columns="50" label="Foto (para abrir, Ctrl + clic)" show="true"/>
+        <attribute name="cantGabinetes" query_capable="true" columns="50" label="Cant. de gabinetes" show="true"/>
+        <attribute name="accesibilidad" usage="LOV" query_capable="true" columns="50" label="Accesibilidad" show="true"/>
+        <attribute name="noGenerizados"  usage="LOV" query_capable="true" columns="50" label="Hay baños no generizados" show="true"/>
+        <attribute name="paraNinios"  usage="LOV" query_capable="true" columns="50" label="Hay baños para niños" show="true"/>
+        <attribute name="cambiadorBebes"  usage="LOV" query_capable="true" columns="50" label="Hay cambiador de bebés" show="true"/>	
+	<attribute name="fecha" query_capable="true" columns="50" label="Fecha" show="true"/>
+	<attribute name="CCZ" query_capable="true" columns="50" label="CCZ" show="true"/>	
+	<attribute name="observaciones" query_capable="true" columns="50" rows="4" presentation="TEXT_AREA" label="Observaciones" show="true"/>
+
+	<attribute name="idauditoria" query_capable = "false" show="false"/>	
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+	<attribute name="the_geom" query_capable="false" show="false"/>
+        <!--child layer="Horarios baños" parent_id_attribute="gid_banio" /-->
+	<child layer="e_ep_inspeccion_banios" parent_id_attribute="gid_banio" />	
+</layer>
+
+	
+	

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="e_citim_pat_regulacion_cuadro1">
+
+	<atributo nombre="grado_de_proteccion" tipo="java.lang.Integer"/>
+	<atributo nombre="restauracion" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Cod Pat Regulacion"/>	
+	<atributo nombre="conservacion_mantenimiento" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Cod Pat Regulacion"/>	
+	<atributo nombre="reparacion_consolidacion" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Cod Pat Regulacion"/>	
+	<atributo nombre="acondicionamiento" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Cod Pat Regulacion"/>	
+	<atributo nombre="reforma_rehabilitacion" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Cod Pat Regulacion"/>	
+	<atributo nombre="ampliacion" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Cod Pat Regulacion"/>	
+	<atributo nombre="sustitucion" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Cod Pat Regulacion"/>	
+	<atributo nombre="idauditoria" tipo="java.lang.String"/>
+	<atributo nombre="Ucrea" tipo="java.lang.String" />
+	<atributo nombre="Fcrea" tipo="java.util.Date" />
+	<atributo nombre="Uact" tipo="java.lang.String" />
+	<atributo nombre="Fact" tipo="java.util.Date" nillable="true"/>	
+	
+	<origen_datos>
+		<workspace nombre="citim.otpatrimonio" tipo="WFS">
+			<style strokeColor="#FF00A6" strokeWidth="1" fillColor="#000000BA" />
+			<capapublicada nombre="e_citim_pat_regulacion_cuadro1" nombre_mostrar="e_citim_pat_regulacion_cuadro1"></capapublicada>
+		</workspace>
+		<fuente nombre="citimDS" tipo="POSTGIS"/>
+		<tabla nombre="citim_pat_regulacion_cuadro1" esquema="public" pk="id" secuencia="gid_global_seq"> 
+			<atributo_tabla nombre_bd="id" nombre_capa="id" />	
+			<atributo_tabla nombre_bd="grado_de_proteccion" nombre_capa="grado_de_proteccion" />	
+			<atributo_tabla nombre_bd="restauracion" nombre_capa="restauracion"/>
+			<atributo_tabla nombre_bd="conservacion_mantenimiento" nombre_capa="conservacion_mantenimiento"/>
+			<atributo_tabla nombre_bd="reparacion_consolidacion" nombre_capa="reparacion_consolidacion"/>
+			<atributo_tabla nombre_bd="acondicionamiento" nombre_capa="acondicionamiento"/>
+			<atributo_tabla nombre_bd="reforma_rehabilitacion" nombre_capa="reforma_rehabilitacion"/>
+			<atributo_tabla nombre_bd="ampliacion" nombre_capa="ampliacion"/>
+			<atributo_tabla nombre_bd="sustitucion" nombre_capa="sustitucion"/>
+			<atributo_tabla nombre_bd="idauditoria" nombre_capa="idauditoria"/>			
+			<atributo_tabla nombre_bd="ucrea" nombre_capa="Ucrea"/>
+			<atributo_tabla nombre_bd="fcrea" nombre_capa="Fcrea"/>
+			<atributo_tabla nombre_bd="uact" nombre_capa="Uact"/>
+			<atributo_tabla nombre_bd="fact" nombre_capa="Fact"/>
+			
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>
+
+

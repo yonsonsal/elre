@@ -1,0 +1,63 @@
+insert into utap_modelo_luminaria (desc_modelo) values ('Tango')
+insert into utap_modelo_luminaria (desc_modelo) values ('Rodio 1887');
+insert into utap_modelo_luminaria (desc_modelo) values ('Mantis 015 730 K33 B016');
+insert into utap_modelo_luminaria (desc_modelo) values ('Mantis 025 730 K33 B016');
+
+insert into utap_marca_luminaria (desc_marca) values ('Disano');
+insert into utap_fabricante_luminaria (desc_fabricante) values ('Disano');
+
+insert into utap_tipo_conductor (tipo_conductor, desc_corta_tipo_conductor, desc_tipo_conductor)
+	values ('XL','Al1x10xlpe','Cond Unipolar 10 mm2 xlpe');
+insert into utap_tipo_conductor (tipo_conductor, desc_corta_tipo_conductor, desc_tipo_conductor)
+	values ('XL','Al2x10xlpe','Cond Bipolar 10 mm2 xlpe');
+
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',16,'LED 16 W');
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',26,'LED 26 W');
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',50,'LED 50 W');
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',50.1,'LED 50.1 W');
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',50.7,'LED 50.7 W');
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',56,'LED 56 W');
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',56.5,'LED 56.5 W');
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',70.1,'LED 70.1 W');
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',72.3,'LED 72.3 W');
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',73.1,'LED 73.1 W');
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',80.2,'LED 80.2 W');
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',80.4,'LED 80.4 W');
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',81.8,'LED 81.8 W');
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',84.1,'LED 84.1 W');
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',86.4,'LED 86.4 W');
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',87.2,'LED 87.2 W');
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',93.7,'LED 93.7 W');
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',95,'LED 95 W');
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',100.6,'LED 100.6 W');
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',100.8,'LED 100.8 W');
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',100.9,'LED 100.9 W');
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',121.5,'LED 121.5 W');
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',121.8,'LED 121.8 W');
+insert into utap_tipo_lampara (tipo_lampara, pot_lampara, desc_tipo_lampara)
+	values ('LED',130.1,'LED 130.1 W');
+
+

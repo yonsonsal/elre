@@ -1,0 +1,40 @@
+
+<keycloak-saml-adapter xmlns="urn:keycloak:saml:adapter"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="urn:keycloak:saml:adapter http://www.keycloak.org/schema/keycloak_saml_adapter_1_7.xsd">
+
+    <SP entityID="${dfr-entity.id}" logoutPage="/api/plugineta/logout.xhtml">
+        <Keys>
+            <Key signing="true" >
+                <KeyStore file="${jboss.server.config.dir}/sso.jks" password="${ks.pass}">
+                    <PrivateKey alias="${pk.alias}" password="${pk.pass}"/>
+                    <Certificate alias="${cert.alias}"/>
+                </KeyStore>
+            </Key>
+        </Keys>
+        <RoleIdentifiers>
+            <Attribute name="http://wso2.org/claims/role"/>
+        </RoleIdentifiers>
+        <IDP entityID="${idp-entity.id}"
+             signaturesRequired="true"
+             signatureAlgorithm="RSA_SHA256">
+            <SingleSignOnService requestBinding="POST"
+                                 bindingUrl="${idp.url}"
+            />
+            <SingleLogoutService
+                    requestBinding="POST"
+                    responseBinding="POST"
+                    postBindingUrl="${idp.url}"
+                    redirectBindingUrl="${idp.url}"
+            />
+            <Keys>
+                <Key signing="true">
+                    <KeyStore file="${jboss.server.config.dir}/sso.jks" password="${ks.pass}">
+                        <PrivateKey alias="${pk.alias}" password="${pk.pass}"/>
+                        <Certificate alias="${cert.alias}"/>
+                    </KeyStore>
+                </Key>
+            </Keys>
+        </IDP>
+    </SP>
+</keycloak-saml-adapter>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="c_v_citim_excepciones_todas_final">
+
+	
+	<origen_datos>
+		<workspace nombre="citim.otbase" tipo="WMS">
+			<style strokeColor="#000000" strokeWidth="1" fillColor="#AAAAAA" />
+			<capapublicada nombre="c_v_citim_excepciones_todas_final" nombre_mostrar="c_v_citim_excepciones_todas_final"></capapublicada>
+		</workspace>		
+	</origen_datos>
+</capa>
+</tema>
+
+

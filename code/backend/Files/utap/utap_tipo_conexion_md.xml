@@ -1,0 +1,3 @@
+<layer>
+	<attribute name="tipo_conexion" query_capable="false"/>
+</layer>

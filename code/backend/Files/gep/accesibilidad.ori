@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Accesibilidad">
+	
+	<atributo nombre="accesibilidad" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="ep_accesibilidad" esquema="ciudadanos" pk="cod_acc" comboValue="cod_acc" comboLabel="acc">	
+					
+			<atributo_tabla nombre_bd="acc" nombre_capa="accesibilidad"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

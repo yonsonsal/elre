@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Descripciones Papeleras" >
+	
+	<atributo nombre="descripcionPapelera" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="ep_descripciones_papeleras" esquema="ciudadanos" pk="cod_desc_papelera" comboValue="cod_desc_papelera" comboLabel="descripcion_papelera">	
+					
+			<atributo_tabla nombre_bd="descripcion_papelera" nombre_capa="descripcionPapelera"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="Levantado">
+	<atributo nombre="Levantado" tipo="java.lang.String"/>
+
+	<origen_datos>
+		<fuente nombre="brfDS" tipo="ORACLE" />
+		<tabla nombre="V_SF_LEVANTADO" pk="COD_LEVANTADO" comboValue="COD_LEVANTADO" comboLabel="DESCRIPCION">	
+			<atributo_tabla nombre_bd="DESCRIPCION" nombre_capa="Levantado"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

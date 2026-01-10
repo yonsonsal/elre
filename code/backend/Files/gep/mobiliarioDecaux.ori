@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="e_ep_residuos_decaux" grupo="Capas editables">
+	<atributo nombre="codigoIM" tipo="java.lang.String"/>	
+	<atributo nombre="tipoResiduo" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Tipo Residuo Decaux"/>	
+	<atributo nombre="CCZ" tipo="java.lang.Integer"/>
+	<atributo nombre="direccion" tipo="java.lang.String"/>
+	
+	<atributo nombre="idauditoria" tipo="java.lang.String"/>	
+    <atributo nombre="Ucrea" tipo="java.lang.String" />
+	<atributo nombre="Fcrea" tipo="java.util.Date" />
+	<atributo nombre="Uact" tipo="java.lang.String" />
+    <atributo nombre="Fact" tipo="java.util.Date" nillable="true"/>	
+		
+    <atributo nombre="the_geom" tipo="com.vividsolutions.jts.geom.Point"/>	 	
+  		
+	<origen_datos>
+		<workspace nombre="gep" tipo="WFS">
+			<style strokeColor="#0000FF"  strokeWidth="3"  fillColor="#000000AA" />
+			<capapublicada nombre="e_ep_residuos_decaux" nombre_mostrar="e_ep_residuos_decaux">
+			</capapublicada>
+		</workspace>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="ep_residuos_decaux" pk="gid" esquema="ciudadanos">	
+			<atributo_tabla nombre_bd="gid" nombre_capa="gid" />
+			<atributo_tabla nombre_bd="cod_imm" nombre_capa="codigoIM"/>
+			<atributo_tabla nombre_bd="tipo_residuo" nombre_capa="tipoResiduo"/>			
+			<atributo_tabla nombre_bd="ccz" nombre_capa="CCZ"/>
+			<atributo_tabla nombre_bd="direccion" nombre_capa="direccion"/>	
+
+			<atributo_tabla nombre_bd="idauditoria" nombre_capa="idauditoria"/>			
+			<atributo_tabla nombre_bd="ucrea" nombre_capa="Ucrea"/>
+			<atributo_tabla nombre_bd="fcrea" nombre_capa="Fcrea"/>
+			<atributo_tabla nombre_bd="uact" nombre_capa="Uact"/>
+			<atributo_tabla nombre_bd="fact" nombre_capa="Fact"/>				
+  			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

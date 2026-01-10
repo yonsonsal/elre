@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="Color Carcasa">
+	<atributo nombre="desc_color" tipo="java.lang.String"/>
+
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS" />
+
+		<tabla nombre="utap_color_carcasa" esquema="public" pk="cod_color" comboValue="cod_color" comboLabel="desc_color">
+			<atributo_tabla nombre_bd="desc_color" nombre_capa="desc_color"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

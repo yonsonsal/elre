@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Tipos Horarios2">
+	
+	<atributo nombre="tipoHorario2" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS" proxy="false"/>
+		<tabla nombre="ep_tipos_horarios2" esquema="ciudadanos" pk="cod_tipo_horario2" comboValue="cod_tipo_horario2" comboLabel="tipo_horario2">	
+					
+			<atributo_tabla nombre_bd="tipo_horario2" nombre_capa="tipoHorario2"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

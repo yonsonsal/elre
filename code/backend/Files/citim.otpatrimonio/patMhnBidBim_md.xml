@@ -1,0 +1,19 @@
+<layer>
+	<attribute name="id" query_capable="false" label="ID" show="false" />
+	<attribute name="padron" query_capable = "false" show="true"  label="Padron"/>	
+	<attribute name="mhn" query_capable="true" label="Mhn" show="true"/>
+	<attribute name="bid" query_capable="true" label="Bid" show="true"/>
+	<attribute name="bim" query_capable = "false" show="true"  label="Bim"/>		
+	<attribute name="dire" query_capable = "false" show="true"  label="Dire"/>		
+	<attribute name="denom" query_capable = "false" show="true"  label="Denom"/>		
+	<attribute name="resolucion" query_capable = "false" show="true"  label="Resolucion"/>		
+	<attribute name="autoria" query_capable = "false" show="true"  label="Autoria"/>		
+	<attribute name="fecha" query_capable = "false" show="true"  label="Fecha"/>		
+        <attribute name="info_int" query_capable = "false" show="true"  label="Información Interna"/>
+	<attribute name="idauditoria" query_capable = "false" show="false"/>	
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+	
+</layer>	

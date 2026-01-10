@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="mdg_espacios_libres">
+	
+	<atributo nombre="nro_espacio_libre" tipo="java.lang.Integer" nillable="true"/>
+	<atributo nombre="cod_nom_espacio" tipo="imm.gis.core.feature.ExternalAttributeRelacionValor" capa_referenciada="mdg_nombres_espacios" nillable="true"/>
+	<atributo nombre="cod_nom_parque"  tipo="imm.gis.core.feature.ExternalAttributeRelacionValor" capa_referenciada="mdg_nombres_parques" nillable="true"/>
+	<atributo nombre="tipo_espacio_sig" tipo="imm.gis.core.feature.ExternalAttributeRelacionValor" nillable="true" capa_referenciada="sig_tipos_espacios" valorCalculado="python::getTipoEspacioEspaciosLIbres()" persistible="true"/>
+	<atributo nombre="estado" tipo="imm.gis.core.feature.ExternalAttributeRelacionValor" nillable="false" capa_referenciada="mdg_tipos_estado" valorCalculado="python::getEstadoEspaciosLIbres()" persistible="true"/>
+
+	<atributo nombre="idauditoria" tipo="java.lang.String"/>	
+	<atributo nombre="Ucrea" tipo="java.lang.String" />
+	<atributo nombre="Fcrea" tipo="java.util.Date" />
+	<atributo nombre="Uact" tipo="java.lang.String" />
+    	<atributo nombre="Fact" tipo="java.util.Date" nillable="true"/>	
+		
+    	<atributo nombre="the_geom" tipo="com.vividsolutions.jts.geom.Point"/>	 	
+  		
+	<origen_datos>
+		<workspace nombre="geomatica" tipo="WFS">
+			<style strokeColor="#FF00A6" strokeWidth="1" fillColor="#000000BA" />
+			<capapublicada nombre="mdg_espacios_libres" nombre_mostrar="mdg_espacios_libres"></capapublicada>
+		</workspace>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="mdg_espacios_libres" pk="gid" esquema="public" secuencia="gid_global_seq">	
+			<atributo_tabla nombre_bd="gid" nombre_capa="gid" />
+		
+			<atributo_tabla nombre_bd="nro_espacio_libre" nombre_capa="nro_espacio_libre"/>
+			<atributo_tabla nombre_bd="cod_nom_espacio" nombre_capa="cod_nom_espacio"/>			
+			<atributo_tabla nombre_bd="cod_nom_parque" nombre_capa="cod_nom_parque"/>
+			<atributo_tabla nombre_bd="tipo_espacio_sig" nombre_capa="tipo_espacio_sig"/>			
+			<atributo_tabla nombre_bd="estado" nombre_capa="estado"/>
+					
+			<atributo_tabla nombre_bd="idauditoria" nombre_capa="idauditoria"/>			
+			<atributo_tabla nombre_bd="ucrea" nombre_capa="Ucrea"/>
+			<atributo_tabla nombre_bd="fcrea" nombre_capa="Fcrea"/>
+			<atributo_tabla nombre_bd="uact" nombre_capa="Uact"/>
+			<atributo_tabla nombre_bd="fact" nombre_capa="Fact"/>				
+  			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

@@ -1,0 +1,13 @@
+<layer>
+	<attribute name="gid" query_capable="false" label="GID" show="false" />
+	<attribute name="categoria" usage="LOV" query_capable="true" label="Categoria" show="true"/>
+	<attribute name="subcat" usage="LOV" query_capable="true" label="Sub Categoria" show="true"/>
+	<attribute name="areadif" query_capable="true" label="Area Dif" show="true"/>
+        <attribute name="info_int" query_capable = "false" show="true"  label="Info Int."/>	
+        <attribute name="idauditoria" query_capable = "false" show="false"/>	
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+	
+</layer>	

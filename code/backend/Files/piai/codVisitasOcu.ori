@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Cod Visita Ocu">
+	
+	<atributo nombre="visita" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="ai_visita_ocupaciones" esquema="public" pk="cod_visita" comboValue="cod_visita" comboLabel="desc_visita">	
+					
+			<atributo_tabla nombre_bd="desc_visita" nombre_capa="visita"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

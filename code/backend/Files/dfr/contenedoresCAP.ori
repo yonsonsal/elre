@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="E_DF_CAP_CONTENEDORES">
+	<atributo nombre="CIRCUITO" tipo="java.lang.String" valorCalculado="uy.gub.montevideo.gis.geomvd.dfr.fields.ContenedoresCAPCalcs::getZonaCircuitoCap(THE_GEOM)" persistible="true"/>
+	<atributo nombre="fechaDesde" tipo="java.util.Date"/>	
+	<atributo nombre="fechaHasta" tipo="java.util.Date" nillable="true"/>
+	<atributo nombre="observaciones" tipo="java.lang.String"/>
+	<atributo nombre="CANT_HUMEDOS" tipo="java.lang.Integer" valorCalculado="uy.gub.montevideo.gis.geomvd.dfr.fields.ContenedoresCAPCalcs::getCantHumedo(THE_GEOM)" persistible="true"/>	
+	<atributo nombre="CANT_SECOS" tipo="java.lang.Integer" valorCalculado="uy.gub.montevideo.gis.geomvd.dfr.fields.ContenedoresCAPCalcs::getCantSeco(THE_GEOM)" persistible="true"/>
+	<atributo nombre="CAPACIDAD_HUMEDA" tipo="java.lang.Float" valorCalculado="uy.gub.montevideo.gis.geomvd.dfr.fields.ContenedoresCAPCalcs::getCapacidadHumeda(THE_GEOM)" persistible="true"/>	
+	<atributo nombre="CAPACIDAD_SECA" tipo="java.lang.Float" valorCalculado="uy.gub.montevideo.gis.geomvd.dfr.fields.ContenedoresCAPCalcs::getCapacidadSeca(THE_GEOM)" persistible="true"/>
+	<atributo nombre="idContenedor" tipo="java.lang.String"/>
+	<atributo nombre="direccion" tipo="java.lang.String" valorCalculado="uy.gub.montevideo.gis.geomvd.dfr.fields.ContenedoresCAPCalcs::getCallePuerta(THE_GEOM)" nillable="true" />
+
+	<atributo nombre="idauditoria" tipo="java.lang.String"/>	
+    	<atributo nombre="Ucrea" tipo="java.lang.String" />
+	<atributo nombre="Fcrea" tipo="java.util.Date" />
+	<atributo nombre="Uact" tipo="java.lang.String" />
+    	<atributo nombre="Fact" tipo="java.util.Date" nillable="true"/>		
+	<atributo nombre="the_geom" tipo="com.vividsolutions.jts.geom.Point"/>	
+
+	<origen_datos>
+		<workspace nombre="dfr" tipo="WFS">
+			<style strokeColor="#FF00A6"  strokeWidth="1"  fillColor="#000000BA" /> 
+			<capapublicada nombre="E_DF_CAP_CONTENEDORES" nombre_mostrar="E_DF_CAP_CONTENEDORES">
+			</capapublicada>
+		</workspace>
+		<fuente nombre="brfDS" tipo="ORACLE"/>
+		<tabla nombre="DF_CAP_CONTENEDORES"  pk="GID" secuencia="s_dfcapcon">
+			<atributo_tabla nombre_bd="GID" nombre_capa="gid" />
+			<atributo_tabla nombre_bd="CIRCUITO" nombre_capa="CIRCUITO"/>
+			<atributo_tabla nombre_bd="ID_CONTENEDOR" nombre_capa="idContenedor"/>
+			<atributo_tabla nombre_bd="FECHA_DESDE" nombre_capa="fechaDesde"/>
+			<atributo_tabla nombre_bd="FECHA_HASTA" nombre_capa="fechaHasta"/>
+			<atributo_tabla nombre_bd="OBSERVACIONES" nombre_capa="observaciones"/>			
+			<atributo_tabla nombre_bd="CANT_HUMEDOS" nombre_capa="CANT_HUMEDOS"/>			
+  			<atributo_tabla nombre_bd="CANT_SECOS" nombre_capa="CANT_SECOS"/>	
+			<atributo_tabla nombre_bd="CAPACIDAD_HUMEDA" nombre_capa="CAPACIDAD_HUMEDA"/>			
+  			<atributo_tabla nombre_bd="CAPACIDAD_SECA" nombre_capa="CAPACIDAD_SECA"/>
+			
+			<atributo_tabla nombre_bd="IDAUDITORIA" nombre_capa="idauditoria"/>			
+			<atributo_tabla nombre_bd="UCREA" nombre_capa="Ucrea"/>
+			<atributo_tabla nombre_bd="FCREA" nombre_capa="Fcrea"/>
+			<atributo_tabla nombre_bd="UACT" nombre_capa="Uact"/>
+			<atributo_tabla nombre_bd="FACT" nombre_capa="Fact"/>				
+	
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

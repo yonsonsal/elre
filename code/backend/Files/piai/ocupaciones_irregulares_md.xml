@@ -1,0 +1,26 @@
+﻿<layer>
+	<attribute name="gid" query_capable="false" label="ID" read_only="true" show="true" />
+
+	<attribute name="nombre" label="Nombre" show="true" />
+	<attribute name="tipo" label="Tipo" show="true" />
+	<attribute name="municipio" label="Municipio" consultable="true" read_only="true" show="true" />
+	<attribute name="ccz" label="Ccz" consultable="true" read_only="true" show="true"/>
+	<attribute name="dirección" label="Direccion" show="true" />
+	<attribute name="padrones" label="Padrones" show="true" />
+	<attribute name="observacio" label="Observaciones" show="true" />
+	<attribute name="cod_previo" label="Cod. Previo" show="true" />
+	<attribute name="cod_prev_1" label="Cod. Previo 1" show="true" />
+	<attribute name="visita" usage="LOV" query_capable="true" label="Visita" show="true"/>
+	<attribute name="visita_fec" label="Fecha Visita" show="true" />
+	<attribute name="visita_obs" label="Visita Observacion" show="true" />
+	<attribute name="info_regis" label="Info Regis" show="true" />
+	<attribute name="info_reg_1" label="Info Reg 1" show="true" />
+	<attribute name="estado" usage="LOV" query_capable="true" label="Estado" show="true"/>
+	<attribute name="codigo_gip" label="Codigo Gip" show="true" />
+	<attribute name="idauditoria" query_capable = "false" show="false"/>
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>
+	<attribute name="the_geom" query_capable="false" show="false"/>
+</layer>

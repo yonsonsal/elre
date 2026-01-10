@@ -1,0 +1,3 @@
+<layer>
+	<attribute name="nombre" query_capable="true"/>
+</layer>

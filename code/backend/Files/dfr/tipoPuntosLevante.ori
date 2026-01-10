@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="Tipo Puntos Levante">
+	<atributo nombre="puntoLevante" tipo="java.lang.String"/>
+	
+	<origen_datos>
+		<fuente nombre="brfDS" tipo="ORACLE" proxy="false"/>
+		<tabla nombre="df_tipo_puntos_levante" pk="TIPO_PUNTO" comboValue="TIPO_PUNTO" comboLabel="ABREV">
+			<atributo_tabla nombre_bd="ABREV" nombre_capa="puntoLevante"/>
+			
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

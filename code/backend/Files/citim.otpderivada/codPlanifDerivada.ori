@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Cod Planif Derivada">
+	
+	<atributo nombre="tipo" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="citimDS" tipo="POSTGIS"/>
+		<tabla nombre="citim_cod_planif_derivada" esquema="public" pk="id" comboValue="id" comboLabel="desc_planif">	
+					
+			<atributo_tabla nombre_bd="desc_planif" nombre_capa="tipo"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

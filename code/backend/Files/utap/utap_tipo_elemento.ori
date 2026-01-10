@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="Tipo Elemento">
+	<atributo nombre="desc_tipo_elemento" tipo="java.lang.String"/>
+
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS" />
+
+		<tabla nombre="utap_tipo_elemento" esquema="public" pk="cod_tipo_elemento" comboValue="cod_tipo_elemento" comboLabel="desc_tipo_elemento">	
+			<atributo_tabla nombre_bd="desc_tipo_elemento" nombre_capa="desc_tipo_elemento"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="Codigos comunales">
+	<atributo nombre="Ambito_territorial" tipo="java.lang.String"/>
+
+	<origen_datos>
+		<fuente nombre="brfDS" tipo="ORACLE" proxy="false"/>
+		<tabla nombre="V_AM_COMUNALES" pk="COD_COMUNAL" comboValue="COD_COMUNAL" comboLabel="NOMBRE">	
+			<atributo_tabla nombre_bd="NOMBRE" nombre_capa="Ambito_territorial"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

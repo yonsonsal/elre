@@ -1,0 +1,4 @@
+<layer >
+	<attribute name="atencion" query_capable = "false" read_only="true" label="ATENCION"/>
+	<attribute name="mensaje" presentation="DEFAULT" columns="50" query_capable = "false" read_only="true" label="Mensajes"/>
+</layer>

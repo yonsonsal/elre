@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="c_citim_parcelario">
+    <atributo nombre="padron" tipo="java.lang.Integer"/>
+	<atributo nombre="area_dnc" tipo="java.lang.Integer" nillable="true"/>
+	<atributo nombre="solcarph" tipo="java.lang.Integer" nillable="true"/>
+	<atributo nombre="solcarp" tipo="java.lang.Float" nillable="true"/>
+    <atributo nombre="solregimen" tipo="java.lang.Float" nillable="true"/>
+    <atributo nombre="solley" tipo="java.lang.Float" nillable="true"/>
+    <atributo nombre="the_geom" tipo="com.vividsolutions.jts.geom.Polygon"/>
+    <atributo nombre="realidad" tipo="java.lang.Float" nillable="true"/>
+    <atributo nombre="estado" tipo="java.lang.Float" nillable="true"/>
+    <atributo nombre="fcrea" tipo="java.util.Date"/>
+    <atributo nombre="ucrea" tipo="java.lang.String"/>
+    <atributo nombre="fact" tipo="java.util.Date"/>
+    <atributo nombre="uact" tipo="java.lang.String"/>
+    <atributo nombre="idauditoria" tipo="java.lang.String" nillable="true"/>
+
+	<origen_datos>
+		<workspace nombre="sca" tipo="WFS">
+			<style strokeColor="#000000" strokeWidth="1" fillColor="#AAAAAA" />
+			<capapublicada nombre="c_citim_parcelario" nombre_mostrar="c_citim_parcelario"></capapublicada>
+		</workspace>		
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="parcelas_sca" esquema="pcb" pk="gid">
+			<atributo_tabla nombre_bd="gid" nombre_capa="gid" />
+			<atributo_tabla nombre_bd="padron" nombre_capa="padron" />
+			<atributo_tabla nombre_bd="area_dnc" nombre_capa="area_dnc"/>
+			<atributo_tabla nombre_bd="solcarph" nombre_capa="solcarph"/>
+			<atributo_tabla nombre_bd="solregimen" nombre_capa="solregimen"/>
+			<atributo_tabla nombre_bd="solley" nombre_capa="solley"/>
+			<atributo_tabla nombre_bd="realidad" nombre_capa="realidad"/>
+			<atributo_tabla nombre_bd="estado" nombre_capa="estado"/>
+			<atributo_tabla nombre_bd="fcrea" nombre_capa="fcrea"/>
+			<atributo_tabla nombre_bd="ucrea" nombre_capa="ucrea"/>
+			<atributo_tabla nombre_bd="fact" nombre_capa="fact"/>
+			<atributo_tabla nombre_bd="uact" nombre_capa="uact"/>
+			<atributo_tabla nombre_bd="idauditoria" nombre_capa="idauditoria"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

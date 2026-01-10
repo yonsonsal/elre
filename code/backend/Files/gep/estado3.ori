@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Estado3">
+	
+	<atributo nombre="paraNinios" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="ep_banios_ninios" esquema="ciudadanos" pk="cod_banio_ni" comboValue="cod_banio_ni" comboLabel="desc_banio_ni">	
+					
+			<atributo_tabla nombre_bd="desc_banio_ni" nombre_capa="paraNinios"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

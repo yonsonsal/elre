@@ -1,0 +1,32 @@
+<layer>
+	<attribute name="gid" query_capable="true" label="Gid" show="false" />
+	<attribute name="padron" query_capable="true" label="Padron" show="true" />
+	
+        <attribute name="carp_cat" query_capable = "false" show="true"  label="Carpeta Catastral"/>	
+        <attribute name="area" query_capable = "false" show="true"  label="Area"/>	
+        <attribute name="categoria" query_capable = "false" show="true"  label="Categoria"/>	
+        <attribute name="sub_categoria" query_capable = "false" show="true"  label="Sub Categoria"/>	
+        <attribute name="normativa_adif" query_capable = "false" show="true"  label="Normativa"/>	
+        <attribute name="rgs" query_capable = "false" show="true"  label="Rgs"/>	
+        <attribute name="uso_pref" query_capable = "false" show="true"  label="Uso Preferente"/>	
+        <attribute name="especif_1_aec" query_capable = "false" show="true"  label="Especificidad AEC"/>	
+        <attribute name="especif_2_aprom" query_capable = "false" show="true"  label="Especificidad APROM"/>	
+        <attribute name="ret_front" query_capable = "false" show="true"  label="Retiro Frontal"/>	
+        <attribute name="ret_lateral" query_capable = "false" show="true"  label="Retiro Lateral"/>	
+        <attribute name="ret_posterior" query_capable = "false" show="true"  label="Retiro Posterior"/>	
+        <attribute name="fos" query_capable = "false" show="true"  label="FOS"/>	
+        <attribute name="fis" query_capable = "false" show="true"  label="FIS"/>	
+        <attribute name="obs_ret" query_capable = "false" show="true"  label="Observacion Retiro"/>	
+        <attribute name="calle" query_capable = "false" show="true"  label="Calle"/>	
+        <attribute name="altura_min" query_capable = "false" show="true"  label="Altura Min"/>	
+        <attribute name="altura_max" query_capable = "false" show="true"  label="Altura Max"/>	
+        <attribute name="galibo" query_capable = "false" show="true"  label="Galibo"/>	
+        <attribute name="obs_alt" query_capable = "false" show="true"  label="Observacion Altura"/>	
+        
+        <attribute name="idauditoria" query_capable = "false" show="false"/>	
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+	
+</layer>	

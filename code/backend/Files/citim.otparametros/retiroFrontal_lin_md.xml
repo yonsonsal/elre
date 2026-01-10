@@ -1,0 +1,16 @@
+<layer>
+	<attribute name="gid" query_capable="false" label="GID" show="false" />
+	<attribute name="retiro_frontal" usage="LOV" query_capable="true" label="Retiro Frontal" show="true"/>
+        <attribute name="acera" usage="LOV" query_capable="true" label="Aceras" show="true"/>
+        <attribute name="obs" query_capable = "false" show="true"  label="Observacion"/>	
+        <attribute name="calle" query_capable = "false" show="true"  label="Calle"/>	
+        <attribute name="cod_nombre" query_capable = "false" show="true"  label="Cod. Nombre Via"/>	
+        <attribute name="info_int" query_capable = "false" show="true"  label="Info Int."/>	
+        <attribute name="idauditoria" query_capable = "false" show="false"/>	
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+	<attribute name="the_geom" query_capable="false" show="false"/>			
+	
+</layer>	

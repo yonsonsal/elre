@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="e_sf_feria" grupo="Capas editables">		
+        <atributo nombre="Codigo" tipo="java.lang.String"/> 
+        <atributo nombre="Responsable"  tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Responsable"/>	
+	<atributo nombre="Dia_de_feria" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Dias de feria" />	
+	<atributo nombre="Ambito_territorial" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Codigos comunales" />		
+	<atributo nombre="Numero_feria" tipo="java.lang.Integer" nillable="true"/>	
+        <atributo nombre="Denominacion" tipo="java.lang.String" nillable="true"/>		
+        <atributo nombre="Ubicacion" tipo="java.lang.String" nillable="true"/>  
+	<atributo nombre="Tipo_de_feria" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Tipos de feria" />			
+	<atributo nombre="Barrio" tipo="java.lang.String" valorCalculado="python::calcularBarrioSfm()" persistible="true"/>		
+	<atributo nombre="Armado" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Armado"/>
+	<atributo nombre="Hora_comienzo" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Hora comienzo"/>
+	<atributo nombre="Hora_fin" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Hora fin"/>
+	<atributo nombre="Levantado" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Levantado"/>	
+        <atributo nombre="Cantidad_puestos" tipo="java.lang.Integer" nillable="true"/>		
+	<atributo nombre="Fecha_instalacion" tipo="java.util.Date"/>
+	<atributo nombre="Fecha_rotacion" tipo="java.util.Date"/>		
+        <atributo nombre="Observaciones" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="Plano_feria" tipo="java.lang.String" nillable="true"/>
+        <atributo nombre="Ucrea" tipo="java.lang.String" />
+	<atributo nombre="Fcrea" tipo="java.util.Date" />
+	<atributo nombre="Uact" tipo="java.lang.String" />
+        <atributo nombre="Fact" tipo="java.util.Date"/>		
+	<atributo nombre="idauditoria" tipo="java.lang.String" />
+        <atributo nombre="the_geom" tipo="com.vividsolutions.jts.geom.Polygon"/>		
+      
+	<origen_datos>
+	  <workspace nombre="sfm" tipo="WFS">
+			<style strokeColor="#0000FF"  strokeWidth="3"  fillColor="#000000AA" />
+			<capapublicada nombre="e_sf_feria" nombre_mostrar="e_sf_feria">
+			</capapublicada>
+		</workspace>
+		<fuente nombre="brfDS" tipo="ORACLE"/>
+		<tabla nombre="SF_FERIA"  pk="GID" secuencia="S_SFFERI">
+		  <atributo_tabla nombre_bd="GID" nombre_capa="GID" />	
+		  <atributo_tabla nombre_bd="COD_FERIA" nombre_capa="Codigo"/>		
+		  <atributo_tabla nombre_bd="COD_RESPONSABLE" nombre_capa="Responsable"/>
+		  <atributo_tabla nombre_bd="COD_DIA" nombre_capa="Dia_de_feria"/>			
+		  <atributo_tabla nombre_bd="COD_COMUNAL" nombre_capa="Ambito_territorial"/>
+		  <atributo_tabla nombre_bd="NRO_FERIA" nombre_capa="Numero_feria"/>		
+		  <atributo_tabla nombre_bd="NOMBRE" nombre_capa="Denominacion"/>		
+		  <atributo_tabla nombre_bd="UBICACION" nombre_capa="Ubicacion"/>	
+		  <atributo_tabla nombre_bd="COD_TIPO" nombre_capa="Tipo_de_feria"/>		
+		  <atributo_tabla nombre_bd="BARRIO" nombre_capa="Barrio"/>		
+		  <atributo_tabla nombre_bd="ARMADO" nombre_capa="Armado"/>	
+		  <atributo_tabla nombre_bd="HORA_COMIENZO" nombre_capa="Hora_comienzo"/>
+		  <atributo_tabla nombre_bd="HORA_FIN" nombre_capa="Hora_fin"/>
+		  <atributo_tabla nombre_bd="LEVANTADO" nombre_capa="Levantado"/>	
+		  <atributo_tabla nombre_bd="CANT_PUESTOS" nombre_capa="Cantidad_puestos"/>		
+		  <atributo_tabla nombre_bd="FECHA_INSTALACION" nombre_capa="Fecha_instalacion"/>
+		  <atributo_tabla nombre_bd="FECHA_ROTACION" nombre_capa="Fecha_rotacion"/>
+		  <atributo_tabla nombre_bd="OBSERVACIONES" nombre_capa="Observaciones"/>		
+		  <atributo_tabla nombre_bd="LINK_PLANO_FERIA" nombre_capa="Plano_feria"/>		
+		  <atributo_tabla nombre_bd="UCREA" nombre_capa="Ucrea"/>
+		  <atributo_tabla nombre_bd="FCREA" nombre_capa="Fcrea"/>
+		  <atributo_tabla nombre_bd="UACT" nombre_capa="Uact"/>
+		  <atributo_tabla nombre_bd="FACT" nombre_capa="Fact"/>	
+		  <atributo_tabla nombre_bd="IDAUDITORIA" nombre_capa="idauditoria"/>		
+		
+		</tabla>
+	</origen_datos>
+	</capa>
+</tema>
+
+

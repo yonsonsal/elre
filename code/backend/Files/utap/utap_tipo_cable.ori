@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="Tipo Cable">
+	<atributo nombre="tipo_cable" tipo="java.lang.String"/>
+
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS" />
+		<tabla nombre="utap_tipo_cable" esquema="public" pk="cod_tipo_cable" comboValue="cod_tipo_cable" comboLabel="desc_tipo_cable">	
+			<atributo_tabla nombre_bd="desc_tipo_cable" nombre_capa="tipo_cable"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

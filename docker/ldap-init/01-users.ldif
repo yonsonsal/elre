@@ -1,0 +1,79 @@
+# Organizational Units
+dn: ou=users,dc=plugineta,dc=local
+objectClass: organizationalUnit
+ou: users
+
+dn: ou=groups,dc=plugineta,dc=local
+objectClass: organizationalUnit
+ou: groups
+
+# Users
+# Usuario: admin_gis, Password: admin123
+dn: uid=admin_gis,ou=users,dc=plugineta,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: admin_gis
+cn: Admin GIS
+sn: Administrator
+givenName: Admin
+mail: admin@plugineta.local
+userPassword: {SSHA}DkMTwBl+a/3DQTxCYEApdUtNXGgdUac3
+loginShell: /bin/bash
+uidNumber: 10001
+gidNumber: 10001
+homeDirectory: /home/admin_gis
+
+# Usuario: editor_gis, Password: editor123
+dn: uid=editor_gis,ou=users,dc=plugineta,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: editor_gis
+cn: Editor GIS
+sn: Editor
+givenName: Editor
+mail: editor@plugineta.local
+userPassword: {SSHA}Zn4/E5f+Eur349BsYqfZzDxnS+xlOjl9
+loginShell: /bin/bash
+uidNumber: 10002
+gidNumber: 10002
+homeDirectory: /home/editor_gis
+
+# Usuario: viewer_gis, Password: viewer123
+dn: uid=viewer_gis,ou=users,dc=plugineta,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: viewer_gis
+cn: Viewer GIS
+sn: Viewer
+givenName: Viewer
+mail: viewer@plugineta.local
+userPassword: {SSHA}xvJO4/Bw+gGm4gLYxKF/2Ll0V7hGqjk8
+loginShell: /bin/bash
+uidNumber: 10003
+gidNumber: 10003
+homeDirectory: /home/viewer_gis
+
+# Groups
+dn: cn=gis_admins,ou=groups,dc=plugineta,dc=local
+objectClass: groupOfUniqueNames
+cn: gis_admins
+description: GIS Administrators with full access
+uniqueMember: uid=admin_gis,ou=users,dc=plugineta,dc=local
+
+dn: cn=gis_editors,ou=groups,dc=plugineta,dc=local
+objectClass: groupOfUniqueNames
+cn: gis_editors
+description: GIS Editors with edit permissions
+uniqueMember: uid=editor_gis,ou=users,dc=plugineta,dc=local
+uniqueMember: uid=admin_gis,ou=users,dc=plugineta,dc=local
+
+dn: cn=gis_viewers,ou=groups,dc=plugineta,dc=local
+objectClass: groupOfUniqueNames
+cn: gis_viewers
+description: GIS Viewers with read-only access
+uniqueMember: uid=viewer_gis,ou=users,dc=plugineta,dc=local
+uniqueMember: uid=editor_gis,ou=users,dc=plugineta,dc=local
+uniqueMember: uid=admin_gis,ou=users,dc=plugineta,dc=local

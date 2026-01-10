@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Cod Fos">
+	
+	<atributo nombre="fos" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="citimDS" tipo="POSTGIS"/>
+		<tabla nombre="citim_cod_factor_ocup_suelo" esquema="public" pk="id" comboValue="id" comboLabel="desc_factor_ocupacion_suelo">	
+					
+			<atributo_tabla nombre_bd="desc_factor_ocupacion_suelo" nombre_capa="fos"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

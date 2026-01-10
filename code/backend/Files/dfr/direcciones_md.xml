@@ -1,0 +1,7 @@
+<layer>
+	<attribute name="gid" query_capable="false" label="gid" show="false" />
+	<attribute name="nombre" query_capable = "true" label="Calle" show="true"/>
+	<attribute name="numero" query_capable = "true" label="Numero" show="true"/>
+	<attribute name="letra" query_capable = "true" label="Letra" show="true"/>	
+	<attribute name="the_geom" query_capable="false" show="false"/>	
+</layer>

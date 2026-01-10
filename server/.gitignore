@@ -1,0 +1,30 @@
+# Archivos temporales y logs de GeoServer
+geoserver/data_dir/logs/
+geoserver/data_dir/temp/
+geoserver/data_dir/tmp/
+geoserver/data_dir/*.log
+geoserver/data_dir/**/*.log
+
+# GeoWebCache tiles (cache generado)
+geoserver/gwc/**/*.png
+geoserver/gwc/**/*.jpeg
+geoserver/gwc/**/*.jpg
+geoserver/gwc/**/*.pbf
+geoserver/gwc/diskquota_page_store*
+
+# Monitoring data (puede ser grande)
+geoserver/data_dir/monitoring/*.db
+geoserver/data_dir/monitoring/*.h2.db
+
+# Settings temporales
+geoserver/settings/temp/
+
+# WildFly logs y temporales (cuando se agregue)
+wildfly*/standalone/log/
+wildfly*/standalone/tmp/
+wildfly*/standalone/data/
+wildfly*/standalone/deployments/*.deployed
+wildfly*/standalone/deployments/*.failed
+wildfly*/standalone/deployments/*.isdeploying
+wildfly*/standalone/deployments/*.isundeploying
+wildfly*/standalone/deployments/*.undeployed

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="e_ep_banios" grupo="Capas editables">
+        <atributo nombre="nombreLocal" tipo="java.lang.String"/>
+        <atributo nombre="direccion" tipo="java.lang.String"/>
+        <atributo nombre="activo" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Estado" nillable="true"/>        
+        <atributo nombre="vigenciaDesde" tipo="java.util.Date"  nillable="true"/>
+        <atributo nombre="vigenciaHasta" tipo="java.util.Date"  nillable="true"/>
+        <atributo nombre="tipoBanio" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Tipos Baños" nillable="true"/>
+        <atributo nombre="modeloBanio" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Modelos Baños" nillable="true"/>
+	<atributo nombre="descripcion" tipo="java.lang.String"/>	
+	<atributo nombre="fabricante" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Fabricantes" nillable="true"/>	
+	<atributo nombre="proveedor" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Proveedores" nillable="true"/>
+	<atributo nombre="instaladoPor" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Instaladores" nillable="true"/>
+        <atributo nombre="horarioFunc" tipo="java.lang.String"/>
+        <atributo nombre="tipoDia" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Tipos Dias" nillable="true"/>	
+        <atributo nombre="tipoHorario" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Tipos Horarios" nillable="true"/>	
+        <atributo nombre="tipoDia2" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Tipos Dias2" nillable="true"/>	
+        <atributo nombre="tipoHorario2" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Tipos Horarios2" nillable="true"/>
+	<atributo nombre="foto" tipo="java.lang.String"/>
+        <atributo nombre="cantGabinetes" tipo="java.lang.Integer"/>
+        <atributo nombre="accesibilidad" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Accesibilidad" nillable="true"/>
+        <atributo nombre="noGenerizados" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Estado2" nillable="true"/>	
+        <atributo nombre="paraNinios" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Estado3" nillable="true"/>	
+        <atributo nombre="cambiadorBebes" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Estado4" nillable="true"/>	
+	<atributo nombre="fecha" tipo="java.util.Date"/>	
+	<atributo nombre="CCZ" tipo="java.lang.Integer"/>	
+	<atributo nombre="observaciones" tipo="java.lang.String"/>
+	
+	<atributo nombre="idauditoria" tipo="java.lang.String"/>	
+    <atributo nombre="Ucrea" tipo="java.lang.String" />
+	<atributo nombre="Fcrea" tipo="java.util.Date" />
+	<atributo nombre="Uact" tipo="java.lang.String" />
+    <atributo nombre="Fact" tipo="java.util.Date" nillable="true"/>	
+		
+    <atributo nombre="the_geom" tipo="com.vividsolutions.jts.geom.Point"/>	 	
+  		
+	<origen_datos>
+		<workspace nombre="gep" tipo="WFS">
+			<style strokeColor="#0000FF"  strokeWidth="3"  fillColor="#000000AA" />
+			<capapublicada nombre="e_ep_banios" nombre_mostrar="e_ep_banios">
+			</capapublicada>
+		</workspace>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="ep_banios" pk="gid" esquema="ciudadanos" secuencia="ciudadanos.s_ep_bani">	
+			<atributo_tabla nombre_bd="gid" nombre_capa="gid"/>
+            <atributo_tabla nombre_bd="nombre_local" nombre_capa="nombreLocal"/>
+            <atributo_tabla nombre_bd="direccion" nombre_capa="direccion"/>
+            <atributo_tabla nombre_bd="foto" nombre_capa="foto"/>
+            <atributo_tabla nombre_bd="vigencia_desde" nombre_capa="vigenciaDesde"/>
+            <atributo_tabla nombre_bd="vigencia_hasta" nombre_capa="vigenciaHasta"/>
+            <atributo_tabla nombre_bd="tipo_dia1" nombre_capa="tipoDia"/>
+            <atributo_tabla nombre_bd="tipo_horario1" nombre_capa="tipoHorario"/>
+            <atributo_tabla nombre_bd="tipo_dia2" nombre_capa="tipoDia2"/>
+            <atributo_tabla nombre_bd="tipo_horario2" nombre_capa="tipoHorario2"/>
+
+            <atributo_tabla nombre_bd="hay_banios_no_generizados" nombre_capa="noGenerizados"/>
+            <atributo_tabla nombre_bd="hay_banios_ninios" nombre_capa="paraNinios"/>
+            <atributo_tabla nombre_bd="hay_cambiador_bebes" nombre_capa="cambiadorBebes"/>
+
+            <atributo_tabla nombre_bd="tipo_banio" nombre_capa="tipoBanio"/>
+            
+			<atributo_tabla nombre_bd="cod_modelo" nombre_capa="modeloBanio"/>
+			<atributo_tabla nombre_bd="descripcion" nombre_capa="descripcion"/>
+			<atributo_tabla nombre_bd="cod_fabricante" nombre_capa="fabricante"/>
+			<atributo_tabla nombre_bd="cod_proveedor" nombre_capa="proveedor"/>
+			<atributo_tabla nombre_bd="cod_instalador" nombre_capa="instaladoPor"/>
+			<atributo_tabla nombre_bd="cant_gabinetes" nombre_capa="cantGabinetes"/>
+			<atributo_tabla nombre_bd="fecha" nombre_capa="fecha"/>			
+			<atributo_tabla nombre_bd="ccz" nombre_capa="CCZ"/>
+			<atributo_tabla nombre_bd="horario_func" nombre_capa="horarioFunc"/>
+			<atributo_tabla nombre_bd="activo" nombre_capa="activo"/>
+			<atributo_tabla nombre_bd="accesibilidad" nombre_capa="accesibilidad"/>
+			<atributo_tabla nombre_bd="observaciones" nombre_capa="observaciones"/>
+
+			<atributo_tabla nombre_bd="idauditoria" nombre_capa="idauditoria"/>			
+			<atributo_tabla nombre_bd="ucrea" nombre_capa="Ucrea"/>
+			<atributo_tabla nombre_bd="fcrea" nombre_capa="Fcrea"/>
+			<atributo_tabla nombre_bd="uact" nombre_capa="Uact"/>
+			<atributo_tabla nombre_bd="fact" nombre_capa="Fact"/>				
+  			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

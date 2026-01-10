@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="e_citim_trazos">
+
+	<atributo nombre="cod_proyecto" tipo="imm.gis.core.feature.ExternalAttributeRelacionValor" capa_referenciada="e_citim_proyectos"/>
+	<atributo nombre="vigente" tipo="java.lang.Boolean"/>
+	<atributo nombre="idauditoria" tipo="java.lang.String"/>	
+	<atributo nombre="Ucrea" tipo="java.lang.String" />
+	<atributo nombre="Fcrea" tipo="java.util.Date" />
+	<atributo nombre="Uact" tipo="java.lang.String" />
+	<atributo nombre="Fact" tipo="java.util.Date" nillable="true"/>	
+	<atributo nombre="the_geom" tipo="com.vividsolutions.jts.geom.LineString"/>
+	
+	<origen_datos>
+		<workspace nombre="citim.alineaciones" tipo="WFS">
+			<style strokeColor="#FF00A6" strokeWidth="1" fillColor="#000000BA" />
+			<capapublicada nombre="e_citim_trazos" nombre_mostrar="e_citim_trazos"></capapublicada>
+		</workspace>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="citim_trazos" esquema="public" pk="gid" secuencia="gid_global_seq"> 
+			<atributo_tabla nombre_bd="gid" nombre_capa="gid" />	
+			<atributo_tabla nombre_bd="cod_proyecto" nombre_capa="cod_proyecto"/>
+			<atributo_tabla nombre_bd="vigente" nombre_capa="vigente"/>
+			<atributo_tabla nombre_bd="idauditoria" nombre_capa="idauditoria"/>			
+			<atributo_tabla nombre_bd="ucrea" nombre_capa="Ucrea"/>
+			<atributo_tabla nombre_bd="fcrea" nombre_capa="Fcrea"/>
+			<atributo_tabla nombre_bd="uact" nombre_capa="Uact"/>
+			<atributo_tabla nombre_bd="fact" nombre_capa="Fact"/>
+			
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>
+

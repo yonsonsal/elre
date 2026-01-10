@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="Tipos Remocion">
+
+	<atributo nombre="motivo_remocion" tipo="java.lang.String"/>
+
+	<origen_datos>
+		<fuente nombre="brfDS" tipo="ORACLE" proxy="false"/>
+		<tabla nombre="FU_TIPOS_REMOCION" pk="TIPO" comboValue="TIPO" comboLabel="DESCRIPCION" >
+			
+			<atributo_tabla nombre_bd="DESCRIPCION" nombre_capa="motivo_remocion"/>
+
+		</tabla>				
+	</origen_datos>
+</capa>
+</tema>

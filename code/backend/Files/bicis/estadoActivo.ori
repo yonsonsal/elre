@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Estado Activo">
+	
+	<atributo nombre="activo" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="bi_estado_activo" esquema="ciudadanos" pk="cod_estado" comboValue="cod_estado" comboLabel="estado">	
+					
+			<atributo_tabla nombre_bd="estado" nombre_capa="activo"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

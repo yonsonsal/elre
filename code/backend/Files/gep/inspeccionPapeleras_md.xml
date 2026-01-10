@@ -1,0 +1,15 @@
+﻿<layer>
+	<attribute name="cod_insp_papelera" query_capable="false" label="cod_insp_papelera" show="false" />
+	<attribute name="gid_papelera" usage="FEATURE_REFERENCE" referenced_layer="Papeleras" query_capable="false" show="false"/>
+	<attribute name="estado" label="Estado" columns="10" show="true"/>
+	<attribute name="funcionamiento" label="Funcionamiento" columns="10" show="true"/>
+	<attribute name="fecha" label="Fecha" query_capable = "true" show="true"/>
+	<attribute name="idauditoria" query_capable = "false" show="false"/>	
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+</layer>
+
+	
+	

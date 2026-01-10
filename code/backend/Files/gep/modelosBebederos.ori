@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Modelos Bebederos" >
+	
+	<atributo nombre="modeloBebedero" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="ep_modelos_bebederos" esquema="ciudadanos" pk="cod_modelo_bebedero" comboValue="cod_modelo_bebedero" comboLabel="modelo_bebedero">
+					
+			<atributo_tabla nombre_bd="modelo_bebedero" nombre_capa="modeloBebedero"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

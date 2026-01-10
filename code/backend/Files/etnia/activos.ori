@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="e_et_activos_etnico_racial">
+	<atributo nombre="nombre" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="descripcion" tipo="java.lang.String" nillable="true"/>		
+	<atributo nombre="tipoActivo" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Tipos Activo" nillable="true"/>	
+	<atributo nombre="etnia" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Etnias" nillable="true"/>
+	<atributo nombre="observaciones" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="direccion" tipo="java.lang.String" nillable="true" valorCalculado="uy.gub.montevideo.gis.geomvd.etnia.fields.ActivosEtnicoRacialCalcs::getDireccion(the_geom)" persistible="true" />
+	<atributo nombre="vinculo" tipo="java.lang.String" nillable="true"/>
+
+
+	<atributo nombre="idauditoria" tipo="java.lang.String"/>	
+	<atributo nombre="Ucrea" tipo="java.lang.String" />
+	<atributo nombre="Fcrea" tipo="java.util.Date" />
+	<atributo nombre="Uact" tipo="java.lang.String" />
+    	<atributo nombre="Fact" tipo="java.util.Date" nillable="true"/>	
+		
+    	<atributo nombre="the_geom" tipo="com.vividsolutions.jts.geom.Point"/>	 	
+  		
+	<origen_datos>
+		<workspace nombre="etnia" tipo="WFS">
+			<style strokeColor="#FF00A6" strokeWidth="1" fillColor="#000000BA" />
+			<capapublicada nombre="e_et_activos_etnico_racial" nombre_mostrar="e_et_activos_etnico_racial"></capapublicada>
+		</workspace>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="et_activos_etnico_racial" pk="gid" esquema="ciudadanos" secuencia="ciudadanos.s_et_etra">	
+			<atributo_tabla nombre_bd="gid" nombre_capa="gid" />
+			<atributo_tabla nombre_bd="nombre_activo" nombre_capa="nombre"/>
+			<atributo_tabla nombre_bd="descripcion" nombre_capa="descripcion"/>			
+			<atributo_tabla nombre_bd="cod_tipo_activo" nombre_capa="tipoActivo"/>			
+			<atributo_tabla nombre_bd="cod_etnia" nombre_capa="etnia"/>
+			<atributo_tabla nombre_bd="observaciones" nombre_capa="observaciones"/>
+			<atributo_tabla nombre_bd="direccion" nombre_capa="direccion"/>
+			<atributo_tabla nombre_bd="vinculo" nombre_capa="vinculo"/>
+			
+			<atributo_tabla nombre_bd="idauditoria" nombre_capa="idauditoria"/>			
+			<atributo_tabla nombre_bd="ucrea" nombre_capa="Ucrea"/>
+			<atributo_tabla nombre_bd="fcrea" nombre_capa="Fcrea"/>
+			<atributo_tabla nombre_bd="uact" nombre_capa="Uact"/>
+			<atributo_tabla nombre_bd="fact" nombre_capa="Fact"/>				
+  			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="e_citim_informes_cargados_uit">
+
+	<atributo nombre="padron" tipo="java.lang.Integer"/>
+	
+	<atributo nombre="carp_cat" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="area" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="categoria" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="sub_categoria" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="normativa_adif" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="rgs" tipo="java.lang.String"/>
+	<atributo nombre="uso_pref" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="especif_1_aec" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="especif_2_aprom" tipo="java.lang.String"/>
+	<atributo nombre="ret_front" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="ret_lateral" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="ret_posterior" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="fos" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="fis" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="obs_ret" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="calle" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="altura_min" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="altura_max" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="galibo" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="obs_alt" tipo="java.lang.String" nillable="true"/>
+	
+	<atributo nombre="idauditoria" tipo="java.lang.String"/>
+	<atributo nombre="Ucrea" tipo="java.lang.String" />
+	<atributo nombre="Fcrea" tipo="java.util.Date" />
+	<atributo nombre="Uact" tipo="java.lang.String" />
+	<atributo nombre="Fact" tipo="java.util.Date" nillable="true"/>	
+	
+	<origen_datos>
+		<workspace nombre="citim.otbase" tipo="WFS">
+			<style strokeColor="#FF00A6" strokeWidth="1" fillColor="#000000BA" />
+			<capapublicada nombre="e_citim_informes_cargados_uit" nombre_mostrar="e_citim_informes_cargados_uit"></capapublicada>
+		</workspace>
+		<fuente nombre="citimDS" tipo="POSTGIS"/>
+		<tabla nombre="citim_informes_cargados_uit" esquema="public" pk="gid"> 
+			<atributo_tabla nombre_bd="gid" nombre_capa="gid" />
+			<atributo_tabla nombre_bd="padron" nombre_capa="padron" />
+				
+			<atributo_tabla nombre_bd="carp_cat" nombre_capa="carp_cat"/>
+			<atributo_tabla nombre_bd="area" nombre_capa="area"/>
+			<atributo_tabla nombre_bd="categoria" nombre_capa="categoria"/>
+			<atributo_tabla nombre_bd="sub_categoria" nombre_capa="sub_categoria"/>
+			<atributo_tabla nombre_bd="normativa_adif" nombre_capa="normativa_adif"/>
+			<atributo_tabla nombre_bd="rgs" nombre_capa="rgs"/>
+			<atributo_tabla nombre_bd="uso_pref" nombre_capa="uso_pref"/>
+			<atributo_tabla nombre_bd="especif_1_aec" nombre_capa="especif_1_aec"/>
+			<atributo_tabla nombre_bd="especif_2_aprom" nombre_capa="especif_2_aprom"/>
+			<atributo_tabla nombre_bd="ret_front" nombre_capa="ret_front"/>
+			<atributo_tabla nombre_bd="ret_lateral" nombre_capa="ret_lateral"/>
+			<atributo_tabla nombre_bd="ret_posterior" nombre_capa="ret_posterior"/>
+			<atributo_tabla nombre_bd="fos" nombre_capa="fos"/>
+			<atributo_tabla nombre_bd="fis" nombre_capa="fis"/>
+			<atributo_tabla nombre_bd="obs_ret" nombre_capa="obs_ret"/>
+			<atributo_tabla nombre_bd="calle" nombre_capa="calle"/>
+			<atributo_tabla nombre_bd="altura_min" nombre_capa="altura_min"/>
+			<atributo_tabla nombre_bd="altura_max" nombre_capa="altura_max"/>
+			<atributo_tabla nombre_bd="galibo" nombre_capa="galibo"/>
+			<atributo_tabla nombre_bd="obs_alt" nombre_capa="obs_alt"/>
+			<atributo_tabla nombre_bd="idauditoria" nombre_capa="idauditoria"/>			
+			<atributo_tabla nombre_bd="ucrea" nombre_capa="Ucrea"/>
+			<atributo_tabla nombre_bd="fcrea" nombre_capa="Fcrea"/>
+			<atributo_tabla nombre_bd="uact" nombre_capa="Uact"/>
+			<atributo_tabla nombre_bd="fact" nombre_capa="Fact"/>
+			
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>
+
+

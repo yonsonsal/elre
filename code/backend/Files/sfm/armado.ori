@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="Armado">
+	<atributo nombre="Armado" tipo="java.lang.String"/>
+
+	<origen_datos>
+		<fuente nombre="brfDS" tipo="ORACLE" />
+		<tabla nombre="V_SF_ARMADO" pk="COD_ARMADO" comboValue="COD_ARMADO" comboLabel="DESCRIPCION">	
+			<atributo_tabla nombre_bd="DESCRIPCION" nombre_capa="Armado"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

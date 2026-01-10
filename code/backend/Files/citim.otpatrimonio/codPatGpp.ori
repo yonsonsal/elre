@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Cod Pat Gpp">
+	
+	<atributo nombre="gpp" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="citimDS" tipo="POSTGIS"/>
+		<tabla nombre="citim_cod_pat_gpp" esquema="public" pk="cod_gpp" comboValue="cod_gpp" comboLabel="des_gpp">	
+					
+			<atributo_tabla nombre_bd="des_gpp" nombre_capa="gpp"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

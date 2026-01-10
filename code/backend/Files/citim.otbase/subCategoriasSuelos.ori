@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Sub Categorias Suelos">
+	
+	<atributo nombre="subcat" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="citimDS" tipo="POSTGIS"/>
+		<tabla nombre="citim_cod_subcategoria_suelo" esquema="public" pk="id" comboValue="id" comboLabel="desc_sub_categoria_suelo">	
+					
+			<atributo_tabla nombre_bd="desc_sub_categoria_suelo" nombre_capa="subcat"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

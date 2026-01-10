@@ -1,0 +1,16 @@
+<layer>
+	<attribute name="id" query_capable="false" label="ID" show="false" />
+	<attribute name="grado_de_proteccion" query_capable = "false" show="true"  label="Grado de Proteccion"/>	
+	<attribute name="restauracion" usage="LOV" query_capable="true" label="Restauracion" show="true"/>
+	<attribute name="conservacion_mantenimiento" usage="LOV" query_capable="true" label="Conservacion Mantenimiento" show="true"/>
+	<attribute name="reparacion_consolidacion" usage="LOV" query_capable="true" label="Reparacion Consolidacion" show="true"/>
+	<attribute name="acondicionamiento" usage="LOV" query_capable="true" label="Acondicionamiento" show="true"/>
+	<attribute name="reforma_rehabilitacion" usage="LOV" query_capable="true" label="Reforma Rehabilitacion" show="true"/>
+	<attribute name="ampliacion" usage="LOV" query_capable="true" label="Ampliacion" show="true"/>
+	<attribute name="sustitucion" usage="LOV" query_capable="true" label="Sustitucion" show="true"/>
+	<attribute name="idauditoria" query_capable = "false" show="false"/>	
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+</layer>	

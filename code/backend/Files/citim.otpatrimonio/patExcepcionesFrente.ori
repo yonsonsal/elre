@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="e_citim_pat_excepciones_frente">
+
+	<atributo nombre="padron" tipo="java.lang.Integer"/>
+	<atributo nombre="calle" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="cod_nom" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="uso_pref" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Cod Uso Preferente" nillable="true"/>	
+	<atributo nombre="fos" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Cod Fos" nillable="true"/>	
+	<atributo nombre="fosv" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Cod Fos"  nillable="true"/>	
+	<atributo nombre="retiro_frontal" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Cod Retiro Frontal" nillable="true"/>	
+	<atributo nombre="retiro_lateral" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Cod Retiro Lateral" nillable="true"/>
+	<atributo nombre="retiro_posterior" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Cod Retiro Posterior" nillable="true"/>		
+	<atributo nombre="altura_max"  tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Cod Altura" nillable="true"/>
+	<atributo nombre="altura_min"  tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Cod Altura" nillable="true"/>
+	<atributo nombre="altura_obl"  tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Cod Altura" nillable="true"/>
+	<atributo nombre="galibo" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Cod Galibo" nillable="true"/>	
+	<atributo nombre="obs" tipo="java.lang.String" nillable="true"/>	
+	<atributo nombre="info_int" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="idauditoria" tipo="java.lang.String"/>
+	<atributo nombre="Ucrea" tipo="java.lang.String" />
+	<atributo nombre="Fcrea" tipo="java.util.Date" />
+	<atributo nombre="Uact" tipo="java.lang.String" />
+	<atributo nombre="Fact" tipo="java.util.Date" nillable="true"/>	
+	
+	<origen_datos>
+		<workspace nombre="citim.otpatrimonio" tipo="WFS">
+			<style strokeColor="#FF00A6" strokeWidth="1" fillColor="#000000BA" />
+			<capapublicada nombre="e_citim_pat_excepciones_frente" nombre_mostrar="e_citim_pat_excepciones_frente"></capapublicada>
+		</workspace>
+		<fuente nombre="citimDS" tipo="POSTGIS"/>
+		<tabla nombre="citim_pat_excepciones_frente" esquema="public" pk="id"> 
+			<atributo_tabla nombre_bd="id" nombre_capa="id" />	
+			<atributo_tabla nombre_bd="padron" nombre_capa="padron" />	
+			<atributo_tabla nombre_bd="calle" nombre_capa="calle"/>
+			<atributo_tabla nombre_bd="cod_nom" nombre_capa="cod_nom"/>
+			<atributo_tabla nombre_bd="uso_pref" nombre_capa="uso_pref"/>
+			<atributo_tabla nombre_bd="fos" nombre_capa="fos"/>
+			<atributo_tabla nombre_bd="fosv" nombre_capa="fosv"/>
+			<atributo_tabla nombre_bd="retiro_frontal" nombre_capa="retiro_frontal"/>
+			<atributo_tabla nombre_bd="retiro_lateral" nombre_capa="retiro_lateral"/>
+			<atributo_tabla nombre_bd="retiro_posterior" nombre_capa="retiro_posterior"/>
+			<atributo_tabla nombre_bd="altura_max" nombre_capa="altura_max"/>
+			<atributo_tabla nombre_bd="altura_min" nombre_capa="altura_min"/>
+			<atributo_tabla nombre_bd="altura_obl" nombre_capa="altura_obl"/>
+			<atributo_tabla nombre_bd="galibo" nombre_capa="galibo"/>
+			<atributo_tabla nombre_bd="obs" nombre_capa="obs"/>
+			<atributo_tabla nombre_bd="info_int" nombre_capa="info_int"/>
+			<atributo_tabla nombre_bd="idauditoria" nombre_capa="idauditoria"/>			
+			<atributo_tabla nombre_bd="ucrea" nombre_capa="Ucrea"/>
+			<atributo_tabla nombre_bd="fcrea" nombre_capa="Fcrea"/>
+			<atributo_tabla nombre_bd="uact" nombre_capa="Uact"/>
+			<atributo_tabla nombre_bd="fact" nombre_capa="Fact"/>
+			
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>
+
+

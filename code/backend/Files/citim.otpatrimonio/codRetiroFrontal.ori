@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Cod Retiro Frontal">
+	
+	<atributo nombre="retiro_frontal" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="citimDS" tipo="POSTGIS"/>
+		<tabla nombre="citim_cod_retiro_frontal" esquema="public" pk="ret_id" comboValue="ret_id" comboLabel="ret_desc">	
+					
+			<atributo_tabla nombre_bd="ret_desc" nombre_capa="retiro_frontal"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

@@ -1,0 +1,34 @@
+﻿<layer>		 
+	<attribute name="GID" query_capable="false" label="GID" show="false" />
+	<attribute name="Codigo" query_capable="true" show="true" label="Código"/> 
+
+	<attribute name="Responsable" query_capable="true" show="true" usage="LOV" label="Responsable"/>
+	<attribute name="Dia_de_feria" query_capable="true" show="true" usage="LOV" label="Día"/>	
+	<attribute name="Ambito_territorial" query_capable="true" show="true" usage="LOV" label="Ambito territorial"/>	
+	<attribute name="Numero_feria" label="Número" query_capable="true" show="true"/>	
+	<attribute name="Denominacion" columns="50" query_capable = "true" show="true" label="Denominación"/>	
+	<attribute name="Ubicacion" presentation="TEXT_AREA" columns="50" rows="4" query_capable = "false" show="true" label="Ubicación"/>	
+	<attribute name="Tipo_de_feria" usage="LOV" label="Tipo" query_capable="true" show="true"/>		
+	<attribute name="Barrio"  query_capable = "false" label="Barrio" show="true"/>	
+	<attribute name="Armado" usage="LOV" label="Hora de armado" query_capable="true" show="true"/>	
+	
+	<attribute name="Hora_comienzo" usage="LOV" label="Hora de comienzo" query_capable="true" show="true"/>
+	
+	<attribute name="Hora_fin" usage="LOV" label="Hora de fin" query_capable="true" show="true"/>
+	<attribute name="Levantado" usage="LOV" label="Hora de levantado" query_capable="true" show="true"/> 
+	
+	<attribute name="Cantidad_puestos" label="Cantidad de puestos" query_capable="true" show="true"/>	
+	<attribute name="Fecha_instalacion" label="Fecha de instalación" query_capable="true" show="true"/>
+	<attribute name="Fecha_rotacion" label="Fecha de rotación" query_capable="true" show="true"/>
+	<attribute name="Observaciones" presentation="TEXT_AREA" columns="50" rows="4" label="Observaciones" query_capable="true" show="true"/>		
+	<attribute name="Plano_feria" query_capable = "false"  label="Plano de feria" show="true"/>			
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+	<attribute name="idauditoria"  query_capable = "false" show="false"/>
+	<attribute name="the_geom" query_capable = "false" show="false"/>
+	
+</layer>
+
+

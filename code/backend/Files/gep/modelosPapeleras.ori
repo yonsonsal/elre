@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Modelos Papeleras" >
+	
+	<atributo nombre="modeloPapelera" tipo="java.lang.String"/>
+	  		
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="ep_modelos_papeleras" esquema="ciudadanos" pk="cod_modelo_papelera" comboValue="cod_modelo_papelera" comboLabel="modelo_papelera">	
+					
+			<atributo_tabla nombre_bd="modelo_papelera" nombre_capa="modeloPapelera"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

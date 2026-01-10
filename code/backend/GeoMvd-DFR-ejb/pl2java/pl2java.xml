@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuracion>
+	<!--<generacion>
+		<package-java>uy.gub.imm.dfr.servicios.ejb.pl2java
+		</package-java>
+	</generacion>
+	<packages>
+	<package nombre="K_DF_VIAJES"
+		nombre-java="KSigBean"
+		persistence-unit="brfDS">
+		<metodo nombre="ACT_POSICIONES_TRAMOS" />	
+		<metodo nombre="ACT_POSICIONES_RECORRIDO" />	
+	</package>
+	</packages>-->
+</configuracion>

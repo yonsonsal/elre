@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="mdg_tipos_estado">
+	
+	<atributo nombre="estado" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<workspace nombre="geomatica" tipo="WFS">
+			<style strokeColor="#FF00A6" strokeWidth="1" fillColor="#000000BA" />
+			<capapublicada nombre="mdg_tipos_estado" nombre_mostrar="mdg_tipos_estado"></capapublicada>
+		</workspace>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="mdg_tipos_estado" esquema="public" pk="codigo" comboValue="codigo" comboLabel="descripcion">	
+			<atributo_tabla nombre_bd="descripcion" nombre_capa="estado"/>
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+	<capa nombre="E_FW_ZONASFACTURACION" grupo="Capas editables">
+		<atributo nombre="nroruta" tipo="java.lang.Integer" nillable="true" />
+		<atributo nombre="zona" tipo="java.lang.Integer" nillable="true" />
+		<atributo nombre="the_geom" tipo="com.vividsolutions.jts.geom.Polygon" nillable="true" />
+		<atributo nombre="Ucrea" tipo="java.lang.String" />
+		<atributo nombre="Fcrea" tipo="java.util.Date" />
+		<atributo nombre="Uact" tipo="java.lang.String" />
+		<atributo nombre="Fact" tipo="java.util.Date" />
+		<atributo nombre="idauditoria" tipo="java.lang.String" />
+		<atributo nombre="totalMetrosVias" tipo="java.lang.Double"
+			valorCalculado="uy.gub.montevideo.gis.geomvd.geofact.fields.ZonasFacturacionCalcs::getMetrosVia(THE_GEOM)" />
+		<atributo nombre="cantPadrones" tipo="java.lang.Integer"
+			valorCalculado="uy.gub.montevideo.gis.geomvd.geofact.fields.ZonasFacturacionCalcs::getCantPadrones(THE_GEOM)" />
+		<origen_datos>
+			<workspace nombre="geofact" tipo="WFS">
+				<style strokeColor="#FF00A6" strokeWidth="1" fillColor="#000000BA" />
+				<capapublicada nombre="E_FW_ZONASFACTURACION" nombre_mostrar="E_FW_ZONASFACTURACION"></capapublicada>
+			</workspace>
+			<fuente nombre="brfDS" tipo="ORACLE" />
+			<tabla nombre="fw_zonasfacturacion" pk="GID" secuencia="S_FWZOFA">
+				<atributo_tabla nombre_bd="GID" nombre_capa="gid" />
+				<atributo_tabla nombre_bd="NRORUTA" nombre_capa=" nroruta" />
+				<atributo_tabla nombre_bd="ZONA" nombre_capa="zona" />
+				<atributo_tabla nombre_bd="UCREA" nombre_capa="Ucrea" />
+				<atributo_tabla nombre_bd="FCREA" nombre_capa="Fcrea" />
+				<atributo_tabla nombre_bd="UACT" nombre_capa="Uact" />
+				<atributo_tabla nombre_bd="FACT" nombre_capa="Fact" />
+				<atributo_tabla nombre_bd="IDAUDITORIA" nombre_capa="idauditoria" />
+			</tabla>
+		</origen_datos>
+	</capa>
+</tema>

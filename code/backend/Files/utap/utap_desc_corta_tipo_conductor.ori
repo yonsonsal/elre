@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="Desc Corta Tipo Conductor">
+
+	<atributo nombre="desc_corta_tipo_conductor" tipo="java.lang.String"/>
+	
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS" />
+		<tabla nombre="utap_tipo_conductor" esquema="public" pk="cod_tipo_conductor" comboValue="cod_tipo_conductor" comboLabel="desc_corta_tipo_conductor">
+			
+			<atributo_tabla nombre_bd="desc_corta_tipo_conductor" nombre_capa="desc_corta_tipo_conductor"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

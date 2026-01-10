@@ -1,0 +1,19 @@
+<layer>
+	<attribute name="id" query_capable="false" label="ID" show="false" />
+	<attribute name="padron" query_capable="false" label="Padrón" show="true" />
+        <attribute name="categoria" usage="LOV" query_capable = "false" show="true"  label="Categoría"/>	
+	<attribute name="subcat" usage="LOV" query_capable="false" label="Suelo Transformado" show="true" />
+
+	<attribute name="fecha_dec" query_capable="true" label="Fecha de Decreto" show="true"/>
+	<attribute name="fecha_res" query_capable="true" label="Fecha de Resolución" show="true"/>
+	<attribute name="resolucion" query_capable="true" label="Resolución" show="true"/>	
+	<attribute name="decreto" query_capable="true" label="Decreto" show="true"/>	
+	<attribute name="obs" query_capable="true" label="Observaciones" show="true"/>	
+        <attribute name="info_int" query_capable = "false" show="true"  label="Información Interna"/>	
+        <attribute name="idauditoria" query_capable = "false" show="false"/>	
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+	
+</layer>	

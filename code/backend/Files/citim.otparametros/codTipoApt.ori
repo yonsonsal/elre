@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Cod Tipo Apt">
+	
+	<atributo nombre="tipo" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="citimDS" tipo="POSTGIS"/>
+		<tabla nombre="citim_cod_tipo_apt" esquema="public" pk="tipo_id" comboValue="tipo_id" comboLabel="tipo_desc">	
+					
+			<atributo_tabla nombre_bd="tipo_desc" nombre_capa="tipo"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Cod Pat Cautela">
+	
+	<atributo nombre="cautela" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="citimDS" tipo="POSTGIS"/>
+		<tabla nombre="citim_cod_pat_cautela" esquema="public" pk="cod_cautela" comboValue="cod_cautela" comboLabel="des_cautela">	
+					
+			<atributo_tabla nombre_bd="des_cautela" nombre_capa="cautela"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

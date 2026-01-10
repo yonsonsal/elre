@@ -1,0 +1,23 @@
+﻿<layer fid_query_capable="true" fid_query_att_name="gid">		 
+	
+	<attribute name="gid" query_capable="false" label="GID" show="false" />
+	<attribute name="Oficina"  label="Oficina" show="true"/> 
+
+	<attribute name="Local_inscripcion" label="Local de inscripción" show="true"/>
+	<attribute name="Limites" label="Límites" show="true"/>	
+	<attribute name="Fecha_inscripcion_desde" label="Fecha de inscipción desde" show="true"/>
+	<attribute name="Fecha_inscripcion_hasta" label="Fecha de inscipción hasta" show="true"/>
+	<attribute name="Fecha_difusion_desde" label="Fecha de difusión desde" show="true"/>
+	<attribute name="Fecha_difusion_hasta" label="Fecha de difusión hasta" show="true"/>
+	<attribute name="Vigencia"  usage="LOV" query_capable = "true" label="Vigencia" show="true"/>
+
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+	<attribute name="idauditoria"  query_capable = "false" show="false"/>
+	<attribute name="the_geom" query_capable = "false" show="false"/>
+	
+</layer>
+
+

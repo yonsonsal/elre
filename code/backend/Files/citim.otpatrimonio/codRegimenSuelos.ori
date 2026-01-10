@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Cod Regimen Suelos">
+	
+	<atributo nombre="regimen" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="citimDS" tipo="POSTGIS"/>
+		<tabla nombre="citim_cod_regimen_suelo" esquema="public" pk="id_regimen" comboValue="id_regimen" comboLabel="desc_regimen_suelo">	
+					
+			<atributo_tabla nombre_bd="desc_regimen_suelo" nombre_capa="regimen"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

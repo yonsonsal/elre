@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Cod Tipos Especifidad">
+	
+	<atributo nombre="especificidad" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="citimDS" tipo="POSTGIS"/>
+		<tabla nombre="citim_cod_tipo_especificidad" esquema="public" pk="id_especificidad" comboValue="id_especificidad" comboLabel="desc_especificidad">	
+					
+			<atributo_tabla nombre_bd="desc_especificidad" nombre_capa="especificidad"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

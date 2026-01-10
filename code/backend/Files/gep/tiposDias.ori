@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Tipos Dias">
+	
+	<atributo nombre="tipoDia" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="ep_tipos_dias" esquema="ciudadanos" pk="cod_tipo_dia" comboValue="cod_tipo_dia" comboLabel="tipo_dia">	
+					
+			<atributo_tabla nombre_bd="tipo_dia" nombre_capa="tipoDia"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

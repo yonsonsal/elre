@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="c_v_citim_padrones_frentes">
+
+
+	<origen_datos>
+		<workspace nombre="citim.otbase" tipo="WMS">
+			<style strokeColor="#000000" strokeWidth="1" fillColor="#AAAAAA" />
+			<capapublicada nombre="c_v_citim_padrones_frentes" nombre_mostrar="c_v_citim_padrones_frentes"></capapublicada>
+		</workspace>
+	</origen_datos>
+</capa>
+</tema>

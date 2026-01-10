@@ -1,0 +1,27 @@
+<layer>
+	<attribute name="id" query_capable="false" label="Id" show="false" />
+	<attribute name="padron" query_capable="true" label="Padron" show="true" />
+        <attribute name="uso_pref" query_capable="true" label="Uso Preferente" show="true"/>
+        <attribute name="fos" query_capable="true" label="Fos" show="true"/>
+	<attribute name="fosv" usage="LOV" query_capable="true" label="Fos Verde" show="true"/>
+        <attribute name="fis" usage="LOV" query_capable="true" label="Fis" show="true"/>
+        <attribute name="retiro_frontal" usage="LOV" query_capable="true" label="Retiro Frontal" show="true"/>
+        <attribute name="retiro_lateral" usage="LOV" query_capable="true" label="Retiro Lateral" show="true"/>
+        <attribute name="retiro_posterior" usage="LOV" query_capable="true" label="Retiro Posterior" show="true"/>
+        <attribute name="retiro" usage="LOV" query_capable="true" label="Retiro Perimetral" show="true"/>
+        <attribute name="altura_max" usage="LOV" query_capable = "false" show="true"  label="Altura Max"/>	
+        <attribute name="altura_min" usage="LOV" query_capable = "false" show="true"  label="Altura Min"/>	
+        <attribute name="altura_obl" usage="LOV" query_capable = "false" show="true"  label="Altura Obl"/>	
+        <attribute name="galibo" usage="LOV" query_capable = "false" show="true"  label="Galibo"/>	
+        <attribute name="obs" query_capable = "false" show="true"  label="Obs"/>
+        <attribute name="info_int" query_capable = "false" show="true"  label="Info Int."/>	
+	<attribute name="categoria" usage="LOV" query_capable="true" label="Categoria" show="true"/>
+	<attribute name="subcat" usage="LOV" query_capable="true" label="Sub Categoria" show="true"/>
+	<attribute name="areadif" query_capable="true" label="Area Dif" show="true"/>
+        <attribute name="idauditoria" query_capable = "false" show="false"/>	
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+	
+</layer>	

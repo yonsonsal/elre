@@ -1,0 +1,5 @@
+<layer>
+	<attribute name="gid" query_capable = "true" show="true"/>
+	<attribute name="codigo" query_capable = "true" show="true"/>
+	<attribute name="nombre" query_capable = "true" show="true"/>
+</layer>

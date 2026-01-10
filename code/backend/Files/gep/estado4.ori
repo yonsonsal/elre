@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Estado4">
+	
+	<atributo nombre="cambiadorBebes" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="ep_banios_camb_bebes" esquema="ciudadanos" pk="cod_banio_cb" comboValue="cod_banio_cb" comboLabel="desc_banio_cb">	
+					
+			<atributo_tabla nombre_bd="desc_banio_cb" nombre_capa="cambiadorBebes"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

@@ -1,0 +1,15 @@
+<layer>
+	<attribute name="gid" query_capable="false" label="GID" show="false" />
+        <attribute name="nombre" query_capable = "false" show="true"  label="Nombre"/>	
+        <attribute name="suelo_ini" usage="LOV" query_capable = "false" show="true"  label="Suelo Ini"/>		
+        <attribute name="suelo_fin" usage="LOV" query_capable = "false" show="true"  label="Suelo Fin"/>	
+        <attribute name="tipo" usage="LOV" query_capable = "false" show="true"  label="Tipo"/>	
+        <attribute name="info_int" query_capable = "false" show="true"  label="Info Int."/>	
+        <attribute name="idauditoria" query_capable = "false" show="false"/>	
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+	<attribute name="the_geom" query_capable="false" show="false"/>			
+	
+</layer>	

@@ -1,0 +1,16 @@
+<layer>
+  <name>points_of_interest</name>
+  <id>LayerInfoImpl-145653fa:19ba9b2aa3f:-7ff2</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-145653fa:19ba9b2aa3f:-8000</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl-145653fa:19ba9b2aa3f:-7ff3</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2026-01-10 20:59:15.501 UTC</dateCreated>
+</layer>

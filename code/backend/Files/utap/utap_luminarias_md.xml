@@ -1,0 +1,31 @@
+<layer >
+	<attribute name="gid" query_capable="false" label="GID" show="false" />
+	<attribute name="id_puesta" label="id_puesta" usage="FEATURE_REFERENCE" referenced_layer="utap:e_utap_puesta" query_capable="false" show="true"/>
+	<attribute name="id_nodo_controlador" label="nodo_controlador" usage="FEATURE_REFERENCE" referenced_layer="utap:e_utap_nodo_controlador" query_capable="false" show="true"/>
+	<attribute name="desc_tipo_lampara" usage="LOV" label="tipo_lampara" query_capable="false" show="true"/>
+	<attribute name="flujo_luminico"  query_capable = "false"  show="true"/>
+	<attribute name="anio_inactivo"  query_capable = "false"  show="false"/>
+	<attribute name="tension_nominal"  query_capable = "false"  show="true"/>
+	<attribute name="cod_serie_luminaria"  query_capable = "false"  show="true"/>
+	<attribute name="fecha_instalado"  query_capable = "false" label="fecha_instalado"  show="true"/>
+	<attribute name="fecha_desinstalado"  query_capable = "false" label="fecha_desinstalado"  show="true"/>
+	<attribute name="potencia_luminaria_W"  query_capable = "false" label="potencia_luminaria_W"  show="true"/>
+	<attribute name="desc_modelo" usage="LOV" label="modelo_luminaria" show="true"/>	
+	<attribute name="desc_marca" usage="LOV" label="marca_luminaria" show="true"/>
+	<attribute name="desc_fabricante" usage="LOV" label="fabricante_luminaria" show="true"/>
+	<attribute name="desc_instalador" usage="LOV" label="instalador" show="true"/>
+	<attribute name="desc_tipologia" usage="LOV" label="tipologia" show="true"/>	
+	<attribute name="desc_modelo_brazo" usage="LOV" label="modelo_brazo" show="true"/>		
+
+	<attribute name="desc_tipo_control" usage="LOV" label="tipo_control" show="true"/>		
+	<attribute name="desc_color" usage="LOV" label="color_carcasa" show="true"/>		
+	<attribute name="desc_temp_color" usage="LOV" label="temperatura_color" show="true"/>
+	
+	<attribute name="idauditoria" query_capable = "false" show="false"/>
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+	<attribute name="the_geom" query_capable="false" show="false"/>			
+	
+</layer>

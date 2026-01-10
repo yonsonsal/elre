@@ -1,0 +1,9 @@
+<plugins>
+<pyqgis_plugin name="IM carga de capas" version="0.63">
+<description>Plugin para cargar capas de la Intendencia de Montevideo</description>
+<category>Plugins</category>
+<icon>icon.png</icon>
+<qgis_minimum_version>3.0</qgis_minimum_version>
+<download_url>https://desa-gis.imm.gub.uy/api/plugineta/plugins/im_layer_loader/v0.63/im_layer_loader.zip</download_url>
+</pyqgis_plugin>
+</plugins>

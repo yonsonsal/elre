@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Modelos Baños" >
+	
+	<atributo nombre="modeloBanio" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="ep_modelos_banios" esquema="ciudadanos" pk="cod_modelo_banio" comboValue="cod_modelo_banio" comboLabel="modelo_banio">
+					
+			<atributo_tabla nombre_bd="modelo_banio" nombre_capa="modeloBanio"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

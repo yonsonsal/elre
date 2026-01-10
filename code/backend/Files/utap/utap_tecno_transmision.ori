@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="Tecnologia Transmision">
+	<atributo nombre="desc_tecno" tipo="java.lang.String"/>
+
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS" />
+
+		<tabla nombre="utap_tecnologia_transmision" esquema="public" pk="cod_tecno" comboValue="cod_tecno" comboLabel="desc_tecno">	
+			<atributo_tabla nombre_bd="desc_tecno" nombre_capa="desc_tecno"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Tipos Afectaciones">
+	
+	<atributo nombre="afectado" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="citim_tipo_afectacion" esquema="public" pk="codigo" comboValue="codigo" comboLabel="descripcion">	
+					
+			<atributo_tabla nombre_bd="descripcion" nombre_capa="afectado"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

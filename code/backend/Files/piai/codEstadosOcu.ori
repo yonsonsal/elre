@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Cod Estado Ocu">
+	
+	<atributo nombre="estado" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="ai_estado_ocupaciones" esquema="public" pk="cod_estado" comboValue="cod_estado" comboLabel="desc_estado">	
+					
+			<atributo_tabla nombre_bd="desc_estado" nombre_capa="estado"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

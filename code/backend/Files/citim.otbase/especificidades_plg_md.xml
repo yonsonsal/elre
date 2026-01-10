@@ -1,0 +1,15 @@
+<layer>
+	<attribute name="gid" query_capable="false" label="GID" show="false" />
+	<attribute name="especificidad" usage="LOV" query_capable="true" label="Tipo" show="true"/>
+        <attribute name="nombre" query_capable = "false" show="true"  label="Nombre"/>	
+        <attribute name="normativa" query_capable = "false" show="true"  label="Normativa"/>	
+        <attribute name="obs" query_capable = "false" show="true"  label="Observaciones"/>	
+        <attribute name="info_int" query_capable = "false" show="true"  label="Información Interna"/>	
+        <attribute name="idauditoria" query_capable = "false" show="false"/>	
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+	<attribute name="the_geom" query_capable="false" show="false"/>			
+	
+</layer>	

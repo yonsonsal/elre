@@ -1,0 +1,19 @@
+﻿<layer>
+	<attribute name="gid" query_capable="false" label="GID" show="false" />
+	<attribute name="circuitovotacion" label="Circuito" consultable="true" show="true"/>
+	<attribute name="circuito" query_capable="false" show="false"/>
+	<attribute name="municipio" label="Municipio" consultable="true" read_only="true"  show="true" />
+	<attribute name="zona" label="CCZ" consultable="true" read_only="true"  show="true" />
+	<attribute name="subzona" presentation="TEXT_AREA" columns="10" rows="1" label="Subzona" consultable="true"  show="true" />
+	<attribute name="nombrelocal" presentation="TEXT_AREA" columns="50" rows="4" label="Nombre del Local" consultable="true"  show="true" />
+	<attribute name="direccion" presentation="TEXT_AREA" columns="50" rows="4" label="Direccion" consultable="true"  show="true" />
+	<attribute name="revisado" label="Revisado (S/N):" consultable="true"  show="true" />
+	<attribute name="accesible" label="Accesible (S/N):" consultable="true"  show="true"/>
+	<attribute name="the_geom" query_capable="false" show="false" />
+	<attribute name="Ucrea" query_capable="false" show="false" />
+	<attribute name="Fcrea" query_capable="false" show="false" />
+	<attribute name="Uact" query_capable="false" show="false" />
+	<attribute name="Fact" query_capable="false" show="false" />
+	<attribute name="idauditoria" query_capable="false" show="false" />
+	<attribute name="the_geom" query_capable="false" show="false" no_export_to="csv"/>
+</layer>

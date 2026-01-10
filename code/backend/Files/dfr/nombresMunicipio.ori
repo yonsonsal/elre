@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="Nombres Municipio" >
+	<atributo nombre="municipio" tipo="java.lang.String" />
+
+	<origen_datos>
+		<fuente nombre="brfDS" tipo="ORACLE" />
+		<tabla nombre="df_municipios" pk="MUNICIPIO" comboValue="MUNICIPIO" comboLabel="MUNICIPIO">	
+			<atributo_tabla nombre_bd="municipio" nombre_capa="municipio"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

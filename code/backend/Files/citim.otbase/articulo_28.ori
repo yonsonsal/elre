@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="e_citim_art_28">
+
+	<atributo nombre="padron" tipo="java.lang.Integer"/>
+	<atributo nombre="categoria" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Categorias Suelos"/>	
+	<atributo nombre="subcat" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Sub Categorias Suelos"/>		
+	<atributo nombre="fecha_dec" tipo="java.util.Date"/>
+	<atributo nombre="fecha_res" tipo="java.util.Date"/>	
+	<atributo nombre="resolucion" tipo="java.lang.String"/>
+	<atributo nombre="decreto" tipo="java.lang.String"/>		
+	<atributo nombre="obs" tipo="java.lang.String" nillable="true"/>	
+	<atributo nombre="info_int" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="idauditoria" tipo="java.lang.String"/>
+	<atributo nombre="Ucrea" tipo="java.lang.String" />
+	<atributo nombre="Fcrea" tipo="java.util.Date" />
+	<atributo nombre="Uact" tipo="java.lang.String" />
+	<atributo nombre="Fact" tipo="java.util.Date" nillable="true"/>		
+	      
+	
+	<origen_datos>
+		<workspace nombre="citim.otbase" tipo="WFS">
+			<style strokeColor="#FF00A6" strokeWidth="1" fillColor="#000000BA" />
+			<capapublicada nombre="e_citim_art_28" nombre_mostrar="e_citim_art_28"></capapublicada>
+		</workspace>
+		<fuente nombre="citimDS" tipo="POSTGIS"/>
+		<tabla nombre="citim_art_28" esquema="public" pk="id" > 
+			<atributo_tabla nombre_bd="id" nombre_capa="id" />	
+			<atributo_tabla nombre_bd="padron" nombre_capa="padron"/>	
+			<atributo_tabla nombre_bd="cat_transf" nombre_capa="categoria"/>	
+			<atributo_tabla nombre_bd="subc_suelo_transf" nombre_capa="subcat"/>
+			<atributo_tabla nombre_bd="decreto" nombre_capa="decreto"/>
+			<atributo_tabla nombre_bd="fecha_dec" nombre_capa="fecha_dec"/>
+			<atributo_tabla nombre_bd="resolucion" nombre_capa="resolucion"/>
+			<atributo_tabla nombre_bd="fecha_res" nombre_capa="fecha_res"/>
+			<atributo_tabla nombre_bd="obs" nombre_capa="obs"/>
+			<atributo_tabla nombre_bd="info_int" nombre_capa="info_int"/>
+			<atributo_tabla nombre_bd="idauditoria" nombre_capa="idauditoria"/>			
+			<atributo_tabla nombre_bd="ucrea" nombre_capa="Ucrea"/>
+			<atributo_tabla nombre_bd="fcrea" nombre_capa="Fcrea"/>
+			<atributo_tabla nombre_bd="uact" nombre_capa="Uact"/>
+			<atributo_tabla nombre_bd="fact" nombre_capa="Fact"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>
+

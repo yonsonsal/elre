@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Cod Aceras">
+	
+	<atributo nombre="acera" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="citimDS" tipo="POSTGIS"/>
+		<tabla nombre="citim_cod_acera" esquema="public" pk="id_acera" comboValue="id_acera" comboLabel="desc_acera">	
+					
+			<atributo_tabla nombre_bd="desc_acera" nombre_capa="acera"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

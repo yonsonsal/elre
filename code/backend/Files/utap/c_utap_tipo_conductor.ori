@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="c_utap_tipo_conductor">
+
+	<atributo nombre="cod_tipo_conductor" tipo="java.lang.Integer" nillable="true" />
+	<atributo nombre="tipo_conductor" tipo="java.lang.String" nillable="true" />
+	<atributo nombre="desc_corta_tipo_conductor" tipo="java.lang.String" nillable="true" />
+	<atributo nombre="desc_tipo_conductor" tipo="java.lang.String" nillable="true" />  
+	<origen_datos>
+		<workspace nombre="utap" tipo="WFS">
+			<style strokeColor="#FF00A6" strokeWidth="1" fillColor="#000000BA" />
+			<capapublicada nombre="e_utap_puesta" nombre_mostrar="c_utap_tipo_conductor"></capapublicada>
+		</workspace>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="utap_tipo_conductor" esquema="public">
+			<atributo_tabla nombre_bd="cod_tipo_conductor" nombre_capa="cod_tipo_conductor"/>
+			<atributo_tabla nombre_bd="tipo_conductor" nombre_capa="tipo_conductor"/>
+			<atributo_tabla nombre_bd="desc_corta_tipo_conductor" nombre_capa="desc_corta_tipo_conductor"/>
+			<atributo_tabla nombre_bd="desc_tipo_conductor" nombre_capa="desc_tipo_conductor"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

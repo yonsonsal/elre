@@ -1,0 +1,15 @@
+﻿<layer>
+	<attribute name="gid_soporte_bicicleta" usage="FEATURE_REFERENCE" referenced_layer="e_ep_soportes_bicicletas" query_capable="false"  show="false"/>
+	<attribute name="cod_insp_sop_bici"  columns="10"  show="false"/>
+	<attribute name="Estado"  columns="10"  show="true"/>
+	<attribute name="Funcionamiento"  columns="10"  show="true"/>
+	<attribute name="Fecha" query_capable = "true" show="true"/>
+	<attribute name="idauditoria" query_capable = "false" show="false"/>	
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+</layer>
+
+	
+	

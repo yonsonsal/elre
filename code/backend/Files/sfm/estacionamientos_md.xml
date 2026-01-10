@@ -1,0 +1,16 @@
+﻿<layer>		 
+	
+	<attribute name="Feria" usage="LOV" query_capable = "true" show="true" label="Feria"/>
+	<attribute name="Ubicacion" presentation="TEXT_AREA" columns="50" rows="4"  query_capable = "true" show="true" label="Ubicación"/>	
+	<attribute name="Observaciones" presentation="TEXT_AREA" columns="50" rows="4" query_capable = "true" show="true" label="Observaciones"/>		
+	<attribute name="idauditoria" query_capable = "false" show="false"/>		
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+
+	<attribute name="the_geom" query_capable = "false" show="false"/>
+	
+</layer>
+
+

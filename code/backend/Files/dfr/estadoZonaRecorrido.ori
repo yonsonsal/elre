@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Estado Zona Recorrido">
+	
+	<atributo nombre="estado" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="brfDS" tipo="ORACLE"/>
+		<tabla nombre="df_estado_zona_recorrido" pk="COD_ESTADO_ZONA" comboValue="COD_ESTADO_ZONA" comboLabel="ESTADO_ZONA">	
+					
+			<atributo_tabla nombre_bd="estado_zona" nombre_capa="estado"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

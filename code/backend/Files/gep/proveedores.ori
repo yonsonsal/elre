@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Proveedores" >
+	
+	<atributo nombre="proveedor" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="ep_proveedores" esquema="ciudadanos" pk="cod_proveedor" comboValue="cod_proveedor" comboLabel="nombre_proveedor">	
+					
+			<atributo_tabla nombre_bd="nombre_proveedor" nombre_capa="proveedor"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

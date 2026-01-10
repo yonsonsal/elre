@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="C_DIRECCIONES">
+	<atributo nombre="nombre" tipo="java.lang.String"/>
+	<atributo nombre="numero" tipo="java.lang.Integer"/>
+	<atributo nombre="letra" tipo="java.lang.String"/>	
+	
+	<atributo nombre="the_geom" tipo="com.vividsolutions.jts.geom.Point"/>
+	
+	<origen_datos>
+		<workspace nombre="dfr" tipo="WMS">
+			<style strokeColor="#FF00A6"  strokeWidth="1"  fillColor="#000000BA" /> 
+			<capapublicada nombre="C_DIRECCIONES" nombre_mostrar="C_DIRECCIONES">
+			</capapublicada>
+		</workspace>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="v_mdg_accesos" pk="gid">
+			<atributo_tabla nombre_bd="gid" nombre_capa="gid" />
+			<atributo_tabla nombre_bd="nom_calle" nombre_capa="nombre"/>
+			<atributo_tabla nombre_bd="num_puerta" nombre_capa="numero"/>
+			<atributo_tabla nombre_bd="letra" nombre_capa="letra"/>			
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

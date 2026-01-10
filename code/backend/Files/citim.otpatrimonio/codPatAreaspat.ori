@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Cod Pat Areas Pat">
+	
+	<atributo nombre="id_ap" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="citimDS" tipo="POSTGIS"/>
+		<tabla nombre="citim_cod_pat_areaspat" esquema="public" pk="id_apat" comboValue="id_apat" comboLabel="desc_apat">	
+					
+			<atributo_tabla nombre_bd="desc_apat" nombre_capa="id_ap"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

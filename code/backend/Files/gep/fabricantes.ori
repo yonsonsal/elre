@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Fabricantes">
+	
+	<atributo nombre="fabricante" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="ep_fabricantes" esquema="ciudadanos" pk="cod_fabricante" comboValue="cod_fabricante" comboLabel="nombre_fabricante">	
+					
+			<atributo_tabla nombre_bd="nombre_fabricante" nombre_capa="fabricante"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

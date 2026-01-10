@@ -1,0 +1,15 @@
+﻿<layer>
+	<attribute name="cod_insp_rel" query_capable="false" label="cod_insp_rel" show="false" />
+	<attribute name="gid_reloj" usage="FEATURE_REFERENCE" referenced_layer="Relojes Termometros" query_capable="false" show="false"/>
+	<attribute name="Estado"  columns="10" label="Estado" show="true"/>
+	<attribute name="Funcionamiento"  columns="10" label="Funcionamiento" show="true"/>
+	<attribute name="Fecha" query_capable = "true" label="Fecha" show="true"/>
+	<attribute name="idauditoria" query_capable = "false" show="false"/>	
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+</layer>
+
+	
+	

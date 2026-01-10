@@ -1,0 +1,15 @@
+﻿<layer>
+	<attribute name="gid" query_capable="false" label="GID" show="false"/>
+	<attribute name="circuito"  label="Circuito" show="true"/>
+	<attribute name="fechaDesde"  label="Fecha desde" show="true"/>
+	<attribute name="fechaHasta"  label="Fecha hasta" show="true"/>	
+	<attribute name="frecuenciaHumeda" query_capable = "true" label="Frecuencia Húmeda" show="true"/>		
+	<attribute name="frecuenciaSeca" query_capable = "true"  label="Frecuencia Seca" show="true"/>	
+	<attribute name="cantContenedores" query_capable = "true"  label="Cantidad de contenedores" show="true"/>		
+	<attribute name="idauditoria" query_capable = "false" show="false"/>	
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+	<attribute name="the_geom" query_capable = "false" show="false"/>		
+</layer>   
