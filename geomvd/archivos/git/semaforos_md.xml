@@ -1,0 +1,21 @@
+﻿<layer>
+	<attribute name="gid" query_capable="false" label="GID" show="false" />
+	<attribute name="nroSenial" query_capable="true" label="Número de señal" show="true"/>
+	<attribute name="ubicacion" query_capable="true" label="Ubicación" show="true"/>
+	<attribute name="anioInstalacion" query_capable="true" label="Año de instalación" show="true"/>
+	<attribute name="tipo"  usage="LOV" query_capable = "true" label="Tipo de semáforo" show="true"/>
+	<attribute name="colsRectas" query_capable="true" label="Cantidad de columnas rectas" show="true"/>
+	<attribute name="colsPescantes" query_capable="true" label="Cantidad de columnas pescantes" show="true"/>
+	<attribute name="fechaInstalacion" query_capable="true" label="Fecha de instalación" show="true"/>
+	<attribute name="expediente" query_capable="true" label="Expediente" show="true"/>
+	<attribute name="idauditoria" query_capable = "false" show="false"/>	
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+	<attribute name="the_geom" query_capable = "false" show="false"/>
+
+</layer>
+
+	
+	

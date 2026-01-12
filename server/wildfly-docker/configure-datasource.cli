@@ -1,0 +1,33 @@
+# Conectar al servidor embebido usando standalone.xml
+embed-server --server-config=standalone.xml
+
+# Agregar driver PostgreSQL
+/subsystem=datasources/jdbc-driver=postgresql:add( \
+    driver-name=postgresql, \
+    driver-module-name=org.postgresql, \
+    driver-class-name=org.postgresql.Driver, \
+    driver-xa-datasource-class-name=org.postgresql.xa.PGXADataSource \
+)
+
+# Crear DataSource principal para plugineta
+data-source add \
+    --name=pluginetaDS \
+    --driver-name=postgresql \
+    --jndi-name=java:jboss/datasources/pluginetaDS \
+    --connection-url=jdbc:postgresql://${env.DB_HOST:db}:${env.DB_PORT:5432}/${env.DB_NAME:gis_database} \
+    --user-name=${env.DB_USER:gis_user} \
+    --password=${env.DB_PASSWORD:gis_password} \
+    --use-ccm=false \
+    --max-pool-size=25 \
+    --blocking-timeout-wait-millis=5000 \
+    --enabled=true \
+    --jta=true \
+    --use-java-context=true \
+    --valid-connection-checker-class-name=org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker \
+    --exception-sorter-class-name=org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLExceptionSorter
+
+# Habilitar estadísticas de datasource
+/subsystem=datasources/data-source=pluginetaDS:write-attribute(name=statistics-enabled,value=true)
+
+# Guardar cambios
+quit

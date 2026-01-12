@@ -136,8 +136,8 @@ services:
       volumes:
         # Directorio para deployments (WAR files)
         - ./server/wildfly/deployments:/opt/wildfly/standalone/deployments
-        # Configuración persistente
-        - ./server/wildfly/configuration:/opt/wildfly/standalone/configuration
+        # Solo mapear el directorio de apps (no toda la configuración)
+        - ./server/wildfly/configuration/apps:/opt/wildfly/standalone/configuration/apps
         # Logs persistentes
         - ./server/wildfly/log:/opt/wildfly/standalone/log
       depends_on:

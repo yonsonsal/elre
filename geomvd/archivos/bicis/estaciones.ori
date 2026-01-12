@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Estaciones" grupo="Capas editables">
+	<atributo nombre="cantidadModulos" tipo="java.lang.Integer" nillable="true" valorCalculado="python::getCantidadEspacios()"  persistible="true"/>		
+	<atributo nombre="horaInicio" tipo="java.lang.String" nillable="true" valorCalculado="python::getHoraIni()"  persistible="true"/>	
+	<atributo nombre="horaFin" tipo="java.lang.String" nillable="true" valorCalculado="python::getHoraFin()"  persistible="true"/>	
+	<atributo nombre="activo" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Estado Activo" nillable="true" valorCalculado="python::getActivo()"  persistible="true"/>
+	<atributo nombre="observaciones" tipo="java.lang.String" nillable="true" valorCalculado="python::getObservaciones()"  persistible="true"/>
+
+	<atributo nombre="idauditoria" tipo="java.lang.String"/>	
+	<atributo nombre="Ucrea" tipo="java.lang.String" />
+	<atributo nombre="Fcrea" tipo="java.util.Date" />
+	<atributo nombre="Uact" tipo="java.lang.String" />
+    	<atributo nombre="Fact" tipo="java.util.Date" nillable="true"/>	
+		
+    	<atributo nombre="the_geom" tipo="com.vividsolutions.jts.geom.Point"/>	 	
+  		
+	<origen_datos>
+		<workspace nombre="bicis" tipo="WFS">
+			<style strokeColor="#FF00A6" strokeWidth="1" fillColor="#000000BA" />
+			<capapublicada nombre="Estaciones" nombre_mostrar="Estaciones"></capapublicada>
+		</workspace>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="bi_estaciones" esquema="ciudadanos" pk="gid" secuencia="ciudadanos.s_bi_estc">	
+			<atributo_tabla nombre_bd="gid" nombre_capa="gid" />
+			<atributo_tabla nombre_bd="cantidad" nombre_capa="cantidadModulos"/>			
+			<atributo_tabla nombre_bd="hora_ini" nombre_capa="horaInicio"/>			
+			<atributo_tabla nombre_bd="hora_fin" nombre_capa="horaFin"/>			
+			<atributo_tabla nombre_bd="activo" nombre_capa="activo"/>
+			<atributo_tabla nombre_bd="observaciones" nombre_capa="observaciones"/>
+			
+			<atributo_tabla nombre_bd="idauditoria" nombre_capa="idauditoria"/>			
+			<atributo_tabla nombre_bd="ucrea" nombre_capa="Ucrea"/>
+			<atributo_tabla nombre_bd="fcrea" nombre_capa="Fcrea"/>
+			<atributo_tabla nombre_bd="uact" nombre_capa="Uact"/>
+			<atributo_tabla nombre_bd="fact" nombre_capa="Fact"/>				
+  			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

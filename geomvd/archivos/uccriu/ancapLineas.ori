@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="Ductos ANCAP">
+	<atributo nombre="name" tipo="java.lang.String"/>
+	<atributo nombre="diametro" tipo="java.lang.String"/>
+	<atributo nombre="transporta" tipo="java.lang.String"/>
+	<atributo nombre="creado" tipo="java.lang.String"/>
+	<atributo nombre="the_geom" tipo="com.vividsolutions.jts.geom.LineString"/>  
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="red_ancap_lineas">		
+			<atributo_tabla nombre_bd="name" nombre_capa="name"/>
+			<atributo_tabla nombre_bd="transporta" nombre_capa="transporta"/>
+			<atributo_tabla nombre_bd="creado" nombre_capa="creado"/>
+			<atributo_tabla nombre_bd="diametro" nombre_capa="diametro"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

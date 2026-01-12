@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="c_citim_padrones">
+
+	
+	<origen_datos>
+		<workspace nombre="citim.alineaciones" tipo="WMS">
+			<style strokeColor="#000000" strokeWidth="1" fillColor="#AAAAAA" />
+			<capapublicada nombre="c_citim_padrones" nombre_mostrar="c_citim_padrones"></capapublicada>
+		</workspace>		
+	</origen_datos>
+</capa>
+</tema>
+
+

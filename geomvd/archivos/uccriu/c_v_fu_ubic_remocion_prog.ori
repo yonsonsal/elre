@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="c_v_fu_ubic_tipo_remocion_prog">
+
+	<atributo nombre="desc_remocion" tipo="java.lang.String"/>
+	<atributo nombre="nro_obra" tipo="java.lang.Integer" nillable="true"/>	
+	      
+	
+	<origen_datos>
+		<workspace nombre="plani" tipo="WFS">
+			<style strokeColor="#FF00A6" strokeWidth="1" fillColor="#000000BA" />
+			<capapublicada nombre="c_v_fu_ubic_tipo_remocion_prog" nombre_mostrar="c_v_fu_ubic_tipo_remocion_prog"></capapublicada>
+		</workspace>
+		<fuente nombre="brfDS" tipo="ORACLE"/>
+		<tabla nombre="V_FU_UBIC_TIPO_REMOCION_PROG"  pk="NRO_REMOCION" comboValue="NRO_REMOCION" comboLabel="UBIC_TREM"> 	
+			<atributo_tabla nombre_bd="UBIC_TREM" nombre_capa="desc_remocion"/>
+			<atributo_tabla nombre_bd="NRO_OBRA" nombre_capa="nro_obra"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>
+

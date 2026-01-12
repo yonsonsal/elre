@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="E_DF_RUTAS_RECORRIDO_PLAN" grupo="Capas editables">
+	<atributo nombre="NOM_RUT" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Codigo Recorrido Planificado" valorCalculado="uy.ciemsa.geomvd.dfr.fields.RutasRecorridoPLCalcs::getZonaRecorrido(THE_GEOM)" persistible="true"/>
+	
+	<atributo nombre="idauditoria" tipo="java.lang.String"/>	
+    <atributo nombre="Ucrea" tipo="java.lang.String" />
+	<atributo nombre="Fcrea" tipo="java.util.Date" />
+	<atributo nombre="Uact" tipo="java.lang.String" />
+    <atributo nombre="Fact" tipo="java.util.Date" nillable="true"/>		
+
+    <atributo nombre="the_geom" tipo="com.vividsolutions.jts.geom.LineString"/>	 	
+  		
+	<origen_datos>
+		<workspace nombre="dfr" tipo="WFS">
+			<style strokeColor="#FF00A6"  strokeWidth="1"  fillColor="#000000BA" /> 
+			<capapublicada nombre="E_DF_RUTAS_RECORRIDO_PLAN" nombre_mostrar="E_DF_RUTAS_RECORRIDO_PLAN">
+			</capapublicada>
+		</workspace>
+		<fuente nombre="brfDS" tipo="ORACLE"/>
+		<tabla nombre="DF_RUTAS_RECORRIDO_PLAN" pk="GID" secuencia="s_dfrurepl">	
+			<atributo_tabla nombre_bd="GID" nombre_capa="gid" />
+			<atributo_tabla nombre_bd="NOM_RUT" nombre_capa="NOM_RUT"/>
+			
+  			<atributo_tabla nombre_bd="IDAUDITORIA" nombre_capa="idauditoria" />
+			<atributo_tabla nombre_bd="UCREA" nombre_capa="Ucrea" />
+			<atributo_tabla nombre_bd="FCREA" nombre_capa="Fcrea" />
+			<atributo_tabla nombre_bd="UACT" nombre_capa="Uact" />
+			<atributo_tabla nombre_bd="FACT" nombre_capa="Fact" />				
+		
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Tipo Act">
+	
+	<atributo nombre="act_tip" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="mdg_act_tip" esquema="public" pk="cod_act_tip" comboValue="cod_act_tip" comboLabel="desc_act_tip">	
+					
+			<atributo_tabla nombre_bd="desc_act_tip" nombre_capa="act_tip"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

@@ -1,0 +1,16 @@
+﻿<layer>
+	<attribute name="gid" query_capable="false" label="GID" show="false" />
+	<attribute name="nombre" usage="LOV" show="true" query_capable = "true" is_lazy = "true" label="Nombre de vía"/>
+	<attribute name="nombre_via_desde" show="true" usage="LOV" query_capable = "true" is_lazy = "true"  label="Nombre de vía desde"/>
+	<attribute name="nombre_via_hasta" show="true" usage="LOV" query_capable = "true" is_lazy = "true" label="Nombre de vía hasta"/>
+	<attribute name="vel_maxima" show="true" label="Velocidad máxima"/>
+	<attribute name="idauditoria" query_capable = "false" show="false"/>	
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+	<attribute name="the_geom" query_capable = "false" show="false"/>
+
+</layer>
+
+

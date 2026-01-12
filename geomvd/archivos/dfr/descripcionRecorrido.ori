@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+	<capa nombre="Descripcion Recorrido">
+		<atributo nombre="recorrido" tipo="java.lang.String"/>
+		<atributo nombre="activo" tipo="java.lang.String"/>
+		<atributo nombre="turno" tipo="java.lang.String"/>	
+
+		<origen_datos>
+			<fuente nombre="brfDS" tipo="ORACLE" proxy="false"/>
+			<tabla nombre="v_df_recorridos_contenedores" pk="nomenclatura_circuito" comboValue="NOMENCLATURA_CIRCUITO" comboLabel="NOMENCLATURA_ABREVIADA">
+				<atributo_tabla nombre_bd="nomenclatura_abreviada" nombre_capa="recorrido"/>
+				<atributo_tabla nombre_bd="viajes_planificados" nombre_capa="activo"/>
+				<atributo_tabla nombre_bd="turno" nombre_capa="turno"/>
+			</tabla>
+		</origen_datos>
+	</capa>
+</tema>

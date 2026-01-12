@@ -1,0 +1,14 @@
+<layer>
+	<attribute name="gid" query_capable="false" label="GID" show="false" />
+	<attribute name="NOM_RUT" usage="LOV" query_capable = "true" label="Recorrido" show="true"/>	
+	<attribute name="idauditoria" query_capable = "false" show="false"/>	
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+	<attribute name="the_geom" query_capable = "false" show="false"/>
+
+</layer>
+
+	
+	

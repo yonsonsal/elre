@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="Nombres Vias Hasta">
+	<atributo nombre="nombre_via_hasta" tipo="java.lang.String"/>
+
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS" />
+		<tabla nombre="mdg_nombres_vias" alias="vias_hasta" pk="cod_nombre_via" comboValue="cod_nombre_via" comboLabel="nom_calle">
+			<atributo_tabla nombre_bd="nom_calle" nombre_capa="nombre_via_hasta"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

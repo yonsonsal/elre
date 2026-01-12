@@ -1,0 +1,24 @@
+<layer >
+	<attribute name="gid" query_capable="false" label="GID" show="false" />
+	<attribute name="codunico" read_only="true" show="true"/>
+	<attribute name="linea" usage="FEATURE_REFERENCE" label="linea" referenced_layer="utap:e_utap_tramo_linea" depends_on="punto_alimentacion" show="true"/>
+	<attribute name="punto_alimentacion" usage="FEATURE_REFERENCE" label="punto_alimentacion" referenced_layer="utap:e_utap_punto_alimentacion" depends_on="linea" show="true"/>
+	<attribute name="fecha_alta"  query_capable = "false"  show="true"/>
+	<attribute name="fecha_baja"  query_capable = "false"  show="true"/>
+	<attribute name="cod_tipo_lampara" show="false"/>
+	<attribute name="desc_corta_tipo_puesta" usage="LOV" label="tipo_soporte" show="true"/>
+	
+	<attribute name="cod_tramo_via" usage="FEATURE_REFERENCE" referenced_layer="utap:c_calles" locking="true" unique="true" show="true"/>
+	<attribute name="cod_nombre_via" read_only="true" show="true"/>
+	
+	<attribute name="altura_soporte" show="true"/>
+	<attribute name="dist_calzada" show="true"/>
+	<attribute name="interdistancia" show="true"/>
+	
+	<attribute name="idauditoria" query_capable = "false" show="false"/>
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+	<attribute name="the_geom" query_capable="false" show="false"/>	
+</layer>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="e_utap_gateway">
+
+	<atributo nombre="cod_serie_gateway" tipo="java.lang.String" nillable="true" />
+	<atributo nombre="compra_gateway" tipo="java.lang.String" nillable="true" /> 
+	<atributo nombre="lote_gateway" tipo="java.lang.String" nillable="true" /> 
+
+	<atributo nombre="desc_modelo" tipo="imm.gis.core.feature.ExternalAttribute" valorCalculado="python::getModelo()" persistible="true" capa_referenciada="Modelo Gateway"/>	
+	<atributo nombre="desc_marca" tipo="imm.gis.core.feature.ExternalAttribute" valorCalculado="python::getMarca()" persistible="true" capa_referenciada="Marca Gateway"/>
+	<atributo nombre="desc_fabricante" tipo="imm.gis.core.feature.ExternalAttribute" valorCalculado="python::getFabricante()" persistible="true" capa_referenciada="Fabricante Gateway"/>
+	<atributo nombre="desc_tecno" tipo="imm.gis.core.feature.ExternalAttribute" valorCalculado="python::getTecnologia()" persistible="true" capa_referenciada="Tecnologia Transmision"/>
+
+	<atributo nombre="altura" tipo="java.lang.Float" nillable="true"/>
+	<atributo nombre="fecha_baja" tipo="java.util.Date" />			
+	<atributo nombre="anio_inactivo" tipo="java.lang.Integer" />
+
+	<atributo nombre="the_geom" tipo="com.vividsolutions.jts.geom.Point"/>
+	<atributo nombre="idauditoria" tipo="java.lang.String"/>	
+	<atributo nombre="Ucrea" tipo="java.lang.String" />
+	<atributo nombre="Fcrea" tipo="java.util.Date" />
+	<atributo nombre="Uact" tipo="java.lang.String" />
+    	<atributo nombre="Fact" tipo="java.util.Date"/>
+
+	<origen_datos>
+		<workspace nombre="utap" tipo="WFS">
+			<style strokeColor="#FF00A6" strokeWidth="1" fillColor="#000000BA" />
+			<capapublicada nombre="e_utap_gateway" nombre_mostrar="e_utap_gateway"></capapublicada>
+		</workspace>
+		<fuente nombre="nucleoDS" tipo="POSTGIS" />		
+		<tabla nombre="utap_gateway" pk="gid" esquema="public">
+			<atributo_tabla nombre_bd="gid" nombre_capa="gid" />
+			<atributo_tabla nombre_bd="cod_marca" nombre_capa="desc_marca"/>
+			<atributo_tabla nombre_bd="cod_modelo" nombre_capa="desc_modelo"/>
+			<atributo_tabla nombre_bd="cod_fabricante" nombre_capa="desc_fabricante"/>
+			<atributo_tabla nombre_bd="cod_tecno" nombre_capa="desc_tecno"/>
+			<atributo_tabla nombre_bd="cod_serie_gateway" nombre_capa="cod_serie_gateway"/>
+			<atributo_tabla nombre_bd="compra_gateway" nombre_capa="compra_gateway"/>
+			<atributo_tabla nombre_bd="lote_gateway" nombre_capa="lote_gateway"/>
+			<atributo_tabla nombre_bd="altura" nombre_capa="altura"/>
+			<atributo_tabla nombre_bd="fecha_baja" nombre_capa="fecha_baja"/>
+			<atributo_tabla nombre_bd="anio_inactivo" nombre_capa="anio_inactivo"/>
+			
+			<atributo_tabla nombre_bd="idauditoria" nombre_capa="idauditoria"/>			
+			<atributo_tabla nombre_bd="ucrea" nombre_capa="Ucrea"/>
+			<atributo_tabla nombre_bd="fcrea" nombre_capa="Fcrea"/>
+			<atributo_tabla nombre_bd="uact" nombre_capa="Uact"/>
+			<atributo_tabla nombre_bd="fact" nombre_capa="Fact"/>	
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

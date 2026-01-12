@@ -1,0 +1,16 @@
+<layer user_id="nis">
+	<attribute name="gid" query_capable="false" label="GID" show="false" />
+	<attribute name="tipo_alimentacion" label="tipo_alimentacion" usage="LOV" show="true"/>
+	<attribute name="nis" show="true"/>
+	<attribute name="numero" show="true"/>
+	<attribute name="nro_cuenta" show="true"/>
+	<attribute name="potencia_contratada" show="true"/>
+	<attribute name="tipo_conexion" label="tipo_conexion" usage="LOV" show="true"/>
+	
+	<attribute name="idauditoria" query_capable = "false" show="false"/>
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+	<attribute name="the_geom" query_capable="false" show="false"/>	
+</layer>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="Temperatura Color">
+	<atributo nombre="desc_temp_color" tipo="java.lang.String"/>
+
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS" />
+		<tabla nombre="utap_temperatura_color" esquema="public" pk="cod_temp_color" comboValue="cod_temp_color" comboLabel="desc_temp_color">
+			<atributo_tabla nombre_bd="desc_temp_color" nombre_capa="desc_temp_color"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

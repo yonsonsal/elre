@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="Tipo Alimentacion">
+
+	<atributo nombre="tipo_alimentacion" tipo="java.lang.String"/>
+	
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS" />
+
+		<tabla nombre="utap_tipo_alimentacion" esquema="public" pk="cod_tipo_alimentacion" comboValue="cod_tipo_alimentacion" comboLabel="desc_tipo_alimentacion">	
+			<atributo_tabla nombre_bd="desc_tipo_alimentacion" nombre_capa="tipo_alimentacion"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

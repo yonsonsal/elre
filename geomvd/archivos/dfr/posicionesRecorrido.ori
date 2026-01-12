@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+	<capa nombre="E_DF_POSICIONES_RECORRIDO" grupo="Capas editables">
+		<atributo nombre="region" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Descripcion Regiones" nillable="true" valorCalculado="python::getRegionDfr()" persistible="true"/>
+		<atributo nombre="COD_RECORRIDO" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Descripcion Recorrido" nillable="true" valorCalculado="uy.ciemsa.geomvd.dfr.fields.PosicionesRecorridoCalcs::getZonaRecorrido(THE_GEOM)" persistible="true" />
+		<atributo nombre="posicion" tipo="java.lang.Integer" valorCalculado="python::calcularPosicionDfr()" persistible="true" />
+		<atributo nombre="fechaDesde" tipo="java.util.Date" />
+		<atributo nombre="fechaHasta" tipo="java.util.Date" nillable="true" />
+		<atributo nombre="observaciones" tipo="java.lang.String" nillable="true"/>
+		<atributo nombre="ultimaPosicion" tipo="java.lang.Integer" />
+		<atributo nombre="COD_MUNICIPIO" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Nombres Municipio" valorCalculado="uy.ciemsa.geomvd.dfr.fields.PosicionesRecorridoCalcs::getMunicipio(THE_GEOM)" persistible="true" />
+		<atributo nombre="direccion" tipo="java.lang.String" valorCalculado="uy.ciemsa.geomvd.dfr.fields.PosicionesRecorridoCalcs::getCallePuerta(THE_GEOM)" nillable="true" />
+		<atributo nombre="Direccion" tipo="java.lang.String" valorCalculado="uy.ciemsa.geomvd.dfr.fields.PosicionesRecorridoCalcs::getDireccion(GID)" nillable="true"/>
+		<atributo nombre="NroPuerta" tipo="java.lang.String" valorCalculado="uy.ciemsa.geomvd.dfr.fields.PosicionesRecorridoCalcs::getNroPuerta(GID)" nillable="true"/>
+		<atributo nombre="X" tipo="java.lang.double" valorCalculado="uy.ciemsa.geomvd.dfr.fields.PosicionesRecorridoCalcs::getX(GID)" nillable="true"/>
+		<atributo nombre="Y" tipo="java.lang.double" valorCalculado="uy.ciemsa.geomvd.dfr.fields.PosicionesRecorridoCalcs::getY(GID)" nillable="true"/>
+		<atributo nombre="puntoLevante" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Tipo Puntos Levante" nillable="true" valorCalculado="python::getTipoPuntoLevanteDfr()" persistible="true"/>
+		<atributo nombre="COD_MOTIVO_INACTIVA" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Motivos Posicion Inactiva" nillable="true"/>
+		<atributo nombre="idauditoria" tipo="java.lang.String" />
+		<atributo nombre="Ucrea" tipo="java.lang.String" />
+		<atributo nombre="Fcrea" tipo="java.util.Date" />
+		<atributo nombre="Uact" tipo="java.lang.String" />
+		<atributo nombre="Fact" tipo="java.util.Date" nillable="true" />
+		<atributo nombre="the_geom" tipo="com.vividsolutions.jts.geom.Point" />
+		<origen_datos>
+			<workspace nombre="dfr" tipo="WFS">
+				<style strokeColor="#FF00A6" strokeWidth="1" fillColor="#000000BA" />
+				<capapublicada nombre="E_DF_POSICIONES_RECORRIDO" nombre_mostrar="E_DF_POSICIONES_RECORRIDO"></capapublicada>
+			</workspace>
+			<fuente nombre="brfDS" tipo="ORACLE" />
+			<tabla nombre="df_posiciones_recorrido" pk="GID" secuencia="s_dfpore">
+				<atributo_tabla nombre_bd="GID" nombre_capa="gid" />
+				<atributo_tabla nombre_bd="REGION" nombre_capa="region" />
+				<atributo_tabla nombre_bd="COD_RECORRIDO" nombre_capa="COD_RECORRIDO" />
+				<atributo_tabla nombre_bd="POSICION" nombre_capa="posicion" />
+				<atributo_tabla nombre_bd="FECHA_DESDE" nombre_capa="fechaDesde" />
+				<atributo_tabla nombre_bd="FECHA_HASTA" nombre_capa="fechaHasta" />
+				<atributo_tabla nombre_bd="OBSERVACIONES" nombre_capa="observaciones" />
+				<atributo_tabla nombre_bd="ULTIMA_POSICION" nombre_capa="ultimaPosicion" />
+				<atributo_tabla nombre_bd="COD_MUNICIPIO" nombre_capa="COD_MUNICIPIO" />
+				<atributo_tabla nombre_bd="COD_MOTIVO_INACTIVA" nombre_capa="COD_MOTIVO_INACTIVA" />
+				<atributo_tabla nombre_bd="TIPO_PUNTO_LEVANTE" nombre_capa="puntoLevante" />
+				<atributo_tabla nombre_bd="IDAUDITORIA" nombre_capa="idauditoria" />
+				<atributo_tabla nombre_bd="UCREA" nombre_capa="Ucrea" />
+				<atributo_tabla nombre_bd="FCREA" nombre_capa="Fcrea" />
+				<atributo_tabla nombre_bd="UACT" nombre_capa="Uact" />
+				<atributo_tabla nombre_bd="FACT" nombre_capa="Fact" />
+			</tabla>
+		</origen_datos>
+	</capa>
+</tema>

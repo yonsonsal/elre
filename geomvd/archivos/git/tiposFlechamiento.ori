@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="Tipos Flechamiento">
+
+	<atributo nombre="sentido" tipo="java.lang.String"/>	
+
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS" />
+		<tabla nombre="git_tiposflechamiento" esquema="internos" pk="codigo" comboValue="codigo" comboLabel="descripcion">			
+
+			<atributo_tabla nombre_bd="descripcion" nombre_capa="sentido"/>			
+			
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

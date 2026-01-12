@@ -1,0 +1,21 @@
+<layer >
+	<attribute name="gid" query_capable="false" label="GID" show="false" />
+
+	<attribute name="cod_serie_gateway" show="true"/>
+	<attribute name="compra_gateway" show="true"/>
+	<attribute name="lote_gateway" show="true"/>
+	<attribute name="altura" show="true"/>
+	<attribute name="fecha_baja" show="false"/>			
+	<attribute name="anio_inactivo" show="false"/>
+	<attribute name="desc_modelo" usage="LOV" label="modelo" show="true"/>
+	<attribute name="desc_marca" usage="LOV" label="marca" show="true"/>
+	<attribute name="desc_fabricante" usage="LOV" label="fabricante" show="true"/>
+	<attribute name="desc_tecno" usage="LOV" label="tecnologia" show="true"/>
+	
+	<attribute name="idauditoria" query_capable = "false" show="false"/>
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+	<attribute name="the_geom" query_capable="false" show="false"/>
+</layer>

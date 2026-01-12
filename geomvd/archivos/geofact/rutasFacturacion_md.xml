@@ -1,0 +1,14 @@
+<layer>
+	<attribute name="gid" query_capable="false" label="Gid" show="false" />
+	<attribute name="nroruta" query_capable="true" label="NroRuta" show="true" />
+	<attribute name="padron" query_capable="true" label="Padron" show="true" />
+	<attribute name="areatot" query_capable="true" label="AreaTot" show="true"/>
+	<attribute name="areacat" query_capable="true" label="AreaCat" show="true"/>
+	<attribute name="ph" query_capable="true" label="PH" show="true"/>
+	<attribute name="the_geom" query_capable = "false" show="false"/>
+	<attribute name="Ucrea"  query_capable = "false" show="false"/>
+	<attribute name="Fcrea"  query_capable = "false" show="false"/>
+	<attribute name="Uact"  query_capable = "false" show="false"/>
+	<attribute name="Fact"  query_capable = "false" show="false"/>	
+	<attribute name="idauditoria"  query_capable = "false" show="false"/>
+</layer>

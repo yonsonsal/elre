@@ -1,0 +1,65 @@
+# Dockerfile multi-stage para compilar el proyecto sin necesidad de instalar JDK ni Maven
+# Este Dockerfile descarga automáticamente OpenJDK 8 y usa Maven Wrapper para compilar
+
+# Etapa 1: Descarga de JDK 8 y compilación
+FROM alpine:3.18 AS builder
+
+# Variables de entorno
+ENV JAVA_HOME=/opt/jdk1.8.0_381 \
+    PATH=/opt/jdk1.8.0_381/bin:$PATH \
+    MAVEN_OPTS="-Xmx512m"
+
+# Instalar dependencias básicas
+RUN apk add --no-cache \
+    wget \
+    tar \
+    bash \
+    git
+
+# Descargar y descomprimir OpenJDK 8
+RUN wget -q https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u381-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u381b09.tar.gz -O /tmp/openjdk.tar.gz && \
+    mkdir -p /opt && \
+    tar -xzf /tmp/openjdk.tar.gz -C /opt && \
+    rm /tmp/openjdk.tar.gz
+
+# Verificar instalación de Java
+RUN java -version
+
+# Establecer directorio de trabajo
+WORKDIR /build
+
+# Copiar archivos del proyecto
+COPY . .
+
+# Dar permisos de ejecución al Maven Wrapper
+RUN chmod +x mvnw
+
+# Instalar dependencias locales en el repositorio Maven local
+# GeoMvdCoreAPI
+RUN ./mvnw install:install-file \
+    -Dfile=GeoMvd-App/WebContent/WEB-INF/lib/GeoMvdCoreAPI-1.1.0-SNAPSHOT.jar \
+    -DgroupId=GeoMvdCoreAPI \
+    -DartifactId=GeoMvdCoreAPI \
+    -Dversion=1.1.0-SNAPSHOT \
+    -Dpackaging=jar
+
+# Compilar el proyecto usando Maven Wrapper
+# Primero compila el EJB, luego el WAR principal
+RUN cd GeoMvd-App-ejb && \
+    ../mvnw clean install -DskipTests && \
+    cd ../GeoMvd-App && \
+    ../mvnw clean package -DskipTests
+
+# Etapa 2: Imagen mínima solo con los artefactos compilados
+FROM scratch AS artifacts
+
+# Copiar los WAR generados
+COPY --from=builder /build/GeoMvd-App/target/*.war /
+COPY --from=builder /build/GeoMvd-App-ejb/target/*.jar /
+
+# Nota: Esta es una imagen vacía que solo contiene los artefactos.
+# Para extraer los archivos, usa:
+# docker build --target artifacts -t plugineta-build -f Dockerfile.build .
+# docker create --name temp plugineta-build
+# docker cp temp:/GeoMvd-App-1.0.1.war ./target/
+# docker rm temp

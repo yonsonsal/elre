@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="Modelo Luminaria">
+	<atributo nombre="desc_modelo" tipo="java.lang.String"/>
+
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS" />
+		<tabla nombre="utap_modelo_luminaria" esquema="public" pk="codmodelo" comboValue="codmodelo" comboLabel="desc_modelo">
+			<atributo_tabla nombre_bd="desc_modelo" nombre_capa="desc_modelo"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

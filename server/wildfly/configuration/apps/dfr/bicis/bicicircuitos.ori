@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Red_Cicloviaria" grupo="Capas editables">
+	<atributo nombre="tipoBicicircuito" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Tipos Bicicircuitos" nillable="true" valorCalculado="python::getTipoBicicircuitos()" persistible="true"/>	
+	<atributo nombre="descripcion" tipo="java.lang.String" nillable="true" valorCalculado="python::getDescripcionBicicircuitos()" persistible="true"/>	
+	<atributo nombre="fechaDesde" tipo="java.util.Date" nillable="true"/>	
+	<atributo nombre="fechaHasta" tipo="java.util.Date" nillable="true"/>	
+	<atributo nombre="sentido" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Sentidos" nillable="true" valorCalculado="python::getSentidoBicicircuitos()" persistible="true"/>
+	<atributo nombre="ancho" tipo="java.lang.Float" nillable="true" valorCalculado="python::getAnchoBicicircuitos()" persistible="true"/>
+	<atributo nombre="activo" tipo="imm.gis.core.feature.ExternalAttribute" capa_referenciada="Estado" nillable="true" valorCalculado="python::getActivoBicicircuitos()" persistible="true"/>
+	<atributo nombre="idauditoria" tipo="java.lang.String"/>	
+    <atributo nombre="Ucrea" tipo="java.lang.String" />
+	<atributo nombre="Fcrea" tipo="java.util.Date" />
+	<atributo nombre="Uact" tipo="java.lang.String" />
+    <atributo nombre="Fact" tipo="java.util.Date" nillable="true"/>		
+		
+    <atributo nombre="the_geom" tipo="com.vividsolutions.jts.geom.LineString"/>	 	
+  		
+	<origen_datos>
+		<workspace nombre="bicis" tipo="WFS">
+			<style strokeColor="#FF00A6" strokeWidth="1" fillColor="#000000BA" />
+			<capapublicada nombre="Red_Cicloviaria" nombre_mostrar="Red_Cicloviaria"></capapublicada>
+		</workspace>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="bi_bicicircuitos" esquema="ciudadanos" pk="gid" secuencia="ciudadanos.bi_bicicircuitos_gid_seq">	
+			<atributo_tabla nombre_bd="gid" nombre_capa="gid" />
+			<atributo_tabla nombre_bd="tipo" nombre_capa="tipoBicicircuito"/>
+			<atributo_tabla nombre_bd="descripcion" nombre_capa="descripcion"/>
+			<atributo_tabla nombre_bd="fecha_desde" nombre_capa="fechaDesde"/>			
+			<atributo_tabla nombre_bd="fecha_hasta" nombre_capa="fechaHasta"/>
+			<atributo_tabla nombre_bd="sentido" nombre_capa="sentido"/>
+			<atributo_tabla nombre_bd="ancho" nombre_capa="ancho"/>
+			<atributo_tabla nombre_bd="activo" nombre_capa="activo"/>
+			<atributo_tabla nombre_bd="idauditoria" nombre_capa="idauditoria"/>			
+			<atributo_tabla nombre_bd="ucrea" nombre_capa="Ucrea"/>
+			<atributo_tabla nombre_bd="fcrea" nombre_capa="Fcrea"/>
+			<atributo_tabla nombre_bd="uact" nombre_capa="Uact"/>
+			<atributo_tabla nombre_bd="fact" nombre_capa="Fact"/>				
+
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+

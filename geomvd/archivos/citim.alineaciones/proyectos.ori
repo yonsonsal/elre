@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="e_citim_proyectos">
+
+	<atributo nombre="cod_proyecto" tipo="java.lang.String"/>
+	<atributo nombre="plano" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="link" tipo="java.lang.String" nillable="true"/>	
+	<atributo nombre="titulo" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="expediente" tipo="java.lang.String" nillable="true"/>	
+	<atributo nombre="fecha_real" tipo="java.util.Date" nillable="true"/>
+	<atributo nombre="fecha_apro" tipo="java.util.Date" nillable="true"/>	
+	<atributo nombre="resolucion" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="decreto" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="planera" tipo="java.lang.String" nillable="true"/>		
+	<atributo nombre="caja" tipo="java.lang.String" nillable="true"/>		
+	      
+	
+	<origen_datos>
+		<workspace nombre="citim.alineaciones" tipo="WFS">
+			<style strokeColor="#FF00A6" strokeWidth="1" fillColor="#000000BA" />
+			<capapublicada nombre="e_citim_proyectos" nombre_mostrar="e_citim_proyectos"></capapublicada>
+		</workspace>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="citim_proyectos" esquema="public" pk="id_proyecto" comboValue="cod_proyecto" comboLabel="cod_proyecto"> 
+			<atributo_tabla nombre_bd="id_proyecto" nombre_capa="id_proyecto"/>	
+			<atributo_tabla nombre_bd="cod_proyecto" nombre_capa="cod_proyecto"/>
+			<atributo_tabla nombre_bd="plano" nombre_capa="plano"/>
+			<atributo_tabla nombre_bd="link" nombre_capa="link"/>
+			<atributo_tabla nombre_bd="titulo" nombre_capa="titulo"/>
+			<atributo_tabla nombre_bd="expediente" nombre_capa="expediente"/>
+			<atributo_tabla nombre_bd="fecha_real" nombre_capa="fecha_real"/>
+			<atributo_tabla nombre_bd="fecha_apro" nombre_capa="fecha_apro"/>
+			<atributo_tabla nombre_bd="resolucion" nombre_capa="resolucion"/>
+			<atributo_tabla nombre_bd="decreto" nombre_capa="decreto"/>
+			<atributo_tabla nombre_bd="planera" nombre_capa="planera"/>
+			<atributo_tabla nombre_bd="caja" nombre_capa="caja"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>
+

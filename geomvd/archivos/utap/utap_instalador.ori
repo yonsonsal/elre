@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="Instalador">
+	<atributo nombre="desc_instalador" tipo="java.lang.String"/>
+
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS" />
+		<tabla nombre="utap_instalador" esquema="public" pk="cod_instalador" comboValue="cod_instalador" comboLabel="desc_instalador">
+			<atributo_tabla nombre_bd="desc_instalador" nombre_capa="desc_instalador"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

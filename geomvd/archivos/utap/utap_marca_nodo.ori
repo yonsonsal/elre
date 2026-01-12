@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="Marca Nodo Controlador">
+	<atributo nombre="desc_marca" tipo="java.lang.String"/>
+
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS" />
+
+		<tabla nombre="utap_marca_nodo" esquema="public" pk="cod_marca" comboValue="cod_marca" comboLabel="desc_marca">	
+			<atributo_tabla nombre_bd="desc_marca" nombre_capa="desc_marca"/>
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

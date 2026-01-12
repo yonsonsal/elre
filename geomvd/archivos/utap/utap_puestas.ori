@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+<capa nombre="e_utap_puesta">
+	<atributo nombre="codunico" tipo="java.lang.Integer" nillable="true"/>
+	<atributo nombre="linea" tipo="imm.gis.core.feature.FeatureReferenceAttribute" capa_referenciada="utap:e_utap_tramo_linea" nillable="true"/>
+	<atributo nombre="punto_alimentacion" tipo="imm.gis.core.feature.FeatureReferenceAttribute" capa_referenciada="utap:e_utap_punto_alimentacion" nillable="true"/>	
+	<atributo nombre="desc_corta_tipo_puesta" tipo="imm.gis.core.feature.ExternalAttribute" valorCalculado="python::getTipoSoporte()" persistible="true" capa_referenciada="Tipo Puesta" nillable="true"/>
+	<atributo nombre="altura_soporte" tipo="java.lang.Float" valorCalculado="python::getAlturaSoporte()" persistible="true"/>
+	<atributo nombre="modelo_soporte" tipo="java.lang.String" nillable="true" />
+	<atributo nombre="fabricante_soporte" tipo="java.lang.String" nillable="true" />
+	<atributo nombre="codserie_soporte" tipo="java.lang.String" nillable="true" />
+	<atributo nombre="compra_soporte" tipo="java.lang.String" nillable="true" />
+	<atributo nombre="lote_soporte" tipo="java.lang.String" nillable="true" />
+	<atributo nombre="dist_calzada" tipo="java.lang.Float"  valorCalculado="python::getDistanciaCalzada()" persistible="true"/>
+	<atributo nombre="interdistancia" tipo="java.lang.Float"  valorCalculado="python::getInterdistancia()" persistible="true"/>
+	<atributo nombre="cod_tramo_via" tipo="imm.gis.core.feature.FeatureReferenceAttribute" capa_referenciada="utap:c_calles" nillable="true"/>
+	<atributo nombre="cod_nombre_via" tipo="java.lang.Integer" nillable="true"/>
+	<atributo nombre="cod_tipo_lampara" tipo="java.lang.Integer" nillable="true"/>
+	<atributo nombre="fecha_alta" tipo="java.util.Date" nillable="true" />
+	<atributo nombre="fecha_baja" tipo="java.util.Date" nillable="true" />
+
+	<atributo nombre="the_geom" tipo="com.vividsolutions.jts.geom.Point"/>
+	<atributo nombre="idauditoria" tipo="java.lang.String"/>	
+	<atributo nombre="Ucrea" tipo="java.lang.String" />
+	<atributo nombre="Fcrea" tipo="java.util.Date" />
+	<atributo nombre="Uact" tipo="java.lang.String" />
+    	<atributo nombre="Fact" tipo="java.util.Date"/>
+
+	<origen_datos>
+		<workspace nombre="utap" tipo="WFS">
+			<style strokeColor="#FF00A6" strokeWidth="1" fillColor="#000000BA" />
+			<capapublicada nombre="e_utap_puesta" nombre_mostrar="e_utap_puesta"></capapublicada>
+		</workspace>
+		<fuente nombre="nucleoDS" tipo="POSTGIS" />		
+		
+		<tabla nombre="utap_puesta" pk="gid" esquema="public">
+			<atributo_tabla nombre_bd="gid" nombre_capa="gid" />
+			<atributo_tabla nombre_bd="id_linea" nombre_capa="linea"/>
+			<atributo_tabla nombre_bd="codunico" nombre_capa="codunico"/>
+			<atributo_tabla nombre_bd="id_punto_alimentacion" nombre_capa="punto_alimentacion"/>			
+			<atributo_tabla nombre_bd="cod_tipo_lampara" nombre_capa="cod_tipo_lampara"/>
+			<atributo_tabla nombre_bd="cod_tipo_puesta" nombre_capa="desc_corta_tipo_puesta"/>
+			<atributo_tabla nombre_bd="cod_tramo_via" nombre_capa="cod_tramo_via"/>
+			<atributo_tabla nombre_bd="cod_nombre_via" nombre_capa="cod_nombre_via"/>
+			<atributo_tabla nombre_bd="fecha_alta" nombre_capa="fecha_alta"/>		
+			<atributo_tabla nombre_bd="fecha_baja" nombre_capa="fecha_baja"/>
+			<atributo_tabla nombre_bd="altura_soporte" nombre_capa="altura_soporte"/>			
+			<atributo_tabla nombre_bd="dist_calzada" nombre_capa="dist_calzada"/>	
+			<atributo_tabla nombre_bd="interdistancia" nombre_capa="interdistancia"/>	
+			<atributo_tabla nombre_bd="idauditoria" nombre_capa="idauditoria"/>	
+			<atributo_tabla nombre_bd="ucrea" nombre_capa="Ucrea"/>
+			<atributo_tabla nombre_bd="fcrea" nombre_capa="Fcrea"/>
+			<atributo_tabla nombre_bd="uact" nombre_capa="Uact"/>
+			<atributo_tabla nombre_bd="fact" nombre_capa="Fact"/>	
+
+		</tabla>
+	</origen_datos>
+</capa>
+</tema>

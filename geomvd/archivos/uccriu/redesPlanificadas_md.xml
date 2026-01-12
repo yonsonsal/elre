@@ -1,0 +1,38 @@
+<layer>
+	<attribute name="nro_remocion" presentation="DEFAULT" query_capable="false" show="false"/>		
+	
+	<attribute name="ubicacion" query_capable="false"  columns="70"   />			
+	
+	<attribute name="nro_obra" presentation="DEFAULT" query_capable="false" show="false" />		
+	<attribute name="nro_permiso" query_capable="false"   			show="false"  />		
+	<attribute name="propietario"  query_capable="false"        show="false" />		
+	<attribute name="adjudicatario"		query_capable="false"     show="false" />		
+	<attribute name="tipo_remocion" query_capable="false"/>		
+	<attribute name="tipo_pavimento" query_capable="false"/>		
+		
+	<attribute name="motivo_obra" query_capable="false" show="false"/>		
+	<attribute name="tipo_obra"	query_capable="false" show="false"/>		
+	<attribute name="fecha_inicio" query_capable="false" show="false"/>		
+	<attribute name="fecha_fin" query_capable="false" show="false"/>		
+	<attribute name="ejecutante" query_capable="false" show="false"/>		
+	<attribute name="nro_cont_o_lici"  query_capable="false" show="false"/>		
+	<attribute name="fecha_solicitud" query_capable="false" show="false"/>		
+	<attribute name="fecha_autorizacion" query_capable="false" show="false"/>		
+	<attribute name="plazo_autorizado" query_capable="false" show="false"/>		
+	<attribute name="fecha_recepcion_provisoria" query_capable="false" show="false"/>		
+	<attribute name="fecha_recepcion_definitiva" query_capable="false" show="false"/>		
+	<attribute name="inspector" query_capable="false"  show="false"/>		
+	<attribute name="cantidad" 	query_capable="false" show="false"/>		
+	<attribute name="longitud" query_capable="false" show="false"/>		
+	<attribute name="ancho" query_capable="false" show="false"/>		
+	<attribute name="diametro" query_capable="false" show="false"/>		 
+	<attribute name="tipo_equipo"	query_capable="false" show="false"/>		
+	<attribute name="plazo_total"	query_capable="false" show="false"/>		
+
+<!--
+	<attribute name="fecha_actual" query_capable="false" show="false"/>		
+-->	
+
+	<attribute name="vigente"	query_capable="false" show="false"/>		
+
+</layer>	

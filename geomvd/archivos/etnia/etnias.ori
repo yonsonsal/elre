@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="Etnias">
+	
+	<atributo nombre="etnia" tipo="java.lang.String"/>	
+	  		
+	<origen_datos>
+		<fuente nombre="nucleoDS" tipo="POSTGIS"/>
+		<tabla nombre="et_origen_etnico" esquema="ciudadanos" pk="cod_etnia" comboValue="cod_etnia" comboLabel="desc_etnia">	
+					
+			<atributo_tabla nombre_bd="desc_etnia" nombre_capa="etnia"/>
+			
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>
+
