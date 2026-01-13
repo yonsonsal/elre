@@ -28,7 +28,10 @@
       "Bash(docker build:*)",
       "Bash(docker-compose -f server/docker-compose.yml ps wildfly)",
       "Bash(docker-compose -f server/docker-compose.yml logs --tail=50 wildfly)",
-      "Bash(docker-compose -f server/docker-compose.yml exec wildfly ls -la /opt/wildfly/standalone/configuration/apps/)"
+      "Bash(docker-compose -f server/docker-compose.yml exec wildfly ls -la /opt/wildfly/standalone/configuration/apps/)",
+      "Bash(docker-compose start:*)",
+      "Bash(./deploy.sh:*)",
+      "Bash(export PATH=$JAVA_HOME/bin:$PATH)"
     ]
   }
 }

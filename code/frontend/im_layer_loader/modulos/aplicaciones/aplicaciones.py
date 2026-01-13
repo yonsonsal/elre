@@ -13,6 +13,7 @@ from .citim.citimAlineaciones import CitimAlineaciones
 from .gep.gep import Gep
 from .sfm.sfm import Sfm
 from .sav.sav import Sav
+from .plugineta.plugineta import Plugineta
 from qgis.core import QgsProject, QgsExpression
 import os
 import shutil

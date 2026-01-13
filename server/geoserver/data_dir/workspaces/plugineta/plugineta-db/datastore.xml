@@ -11,7 +11,7 @@
     <entry key="Estimated extends">true</entry>
     <entry key="database">gis_database</entry>
     <entry key="port">5432</entry>
-    <entry key="passwd">crypt2:FaVCJwmZ6e7gl2lbWMP8LWaopAW9Udb2lFG9mwa3Fx8=</entry>
+    <entry key="passwd">crypt2:xSID5RJJC4ByBlGLQALGddMbCuDLpFg7knYyr9WVfpI=</entry>
     <entry key="Expose primary keys">true</entry>
     <entry key="host">db</entry>
     <entry key="dbtype">postgis</entry>
@@ -20,5 +20,6 @@
   </connectionParameters>
   <__default>false</__default>
   <dateCreated>2026-01-10 20:59:11.667 UTC</dateCreated>
+  <dateModified>2026-01-13 01:04:32.475 UTC</dateModified>
   <disableOnConnFailure>false</disableOnConnFailure>
 </dataStore>

@@ -52,7 +52,9 @@ public class DFRPublicLayerService {
 	public Response getLayers(@PathParam("appName") String appName, @QueryParam(value = "username") String username, @Context HttpServletRequest req) {
 
 		ConfigParser data = ConfigParser.getInstanceAppMap(appName);
-		Usuario user = SecurityHelper.getCurrentUser(username.toUpperCase(), req);
+		// Make username optional for open-source distribution - default to "test" if not provided
+		String effectiveUsername = (username != null && !username.isEmpty()) ? username : "test";
+		Usuario user = SecurityHelper.getCurrentUser(effectiveUsername.toUpperCase(), req);
 		String layers = "";
 		//CustomLogger.log().info("Obteniendo layers de usuario: " + user.getUsername() + "|"+user.getRoles());
 
@@ -67,7 +69,8 @@ public class DFRPublicLayerService {
 	@GET
 	public Response getAtributoCapa(@PathParam("appName") String appName, @QueryParam(value = "username") String username, @QueryParam(value = "capa") String capa, @Context HttpServletRequest req) {
 		ConfigParser data = ConfigParser.getInstanceAppMap(appName);
-		Usuario user = SecurityHelper.getCurrentUser(username.toUpperCase(), req);
+		String effectiveUsername = (username != null && !username.isEmpty()) ? username : "test";
+		Usuario user = SecurityHelper.getCurrentUser(effectiveUsername.toUpperCase(), req);
 
 		//CustomLogger.log().info("Obteniendo atributos de las capas para el usuario: " + user.getUsername());
 		String atributocapa = "";
@@ -96,7 +99,8 @@ public class DFRPublicLayerService {
 	@GET
 	public Response getCodiguerasData(@PathParam("appName") String appName, @QueryParam(value = "username") String username, @Context HttpServletRequest req) {
 		ConfigParser data = ConfigParser.getInstanceAppMap(appName);
-		Usuario user = SecurityHelper.getCurrentUser(username.toUpperCase(), req);
+		String effectiveUsername = (username != null && !username.isEmpty()) ? username : "test";
+		Usuario user = SecurityHelper.getCurrentUser(effectiveUsername.toUpperCase(), req);
 		String codigueras = "";
 		codigueras = data.getCodiguerasJSON();
 		//System.out.println("codigueras " + codigueras);
@@ -143,7 +147,8 @@ public class DFRPublicLayerService {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getCalcFields(@PathParam("appName") String appName, @QueryParam(value = "username") String username, @QueryParam(value = "tabla") String tabla, Object data, @Context HttpServletRequest req) {
-		Usuario user = SecurityHelper.getCurrentUser(username.toUpperCase(), req);
+		String effectiveUsername = (username != null && !username.isEmpty()) ? username : "test";
+		Usuario user = SecurityHelper.getCurrentUser(effectiveUsername.toUpperCase(), req);
 
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String json = gson.toJson(data);
@@ -166,7 +171,8 @@ public class DFRPublicLayerService {
 	//@Consumes(MediaType.APPLICATION_JSON)
 	@Produces({"text/csv"})
 	public Response getCSV(@PathParam("appName") String appName, @PathParam("datasource") String ds, @PathParam("tabla") String tabla, @PathParam("dbms") String dbms, @QueryParam(value = "username") String username, ReportFilter filter, @Context HttpServletRequest req, @Context ServletContext context) {
-		Usuario user = SecurityHelper.getCurrentUser(username.toUpperCase(), req);
+		String effectiveUsername = (username != null && !username.isEmpty()) ? username : "test";
+		Usuario user = SecurityHelper.getCurrentUser(effectiveUsername.toUpperCase(), req);
 
 		try {
 			System.out.println("tabla " + tabla );
