@@ -11,6 +11,9 @@ CONFIGURACION_GEOSERVER_PERSISTENTE.md
 *~
 .DS_Store
 
+# Claude Code configuración local
+.claude/settings.local.json
+
 # Variables de entorno con datos sensibles
 .env.local
 .env.production
