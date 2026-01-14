@@ -1,0 +1,20 @@
+<org.geoserver.security.ldap.LDAPRoleServiceConfig>
+  <id>5d6a4f56:19bb89654e0:-7ffe</id>
+  <name>ldap-roles</name>
+  <className>org.geoserver.security.ldap.LDAPRoleService</className>
+  <serverURL>ldap://ldap:389/dc=plugineta,dc=local</serverURL>
+  <groupSearchBase>ou=groups</groupSearchBase>
+  <allGroupsSearchFilter>cn=*</allGroupsSearchFilter>
+  <groupSearchFilter>uniqueMember=uid={0},ou=users,dc=plugineta,dc=local</groupSearchFilter>
+  <useTLS>false</useTLS>
+  <useNestedParentGroups>false</useNestedParentGroups>
+  <maxGroupSearchLevel>10</maxGroupSearchLevel>
+  <nestedGroupSearchFilter>(member={0})</nestedGroupSearchFilter>
+  <bindBeforeGroupSearch>true</bindBeforeGroupSearch>
+  <adminGroup>ROLE_GIS_ADMINS</adminGroup>
+  <groupAdminGroup>ROLE_GIS_ADMINS</groupAdminGroup>
+  <rolePrefix>ROLE_</rolePrefix>
+  <convertToUpperCase>true</convertToUpperCase>
+  <user>cn=admin,dc=plugineta,dc=local</user>
+  <password>admin_password</password>
+</org.geoserver.security.ldap.LDAPRoleServiceConfig>

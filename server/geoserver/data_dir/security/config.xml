@@ -1,7 +1,8 @@
 <security>
-  <roleServiceName>default</roleServiceName>
+  <roleServiceName>ldap-roles</roleServiceName>
   <authProviderNames>
     <string>default</string>
+    <string>ldap</string>
   </authProviderNames>
   <configPasswordEncrypterName>strongPbePasswordEncoder</configPasswordEncrypterName>
   <encryptingUrlParams>false</encryptingUrlParams>
