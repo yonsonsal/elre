@@ -1,7 +1,6 @@
 from qgis.core import QgsMapLayerType
 from qgis.core import QgsProject
 
-from .formularios.accionesFormulario import AccionesFormulario
 from .formularios.codigueras import Codigueras
 from .servicios.serviciosCapas import ServiciosCapas
 from .formularios.formulario import Formulario
@@ -83,9 +82,6 @@ class ConfiguraCapasProyecto :
 							flag_una_vez_x_workspace = False
 
 						retornoString = conf.__procesarDatosCapa(nombreUsuario, nombreCapa, workspace, codigueras)
-
-						if nombreCapa == "e_citim_proyectos":
-							AccionesFormulario.cargarAccionSubirArchivoImnube(nombreCapa, workspace)
 
 						if retornoString!="":
 							retorno += "\n"+retornoString

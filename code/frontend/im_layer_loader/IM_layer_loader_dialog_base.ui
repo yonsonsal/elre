@@ -152,7 +152,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Fotos IDE</string>
+    <string>Fotos IM 2024</string>
    </property>
   </widget>
   <widget class="QCheckBox" name="cbox_IM">

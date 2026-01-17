@@ -1,0 +1,50 @@
+# ============================================================
+# Archivo de configuracion del backend Plugineta
+# ============================================================
+# Este archivo debe copiarse a config.local.properties, config.dev.properties
+# o config.prod.properties segun el ambiente.
+#
+# El archivo que se utiliza depende del perfil de Maven activo durante el build.
+# ============================================================
+
+#URL GEOSERVER
+# URL base del GeoServer
+URLgeoserver=http://localhost:8080/geoserver
+
+# URL del servicio core de la API
+URLcore=http://localhost:8082/api/plugineta/core/
+
+# URL del proxy para GeoServer (si se usa)
+URLgeoserverProxy=http://localhost:8082/geoserverproxy
+
+#URL Servicios Rest
+# Servicio de ubicaciones (geocodificacion)
+URLrestserver=https://api.montevideo.gub.uy/ubicacionesRest/
+
+#datasources conexion DB
+# Nombres JNDI de los datasources configurados en el servidor de aplicaciones
+# Estos deben coincidir con la configuracion del servidor (ej: WildFly standalone.xml)
+brfDS=jboss/datasources/brfDS
+stmDS=jboss/datasources/stmDS
+nucleoDS=jboss/datasources/nucleoDS
+brhDS=jboss/datasources/brhDS
+citimDS=jboss/datasources/citimDS
+
+# URL base para reportes generados
+REPORTS_BASE_URL=http://localhost:8082/reports/
+
+# Ruta local donde se guardan los reportes (vacio = directorio temporal)
+REPORTS_PATH=
+
+#tipo de medicion: lineal = false - geodesica = true
+# true = usa medicion geodesica (mas precisa para grandes distancias)
+# false = usa medicion lineal cartesiana
+geodesicMeasure=true
+
+#url Manual
+# URL a documentacion/manual de usuario (opcional)
+URLmanual=
+
+# Roles de la aplicacion separados por ;
+# Estos roles deben existir en el proveedor de autenticacion (LDAP/AD)
+rolaplicacion=GIS_ADMINS;GIS_EDITORS

@@ -52,3 +52,23 @@ atlassian-ide-plugin.xml
 
 .vscode/launch.json
 
+# Configuraciones locales del plugin (no versionar)
+modulos/properties/config.local.properties
+
+# Bases de datos locales del plugin
+*.db
+user-history.db
+symbology-style.db
+
+# Archivos temporales
+*.log
+__pycache__/
+*.pyc
+*.pyo
+
+# Directorios de archivos locales
+Archivos/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db

@@ -15,6 +15,7 @@ CONFIGURACION_GEOSERVER_PERSISTENTE.md
 .claude/settings.local.json
 
 # Variables de entorno con datos sensibles
+.env
 .env.local
 .env.production
 

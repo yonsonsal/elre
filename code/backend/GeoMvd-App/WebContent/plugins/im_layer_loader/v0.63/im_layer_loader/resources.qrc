@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/plugins/IM_layer_loader" >
-        <file>icon.png</file>
-    </qresource>
-</RCC>

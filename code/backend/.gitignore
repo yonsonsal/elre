@@ -94,3 +94,9 @@ atlassian-ide-plugin.xml
 # Editor-based Rest Client
 .idea/httpRequests
 
+# Configuraciones locales (no versionar)
+Files/config.local.properties
+
+# Sistema operativo
+.DS_Store
+Thumbs.db

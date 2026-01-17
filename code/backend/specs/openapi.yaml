@@ -1,0 +1,481 @@
+openapi: 3.0.3
+info:
+  title: Plugineta API
+  description: |
+    API REST del backend Plugineta para gestión de capas geográficas.
+
+    Este backend provee servicios para:
+    - Obtener configuración de capas disponibles por aplicación
+    - Consultar atributos y metadatos de capas
+    - Obtener codigueras (listas de valores) para formularios
+    - Calcular campos dinámicos basados en geometría
+    - Exportar datos a CSV
+
+    ## Autenticación
+
+    Los endpoints públicos no requieren autenticación. La autenticación con
+    Geoserver se maneja de forma separada mediante LDAP.
+
+    ## Aplicaciones
+
+    El parámetro `{appName}` representa el nombre de la aplicación configurada
+    en el sistema (ej: plugineta, dfr, sav, etc.).
+
+  version: 1.0.0
+  contact:
+    name: Plugineta Project
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:8082/api/plugineta
+    description: Servidor de desarrollo local
+  - url: https://tu-servidor.com/api/plugineta
+    description: Servidor de producción (configurar según ambiente)
+
+tags:
+  - name: Capas
+    description: Operaciones relacionadas con capas geográficas
+  - name: Codigueras
+    description: Listas de valores para formularios
+  - name: Campos Calculados
+    description: Cálculo dinámico de campos
+  - name: Exportación
+    description: Exportación de datos
+
+paths:
+  /rest/public/{appName}/layers:
+    get:
+      tags:
+        - Capas
+      summary: Obtener lista de capas
+      description: |
+        Retorna la lista de capas disponibles para una aplicación específica.
+        Cada capa incluye su configuración, atributos y permisos.
+      operationId: getLayers
+      parameters:
+        - $ref: '#/components/parameters/appName'
+        - $ref: '#/components/parameters/username'
+      responses:
+        '200':
+          description: Lista de capas obtenida exitosamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Layer'
+              example:
+                - nombre: "parcelas"
+                  workspace: "catastro"
+                  tipo: "WFS"
+                  editable: true
+                  atributos:
+                    - nombre: "id"
+                      tipo: "integer"
+                    - nombre: "propietario"
+                      tipo: "string"
+        '404':
+          description: Aplicación no encontrada
+        '500':
+          description: Error interno del servidor
+
+  /rest/public/{appName}/layers/atributocapaformat:
+    get:
+      tags:
+        - Capas
+      summary: Obtener atributos formateados de una capa
+      description: |
+        Retorna la definición de atributos de una capa específica,
+        incluyendo formato de visualización, validaciones y configuración
+        de formularios.
+      operationId: getLayerAttributes
+      parameters:
+        - $ref: '#/components/parameters/appName'
+        - $ref: '#/components/parameters/username'
+        - name: capa
+          in: query
+          required: true
+          description: Nombre de la capa
+          schema:
+            type: string
+          example: "parcelas"
+      responses:
+        '200':
+          description: Atributos de la capa obtenidos exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LayerAttributes'
+              example:
+                capa: "parcelas"
+                atributos:
+                  - nombre: "id"
+                    tipo: "integer"
+                    editable: false
+                    visible: true
+                    etiqueta: "Identificador"
+                  - nombre: "propietario"
+                    tipo: "string"
+                    editable: true
+                    visible: true
+                    etiqueta: "Propietario"
+                    maxLength: 100
+        '404':
+          description: Capa no encontrada
+        '500':
+          description: Error interno del servidor
+
+  /rest/public/{appName}/layers/codiguerasformat:
+    get:
+      tags:
+        - Codigueras
+      summary: Obtener definiciones de codigueras
+      description: |
+        Retorna las definiciones de codigueras (listas de valores)
+        disponibles en la aplicación. Incluye estructura y metadatos
+        de cada codiguera.
+      operationId: getCodiguerasFormat
+      parameters:
+        - $ref: '#/components/parameters/appName'
+      responses:
+        '200':
+          description: Definiciones de codigueras obtenidas exitosamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CodigueraDefinition'
+              example:
+                - nombre: "tipo_uso"
+                  descripcion: "Tipos de uso de suelo"
+                  campos:
+                    - "codigo"
+                    - "descripcion"
+        '500':
+          description: Error interno del servidor
+
+  /rest/public/{appName}/layers/codiguerasdata:
+    get:
+      tags:
+        - Codigueras
+      summary: Obtener datos de codigueras
+      description: |
+        Retorna los datos de todas las codigueras configuradas
+        para la aplicación. Estos datos se utilizan para poblar
+        combos y listas en los formularios del plugin.
+      operationId: getCodiguerasData
+      parameters:
+        - $ref: '#/components/parameters/appName'
+        - $ref: '#/components/parameters/username'
+      responses:
+        '200':
+          description: Datos de codigueras obtenidos exitosamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CodigueraData'
+              example:
+                - nombre: "tipo_uso"
+                  datos:
+                    - codigo: "R"
+                      descripcion: "Residencial"
+                    - codigo: "C"
+                      descripcion: "Comercial"
+                    - codigo: "I"
+                      descripcion: "Industrial"
+        '500':
+          description: Error interno del servidor
+
+  /rest/public/{appName}/layers/getCalcFields:
+    post:
+      tags:
+        - Campos Calculados
+      summary: Calcular campos dinámicos
+      description: |
+        Calcula valores de campos que dependen de otros atributos
+        o de la geometría del feature. Por ejemplo, puede calcular
+        el municipio basado en las coordenadas, o valores derivados
+        de otros campos.
+      operationId: getCalcFields
+      parameters:
+        - $ref: '#/components/parameters/appName'
+        - $ref: '#/components/parameters/username'
+        - name: tabla
+          in: query
+          required: true
+          description: Nombre de la tabla/capa
+          schema:
+            type: string
+          example: "parcelas"
+      requestBody:
+        required: true
+        description: Datos del feature incluyendo geometría
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalcFieldsRequest'
+            example:
+              the_geom: "POINT(-56.1645 -34.9011)"
+              pk: 12345
+              atributo1: "valor1"
+      responses:
+        '200':
+          description: Campos calculados exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalcFieldsResponse'
+              example:
+                municipio: "B"
+                municipio_nombre: "Centro"
+                zona: "urbana"
+        '400':
+          description: Datos de entrada inválidos
+        '500':
+          description: Error interno del servidor
+
+  /rest/public/{appName}/layers/reportes/csv/{dbms}/{datasource}/{tabla}:
+    post:
+      tags:
+        - Exportación
+      summary: Exportar datos a CSV
+      description: |
+        Exporta datos de una capa a formato CSV. Permite filtrar
+        por lista de IDs o aplicar filtros personalizados.
+      operationId: exportToCSV
+      parameters:
+        - $ref: '#/components/parameters/appName'
+        - $ref: '#/components/parameters/username'
+        - name: dbms
+          in: path
+          required: true
+          description: Tipo de base de datos
+          schema:
+            type: string
+            enum:
+              - postgresql
+              - oracle
+          example: "postgresql"
+        - name: datasource
+          in: path
+          required: true
+          description: Nombre del datasource configurado
+          schema:
+            type: string
+          example: "gis_database"
+        - name: tabla
+          in: path
+          required: true
+          description: Nombre de la tabla a exportar
+          schema:
+            type: string
+          example: "parcelas"
+      requestBody:
+        required: true
+        description: Filtros para la exportación
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportFilter'
+            example:
+              ids:
+                - 1
+                - 2
+                - 3
+              filtro: "estado = 'activo'"
+      responses:
+        '200':
+          description: Archivo CSV generado exitosamente
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+          headers:
+            Content-Disposition:
+              schema:
+                type: string
+              example: "attachment; filename=parcelas_export.csv"
+        '400':
+          description: Filtros inválidos
+        '404':
+          description: Tabla no encontrada
+        '500':
+          description: Error interno del servidor
+
+components:
+  parameters:
+    appName:
+      name: appName
+      in: path
+      required: true
+      description: Nombre de la aplicación
+      schema:
+        type: string
+      example: "plugineta"
+
+    username:
+      name: username
+      in: query
+      required: false
+      description: Nombre de usuario para filtrar permisos
+      schema:
+        type: string
+      example: "admin_gis"
+
+  schemas:
+    Layer:
+      type: object
+      description: Configuración de una capa geográfica
+      properties:
+        nombre:
+          type: string
+          description: Nombre único de la capa
+        workspace:
+          type: string
+          description: Workspace de Geoserver donde reside la capa
+        tipo:
+          type: string
+          enum:
+            - WFS
+            - WMS
+          description: Tipo de servicio OGC
+        editable:
+          type: boolean
+          description: Indica si la capa permite edición
+        atributos:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributeBasic'
+      required:
+        - nombre
+        - workspace
+        - tipo
+
+    AttributeBasic:
+      type: object
+      description: Definición básica de un atributo
+      properties:
+        nombre:
+          type: string
+          description: Nombre del atributo
+        tipo:
+          type: string
+          description: Tipo de dato
+          enum:
+            - string
+            - integer
+            - double
+            - boolean
+            - date
+            - datetime
+            - geometry
+
+    LayerAttributes:
+      type: object
+      description: Atributos detallados de una capa
+      properties:
+        capa:
+          type: string
+          description: Nombre de la capa
+        atributos:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributeDetail'
+
+    AttributeDetail:
+      type: object
+      description: Definición detallada de un atributo con formato
+      properties:
+        nombre:
+          type: string
+          description: Nombre del atributo
+        tipo:
+          type: string
+          description: Tipo de dato
+        editable:
+          type: boolean
+          description: Si el atributo es editable
+        visible:
+          type: boolean
+          description: Si el atributo es visible en formularios
+        etiqueta:
+          type: string
+          description: Etiqueta para mostrar en UI
+        maxLength:
+          type: integer
+          description: Longitud máxima para strings
+        codiguera:
+          type: string
+          description: Nombre de codiguera asociada (si aplica)
+        valorDefecto:
+          type: string
+          description: Valor por defecto
+
+    CodigueraDefinition:
+      type: object
+      description: Definición de una codiguera
+      properties:
+        nombre:
+          type: string
+          description: Nombre único de la codiguera
+        descripcion:
+          type: string
+          description: Descripción de la codiguera
+        campos:
+          type: array
+          items:
+            type: string
+          description: Lista de campos de la codiguera
+
+    CodigueraData:
+      type: object
+      description: Datos de una codiguera
+      properties:
+        nombre:
+          type: string
+          description: Nombre de la codiguera
+        datos:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          description: Lista de valores de la codiguera
+
+    CalcFieldsRequest:
+      type: object
+      description: Datos para calcular campos dinámicos
+      properties:
+        the_geom:
+          type: string
+          description: Geometría en formato WKT
+        pk:
+          type: integer
+          description: Clave primaria del feature
+      additionalProperties: true
+
+    CalcFieldsResponse:
+      type: object
+      description: Campos calculados
+      additionalProperties: true
+      example:
+        municipio: "B"
+        municipio_nombre: "Centro"
+
+    ReportFilter:
+      type: object
+      description: Filtros para exportación
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+          description: Lista de IDs a exportar
+        filtro:
+          type: string
+          description: Filtro SQL adicional (WHERE clause)

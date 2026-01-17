@@ -1,20 +1,42 @@
+# ============================================================
+# Archivo de configuracion local del plugin IM Layer Loader
+# ============================================================
+# Copiar este archivo a config.local.properties y ajustar los valores
+# segun tu entorno local.
+#
+# IMPORTANTE: config.local.properties NO debe versionarse (esta en .gitignore)
+# ============================================================
+
 [ServicioRest]
+# URL del backend de Plugineta
+# - replaceAppName se reemplaza dinamicamente por el nombre de la aplicacion
 urlCapas=http://localhost:8082/api/plugineta/rest/public/replaceAppName/layers
+
+# API de ubicaciones de Montevideo (servicio publico)
 urlubicacionesRestWEB=https://api.montevideo.gub.uy/ubicacionesRest/
 
 [Geoserver]
+# Parametros WFS para consultas de features
 urlComplementoWFS=/wfs?service=WFS&version=auto&request=GetFeature&restrictToRequestBBOX=1&srsname=EPSG:32721&format=application/json
+
+# URL base del GeoServer local
 urlApi=http://localhost:8080/geoserver
 
 [CapasBase]
+# Capa de fotos aereas IDE
 nombreCapaIde=Fotos IDE
 urlCapaIde=contextualWMSLegend=0&crs=EPSG:32721&dpiMode=7&featureCount=10&format=image/png&layers=im-fotos:fotos_2024&styles&tileMatrixSet=im-fotos:fotos_2024-wmsc-8&tilePixelRatio=0&url=https://montevideo.gub.uy/app/geowebcache/capabilities/im-fotos_fotos_2024.xml
 
+# Capa base OpenStreetMap
 nombreCapaOSM=OpenStreetMap
 urlCapaOSM=crs=EPSG:32721&format=image/png&type=xyz&url=http://tile.openstreetmap.org/{z}/{x}/{y}.png&zmax=19&zmin=0
 
+# Capa base cartografica IM
 nombreCapaBaseIM=Carto Basica IM
 urlCapaBaseIM=crs=EPSG:32721&dpiMode=7&featureCount=10&format=image/png&layers=mapstore-base:capas_base&styles&tileMatrixSet=mapstore-base:capas_base-wmsc-8&tilePixelRatio=0&url=https://montevideo.gub.uy/app/geowebcache/capabilities/mapstore-base_capas_base.xml
 
 [Ambiente]
-avisoTest=N
+# Mostrar aviso de ambiente de pruebas (S/N)
+# S = Muestra cartel indicando que es ambiente de desarrollo/test
+# N = No muestra el cartel (usar en produccion)
+avisoTest=S
