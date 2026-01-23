@@ -49,7 +49,7 @@ Open Plugineta es una plataforma que permite:
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/tu-usuario/open-plugineta.git
+git clone https://github.com/dti-montevideo/open-plugineta.git
 cd open-plugineta
 ```
 
@@ -178,11 +178,43 @@ cp code/backend/GeoMvd-App/target/GeoMvd-App-*.war server/wildfly/deployments/
 # El hot-deploy de WildFly lo desplegara automaticamente
 ```
 
+### Generar el Plugin QGIS
+
+El plugin se distribuye como un archivo ZIP que se puede instalar directamente en QGIS.
+
+```bash
+cd code/frontend
+./build-plugin.sh
+```
+
+Esto genera el archivo `dist/im_layer_loader-{version}.zip`.
+
 ### Instalar el Plugin en QGIS
 
-1. En QGIS, ir a **Plugins** > **Manage and Install Plugins** > **Install from ZIP**
-2. Seleccionar el directorio `code/frontend/im_layer_loader`
-3. O copiar manualmente a `~/.local/share/QGIS/QGIS3/profiles/default/python/plugins/`
+**Opcion 1: Instalar desde ZIP (recomendado)**
+
+1. Generar el ZIP con `./build-plugin.sh` (ver arriba)
+2. En QGIS, ir a **Plugins** > **Manage and Install Plugins**
+3. Seleccionar **Install from ZIP**
+4. Buscar el archivo `code/frontend/dist/im_layer_loader-{version}.zip`
+5. Click en **Install Plugin**
+
+**Opcion 2: Copiar manualmente**
+
+Copiar el directorio del plugin a la carpeta de plugins de QGIS:
+
+```bash
+# Linux
+cp -r code/frontend/im_layer_loader ~/.local/share/QGIS/QGIS3/profiles/default/python/plugins/
+
+# macOS
+cp -r code/frontend/im_layer_loader ~/Library/Application\ Support/QGIS/QGIS3/profiles/default/python/plugins/
+
+# Windows
+xcopy /E code\frontend\im_layer_loader %APPDATA%\QGIS\QGIS3\profiles\default\python\plugins\im_layer_loader
+```
+
+Luego reiniciar QGIS y activar el plugin en **Plugins** > **Manage and Install Plugins**.
 
 ## API REST
 
