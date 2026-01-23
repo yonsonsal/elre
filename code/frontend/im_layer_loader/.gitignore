@@ -69,3 +69,6 @@ Archivos/
 # Sistema operativo
 .DS_Store
 Thumbs.db
+
+# Build output (generado por build-plugin.sh)
+../dist/
