@@ -3,18 +3,18 @@
 # This file should be included when you package your plugin.# Mandatory items:
 
 [general]
-name=IM carga de capas
+name=Open Plugineta
 qgisMinimumVersion=3.0
-description=Plugin para cargar capas de la Intendencia de Montevideo
+description=Plugin para cargar y gestionar capas geoespaciales
 version=0.65
-author=-
-email=-
+author=Intendencia de Montevideo
+email=gis@montevideo.gub.uy
 ambiente=local
 #ambiente=desarrollo
 #ambiente=produccion
 epsg=32721
 
-about=Carga de capas de la Intendencia de Montevideo.
+about=Plugin para cargar y gestionar capas geoespaciales desde un servidor GeoServer con autenticacion LDAP.
 
 tracker=http://bugs
 repository=http://repo

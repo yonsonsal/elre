@@ -18,7 +18,7 @@ cn: Admin GIS
 sn: Administrator
 givenName: Admin
 mail: admin@plugineta.local
-userPassword: {SSHA}DkMTwBl+a/3DQTxCYEApdUtNXGgdUac3
+userPassword: admin123
 loginShell: /bin/bash
 uidNumber: 10001
 gidNumber: 10001
@@ -34,7 +34,7 @@ cn: Editor GIS
 sn: Editor
 givenName: Editor
 mail: editor@plugineta.local
-userPassword: {SSHA}Zn4/E5f+Eur349BsYqfZzDxnS+xlOjl9
+userPassword: editor123
 loginShell: /bin/bash
 uidNumber: 10002
 gidNumber: 10002
@@ -50,7 +50,7 @@ cn: Viewer GIS
 sn: Viewer
 givenName: Viewer
 mail: viewer@plugineta.local
-userPassword: {SSHA}xvJO4/Bw+gGm4gLYxKF/2Ll0V7hGqjk8
+userPassword: viewer123
 loginShell: /bin/bash
 uidNumber: 10003
 gidNumber: 10003

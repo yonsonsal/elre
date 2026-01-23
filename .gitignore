@@ -22,6 +22,8 @@ CONFIGURACION_GEOSERVER_PERSISTENTE.md
 # Configuraciones locales (solo versionar .example)
 *.local.properties
 config.local.properties
+# Excepcion: versionar el config.local.properties del plugin frontend
+!code/frontend/im_layer_loader/modulos/properties/config.local.properties
 
 # Logs
 *.log

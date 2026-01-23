@@ -52,9 +52,6 @@ atlassian-ide-plugin.xml
 
 .vscode/launch.json
 
-# Configuraciones locales del plugin (no versionar)
-modulos/properties/config.local.properties
-
 # Bases de datos locales del plugin
 *.db
 user-history.db

@@ -1,18 +1,5 @@
 from PyQt5.QtCore import QSettings
 
-from .bicis.bicis import Bicis
-from .dfr.dfr import Dfr
-from .utap.utap import Utap
-from .dfr.funcionesDfr import FuncionesDfr
-from .etnia.etnia import Etnia
-from .geofact.geofact import Geofact
-from .geoprep.geoprep import Geoprep
-from .uccriu.uccriu import Uccriu
-from .geomatica.geomatica import Geomatica
-from .citim.citimAlineaciones import CitimAlineaciones
-from .gep.gep import Gep
-from .sfm.sfm import Sfm
-from .sav.sav import Sav
 from .plugineta.plugineta import Plugineta
 from qgis.core import QgsProject, QgsExpression
 import os
