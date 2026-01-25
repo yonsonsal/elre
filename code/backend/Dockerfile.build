@@ -1,26 +1,27 @@
 # Dockerfile multi-stage para compilar el proyecto sin necesidad de instalar JDK ni Maven
-# Este Dockerfile descarga automáticamente OpenJDK 8 y usa Maven Wrapper para compilar
+# Usa Debian + OpenJDK 8 Temurin + Maven Wrapper
 
-# Etapa 1: Descarga de JDK 8 y compilación
-FROM alpine:3.18 AS builder
-
-# Variables de entorno
-ENV JAVA_HOME=/opt/jdk1.8.0_381 \
-    PATH=/opt/jdk1.8.0_381/bin:$PATH \
-    MAVEN_OPTS="-Xmx512m"
+# Etapa 1: Compilación
+FROM debian:bullseye-slim AS builder
 
 # Instalar dependencias básicas
-RUN apk add --no-cache \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     tar \
     bash \
-    git
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
-# Descargar y descomprimir OpenJDK 8
-RUN wget -q https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u381-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u381b09.tar.gz -O /tmp/openjdk.tar.gz && \
+# Descargar y descomprimir OpenJDK 8 (Temurin)
+RUN wget -q https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u432-b06/OpenJDK8U-jdk_x64_linux_hotspot_8u432b06.tar.gz -O /tmp/openjdk.tar.gz && \
     mkdir -p /opt && \
     tar -xzf /tmp/openjdk.tar.gz -C /opt && \
     rm /tmp/openjdk.tar.gz
+
+# Variables de entorno
+ENV JAVA_HOME=/opt/jdk8u432-b06 \
+    PATH=/opt/jdk8u432-b06/bin:$PATH \
+    MAVEN_OPTS="-Xmx512m"
 
 # Verificar instalación de Java
 RUN java -version
@@ -34,8 +35,7 @@ COPY . .
 # Dar permisos de ejecución al Maven Wrapper
 RUN chmod +x mvnw
 
-# Instalar dependencias locales en el repositorio Maven local
-# GeoMvdCoreAPI
+# Instalar GeoMvdCoreAPI en el repositorio Maven local
 RUN ./mvnw install:install-file \
     -Dfile=GeoMvd-App/WebContent/WEB-INF/lib/GeoMvdCoreAPI-1.1.0-SNAPSHOT.jar \
     -DgroupId=GeoMvdCoreAPI \
@@ -43,23 +43,18 @@ RUN ./mvnw install:install-file \
     -Dversion=1.1.0-SNAPSHOT \
     -Dpackaging=jar
 
-# Compilar el proyecto usando Maven Wrapper
-# Primero compila el EJB, luego el WAR principal
-RUN cd GeoMvd-App-ejb && \
-    ../mvnw clean install -DskipTests && \
-    cd ../GeoMvd-App && \
+# Compilar GeoMvd-App (sin EJB, sin git plugin)
+RUN cd GeoMvd-App && \
     ../mvnw clean package -DskipTests
 
 # Etapa 2: Imagen mínima solo con los artefactos compilados
 FROM scratch AS artifacts
 
-# Copiar los WAR generados
+# Copiar el WAR generado
 COPY --from=builder /build/GeoMvd-App/target/*.war /
-COPY --from=builder /build/GeoMvd-App-ejb/target/*.jar /
 
-# Nota: Esta es una imagen vacía que solo contiene los artefactos.
-# Para extraer los archivos, usa:
+# Nota: Para extraer el WAR compilado, ejecutar:
 # docker build --target artifacts -t plugineta-build -f Dockerfile.build .
 # docker create --name temp plugineta-build
-# docker cp temp:/GeoMvd-App-1.0.1.war ./target/
+# docker cp temp:/ ./target/
 # docker rm temp

@@ -36,6 +36,26 @@ Open Plugineta es una plataforma que permite:
 | **OpenLDAP** | Autenticacion de usuarios | 389 |
 | **phpLDAPadmin** | Interfaz web para LDAP | 8081 |
 
+## Proyeccion y Sistema de Coordenadas
+
+Este proyecto utiliza la proyeccion **EPSG:32721** (UTM zona 21 Sur) como sistema de coordenadas nativo.
+
+| Parametro | Valor |
+|-----------|-------|
+| **EPSG** | 32721 |
+| **Nombre** | WGS 84 / UTM zone 21S |
+| **Unidades** | Metros |
+| **Zona** | Uruguay, sur de Brasil, noreste de Argentina |
+
+Los datos de ejemplo incluidos estan centrados en **Montevideo, Uruguay**:
+- Rango X: 560,000 - 590,000 metros
+- Rango Y: 6,130,000 - 6,160,000 metros
+
+> **Nota**: Si necesitas trabajar con otra proyeccion, deberas modificar:
+> 1. El script de inicializacion de la base de datos (`docker/init-db/01-init-schema.sql`)
+> 2. Los featuretype.xml de GeoServer (`server/geoserver/data_dir/workspaces/`)
+> 3. La configuracion del plugin QGIS (`code/frontend/im_layer_loader/modulos/properties/`)
+
 ## Requisitos
 
 - Docker Engine 20.10+
@@ -106,6 +126,8 @@ open-plugineta/
 
 ### Backend (Java)
 
+Ver documentacion completa en [code/backend/README.md](code/backend/README.md).
+
 Los archivos de configuracion estan en `code/backend/Files/`:
 
 ```bash
@@ -120,7 +142,7 @@ Editar `config.local.properties` segun tu entorno:
 URLgeoserver=http://localhost:8080/geoserver
 
 # Datasources (deben coincidir con standalone.xml de WildFly)
-brfDS=jboss/datasources/brfDS
+pluginetaDS=jboss/datasources/pluginetaDS
 ```
 
 ### Plugin QGIS
@@ -157,23 +179,36 @@ Configuracion rapida:
 
 ### Compilar el Backend
 
+Ver instrucciones detalladas en [code/backend/README.md](code/backend/README.md).
+
+**Compilacion rapida con Docker (no requiere Java instalado):**
+
 ```bash
 cd code/backend
-
-# Usando Maven Wrapper (recomendado)
-./mvnw clean package -DskipTests
-
-# O usando Maven instalado
-mvn clean package -DskipTests
+docker build --target builder -t plugineta-builder -f Dockerfile.build .
+docker create --name temp plugineta-builder true
+docker cp temp:/build/GeoMvd-App/target/geomvd-app-v1.0.0-BETA.war ./target/
+docker rm temp
 ```
 
-El WAR generado estara en `code/backend/GeoMvd-App/target/GeoMvd-App-2.0.0-SNAPSHOT.war`.
+**Compilacion con Maven Wrapper (requiere Java 8):**
+
+```bash
+cd code/backend
+./mvnw install:install-file \
+    -Dfile=GeoMvd-App/WebContent/WEB-INF/lib/GeoMvdCoreAPI-1.1.0-SNAPSHOT.jar \
+    -DgroupId=GeoMvdCoreAPI -DartifactId=GeoMvdCoreAPI \
+    -Dversion=1.1.0-SNAPSHOT -Dpackaging=jar
+cd GeoMvd-App && ../mvnw clean package -DskipTests
+```
+
+El WAR generado estara en `code/backend/GeoMvd-App/target/geomvd-app-v1.0.0-BETA.war`.
 
 ### Desplegar en WildFly
 
 ```bash
 # Copiar WAR al directorio de deployments
-cp code/backend/GeoMvd-App/target/GeoMvd-App-*.war server/wildfly/deployments/
+cp code/backend/GeoMvd-App/target/geomvd-app-*.war server/wildfly/deployments/
 
 # El hot-deploy de WildFly lo desplegara automaticamente
 ```
@@ -267,6 +302,7 @@ docker exec plugineta-postgis pg_isready -U gis_user -d gis_database
 
 ## Documentacion Adicional
 
+- [Backend Java (compilacion y despliegue)](code/backend/README.md)
 - [Configuracion de Docker](docker/README.md)
 - [Configuracion de GeoServer](server/README.md)
 - [Configuracion LDAP para GeoServer](docker/configure-geoserver-ldap.md)

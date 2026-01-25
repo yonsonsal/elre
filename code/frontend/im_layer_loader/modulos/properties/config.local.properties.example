@@ -10,7 +10,7 @@
 [ServicioRest]
 # URL del backend de Plugineta
 # - replaceAppName se reemplaza dinamicamente por el nombre de la aplicacion
-urlCapas=http://localhost:8082/api/plugineta/rest/public/replaceAppName/layers
+urlCapas=http://localhost:8082/api/plugineta/rest/public/replaceAppName/layers/
 
 # API de ubicaciones de Montevideo (servicio publico)
 urlubicacionesRestWEB=https://api.montevideo.gub.uy/ubicacionesRest/

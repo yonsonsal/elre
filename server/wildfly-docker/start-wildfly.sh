@@ -17,10 +17,10 @@ fi
 
 echo ""
 echo "🔧 Configurando symlink para config geomvd..."
-# Create symlink if not exists
+# Create symlink if not exists (geomvd -> plugineta for core compatibility)
 if [ ! -L "$JBOSS_HOME/standalone/configuration/apps/geomvd" ]; then
-    ln -s $JBOSS_HOME/standalone/configuration/apps/dfr $JBOSS_HOME/standalone/configuration/apps/geomvd
-    echo "✅ Symlink geomvd -> dfr creado"
+    ln -s $JBOSS_HOME/standalone/configuration/apps/plugineta $JBOSS_HOME/standalone/configuration/apps/geomvd
+    echo "✅ Symlink geomvd -> plugineta creado"
 else
     echo "✅ Symlink ya existe"
 fi
@@ -34,4 +34,4 @@ echo "   DB_USER: ${DB_USER:-gis_user}"
 echo ""
 
 # Iniciar WildFly con standalone.xml
-exec $JBOSS_HOME/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0
+exec $JBOSS_HOME/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0 $DEBUG_FLAGS

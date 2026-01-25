@@ -3,8 +3,6 @@ from qgis.core import QgsProject
 from qgis.core import QgsDataSourceUri
 
 from .aplicaciones.aplicaciones import Aplicaciones
-from .aplicaciones.dfr.checkCircuito import CheckCircuito
-from .aplicaciones.dfr.funcionesDfr import FuncionesDfr
 from .seguridad.funcionesAutenticacion import FuncionesAutenticacion
 from .servicios.geoserverApi import GeoserverApi
 from .servicios.serviciosCapas import ServiciosCapas
@@ -100,9 +98,6 @@ class CargaCapasProyecto :
 
                             if atributosCapa is not None and "pk" in atributosCapa:
                                 FuncionesExportacion.cargarOpcionExportarCSV(aplicacion, capa, userLogin, atributosCapa)
-
-                            if atributosCapa is not None and aplicacion == 'dfr' and capa == 'dfr:E_DF_POSICIONES_RECORRIDO':
-                                CheckCircuito.cargarOpcionCheckCircuito(capa)
 
                         cargoAlgunaCapa = True
 

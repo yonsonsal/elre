@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="zones" grupo="Capas editables">
+	<!-- Atributos editables -->
+	<atributo nombre="zoneName" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="zoneType" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="areaM2" tipo="java.lang.Float" nillable="true"/>
+	<atributo nombre="population" tipo="java.lang.Integer" nillable="true"/>
+
+	<!-- Atributos de auditoría (no editables) -->
+	<atributo nombre="createdAt" tipo="java.util.Date" nillable="true"/>
+	<atributo nombre="updatedAt" tipo="java.util.Date" nillable="true"/>
+	<atributo nombre="createdBy" tipo="java.lang.String" nillable="true"/>
+
+	<!-- Geometría -->
+	<atributo nombre="the_geom" tipo="com.vividsolutions.jts.geom.Polygon"/>
+
+	<origen_datos>
+		<workspace nombre="workspace-demo" tipo="WFS">
+			<style strokeColor="#95E1D3" strokeWidth="2" fillColor="#95E1D380" />
+			<capapublicada nombre="zones" nombre_mostrar="Zones"></capapublicada>
+		</workspace>
+		<fuente nombre="pluginetaDS" tipo="POSTGIS"/>
+		<tabla nombre="zones" esquema="example_data" pk="gid" secuencia="example_data.zones_gid_seq">
+			<atributo_tabla nombre_bd="gid" nombre_capa="gid" />
+			<atributo_tabla nombre_bd="zone_name" nombre_capa="zoneName"/>
+			<atributo_tabla nombre_bd="zone_type" nombre_capa="zoneType"/>
+			<atributo_tabla nombre_bd="area_m2" nombre_capa="areaM2"/>
+			<atributo_tabla nombre_bd="population" nombre_capa="population"/>
+			<atributo_tabla nombre_bd="created_at" nombre_capa="createdAt"/>
+			<atributo_tabla nombre_bd="updated_at" nombre_capa="updatedAt"/>
+			<atributo_tabla nombre_bd="created_by" nombre_capa="createdBy"/>
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>

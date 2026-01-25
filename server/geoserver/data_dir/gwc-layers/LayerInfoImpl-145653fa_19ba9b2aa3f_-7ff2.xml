@@ -2,7 +2,7 @@
   <id>LayerInfoImpl-145653fa:19ba9b2aa3f:-7ff2</id>
   <enabled>true</enabled>
   <inMemoryCached>true</inMemoryCached>
-  <name>plugineta:points_of_interest</name>
+  <name>workspace-demo:points_of_interest</name>
   <mimeFormats>
     <string>application/vnd.mapbox-vector-tile</string>
     <string>image/png</string>
@@ -11,9 +11,25 @@
   <gridSubsets>
     <gridSubset>
       <gridSetName>EPSG:4326</gridSetName>
+      <extent>
+        <coords>
+          <double>-56.2799869293797</double>
+          <double>-34.893776964232636</double>
+          <double>-56.266720774236965</double>
+          <double>-34.87836977162044</double>
+        </coords>
+      </extent>
     </gridSubset>
     <gridSubset>
       <gridSetName>EPSG:900913</gridSetName>
+      <extent>
+        <coords>
+          <double>-6265059.486830641</double>
+          <double>-4149455.210984629</double>
+          <double>-6263582.705195366</double>
+          <double>-4147364.341997503</double>
+        </coords>
+      </extent>
     </gridSubset>
   </gridSubsets>
   <metaWidthHeight>

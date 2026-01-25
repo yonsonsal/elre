@@ -2,7 +2,7 @@
   <id>LayerInfoImpl-145653fa:19ba9b2aa3f:-7ff0</id>
   <enabled>true</enabled>
   <inMemoryCached>true</inMemoryCached>
-  <name>plugineta:streets</name>
+  <name>workspace-demo:streets</name>
   <mimeFormats>
     <string>application/vnd.mapbox-vector-tile</string>
     <string>image/png</string>
@@ -11,9 +11,25 @@
   <gridSubsets>
     <gridSubset>
       <gridSetName>EPSG:4326</gridSetName>
+      <extent>
+        <coords>
+          <double>-56.294272796884144</double>
+          <double>-34.90017225458793</double>
+          <double>-56.261192427880424</double>
+          <double>-34.87112315693979</double>
+        </coords>
+      </extent>
     </gridSubset>
     <gridSubset>
       <gridSetName>EPSG:900913</gridSetName>
+      <extent>
+        <coords>
+          <double>-6266649.782326776</double>
+          <double>-4150323.213930454</double>
+          <double>-6262967.292494028</double>
+          <double>-4146381.05878198</double>
+        </coords>
+      </extent>
     </gridSubset>
   </gridSubsets>
   <metaWidthHeight>

@@ -34,7 +34,6 @@ from qgis.utils import iface
 from .modulos.formularios.atributosFormulario import AtributosFormularios
 from .modulos.formularios.codigueras import Codigueras
 from .modulos.seguridad.funcionesAutenticacion import FuncionesAutenticacion
-from .modulos.aplicaciones.citim.manejadorAlfresco import ManejadorAlfresco
 from .modulos.utilidades.funcionesExportacion import FuncionesExportacion
 from .modulos.aplicaciones.aplicaciones import Aplicaciones
 from .modulos.servicios.geoserverApi import GeoserverApi
@@ -344,13 +343,6 @@ class IMLayerLoader:
         self.dlg.findChild(QLineEdit, "lineEditPass").setEnabled(True)
         self.dlg.findChild(QToolButton, "authUser").setVisible(True)
         self.dlg.findChild(QLineEdit, "lineEditUser").setFocus()
-
-    def subir_mapa(self):
-        link, id_nodo = ManejadorAlfresco.subirArchivo(self.userLogin, self.passLogin)
-        return link, id_nodo
-
-    def bajar_mapa(self, id_nodo):
-        ManejadorAlfresco.bajarArchivo(id_nodo, self.userLogin, self.passLogin)
 
     def run(self):
 

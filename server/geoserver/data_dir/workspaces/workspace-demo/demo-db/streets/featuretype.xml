@@ -1,0 +1,43 @@
+<featureType>
+  <id>FeatureTypeInfoImpl-145653fa:19ba9b2aa3f:-7ff1</id>
+  <name>streets</name>
+  <nativeName>streets</nativeName>
+  <namespace>
+    <id>NamespaceInfoImpl-145653fa:19ba9b2aa3f:-7ff5</id>
+  </namespace>
+  <title>streets</title>
+  <keywords>
+    <string>features</string>
+    <string>streets</string>
+  </keywords>
+  <srs>EPSG:32721</srs>
+  <nativeBoundingBox>
+    <minx>564500.0</minx>
+    <maxx>574216.8125</maxx>
+    <miny>6137800.0</miny>
+    <maxy>6142511.5</maxy>
+    <crs class="projected">EPSG:32721</crs>
+  </nativeBoundingBox>
+  <latLonBoundingBox>
+    <minx>-56.29438922065352</minx>
+    <maxx>-56.187681174479636</maxx>
+    <miny>-34.90017225458793</miny>
+    <maxy>-34.857025789246165</maxy>
+    <crs>EPSG:4326</crs>
+  </latLonBoundingBox>
+  <projectionPolicy>FORCE_DECLARED</projectionPolicy>
+  <enabled>true</enabled>
+  <store class="dataStore">
+    <id>DataStoreInfoImpl-145653fa:19ba9b2aa3f:-7ff4</id>
+  </store>
+  <serviceConfiguration>false</serviceConfiguration>
+  <internationalTitle/>
+  <internationalAbstract/>
+  <maxFeatures>0</maxFeatures>
+  <numDecimals>0</numDecimals>
+  <padWithZeros>false</padWithZeros>
+  <forcedDecimal>false</forcedDecimal>
+  <overridingServiceSRS>false</overridingServiceSRS>
+  <skipNumberMatched>false</skipNumberMatched>
+  <circularArcPresent>false</circularArcPresent>
+</featureType>

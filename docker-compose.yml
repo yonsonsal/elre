@@ -132,6 +132,7 @@ services:
       ports:
         - "8082:8080"   # HTTP (8082 en host para no conflictuar con GeoServer)
         - "9990:9990"   # Management console
+        - "8787:8787"   # Debug ports
       environment:
         # Configuración de conexión a PostgreSQL
         - DB_HOST=db
@@ -139,6 +140,7 @@ services:
         - DB_NAME=${POSTGRES_DB:-gis_database}
         - DB_USER=${POSTGRES_USER:-gis_user}
         - DB_PASSWORD=${POSTGRES_PASS:-gis_password}
+        - DEBUG_FLAGS=--debug 8787
       volumes:
         # Directorio para deployments (WAR files)
         - ./server/wildfly/deployments:/opt/wildfly/standalone/deployments

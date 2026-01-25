@@ -2,7 +2,7 @@
   <id>LayerInfoImpl-145653fa:19ba9b2aa3f:-7fee</id>
   <enabled>true</enabled>
   <inMemoryCached>true</inMemoryCached>
-  <name>plugineta:zones</name>
+  <name>workspace-demo:zones</name>
   <mimeFormats>
     <string>application/vnd.mapbox-vector-tile</string>
     <string>image/png</string>
@@ -10,10 +10,26 @@
   </mimeFormats>
   <gridSubsets>
     <gridSubset>
-      <gridSetName>EPSG:4326</gridSetName>
+      <gridSetName>EPSG:900913</gridSetName>
+      <extent>
+        <coords>
+          <double>-6265427.5075653065</double>
+          <double>-4148234.137747171</double>
+          <double>-6262982.567846374</double>
+          <double>-4146992.792537766</double>
+        </coords>
+      </extent>
     </gridSubset>
     <gridSubset>
-      <gridSetName>EPSG:900913</gridSetName>
+      <gridSetName>EPSG:4326</gridSetName>
+      <extent>
+        <coords>
+          <double>-56.283292915887934</double>
+          <double>-34.88477947228525</double>
+          <double>-56.26132964870525</double>
+          <double>-34.87563159619095</double>
+        </coords>
+      </extent>
     </gridSubset>
   </gridSubsets>
   <metaWidthHeight>

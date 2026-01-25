@@ -52,7 +52,8 @@ RUN mkdir -p $JBOSS_HOME/standalone/deployments
 # 8080: HTTP
 # 9990: Management console
 # 8443: HTTPS (si se configura)
-EXPOSE 8080 9990 8443
+# 8787: Debug port (si se necesita)
+EXPOSE 8080 9990 8443 8787
 
 # Variables de entorno para la base de datos (pueden ser sobrescritas en docker-compose)
 ENV DB_HOST=db \
