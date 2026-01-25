@@ -80,19 +80,27 @@ cp .env.example .env
 # Editar .env con tus valores si es necesario
 ```
 
-### 3. Iniciar los servicios
+### 3. Compilar el backend
 
 ```bash
-docker-compose up -d
+./build.sh
 ```
 
-### 4. Verificar que los servicios esten corriendo
+> **Nota**: La primera ejecucion tarda varios minutos porque descarga las dependencias y compila el proyecto Java.
+
+### 4. Iniciar los servicios
+
+```bash
+docker-compose up -d --build
+```
+
+### 5. Verificar que los servicios esten corriendo
 
 ```bash
 docker-compose ps
 ```
 
-### 5. Acceder a los servicios
+### 6. Acceder a los servicios
 
 | Servicio | URL | Credenciales |
 |----------|-----|--------------|
@@ -179,19 +187,13 @@ Configuracion rapida:
 
 ### Compilar el Backend
 
-Ver instrucciones detalladas en [code/backend/README.md](code/backend/README.md).
+El backend se compila ejecutando `./build.sh` en la raiz del proyecto. Este script:
+1. Usa Docker para compilar el WAR (no requiere Java instalado)
+2. Copia el WAR generado a `server/wildfly/deployments/`
 
-**Compilacion rapida con Docker (no requiere Java instalado):**
+Para instrucciones detalladas sobre desarrollo del backend, ver [code/backend/README.md](code/backend/README.md).
 
-```bash
-cd code/backend
-docker build --target builder -t plugineta-builder -f Dockerfile.build .
-docker create --name temp plugineta-builder true
-docker cp temp:/build/GeoMvd-App/target/geomvd-app-v1.0.0-BETA.war ./target/
-docker rm temp
-```
-
-**Compilacion con Maven Wrapper (requiere Java 8):**
+**Compilacion con Maven Wrapper (alternativa, requiere Java 8):**
 
 ```bash
 cd code/backend
@@ -203,15 +205,6 @@ cd GeoMvd-App && ../mvnw clean package -DskipTests
 ```
 
 El WAR generado estara en `code/backend/GeoMvd-App/target/geomvd-app-v1.0.0-BETA.war`.
-
-### Desplegar en WildFly
-
-```bash
-# Copiar WAR al directorio de deployments
-cp code/backend/GeoMvd-App/target/geomvd-app-*.war server/wildfly/deployments/
-
-# El hot-deploy de WildFly lo desplegara automaticamente
-```
 
 ### Generar el Plugin QGIS
 

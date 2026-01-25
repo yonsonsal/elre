@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../plugineta-im/qgis-plugin-configura-capas-develop"
+		},
+		{
+			"path": "../tmp-open-plugineta"
 		}
 	],
 	"settings": {
