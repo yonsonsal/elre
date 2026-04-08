@@ -1,4 +1,0 @@
-<layer >
-	<attribute name="name" query_capable = "false" read_only="true"  label="Tipo Ducto"/>
-	<attribute name="tipo" query_capable = "false" read_only="true"  label="Tipo"/>
-</layer>

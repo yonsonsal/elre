@@ -1,5 +1,0 @@
-<layer >
-	<attribute name="material" query_capable = "false" read_only="true" label="Material" />
-	<attribute name="presion" query_capable = "false" read_only="true"  label="Presion"  />
-	<attribute name="contacto" presentation="DEFAULT" columns="35" query_capable = "false" read_only="true" label="Contacto" />
-</layer>

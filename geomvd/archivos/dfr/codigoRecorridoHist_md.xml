@@ -1,4 +1,0 @@
-<layer>
-	<!--attribute name="codigoRecorrido" query_capable="false"/-->
-	<attribute name="recorrido" query_capable="false" show="true"/>
-</layer>

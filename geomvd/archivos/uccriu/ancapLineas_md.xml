@@ -1,6 +1,0 @@
-<layer >
-	<attribute name="name" query_capable = "false" presentation="DEFAULT" columns="40" read_only="true" label="Tipo Ducto"/>
-	<attribute name="transporta" query_capable = "false" read_only="true" label="Transporta"/>
-	<attribute name="creado" query_capable = "false" read_only="true" label="Creado"/>
-	<attribute name="diametro" query_capable = "false" read_only="true" label="Diametro"/>
-</layer>
