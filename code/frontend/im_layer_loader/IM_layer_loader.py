@@ -440,7 +440,7 @@ class IMLayerLoader:
                 Aplicaciones.disponibilizarFuncionesParaExpresiones()
                 
                 #VAMOS A INVOCAR LA CONFIGURACION PARA TODAS LAS CAPAS DEL PROYECTO:
-                retorno += ConfiguraCapasProyecto.configuraCapasProyecto().strip()
+                retorno += ConfiguraCapasProyecto.configuraCapasProyecto(self.userLogin).strip()
 
                 ###################  RECARGAR CODIGUERAS FALLIDAS ####################
                 for nombreUsuario, nombreCapa, nombreAtributo, capaCodiguera, codigueras, aplicacion in self.erroresEnCodigueras:

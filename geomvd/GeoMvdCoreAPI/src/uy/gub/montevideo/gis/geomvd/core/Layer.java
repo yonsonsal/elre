@@ -57,7 +57,10 @@ public class Layer {
 		String json;
 
 		if (this.format != null ) {
-			this.srsName = "EPSG:32721";
+			if (this.srsName == null) {
+				// Default legacy solo si capatoLayer() no pudo derivar un epsg real (ver plan multi-CRS)
+				this.srsName = "EPSG:32721";
+			}
 			this.typeName = this.workspace + ":" + this.capa;
 			if (format.equals("WFS")) {
 				this.url = GetPropertyValues.getInstance().getValue(ConfigProperties.URLgeoserver.getValue()) + "/wfs";
@@ -87,6 +90,7 @@ public class Layer {
 	public void capatoLayer (Capa capa,Layer layer) {
 		
 		layer.workspace = (capa.getDatos() != null ? capa.getDatos().getWorkspace():null);
+		layer.srsName = (capa.getDatos() != null && capa.getDatos().getEpsg() != null ? "EPSG:" + capa.getDatos().getEpsg() : null);
 		layer.esCodiguera = capa.isEsCodiguera();
 		layer.format = (capa.getDatos() != null ?capa.getDatos().getTipo():null);
 		layer.title = (capa.getDatos() != null ?capa.getDatos().getNombreMostrar():null);

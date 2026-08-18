@@ -1,0 +1,23 @@
+<dataStore>
+  <id>DataStoreInfoImpl--4c29d0ef:1a010dbef9b:-7ffe</id>
+  <name>demo-db-4326</name>
+  <type>PostGIS</type>
+  <enabled>true</enabled>
+  <workspace>
+    <id>WorkspaceInfoImpl--4c29d0ef:1a010dbef9b:-8000</id>
+  </workspace>
+  <connectionParameters>
+    <entry key="schema">example_data_4326</entry>
+    <entry key="database">gis_database</entry>
+    <entry key="port">5432</entry>
+    <entry key="passwd">crypt2:C0lNAxKwY2qUFXFUJIIsWNFGx2Yznpbc1LlWT3BosxM=</entry>
+    <entry key="Expose primary keys">true</entry>
+    <entry key="host">db</entry>
+    <entry key="dbtype">postgis</entry>
+    <entry key="namespace">http://workspace-demo-4326</entry>
+    <entry key="user">gis_user</entry>
+  </connectionParameters>
+  <__default>false</__default>
+  <dateCreated>2026-08-17 17:54:17.28 UTC</dateCreated>
+  <disableOnConnFailure>false</disableOnConnFailure>
+</dataStore>

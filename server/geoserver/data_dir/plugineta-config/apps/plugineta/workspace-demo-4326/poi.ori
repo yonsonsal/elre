@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tema>
+    <capa nombre="points_of_interest" grupo="Capas editables">
+	<!-- Atributos editables -->
+	<atributo nombre="name" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="description" tipo="java.lang.String" nillable="true"/>
+	<atributo nombre="category" tipo="java.lang.String" nillable="true"/>
+
+	<!-- Atributos de auditoría (no editables) -->
+	<atributo nombre="createdAt" tipo="java.util.Date" nillable="true"/>
+	<atributo nombre="updatedAt" tipo="java.util.Date" nillable="true"/>
+	<atributo nombre="createdBy" tipo="java.lang.String" nillable="true"/>
+
+	<!-- Geometría -->
+	<atributo nombre="the_geom" tipo="com.vividsolutions.jts.geom.Point"/>
+
+	<origen_datos>
+		<workspace nombre="workspace-demo-4326" tipo="WFS" epsg="4326">
+			<style strokeColor="#FF6B6B" strokeWidth="2" fillColor="#FF6B6BBA" />
+			<capapublicada nombre="points_of_interest" nombre_mostrar="Points of Interest (4326)"></capapublicada>
+		</workspace>
+		<fuente nombre="pluginetaDS" tipo="POSTGIS"/>
+		<tabla nombre="points_of_interest" esquema="example_data_4326" pk="gid" secuencia="example_data_4326.points_of_interest_gid_seq">
+			<atributo_tabla nombre_bd="gid" nombre_capa="gid" />
+			<atributo_tabla nombre_bd="name" nombre_capa="name"/>
+			<atributo_tabla nombre_bd="description" nombre_capa="description"/>
+			<atributo_tabla nombre_bd="category" nombre_capa="category"/>
+			<atributo_tabla nombre_bd="created_at" nombre_capa="createdAt"/>
+			<atributo_tabla nombre_bd="updated_at" nombre_capa="updatedAt"/>
+			<atributo_tabla nombre_bd="created_by" nombre_capa="createdBy"/>
+		</tabla>
+	</origen_datos>
+    </capa>
+</tema>

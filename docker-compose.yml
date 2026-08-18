@@ -87,6 +87,12 @@ services:
         - ./server/geoserver/data_dir:/opt/geoserver_data
         - ./server/geoserver/gwc:/opt/geoserver/gwc
         - ./server/geoserver/settings:/settings
+        # PluginetaGeoserverExt: extensión nativa de GeoServer (plan de migración de plataforma, Fase 1)
+        - ./geomvd/PluginetaGeoserverExt/target/PluginetaGeoserverExt-1.0.0-SNAPSHOT.jar:/usr/local/tomcat/webapps/geoserver/WEB-INF/lib/PluginetaGeoserverExt.jar
+        # GeoMvdCoreAPI: dependencia compile de la extensión, no se empaqueta dentro de su jar (hay que desplegarla aparte)
+        - ./geomvd/GeoMvdCoreAPI/target/GeoMvdCoreAPI-1.1.0-SNAPSHOT.jar:/usr/local/tomcat/webapps/geoserver/WEB-INF/lib/GeoMvdCoreAPI.jar
+        # gson: dependencia de GeoMvdCoreAPI que GeoServer no trae bundleada (ver Fase 0 del plan: log4j y org.json sí vienen ya, gson no)
+        - ./geomvd/PluginetaGeoserverExt/target/webapp-lib/gson-2.8.5.jar:/usr/local/tomcat/webapps/geoserver/WEB-INF/lib/gson-2.8.5.jar
       ports:
         - "${GEOSERVER_PORT:-8080}:8080"
       restart: on-failure
@@ -109,7 +115,13 @@ services:
         - POSTGRES_PASS=${POSTGRES_PASS:-gis_password}
         - POSTGRES_HOST=db
         - POSTGRES_PORT=5432
-        
+        # JNDI DataSource nativo de esta imagen de GeoServer (server.xml ya trae un <Resource>
+        # templateado con estas variables — ver plan de migración de plataforma, Fase 2).
+        # Usa nombres de variable distintos a los de arriba (USERNAME/PASSWORD, no USER/PASS).
+        - POSTGRES_JNDI_RESOURCE_NAME=jboss/datasources/pluginetaDS
+        - POSTGRES_USERNAME=${POSTGRES_USER:-gis_user}
+        - POSTGRES_PASSWORD=${POSTGRES_PASS:-gis_password}
+
       depends_on:
         db:
           condition: service_healthy
@@ -124,6 +136,11 @@ services:
 
    # WildFly Application Server (Backend Java)
    wildfly:
+      # Dormida por defecto tras la migración de plataforma (Fase 4): ya no hace falta para que
+      # el plugin funcione (ver geomvd/PluginetaGeoserverExt). Sigue completa y sin tocar por si
+      # hace falta compararla o volver atrás — se levanta a demanda con:
+      #   docker compose --profile legacy up wildfly
+      profiles: ["legacy"]
       build:
         context: ./server/wildfly-docker
         dockerfile: Dockerfile

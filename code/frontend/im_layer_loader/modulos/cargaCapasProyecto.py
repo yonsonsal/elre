@@ -49,13 +49,19 @@ class CargaCapasProyecto :
                     atributosCapa = ServiciosCapas.obtenerAtributosCapa(userLogin, nombreCapa, aplicacion)
                     esWFS=True
 
+                    # CRS por capa (plan de soporte multi-CRS): el backend informa el epsg real de
+                    # cada capa/workspace en "datos.epsg" (ver ConfigParser/DatosCapa). Si por algun
+                    # motivo no vino (capa vieja sin recompilar, backend caido), se cae al default de
+                    # instalacion en metadata.txt - nunca se asume 32721 a fuego.
+                    epsgCapa = ConfigProperties.getEPSG()
                     if atributosCapa is not None:
                         tipo = atributosCapa["datos"]["tipo"]
                         if tipo is not None and tipo.upper() == "WMS":
                             esWFS=False
+                        epsgCapa = atributosCapa["datos"].get("epsg") or epsgCapa
 
                     if esWFS:
-                        wfs_url = urlGeoserver+urlWFS
+                        wfs_url = urlGeoserver+urlWFS+"&srsname=EPSG:"+epsgCapa
                         dsu = QgsDataSourceUri()
                         dsu.setParam( 'url', wfs_url)
                         dsu.setParam( 'typename', capa)
@@ -64,7 +70,7 @@ class CargaCapasProyecto :
                         layerToLoad = QgsVectorLayer(dsu.uri(), capa, "WFS")
                     else:
                         uri_config = {
-                            "crs": "EPSG:32721",
+                            "crs": "EPSG:"+epsgCapa,
                             "format": "image/png",
                             "layers": capa,
                             "url": urlGeoserver+"/wms",
