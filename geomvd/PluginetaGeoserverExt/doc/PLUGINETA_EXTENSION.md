@@ -24,6 +24,13 @@ un usuario LDAP válido (ver [`../../../README.md`](../../../README.md#usuarios-
 | GET | `/rest/plugineta/public/{appName}/layers/codiguerasdata` | Listas de valores para dropdowns, una vez por workspace |
 | POST | `/rest/plugineta/public/{appName}/layers/getCalcFields?tabla=` | Campos calculados al editar una feature |
 
+Repositorio de plugins QGIS (`PluginetaRepoController`, no lo usan las capas — lo usa QGIS mismo para instalar/actualizar el plugin). **Estos dos, a diferencia de todo lo demás en esta tabla, son públicos, sin auth** (ver regla propia en `rest.properties`) — mismo criterio que el repositorio oficial de `plugins.qgis.org`, y evita pedir credenciales dos veces (una para el repo, otra para el login del propio plugin):
+
+| Método | Endpoint | Para qué sirve |
+|--------|----------|-----------------|
+| GET | `/rest/plugineta/repo/plugins.xml` | Índice del repositorio (formato `plugins.xml` de QGIS) |
+| GET | `/rest/plugineta/repo/{fileName}.zip` | Descarga del plugin en sí, referenciada por `download_url` en el XML de arriba |
+
 Diagnóstico (no los usa el plugin, son para verificar que la extensión está sana):
 
 | Método | Endpoint | Qué confirma |
@@ -40,6 +47,69 @@ Diagnóstico (no los usa el plugin, son para verificar que la extensión está s
 - El módulo de auditoría (`p_aw_contexto`) — queda para una iteración futura, pensado
   como un `TransactionListener`/`TransactionPlugin` de WFS-T de GeoServer, no un puerto
   directo del código viejo.
+
+## Instalar el plugin QGIS como repositorio (en vez de "Install from ZIP")
+
+Con GeoServer como backend completo, el plugin también se puede instalar y actualizar desde
+QGIS como cualquier plugin del repositorio oficial, sin manejar ZIPs a mano:
+
+1. En QGIS: **Plugins > Manage and Install Plugins > Settings > Plugin Repositories > Add**.
+2. Nombre libre (ej. "Plugineta"), URL: `http://localhost:8080/geoserver/rest/plugineta/repo/plugins.xml`
+   (reemplazar `localhost:8080` por el host real, ver [exponer la demo](#exponer-la-demo-afuera) más abajo).
+   No hace falta configurar **Authentication** — el repositorio es público (ver la nota en la tabla
+   de endpoints de arriba), así que la única contraseña que vas a tipear es la del login del plugin
+   en sí, no una segunda para bajar el plugin.
+3. Guardar. El plugin "Open Plugineta" aparece en la pestaña **All** del Plugin Manager, instalable
+   con un click — y a partir de ahí, QGIS lo detecta y ofrece actualizarlo solo cuando cambia la
+   versión en el repositorio.
+
+**Publicar una versión nueva** — no requiere recompilar la extensión ni reiniciar GeoServer:
+1. `cd code/frontend && ./build-plugin.sh` (después de bumpear `version=` en
+   `im_layer_loader/metadata.txt`).
+2. Copiar el ZIP resultante a
+   `server/geoserver/data_dir/plugineta-config/plugin-repo/im_layer_loader.zip` — **el nombre
+   del archivo tiene que quedar siempre igual** (ver aviso abajo), así que es un simple
+   sobreescribir, no hay que renombrar nada.
+3. Editar `plugineta-config/plugin-repo/repo.properties` — actualizar solo `version` (`fileName`
+   no cambia entre versiones).
+
+`PluginetaRepoController` lee esos archivos directo del data_dir (vía `GeoServerResourceLoader`,
+igual que los `.ori`) en cada request — a diferencia de `ConfigParser` (ver el aviso de cache más
+abajo), acá no hay ningún singleton en memoria, así que el cambio es instantáneo.
+
+**Importante — el nombre del archivo no puede tener un punto antes de `.zip`**: el instalador de
+QGIS, al instalar desde un repositorio, calcula el id interno del plugin cortando `file_name` en
+el *primer* punto (`fileName.partition(".")[0]`) — con un nombre como `im_layer_loader-0.65.zip`
+el primer punto cae en "0.65" (no antes de "zip"), y QGIS termina esperando una carpeta
+`im_layer_loader-0`, que no existe (el zip trae `im_layer_loader/`, el nombre real del módulo
+Python). Resultado: *"El complemento ha desaparecido... la carpeta .../im_layer_loader-0 no fue
+encontrada"*, aunque el ZIP en sí esté perfecto. Por eso `fileName=im_layer_loader.zip` (un solo
+punto, justo antes de `zip`) y la versión se versiona únicamente vía el tag `<version>` del XML,
+nunca en el nombre del archivo.
+
+## Exponer la demo afuera
+
+Para que alguien fuera de tu red acceda a la demo (GeoServer + el repo de plugins de arriba) sin
+publicar tu IP y con HTTPS, la forma más rápida es un túnel saliente — no requiere abrir puertos en
+el router ni tener un dominio propio:
+
+```bash
+# instalar ngrok (una sola vez): https://ngrok.com/download
+ngrok http 8080
+```
+
+ngrok imprime una URL pública `https://xxxx.ngrok-free.app` que proxea a tu `localhost:8080`. Con
+esa URL:
+- GeoServer queda accesible en `https://xxxx.ngrok-free.app/geoserver/...`.
+- El repositorio de plugins se agrega en QGIS con
+  `https://xxxx.ngrok-free.app/geoserver/rest/plugineta/repo/plugins.xml` — y el `download_url` que
+  genera `PluginetaRepoController` ya apunta correcto a ese mismo host público (respeta las
+  cabeceras `X-Forwarded-Proto`/`X-Forwarded-Host` que ngrok agrega), no a `localhost`.
+
+En el free tier de ngrok esa URL cambia cada vez que reiniciás el túnel — está bien para una demo
+puntual, pero si hace falta una URL estable para más de una sesión conviene un
+[Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/)
+en su lugar (mismo principio, URL persistente).
 
 ## Cómo testear que la extensión anda bien
 

@@ -104,6 +104,10 @@ class IMLayerLoader:
 
         self.original_message_handler = None  # Para almacenar el manejador por defecto
 
+        # Capas base efectivas para el/los workspace(s) seleccionados actualmente en listApp
+        # (seccion, capa, nombre) - ver ConfigProperties.getCapasBaseParaWorkspaces
+        self._capaBaseEntradas = []
+
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -334,6 +338,30 @@ class IMLayerLoader:
         if retorno != "":
             QtWidgets.QMessageBox.information(None, "Proceso Carga y Configuración Capas", retorno)
 
+    # Slots fijos del dialogo (.ui) reusados como "casilleros" genericos de capa base - la
+    # cantidad/etiqueta/URL real sale de ConfigProperties.getCapasBaseParaWorkspaces, no de aca.
+    CAPA_BASE_CHECKBOXES = ["cbox_IM", "cbox_OSM", "cbox_IDE", "cbox_capaBase4"]
+
+    def actualizarCapasBaseUI(self):
+        """Las capas base disponibles dependen del/los workspace(s) que esten seleccionados en
+        listApp (workspace-demo: cartografia de Montevideo; workspace-demo-4326: IDEuy + OSM +
+        Google, estas dos ultimas disponibles pero no tildadas por defecto) - ver
+        ConfigProperties.getSeccionCapasBase/getCapasBaseParaWorkspaces. Se llama cada vez que
+        cambia la seleccion de workspaces."""
+        listApp = self.dlg.findChild(QListWidget, "listApp")
+        workspaces = [item.text().lower() for item in listApp.selectedItems()]
+        self._capaBaseEntradas = ConfigProperties.getCapasBaseParaWorkspaces(workspaces)
+        for i, cboxName in enumerate(self.CAPA_BASE_CHECKBOXES):
+            cbox = self.dlg.findChild(QCheckBox, cboxName)
+            if i < len(self._capaBaseEntradas):
+                _, _, nombre, porDefecto = self._capaBaseEntradas[i]
+                cbox.setText(nombre)
+                cbox.setChecked(porDefecto)
+                cbox.setVisible(True)
+            else:
+                cbox.setChecked(False)
+                cbox.setVisible(False)
+
     def habilitaAutenticar(self):
         self.dlg.findChild(QLineEdit, "lineEditUser").setText("")
         self.dlg.findChild(QLineEdit, "lineEditPass").setText("")
@@ -356,6 +384,7 @@ class IMLayerLoader:
             authUser.clicked.connect(self.traerWorkspaces)
             authUserAgain = self.dlg.findChild(QToolButton, "authUserAgain")
             authUserAgain.clicked.connect(self.habilitaAutenticar)
+            self.dlg.findChild(QListWidget, "listApp").itemSelectionChanged.connect(self.actualizarCapasBaseUI)
 
         retorno = ""
         self.erroresEnCodigueras.clear()
@@ -385,12 +414,9 @@ class IMLayerLoader:
         l_passLogin.setEchoMode(QLineEdit.Password)
         l_passLogin.setText("")
 
-        cbox_osm = self.dlg.findChild(QCheckBox, "cbox_OSM")
-        cbox_osm.setChecked(True)
-        cbox_im = self.dlg.findChild(QCheckBox, "cbox_IM")
-        cbox_im.setChecked(True)
-        cbox_ide = self.dlg.findChild(QCheckBox, "cbox_IDE")
-        cbox_ide.setChecked(True)
+        # Las capas base dependen del workspace seleccionado - se resuelven recien cuando hay
+        # seleccion real en listApp (ver actualizarCapasBaseUI, conectado a itemSelectionChanged).
+        self.actualizarCapasBaseUI()
 
         cbox_recargaCapas = self.dlg.findChild(QCheckBox, "cbox_recargar")
         cbox_recargaCapas.setChecked(True)
@@ -426,10 +452,11 @@ class IMLayerLoader:
             elif self.userLogin == "" or self.passLogin == "":
                 retorno = "Debe ingresar Usuario y Contraseña."
             else:
+                # cargaCapaBaseDict: capa -> (seccion, seCarga) - ver ConfigProperties.getCapasBaseParaWorkspaces
                 cargaCapaBaseDict = {}
-                cargaCapaBaseDict['CapaBaseIM'] = cbox_im.isChecked()
-                cargaCapaBaseDict['CapaOSM'] = cbox_osm.isChecked()
-                cargaCapaBaseDict['CapaIde'] = cbox_ide.isChecked()
+                for i, (seccion, capa, nombre, porDefecto) in enumerate(self._capaBaseEntradas):
+                    cbox = self.dlg.findChild(QCheckBox, self.CAPA_BASE_CHECKBOXES[i])
+                    cargaCapaBaseDict[capa] = (seccion, cbox.isChecked())
 
                 sobreEscribirCapas = cbox_recargaCapas.isChecked()
 

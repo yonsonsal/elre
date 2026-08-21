@@ -61,6 +61,8 @@ tags:
     description: Listas de valores para dropdowns de formularios
   - name: Campos Calculados
     description: Cálculo dinámico de campos vía ReflectionCalcs
+  - name: Repositorio de Plugins
+    description: Sirve el plugin QGIS como repositorio instalable/actualizable (no lo usan las capas)
   - name: Diagnóstico
     description: Endpoints de ping/diagnóstico (no usados por el plugin QGIS)
 
@@ -222,6 +224,54 @@ paths:
             text/plain:
               schema:
                 type: string
+
+  /rest/plugineta/repo/plugins.xml:
+    get:
+      tags: [Repositorio de Plugins]
+      summary: Índice del repositorio de plugins QGIS
+      description: |
+        Formato `plugins.xml` estándar de QGIS. Se agrega como URL de repositorio en QGIS
+        (Plugins > Manage and Install Plugins > Settings > Plugin Repositories) — **público, sin
+        autenticación** (regla propia en `rest.properties`, más específica que el resto de
+        `/rest/plugineta/**`), mismo criterio que el repositorio oficial de plugins.qgis.org, para
+        no pedir credenciales dos veces (repo + login del propio plugin). `download_url` se genera
+        dinámicamente respetando `X-Forwarded-Proto`/`X-Forwarded-Host`, para que apunte al host
+        público real cuando se accede vía un túnel (ngrok, Cloudflare Tunnel). El contenido
+        (nombre, versión, URLs) sale de `plugineta-config/plugin-repo/repo.properties` en el
+        data_dir — publicar una versión nueva no requiere recompilar ni reiniciar GeoServer.
+      operationId: pluginsRepoIndex
+      security: []
+      responses:
+        '200':
+          description: XML del repositorio
+
+  /rest/plugineta/repo/{fileName}:
+    get:
+      tags: [Repositorio de Plugins]
+      summary: Descarga del ZIP del plugin
+      description: |
+        Referenciado por `download_url` en `plugins.xml`. Sirve el archivo tal cual está en
+        `plugineta-config/plugin-repo/` (data_dir). Público, sin autenticación (mismo criterio
+        que `plugins.xml` — ver descripción de ese endpoint).
+      operationId: pluginsRepoDownload
+      security: []
+      parameters:
+        - name: fileName
+          in: path
+          required: true
+          schema:
+            type: string
+            example: im_layer_loader.zip
+      responses:
+        '200':
+          description: Archivo ZIP del plugin
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: No existe ese archivo en plugineta-config/plugin-repo/
 
   /rest/plugineta/ping:
     get:

@@ -244,6 +244,12 @@ xcopy /E code\frontend\im_layer_loader %APPDATA%\QGIS\QGIS3\profiles\default\pyt
 
 Luego reiniciar QGIS y activar el plugin en **Plugins** > **Manage and Install Plugins**.
 
+**Opcion 3: como repositorio QGIS (recomendado para mantenerlo actualizado)**
+
+GeoServer sirve el plugin como un repositorio instalable/actualizable desde QGIS directamente
+(sin ZIPs manuales) — ver ["Instalar el plugin QGIS como repositorio"](geomvd/PluginetaGeoserverExt/doc/PLUGINETA_EXTENSION.md#instalar-el-plugin-qgis-como-repositorio-en-vez-de-install-from-zip)
+en la documentacion de la extension.
+
 ## API REST
 
 El backend activo hoy **no es WildFly** — es una extensión nativa de GeoServer

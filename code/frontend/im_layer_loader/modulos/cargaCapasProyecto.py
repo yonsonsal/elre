@@ -123,20 +123,19 @@ class CargaCapasProyecto :
 
 
     def __cargarCapasBase(self, cargaCapaBaseDict):
-        FuncionesMapa.eliminarCapasBase(cargaCapaBaseDict)                    
-        for capaBase in cargaCapaBaseDict.items():
-            capa = capaBase[0]
-            seCarga = capaBase[1]
+        # cargaCapaBaseDict: capa -> (seccion, seCarga) - ver ConfigProperties.getCapasBaseParaWorkspaces
+        FuncionesMapa.eliminarCapasBase(cargaCapaBaseDict)
+        for capa, (seccion, seCarga) in cargaCapaBaseDict.items():
             if seCarga:
                 root = QgsProject.instance().layerTreeRoot()
                 if not FuncionesMapa.existeGrupo("Mapas base"):
-                    grupoCapasBase = root.addGroup("Mapas base") 
+                    grupoCapasBase = root.addGroup("Mapas base")
                     grupoCapasBase.setIsMutuallyExclusive(True)
                 else:
                     grupoCapasBase = root.findGroup("Mapas base")
-                FuncionesMapa.agregarCapasBase(capa, grupoCapasBase)
+                FuncionesMapa.agregarCapasBase(seccion, capa, grupoCapasBase)
         #PRENDO UNA DE LAS CAPAS ACTIVAS SI ES QUE HAY
-        FuncionesMapa.activoCapaBase()
+        FuncionesMapa.activoCapaBase(cargaCapaBaseDict)
 
     @staticmethod
     def cargaCapasProyecto(workSpacesSelected, userLogin, passLogin, cargaCapaBaseDict, sobreEscribirCapas):

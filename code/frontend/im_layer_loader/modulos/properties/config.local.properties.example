@@ -35,6 +35,27 @@ urlCapaOSM=crs=EPSG:32721&format=image/png&type=xyz&url=http://tile.openstreetma
 nombreCapaBaseIM=Carto Basica IM
 urlCapaBaseIM=crs=EPSG:32721&dpiMode=7&featureCount=10&format=image/png&layers=mapstore-base:capas_base&styles&tileMatrixSet=mapstore-base:capas_base-wmsc-8&tilePixelRatio=0&url=https://montevideo.gub.uy/app/geowebcache/capabilities/mapstore-base_capas_base.xml
 
+# Capas base propias del workspace-demo-4326 (zona Salto Grande) - las de Montevideo de arriba
+# no aplican geograficamente. Seccion con nombre "CapasBase:<nombre-workspace-geoserver>";
+# si un workspace no tiene una seccion propia, se usa [CapasBase] (arriba) como default.
+[CapasBase:workspace-demo-4326]
+# Cartografia base IDEuy (Infraestructura de Datos Espaciales de Uruguay)
+nombreCapaBaseIDEuy=IDEuy Mapa Base
+urlCapaBaseIDEuy=crs=EPSG:4326&dpiMode=7&featureCount=10&format=image/png&layers=capa_base_ideuy_ideuy&styles&tileMatrixSet=EPSG:4326&tilePixelRatio=0&url=https://visualizador.ide.uy/descargas/datos/Documentos_IDE/WMTS_Uruguay_IDEuy_Mapa_Base
+
+# Foto aerea nacional IDEuy
+nombreCapaIde=IDEuy Ortofotos
+urlCapaIde=crs=EPSG:4326&dpiMode=7&featureCount=10&format=image/jpeg&layers=ortofotos:ortofoto_nacional&styles&tileMatrixSet=EPSG:4326&tilePixelRatio=0&url=https://mapas.ide.uy/geoservicios/WMTS/WMTS_Uruguay_IDEuy_Ortofotos
+
+# Opciones adicionales (no tildadas por defecto - default*=false, ver ConfigProperties.getCapasBaseParaWorkspaces)
+defaultCapaOSM=false
+nombreCapaOSM=OpenStreetMap
+urlCapaOSM=crs=EPSG:4326&format=image/png&type=xyz&url=http://tile.openstreetmap.org/{z}/{x}/{y}.png&zmax=19&zmin=0
+
+defaultCapaGoogleSat=false
+nombreCapaGoogleSat=Fotos Aereas Google
+urlCapaGoogleSat=crs=EPSG:4326&format=image/png&type=xyz&url=https://mt1.google.com/vt/lyrs%3Ds%26x%3D{x}%26y%3D{y}%26z%3D{z}&zmax=20&zmin=0
+
 [Ambiente]
 # Mostrar aviso de ambiente de pruebas (S/N)
 # S = Muestra cartel indicando que es ambiente de desarrollo/test
