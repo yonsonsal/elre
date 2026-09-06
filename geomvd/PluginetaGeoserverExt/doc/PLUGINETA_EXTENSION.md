@@ -91,25 +91,91 @@ nunca en el nombre del archivo.
 
 Para que alguien fuera de tu red acceda a la demo (GeoServer + el repo de plugins de arriba) sin
 publicar tu IP y con HTTPS, la forma más rápida es un túnel saliente — no requiere abrir puertos en
-el router ni tener un dominio propio:
+el router ni tener un dominio propio.
+
+**Usamos [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/), no ngrok**: el free tier de ngrok
+interpone una página HTML de confirmación ("interstitial") ante cualquier visitante sin el header
+`ngrok-skip-browser-warning` — lo cual traba tanto al instalador de QGIS (baja `plugins.xml`/el
+zip con un cliente HTTP simple, no un navegador que pueda hacer click en "Visit Site") como al
+propio plugin corriendo. Un "quick tunnel" de Cloudflare no tiene ese problema, no requiere cuenta
+ni login. A cambio, la URL es efímera — cambia en cada arranque del túnel (igual que ngrok free).
 
 ```bash
-# instalar ngrok (una sola vez): https://ngrok.com/download
-ngrok http 8080
+# arranca el tunel (perfil opt-in, no corre con "docker compose up" normal)
+docker compose --profile tunnel up -d cloudflared
+
+# la URL asignada queda en los logs del contenedor
+docker compose logs cloudflared | grep trycloudflare.com
 ```
 
-ngrok imprime una URL pública `https://xxxx.ngrok-free.app` que proxea a tu `localhost:8080`. Con
-esa URL:
-- GeoServer queda accesible en `https://xxxx.ngrok-free.app/geoserver/...`.
-- El repositorio de plugins se agrega en QGIS con
-  `https://xxxx.ngrok-free.app/geoserver/rest/plugineta/repo/plugins.xml` — y el `download_url` que
-  genera `PluginetaRepoController` ya apunta correcto a ese mismo host público (respeta las
-  cabeceras `X-Forwarded-Proto`/`X-Forwarded-Host` que ngrok agrega), no a `localhost`.
+Eso imprime una URL pública `https://xxxx-xx-xx.trycloudflare.com` que proxea a `geoserver:8080`
+dentro de la red de Docker Compose (no hace falta que apunte a tu `localhost`, el contenedor
+`cloudflared` habla directo con el contenedor `geoserver`).
 
-En el free tier de ngrok esa URL cambia cada vez que reiniciás el túnel — está bien para una demo
-puntual, pero si hace falta una URL estable para más de una sesión conviene un
-[Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/)
-en su lugar (mismo principio, URL persistente).
+### El repositorio (plugins.xml) anda solo — pero lo que instala el plugin, no
+
+`PluginetaRepoController` genera `download_url` respetando `X-Forwarded-Proto`/`X-Forwarded-Host`,
+así que el `plugins.xml` en sí ya apunta correcto al host público sin tocar nada. **El problema es
+lo que hay DENTRO del ZIP**: el plugin trae su propio `config.local.properties` con
+`urlApi`/`urlCapas` apuntando a `http://localhost:8080` — en la máquina de otra persona, "localhost"
+es esa misma máquina, no la tuya. Sin corregir esto, el login del plugin y la carga de capas fallan
+aunque el repositorio funcione perfecto.
+
+### Una sola variable para las dos cosas: `PLUGINETA_PUBLIC_URL`
+
+Con la URL del túnel en mano, `PLUGINETA_PUBLIC_URL` (variable de Docker Compose, en `.env`)
+alimenta **dos** mecanismos distintos — hay que recrear los dos contenedores después de cambiarla:
+
+```bash
+# .env
+PLUGINETA_PUBLIC_URL=https://xxxx-xx-xx.trycloudflare.com
+```
+
+**1. GeoServer mismo — `PROXY_BASE_URL`** (servicio `geoserver` en `docker-compose.yml`). Es una
+*application property* nativa de GeoServer (no un invento de esta imagen ni de esta extensión) que
+le dice al servidor bajo qué URL externa se lo ve, para que capabilities documents, enlaces
+internos y redirecciones de login del admin apunten al host público en vez de a
+`http://localhost:8080`:
+
+```bash
+docker compose up -d geoserver
+```
+
+Sin esto, GeoServer sigue creyendo que es `localhost:8080` detrás del túnel y esos enlaces salen
+rotos aunque el proxy funcione. Está resuelto vía `docker-compose.yml`:
+`PROXY_BASE_URL=${PLUGINETA_PUBLIC_URL:-http://localhost:8080}/geoserver` — vacía la variable, cae
+al comportamiento de siempre.
+
+**2. El plugin QGIS servido por el repo embebido — `urlApi`/`urlCapas`**:
+
+```bash
+# corre una vez y termina - no hace falta reiniciar geoserver para que sirva el zip nuevo
+docker compose --profile publish up plugin-repo-publisher
+```
+
+Esto reempaqueta `im_layer_loader.zip` con `urlApi`/`urlCapas` apuntando a `PLUGINETA_PUBLIC_URL`
+en vez de `localhost:8080`, y lo deja en `plugineta-config/plugin-repo/` — `PluginetaRepoController`
+lo sirve al toque (lee el zip del disco en cada request, no lo cachea). El código fuente en git
+nunca se toca: el reemplazo se hace en una copia temporal (ver
+`code/frontend/publish-plugin-repo.sh`). Si `PLUGINETA_PUBLIC_URL` está vacía (o no corriste este
+comando), el plugin se publica con el default `localhost:8080` de siempre — nada cambia para el uso
+local normal.
+
+Con las dos cosas hechas, cualquiera que instale el plugin desde
+`https://xxxx-xx-xx.trycloudflare.com/geoserver/rest/plugineta/repo/plugins.xml` (repositorio
+público, sin auth — ver más arriba) baja una copia ya configurada para hablarle al túnel, se
+autentica, y ve/edita capas sin tocar nada en su máquina.
+
+### La URL cambia en cada reinicio del túnel
+
+Tanto el quick tunnel de Cloudflare como el free tier de ngrok asignan una URL nueva cada vez que
+se reinician — está bien para una demo puntual, pero significa repetir los dos pasos de arriba
+(`docker compose up -d geoserver` + `docker compose --profile publish up plugin-repo-publisher`)
+con la URL nueva cada vez que se reinicia el túnel (y cualquiera que ya tenía el plugin instalado
+necesita actualizarlo de nuevo desde QGIS). Si hace falta una URL estable para más de una sesión,
+conviene un dominio propio en Cloudflare Tunnel (`cloudflared tunnel` con token, no el modo
+`--url` de quick tunnel) o un plan pago de ngrok con subdominio reservado — mismo mecanismo de
+arriba, solo cambia qué URL le pasás a `PLUGINETA_PUBLIC_URL`.
 
 ## Cómo testear que la extensión anda bien
 

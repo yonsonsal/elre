@@ -64,6 +64,11 @@ Los datos de ejemplo incluidos estan centrados en **Montevideo, Uruguay**:
 - Java 8+ y Maven 3.6+ (para desarrollo del backend)
 - 6GB RAM minimo disponible
 
+> **Alternativa liviana a Docker Desktop en macOS**: si no querés/podés usar Docker Desktop
+> (consume mucha RAM incluso ocioso), podés usar [Colima](https://github.com/abiquo/colima) como
+> motor Docker — mismos comandos `docker`/`docker compose` de siempre. Ver
+> [`docs/entorno-docker-sin-docker-desktop.md`](docs/entorno-docker-sin-docker-desktop.md).
+
 ## Inicio Rapido
 
 ### 1. Clonar el repositorio
@@ -311,6 +316,7 @@ docker exec plugineta-postgis pg_isready -U gis_user -d gis_database
 - [Backend Java (compilacion y despliegue, WildFly, dormido)](code/backend/README.md)
 - [Extension de GeoServer (backend activo): endpoints, testing, .ori](geomvd/PluginetaGeoserverExt/doc/PLUGINETA_EXTENSION.md)
 - [Configuracion de Docker](docker/README.md)
+- [Correr el stack sin Docker Desktop (Colima) + exponer la demo con Cloudflare Tunnel](docs/entorno-docker-sin-docker-desktop.md)
 - [Configuracion de GeoServer](server/README.md)
 - [Configuracion LDAP para GeoServer](docker/configure-geoserver-ldap.md)
 

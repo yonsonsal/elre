@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>IM - Carga y Configura Capas</string>
+   <string>Open Plugineta - Carga y Configura Capas</string>
   </property>
   <property name="modal">
    <bool>true</bool>
@@ -168,7 +168,7 @@
     <enum>Qt::DefaultContextMenu</enum>
    </property>
    <property name="text">
-    <string>Carto Base IM.</string>
+    <string>Carto Base Montevideo</string>
    </property>
   </widget>
   <widget class="QCheckBox" name="cbox_capaBase4">

@@ -1,8 +1,8 @@
 <GeoServerTileLayer>
-  <id>LayerInfoImpl--4c29d0ef:1a010dbef9b:-7ff8</id>
+  <id>LayerInfoImpl-42fe8a8b:1a072704e0f:-7fff</id>
   <enabled>true</enabled>
   <inMemoryCached>true</inMemoryCached>
-  <name>workspace-demo-4326:points_of_interest</name>
+  <name>workspace-demo-4326:points_of_interest_4326</name>
   <mimeFormats>
     <string>application/vnd.mapbox-vector-tile</string>
     <string>image/png</string>

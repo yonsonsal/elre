@@ -61,10 +61,35 @@ class CargaCapasProyecto :
                         epsgCapa = atributosCapa["datos"].get("epsg") or epsgCapa
 
                     if esWFS:
+                        # NOTA (5/9/2026): se probo "InvertAxisOrientation" acá para corregir un bug
+                        # de orden de ejes en capas EPSG:4326 (WFS-T Insert declaraba
+                        # srsName="urn:ogc:def:crs:EPSG::4326" - lat,lon segun spec de GeoServer -
+                        # pero mandaba las coordenadas sin invertir). SE REVIRTIO: el mismo flag
+                        # tambien afecta la LECTURA (GetFeature) via el parser GML de QGIS
+                        # (qgsgml.cpp), y como las respuestas de lectura de este servidor usan un
+                        # srsName distinto (forma "http://.../epsg.xml#4326", no URN), forzar el
+                        # flag hacia terminaba invirtiendo datos de lectura que ya estaban bien -
+                        # confirmado comparando esta capa cargada por el plugin vs. agregada nativa
+                        # por QGIS (WFS/OGC API) contra el mismo servidor: la nativa se ve correcta,
+                        # esta con el flag no.
+                        #
+                        # FIX REAL (5/9/2026): bug conocido y confirmado por QGIS mismo -
+                        # https://github.com/qgis/QGIS/issues/57965 ("WFS-T 1.0 transactions to
+                        # GeoServer have incorrect axis order when QGIS set to WFS 2.0 mode").//
+                        # Con conexion WFS 2.0 (la que usa por defecto si no se fuerza version),
+                        # QGIS cae a WFS-T 1.0 para las transacciones de escritura, que tiene
+                        # reglas de eje distintas a WFS 1.1/2.0 - "las opciones de invertir eje no
+                        # tienen ningun efecto en transacciones WFS-T 1.0 enviadas en modo WFS 2.0"
+                        # (cita del propio reporte). El workaround oficial de QGIS: forzar version
+                        # 1.1 en la conexion. "version" tiene que ir como parametro de nivel
+                        # superior del QgsDataSourceUri (no embebido en el string de "url" - el
+                        # proveedor WFS descarta ese valor sin leerlo, mismo problema que tuvo
+                        # "srsname" antes).
                         wfs_url = urlGeoserver+urlWFS+"&srsname=EPSG:"+epsgCapa
                         dsu = QgsDataSourceUri()
                         dsu.setParam( 'url', wfs_url)
                         dsu.setParam( 'typename', capa)
+                        dsu.setParam( 'version', '1.1.0')
                         dsu.setAuthConfigId(userLogin)
                         # creo la capa
                         layerToLoad = QgsVectorLayer(dsu.uri(), capa, "WFS")
