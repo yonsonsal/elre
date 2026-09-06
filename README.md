@@ -64,6 +64,11 @@ Los datos de ejemplo incluidos estan centrados en **Montevideo, Uruguay**:
 - Java 8+ y Maven 3.6+ (para desarrollo del backend)
 - 6GB RAM minimo disponible
 
+> **Alternativa liviana a Docker Desktop en macOS**: si no querés/podés usar Docker Desktop
+> (consume mucha RAM incluso ocioso), podés usar [Colima](https://github.com/abiquo/colima) como
+> motor Docker — mismos comandos `docker`/`docker compose` de siempre. Ver
+> [`docs/entorno-docker-sin-docker-desktop.md`](docs/entorno-docker-sin-docker-desktop.md).
+
 ## Inicio Rapido
 
 ### 1. Clonar el repositorio
@@ -244,22 +249,35 @@ xcopy /E code\frontend\im_layer_loader %APPDATA%\QGIS\QGIS3\profiles\default\pyt
 
 Luego reiniciar QGIS y activar el plugin en **Plugins** > **Manage and Install Plugins**.
 
+**Opcion 3: como repositorio QGIS (recomendado para mantenerlo actualizado)**
+
+GeoServer sirve el plugin como un repositorio instalable/actualizable desde QGIS directamente
+(sin ZIPs manuales) — ver ["Instalar el plugin QGIS como repositorio"](geomvd/PluginetaGeoserverExt/doc/PLUGINETA_EXTENSION.md#instalar-el-plugin-qgis-como-repositorio-en-vez-de-install-from-zip)
+en la documentacion de la extension.
+
 ## API REST
 
-La documentacion completa de la API esta disponible en formato OpenAPI:
+El backend activo hoy **no es WildFly** — es una extensión nativa de GeoServer
+(`PluginetaGeoserverExt`), que corre dentro del propio proceso de GeoServer y es la que
+consume el plugin QGIS real. WildFly queda dormido en el repo (perfil `legacy`), sin
+arrancar por defecto.
 
-- Especificacion: [code/backend/specs/openapi.yaml](code/backend/specs/openapi.yaml)
+- Especificacion OpenAPI (API activa): [geomvd/PluginetaGeoserverExt/doc/openapi.yml](geomvd/PluginetaGeoserverExt/doc/openapi.yml)
+- Documentacion de endpoints, como testearlos y donde van los `.ori`: [geomvd/PluginetaGeoserverExt/doc/PLUGINETA_EXTENSION.md](geomvd/PluginetaGeoserverExt/doc/PLUGINETA_EXTENSION.md)
+- Especificacion original (WildFly, dormida): [code/backend/specs/openapi.yaml](code/backend/specs/openapi.yaml)
 
-### Endpoints principales
+### Endpoints principales (GeoServer, activos)
 
 | Metodo | Endpoint | Descripcion |
 |--------|----------|-------------|
-| GET | `/rest/public/{appName}/layers` | Obtener capas de una aplicacion |
-| GET | `/rest/public/{appName}/layers/atributocapaformat` | Formato de atributos |
-| GET | `/rest/public/{appName}/layers/codiguerasformat` | Formato de codigueras |
-| GET | `/rest/public/{appName}/layers/codiguerasdata` | Datos de codigueras |
-| POST | `/rest/public/{appName}/layers/getCalcFields` | Campos calculados |
-| POST | `/rest/public/{appName}/layers/reportes/csv/{dbms}/{datasource}/{tabla}` | Generar reporte CSV |
+| GET | `/geoserver/rest/plugineta/public/{appName}/layers` | Obtener capas de una aplicacion |
+| GET | `/geoserver/rest/plugineta/public/{appName}/layers/atributocapaformat` | Metadata/atributos de una capa |
+| GET | `/geoserver/rest/plugineta/public/{appName}/layers/codiguerasdata` | Datos de codigueras |
+| POST | `/geoserver/rest/plugineta/public/{appName}/layers/getCalcFields` | Campos calculados |
+
+Todos requieren HTTP Basic Auth con un usuario LDAP valido (ver
+[geomvd/PluginetaGeoserverExt/doc/PLUGINETA_EXTENSION.md](geomvd/PluginetaGeoserverExt/doc/PLUGINETA_EXTENSION.md) para
+ejemplos de `curl` y guia de testeo).
 
 ## Troubleshooting
 
@@ -295,8 +313,10 @@ docker exec plugineta-postgis pg_isready -U gis_user -d gis_database
 
 ## Documentacion Adicional
 
-- [Backend Java (compilacion y despliegue)](code/backend/README.md)
+- [Backend Java (compilacion y despliegue, WildFly, dormido)](code/backend/README.md)
+- [Extension de GeoServer (backend activo): endpoints, testing, .ori](geomvd/PluginetaGeoserverExt/doc/PLUGINETA_EXTENSION.md)
 - [Configuracion de Docker](docker/README.md)
+- [Correr el stack sin Docker Desktop (Colima) + exponer la demo con Cloudflare Tunnel](docs/entorno-docker-sin-docker-desktop.md)
 - [Configuracion de GeoServer](server/README.md)
 - [Configuracion LDAP para GeoServer](docker/configure-geoserver-ldap.md)
 

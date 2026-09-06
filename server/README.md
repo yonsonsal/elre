@@ -2,6 +2,14 @@
 
 Este directorio contiene las configuraciones y datos de los servidores para desarrollo local.
 
+> **Backend activo**: desde la migración de plataforma, el backend que consume el
+> plugin QGIS corre como extensión nativa **dentro** de GeoServer, no en WildFly. Ver
+> [../geomvd/PluginetaGeoserverExt/doc/PLUGINETA_EXTENSION.md](../geomvd/PluginetaGeoserverExt/doc/PLUGINETA_EXTENSION.md)
+> (endpoints, testing, ubicación de los `.ori`) y
+> [../geomvd/PluginetaGeoserverExt/doc/openapi.yml](../geomvd/PluginetaGeoserverExt/doc/openapi.yml).
+> El código fuente de la extensión vive en `../geomvd/PluginetaGeoserverExt/` (hermano de
+> `code/`, no dentro de este directorio `server/`, que es solo datos/config de GeoServer).
+
 ## 📂 Estructura
 
 ```

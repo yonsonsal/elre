@@ -108,6 +108,34 @@ public class DBHelper {
         return "";
     }
 
+    /**
+     * Igual que geoColumnAsWKT(dbms, translateToLatLon) pero con un SRID de destino arbitrario en
+     * vez de un booleano fijo a 4326 (ver plan de soporte multi-CRS, Fase 5). Se agrega como
+     * sobrecarga nueva en vez de modificar la firma existente para no romper compilación de
+     * código legacy (DFRPublicLayerService, en el módulo GeoMvd-App, dormido) que sigue llamando
+     * a la version original.
+     */
+    public static String geoColumnAsWKT(String dbms, String targetSrid) {
+        if (dbms.equals("POSTGIS"))
+            return "ST_ASTEXT(ST_Transform(the_geom, " + targetSrid + ")) as the_geom";
+        else if (dbms.equals("ORACLE"))
+            return "SDO_CS.TRANSFORM(t.the_geom," + targetSrid + ").Get_WKT() as the_geom";
+        return "";
+    }
+
+    /**
+     * Simétrico de entrada de geoColumnAsWKT/convertToGeometry: arma el fragmento SQL para
+     * parsear un WKT con un SRID explícito (en vez del campo estático SRID=32721). Mismo patrón
+     * que convertToGeometry(dbms, geomtext), parametrizado.
+     */
+    public static String parseWKTWithSrid(String dbms, String wkt, String srid) {
+        if (dbms.equals("POSTGIS"))
+            return "ST_GeomFromText('" + wkt + "'," + srid + ")";
+        else if (dbms.equals("ORACLE"))
+            return "SDO_GEOMETRY('" + wkt + "'," + srid + ")";
+        return "";
+    }
+
     public static String geoColumnAsWKTBothSRS(String dbms) {
         if (dbms.equals("POSTGIS"))
             return "ST_AsText(the_geom) AS wkt_geom, ST_AsText(ST_Transform(the_geom, 4326)) AS wkt_transformed_geom";

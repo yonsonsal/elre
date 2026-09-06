@@ -80,6 +80,17 @@ class ServiciosRest :
 			return None
 
 	@staticmethod
+	def invocarRestPostAuth(urlServicio, data, usuario, password):
+		try:
+			headers = {'Accept': 'application/json'}
+			auth = HTTPBasicAuth(usuario, password)
+			response = requests.post(urlServicio, json=data, headers=headers, auth=auth)
+			return response.json()
+		except Exception as error:
+			logger.error(f'Error en la red. En "invocarRestPostAuth" en ServiciosRest: {type(error).__name__} : {error}. urlServicio: {urlServicio}')
+			return None
+
+	@staticmethod
 	def invocarRestPostCSV(urlServicio, data):
 		try:
 			headers = {'Accept': 'text/csv'}

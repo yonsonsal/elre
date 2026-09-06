@@ -8,10 +8,9 @@
   </workspace>
   <connectionParameters>
     <entry key="schema">example_data</entry>
-    <entry key="Estimated extends">true</entry>
     <entry key="database">gis_database</entry>
     <entry key="port">5432</entry>
-    <entry key="passwd">crypt2:xSID5RJJC4ByBlGLQALGddMbCuDLpFg7knYyr9WVfpI=</entry>
+    <entry key="passwd">crypt2:pR4dsujKNcdx3OduHdSa05A4VYfMvsr+l2+e4Dif0e4=</entry>
     <entry key="Expose primary keys">true</entry>
     <entry key="host">db</entry>
     <entry key="dbtype">postgis</entry>

@@ -1,0 +1,16 @@
+<layer>
+  <name>streets</name>
+  <id>LayerInfoImpl--4c29d0ef:1a010dbef9b:-7ffa</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-145653fa:19ba9b2aa3f:-7fff</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl--4c29d0ef:1a010dbef9b:-7ffb</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2026-08-17 17:54:28.806 UTC</dateCreated>
+</layer>

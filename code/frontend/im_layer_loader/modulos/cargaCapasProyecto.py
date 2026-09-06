@@ -49,22 +49,53 @@ class CargaCapasProyecto :
                     atributosCapa = ServiciosCapas.obtenerAtributosCapa(userLogin, nombreCapa, aplicacion)
                     esWFS=True
 
+                    # CRS por capa (plan de soporte multi-CRS): el backend informa el epsg real de
+                    # cada capa/workspace en "datos.epsg" (ver ConfigParser/DatosCapa). Si por algun
+                    # motivo no vino (capa vieja sin recompilar, backend caido), se cae al default de
+                    # instalacion en metadata.txt - nunca se asume 32721 a fuego.
+                    epsgCapa = ConfigProperties.getEPSG()
                     if atributosCapa is not None:
                         tipo = atributosCapa["datos"]["tipo"]
                         if tipo is not None and tipo.upper() == "WMS":
                             esWFS=False
+                        epsgCapa = atributosCapa["datos"].get("epsg") or epsgCapa
 
                     if esWFS:
-                        wfs_url = urlGeoserver+urlWFS
+                        # NOTA (5/9/2026): se probo "InvertAxisOrientation" acá para corregir un bug
+                        # de orden de ejes en capas EPSG:4326 (WFS-T Insert declaraba
+                        # srsName="urn:ogc:def:crs:EPSG::4326" - lat,lon segun spec de GeoServer -
+                        # pero mandaba las coordenadas sin invertir). SE REVIRTIO: el mismo flag
+                        # tambien afecta la LECTURA (GetFeature) via el parser GML de QGIS
+                        # (qgsgml.cpp), y como las respuestas de lectura de este servidor usan un
+                        # srsName distinto (forma "http://.../epsg.xml#4326", no URN), forzar el
+                        # flag hacia terminaba invirtiendo datos de lectura que ya estaban bien -
+                        # confirmado comparando esta capa cargada por el plugin vs. agregada nativa
+                        # por QGIS (WFS/OGC API) contra el mismo servidor: la nativa se ve correcta,
+                        # esta con el flag no.
+                        #
+                        # FIX REAL (5/9/2026): bug conocido y confirmado por QGIS mismo -
+                        # https://github.com/qgis/QGIS/issues/57965 ("WFS-T 1.0 transactions to
+                        # GeoServer have incorrect axis order when QGIS set to WFS 2.0 mode").//
+                        # Con conexion WFS 2.0 (la que usa por defecto si no se fuerza version),
+                        # QGIS cae a WFS-T 1.0 para las transacciones de escritura, que tiene
+                        # reglas de eje distintas a WFS 1.1/2.0 - "las opciones de invertir eje no
+                        # tienen ningun efecto en transacciones WFS-T 1.0 enviadas en modo WFS 2.0"
+                        # (cita del propio reporte). El workaround oficial de QGIS: forzar version
+                        # 1.1 en la conexion. "version" tiene que ir como parametro de nivel
+                        # superior del QgsDataSourceUri (no embebido en el string de "url" - el
+                        # proveedor WFS descarta ese valor sin leerlo, mismo problema que tuvo
+                        # "srsname" antes).
+                        wfs_url = urlGeoserver+urlWFS+"&srsname=EPSG:"+epsgCapa
                         dsu = QgsDataSourceUri()
                         dsu.setParam( 'url', wfs_url)
                         dsu.setParam( 'typename', capa)
+                        dsu.setParam( 'version', '1.1.0')
                         dsu.setAuthConfigId(userLogin)
                         # creo la capa
                         layerToLoad = QgsVectorLayer(dsu.uri(), capa, "WFS")
                     else:
                         uri_config = {
-                            "crs": "EPSG:32721",
+                            "crs": "EPSG:"+epsgCapa,
                             "format": "image/png",
                             "layers": capa,
                             "url": urlGeoserver+"/wms",
@@ -117,20 +148,19 @@ class CargaCapasProyecto :
 
 
     def __cargarCapasBase(self, cargaCapaBaseDict):
-        FuncionesMapa.eliminarCapasBase(cargaCapaBaseDict)                    
-        for capaBase in cargaCapaBaseDict.items():
-            capa = capaBase[0]
-            seCarga = capaBase[1]
+        # cargaCapaBaseDict: capa -> (seccion, seCarga) - ver ConfigProperties.getCapasBaseParaWorkspaces
+        FuncionesMapa.eliminarCapasBase(cargaCapaBaseDict)
+        for capa, (seccion, seCarga) in cargaCapaBaseDict.items():
             if seCarga:
                 root = QgsProject.instance().layerTreeRoot()
                 if not FuncionesMapa.existeGrupo("Mapas base"):
-                    grupoCapasBase = root.addGroup("Mapas base") 
+                    grupoCapasBase = root.addGroup("Mapas base")
                     grupoCapasBase.setIsMutuallyExclusive(True)
                 else:
                     grupoCapasBase = root.findGroup("Mapas base")
-                FuncionesMapa.agregarCapasBase(capa, grupoCapasBase)
+                FuncionesMapa.agregarCapasBase(seccion, capa, grupoCapasBase)
         #PRENDO UNA DE LAS CAPAS ACTIVAS SI ES QUE HAY
-        FuncionesMapa.activoCapaBase()
+        FuncionesMapa.activoCapaBase(cargaCapaBaseDict)
 
     @staticmethod
     def cargaCapasProyecto(workSpacesSelected, userLogin, passLogin, cargaCapaBaseDict, sobreEscribirCapas):

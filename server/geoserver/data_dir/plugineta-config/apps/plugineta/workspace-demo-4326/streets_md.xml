@@ -1,0 +1,10 @@
+<layer>
+	<attribute name="gid" query_capable="false" label="GID" show="false" />
+	<attribute name="name" query_capable="true" label="Name" show="true"/>
+	<attribute name="streetType" query_capable="true" label="Street Type" show="true"/>
+	<attribute name="lengthM" query_capable="true" label="Length (m)" show="true"/>
+	<attribute name="createdAt" query_capable="false" show="false"/>
+	<attribute name="updatedAt" query_capable="false" show="false"/>
+	<attribute name="createdBy" query_capable="false" show="false"/>	
+	<attribute name="the_geom" query_capable="false" show="false"/>	
+</layer>

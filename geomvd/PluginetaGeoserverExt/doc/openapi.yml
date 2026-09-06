@@ -1,0 +1,374 @@
+openapi: 3.0.3
+info:
+  title: Plugineta GeoServer Extension API
+  description: |
+    API REST de `PluginetaGeoserverExt`, la extensión nativa de GeoServer que reemplaza
+    al backend WildFly/JAX-RS original (`DFRPublicLayerService`, ahora dormido). Corre
+    **dentro** del mismo proceso de GeoServer (Spring MVC, `RestBaseController`), no como
+    un servicio aparte — no hay puerto propio, se sirve bajo `/geoserver/rest/plugineta/**`.
+
+    No reimplementa lógica de negocio: sigue usando `GeoMvdCoreAPI` tal cual
+    (`ConfigParser`, `Datahandler`, `ReflectionCalcs`, `RolesUtils`, `SecurityHelper`)
+    como dependencia. Lo único que cambió es el framework REST (JAX-RS → Spring MVC) y
+    quién resuelve la autenticación (antes nada, ahora GeoServer/Spring Security vía LDAP).
+
+    ## Autenticación
+
+    Todos los endpoints bajo `/rest/plugineta/**` requieren HTTP Basic Auth con un
+    usuario válido de GeoServer (resuelto vía el proveedor LDAP configurado en
+    **Security > Authentication**) — ver `server/geoserver/data_dir/security/rest.properties`,
+    regla `/rest/plugineta/**;GET,HEAD,OPTIONS,POST,DELETE,PUT=IS_AUTHENTICATED_FULLY`.
+    No hace falta ser administrador de GeoServer, alcanza con estar autenticado.
+
+    El plugin QGIS obtiene estas credenciales del Auth Manager de QGIS (las mismas que
+    el usuario ingresó para cargar capas, `FuncionesAutenticacion.cargarAutenticacionBasic`)
+    — no hay un usuario/servicio separado.
+
+    ## Diferencias con la API original (`code/backend/specs/openapi.yaml`, WildFly/dormida)
+
+    - Prefijo de path nuevo: `/geoserver/rest/plugineta/public/{appName}/layers/...` en vez
+      de `/api/plugineta/rest/public/{appName}/layers/...`.
+    - Requiere autenticación real (antes el `username` era un query param sin validar).
+    - El endpoint de export CSV (`reportes/csv/{dbms}/{datasource}/{tabla}`) **no existe
+      en esta API** — se descartó, ver `geomvd/PluginetaGeoserverExt/doc/PLUGINETA_EXTENSION.md`.
+    - `codiguerasformat` tampoco se portó (no confirmado en uso real por el cliente QGIS
+      de producción).
+    - El campo `datos.epsg` es nuevo (soporte multi-CRS): cada capa/workspace declara su
+      propio EPSG en vez de asumir siempre 32721.
+
+    ## Aplicaciones (`{appName}`)
+
+    Coincide 1:1 con el nombre del **workspace de GeoServer**. La demo de este repo trae
+    dos: `workspace-demo` (EPSG:32721, datos de Montevideo) y `workspace-demo-4326`
+    (EPSG:4326, datos de la zona de Salto Grande) — mismo código, cero diferencias salvo
+    la config de cada uno.
+
+  version: 1.0.0
+  contact:
+    name: Plugineta Project
+  license:
+    name: GPL-3.0
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+
+servers:
+  - url: http://localhost:8080/geoserver
+    description: GeoServer local (docker-compose)
+
+tags:
+  - name: Capas
+    description: Metadata y configuración de capas
+  - name: Codigueras
+    description: Listas de valores para dropdowns de formularios
+  - name: Campos Calculados
+    description: Cálculo dinámico de campos vía ReflectionCalcs
+  - name: Repositorio de Plugins
+    description: Sirve el plugin QGIS como repositorio instalable/actualizable (no lo usan las capas)
+  - name: Diagnóstico
+    description: Endpoints de ping/diagnóstico (no usados por el plugin QGIS)
+
+paths:
+  /rest/plugineta/public/{appName}/layers:
+    get:
+      tags: [Capas]
+      summary: Obtener lista de capas de una aplicación (workspace)
+      description: |
+        Puerto Spring MVC de `DFRPublicLayerService.getLayers`. No confirmado en tráfico
+        real del plugin de producción (se migró igual, por las dudas, costo marginal bajo).
+      operationId: getLayers
+      security: [{ basicAuth: [] }]
+      parameters:
+        - $ref: '#/components/parameters/appName'
+      responses:
+        '200':
+          description: Lista de capas agrupadas, formato jerárquico para el árbol de capas de QGIS
+          content:
+            application/json:
+              schema:
+                type: string
+                description: JSON serializado (ver JsonUtils.generateJSON) agrupado por "groupTitle"/"groupLayers"
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /rest/plugineta/public/{appName}/layers/atributocapaformat:
+    get:
+      tags: [Capas]
+      summary: Metadata y atributos editables de una capa
+      description: |
+        El endpoint que más ejercita el plugin: se llama una vez por cada capa cargada en
+        QGIS (`cargaCapasProyecto.py`) y una vez más al construir el formulario de edición
+        (`configuraCapasProyecto.py`). Trae, entre otras cosas, `datos.epsg` (soporte
+        multi-CRS) y el mapa de `atributos` que arma el formulario de QGIS.
+      operationId: getAtributoCapa
+      security: [{ basicAuth: [] }]
+      parameters:
+        - $ref: '#/components/parameters/appName'
+        - name: capa
+          in: query
+          required: true
+          description: Nombre de la capa (debe coincidir con el nombre real en GeoServer, no un alias)
+          schema:
+            type: string
+            example: zones
+      responses:
+        '200':
+          description: Metadata de la capa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Capa'
+              example:
+                Nombre Capa: zones
+                tipo: WFS
+                editable: true
+                datos:
+                  workspace: workspace-demo
+                  layer: zones
+                  tipo: WFS
+                  epsg: "32721"
+                atributos:
+                  gid:
+                    nombre: gid
+                    tipo: integer
+                    editable: false
+        '404':
+          description: La capa no tiene metadata (no existe un `.ori` para ese nombre en el appName dado)
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: "La capa : zones no tiene metadata"
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /rest/plugineta/public/{appName}/layers/codiguerasdata:
+    get:
+      tags: [Codigueras]
+      summary: Datos de codigueras (listas de valores para dropdowns)
+      description: |
+        Se llama una vez por workspace (no por capa) al armar los formularios de edición
+        — resuelve las tablas de referencia (relaciones 1-N) declaradas en la config.
+      operationId: getCodiguerasData
+      security: [{ basicAuth: [] }]
+      parameters:
+        - $ref: '#/components/parameters/appName'
+      responses:
+        '200':
+          description: Array de codigueras con sus datos resueltos contra la base
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    Codiguera:
+                      type: string
+                    comboValue:
+                      type: string
+                    comboLabel:
+                      type: string
+                    Data:
+                      type: array
+                      items:
+                        type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          description: Error resolviendo alguna codiguera contra la base de datos
+
+  /rest/plugineta/public/{appName}/layers/getCalcFields:
+    post:
+      tags: [Campos Calculados]
+      summary: Calcular campos dinámicos de una feature (vía ReflectionCalcs)
+      description: |
+        El body es la feature (atributos + geometría) tal cual la tiene QGIS en el
+        momento de editar; se le inyectan los valores calculados configurados para esa
+        tabla (ver `getCalcFields` en el `.ori`) y se devuelve el mismo objeto con esos
+        campos completados. El SRID real de la capa (`tabla`) se resuelve del lado del
+        servidor via `SridRegistry` — el cliente no necesita mandarlo.
+
+        Nota técnica: el body se lee crudo desde el `HttpServletRequest`, no vía
+        `@RequestBody` — el `RequestMappingHandlerAdapter` de GeoServer registra
+        convertidores XStream para los controllers `RestBaseController` que interpretan
+        la primera clave del JSON como nombre de clase Java si se usa `@RequestBody`.
+      operationId: getCalcFields
+      security: [{ basicAuth: [] }]
+      parameters:
+        - $ref: '#/components/parameters/appName'
+        - name: tabla
+          in: query
+          required: true
+          description: Nombre de tabla/capa para la que se calculan los campos
+          schema:
+            type: string
+            example: zones
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Feature (atributos + geometría WKT) tal cual la maneja el plugin
+      responses:
+        '200':
+          description: Mismo objeto recibido, con los campos calculados completados
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          description: Error durante el cálculo (excepción de ReflectionCalcs o de la query SQL)
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /rest/plugineta/repo/plugins.xml:
+    get:
+      tags: [Repositorio de Plugins]
+      summary: Índice del repositorio de plugins QGIS
+      description: |
+        Formato `plugins.xml` estándar de QGIS. Se agrega como URL de repositorio en QGIS
+        (Plugins > Manage and Install Plugins > Settings > Plugin Repositories) — **público, sin
+        autenticación** (regla propia en `rest.properties`, más específica que el resto de
+        `/rest/plugineta/**`), mismo criterio que el repositorio oficial de plugins.qgis.org, para
+        no pedir credenciales dos veces (repo + login del propio plugin). `download_url` se genera
+        dinámicamente respetando `X-Forwarded-Proto`/`X-Forwarded-Host`, para que apunte al host
+        público real cuando se accede vía un túnel (ngrok, Cloudflare Tunnel). El contenido
+        (nombre, versión, URLs) sale de `plugineta-config/plugin-repo/repo.properties` en el
+        data_dir — publicar una versión nueva no requiere recompilar ni reiniciar GeoServer.
+      operationId: pluginsRepoIndex
+      security: []
+      responses:
+        '200':
+          description: XML del repositorio
+
+  /rest/plugineta/repo/{fileName}:
+    get:
+      tags: [Repositorio de Plugins]
+      summary: Descarga del ZIP del plugin
+      description: |
+        Referenciado por `download_url` en `plugins.xml`. Sirve el archivo tal cual está en
+        `plugineta-config/plugin-repo/` (data_dir). Público, sin autenticación (mismo criterio
+        que `plugins.xml` — ver descripción de ese endpoint).
+      operationId: pluginsRepoDownload
+      security: []
+      parameters:
+        - name: fileName
+          in: path
+          required: true
+          schema:
+            type: string
+            example: im_layer_loader.zip
+      responses:
+        '200':
+          description: Archivo ZIP del plugin
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: No existe ese archivo en plugineta-config/plugin-repo/
+
+  /rest/plugineta/ping:
+    get:
+      tags: [Diagnóstico]
+      summary: Ping básico de la extensión
+      description: Confirma que el jar fue descubierto y montado por GeoServer, y que el filtro de seguridad de `/rest/plugineta/**` deja pasar al usuario autenticado.
+      operationId: ping
+      security: [{ basicAuth: [] }]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example: { "status": "ok", "extension": "PluginetaGeoserverExt" }
+
+  /rest/plugineta/ping/config:
+    get:
+      tags: [Diagnóstico]
+      summary: Ping de resolución de configuración (.ori/.app)
+      description: Confirma que `GeoServerResourceLoader` + `ConfigParser` resuelven y parsean la config de un `appName` dado.
+      operationId: pingConfig
+      security: [{ basicAuth: [] }]
+      parameters:
+        - $ref: '#/components/parameters/appName'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example: { "appName": "workspace-demo", "capasCargadas": 3, "nombres": ["zones", "streets", "points_of_interest"] }
+
+  /rest/plugineta/ping/db:
+    get:
+      tags: [Diagnóstico]
+      summary: Ping de conexión a la base (JNDI)
+      description: Confirma que el DataSource JNDI (`pluginetaDS`) resuelve y puede ejecutar una query real.
+      operationId: pingDb
+      security: [{ basicAuth: [] }]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example: { "status": "ok", "filas": 3 }
+
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Usuario/contraseña de GeoServer (LDAP). Ver usuarios de prueba en el README principal.
+
+  parameters:
+    appName:
+      name: appName
+      in: path
+      required: true
+      description: Nombre de la aplicación — coincide con el workspace de GeoServer (`workspace-demo`, `workspace-demo-4326`, ...)
+      schema:
+        type: string
+        example: workspace-demo
+
+  responses:
+    Unauthorized:
+      description: Sin autenticar o credenciales inválidas — GeoServer corta el request antes de llegar al controller
+
+  schemas:
+    DatosCapa:
+      type: object
+      properties:
+        capa_publicada_nombre_mostrar: { type: string }
+        workspace: { type: string }
+        layer: { type: string }
+        tipo: { type: string, enum: [WFS, WMS] }
+        source: { type: string }
+        epsg:
+          type: string
+          description: EPSG de la capa/workspace (soporte multi-CRS). Si el `.ori` no lo trae, cae al `defaultEpsg` de `config.properties`.
+          example: "32721"
+
+    AtributoCapa:
+      type: object
+      properties:
+        nombre: { type: string }
+        tipo: { type: string }
+        editable: { type: boolean }
+
+    Capa:
+      type: object
+      properties:
+        Nombre Capa: { type: string }
+        tipo: { type: string }
+        editable: { type: boolean }
+        visible: { type: boolean }
+        datos:
+          $ref: '#/components/schemas/DatosCapa'
+        atributos:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AtributoCapa'
