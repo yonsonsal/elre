@@ -448,3 +448,9 @@ Este proyecto esta licenciado bajo la [GNU General Public License v3.0](LICENSE)
 ## Contribuir
 
 Las contribuciones son bienvenidas. Por favor, abrir un issue antes de enviar un pull request para discutir los cambios propuestos.
+
+## Creditos
+
+Este repositorio es un fork de un desarrollo original de la **Intendencia de Montevideo**, que
+sento las bases de la plataforma (backend Java, plugin QGIS, integracion LDAP). A partir de ahi
+evoluciono de forma independiente hacia lo que es hoy Open Plugineta.
