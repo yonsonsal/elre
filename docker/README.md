@@ -1,273 +1,146 @@
 # Entorno de Desarrollo Local - Plugineta
 
-Este directorio contiene la configuración para levantar un entorno de desarrollo completo con Docker Compose.
+Este directorio contiene los scripts de inicializacion (PostgreSQL, LDAP) que usa
+`docker-compose.yml` (en la raiz del proyecto) para levantar el entorno completo.
 
-## 🚀 Componentes
+> **Arquitectura y como levantar todo**: ver el [README principal](../README.md) — esta pagina es
+> solo un complemento con comandos de verificacion y troubleshooting puntual. El backend activo
+> es GeoServer + `PluginetaGeoserverExt` (no WildFly), y los workspaces/datastores de GeoServer
+> ya vienen preconfigurados en `server/geoserver/data_dir/` — no hace falta crearlos a mano via
+> REST API ni Web UI como sugerian versiones anteriores de este documento.
 
-- **PostgreSQL + PostGIS**: Base de datos espacial
-- **OpenLDAP**: Servidor de autenticación
-- **phpLDAPadmin**: Interfaz web para administrar LDAP
-- **GeoServer**: Servidor de mapas (Kartoza)
+## Componentes que levanta `docker-compose.yml` (por defecto)
 
-## 📋 Requisitos Previos
+- **PostgreSQL + PostGIS**: base de datos espacial
+- **OpenLDAP**: autenticacion
+- **phpLDAPadmin**: interfaz web para administrar LDAP
+- **GeoServer** (`docker.osgeo.org/geoserver`, con `PluginetaGeoserverExt` montada): backend activo
 
-- Docker Engine 20.10+
-- Docker Compose 2.0+
+Servicios opcionales (perfiles `legacy`/`tunnel`/`publish`): ver [README principal](../README.md#componentes).
+
+## Requisitos Previos
+
+- Docker Engine 20.10+ / Docker Compose 2.0+
 - Al menos 6GB de RAM disponible
 - Puertos disponibles: 5432, 389, 636, 8080, 8081
 
-## 🔧 Inicio Rápido
+## Comandos basicos
 
-Desde el directorio raíz del proyecto:
+Desde el directorio raiz del proyecto:
 
 ```bash
-# Iniciar todos los servicios
-docker-compose up -d
-
-# Ver logs en tiempo real
-docker-compose logs -f
-
-# Verificar estado de los servicios
-docker-compose ps
-
-# Detener servicios
-docker-compose down
-
-# Detener y eliminar volúmenes (⚠️ ELIMINA TODOS LOS DATOS)
-docker-compose down -v
+docker compose up -d              # iniciar todos los servicios (default)
+docker compose logs -f            # ver logs en tiempo real
+docker compose ps                 # verificar estado
+docker compose down               # detener servicios
+docker compose down -v            # detener y eliminar volumenes (ELIMINA TODOS LOS DATOS)
 ```
 
-## 🌐 Acceso a los Servicios
+## Acceso a los Servicios
 
-Una vez iniciados, los servicios estarán disponibles en:
+| Servicio | URL / Conexion | Credenciales |
+|---|---|---|
+| GeoServer | http://localhost:8080/geoserver | admin / geoserver |
+| phpLDAPadmin | http://localhost:8081 | cn=admin,dc=plugineta,dc=local / admin_password |
+| PostgreSQL + PostGIS | localhost:5432, db `gis_database` | gis_user / gis_password |
+| OpenLDAP | localhost:389 (LDAP) / 636 (LDAPS), base DN `dc=plugineta,dc=local` | cn=admin,dc=plugineta,dc=local / admin_password |
 
-### GeoServer
-- **URL**: http://localhost:8080/geoserver
-- **Usuario**: `admin`
-- **Contraseña**: `geoserver`
+## Usuarios LDAP de Prueba
 
-### phpLDAPadmin (Administración LDAP)
-- **URL**: http://localhost:8081
-- **Login DN**: `cn=admin,dc=plugineta,dc=local`
-- **Contraseña**: `admin_password`
-
-### PostgreSQL + PostGIS
-- **Host**: `localhost`
-- **Puerto**: `5432`
-- **Base de datos**: `gis_database`
-- **Usuario**: `gis_user`
-- **Contraseña**: `gis_password`
-
-#### Usuario para GeoServer:
-- **Usuario**: `geoserver_user`
-- **Contraseña**: `geoserver_pass`
-
-### OpenLDAP
-- **Host**: `localhost`
-- **Puerto**: `389` (LDAP) / `636` (LDAPS)
-- **Base DN**: `dc=plugineta,dc=local`
-- **Admin DN**: `cn=admin,dc=plugineta,dc=local`
-- **Admin Password**: `admin_password`
-
-## 👥 Usuarios LDAP de Prueba
-
-| Usuario | Password | Grupo | Descripción |
-|---------|----------|-------|-------------|
+| Usuario | Password | Grupo | Descripcion |
+|---|---|---|---|
 | `admin_gis` | `admin123` | gis_admins, gis_editors, gis_viewers | Administrador con acceso completo |
-| `editor_gis` | `editor123` | gis_editors, gis_viewers | Editor con permisos de edición |
+| `editor_gis` | `editor123` | gis_editors, gis_viewers | Editor con permisos de edicion |
 | `viewer_gis` | `viewer123` | gis_viewers | Visualizador solo lectura |
 
 **Email pattern**: `{usuario}@plugineta.local`
 
-## 🗄️ Datos de Ejemplo
+## Datos de Ejemplo
 
-La base de datos se inicializa automáticamente con:
+Dos workspaces conviviendo (ver [Proyeccion y sistema de coordenadas en el README](../README.md#proyeccion-y-sistema-de-coordenadas)):
 
-### Schema: `example_data`
+- `example_data` (schema PostGIS, EPSG:32721) → workspace GeoServer `workspace-demo`
+- `example_data_4326` (schema PostGIS, EPSG:4326) → workspace GeoServer `workspace-demo-4326`
 
-1. **points_of_interest**: Puntos de interés (Plaza, Museo, Parque, etc.)
-2. **streets**: Calles y rutas
-3. **zones**: Zonas y distritos
+Ambos con las mismas 3 tablas conceptuales: `points_of_interest`, `streets`, `zones`.
 
-Todas las tablas tienen geometrías en **EPSG:4326** (WGS84).
+## Verificar Conexiones
 
-## 🔧 Configurar GeoServer con LDAP
-
-### Opción 1: Interfaz Web (Recomendado para desarrollo)
-
-1. Acceder a GeoServer: http://localhost:8080/geoserver
-2. Login con admin/geoserver
-3. Ir a **Security** → **Authentication**
-4. Agregar nuevo **LDAP Authentication Provider**:
-   - **Name**: `ldap-auth`
-   - **Server URL**: `ldap://ldap:389/dc=plugineta,dc=local`
-   - **User DN pattern**: `uid={0},ou=users`
-   - **User search base**: `ou=users`
-   - **User search filter**: `uid={0}`
-5. En **Authentication Filter Chain**, agregar `ldap-auth` antes de `basic`
-
-### Opción 2: Configuración Automática (TODO)
+### PostgreSQL
 
 ```bash
-# Script para configurar LDAP en GeoServer automáticamente
-./docker/scripts/configure-geoserver-ldap.sh
-```
-
-## 🗺️ Configurar PostGIS Store en GeoServer
-
-### Vía Web UI:
-
-1. Ir a **Stores** → **Add new Store** → **PostGIS**
-2. Configurar:
-   - **Workspace**: Crear uno nuevo (ej: `plugineta`)
-   - **Data Source Name**: `plugineta-db`
-   - **Host**: `postgis`
-   - **Port**: `5432`
-   - **Database**: `gis_database`
-   - **Schema**: `example_data`
-   - **User**: `geoserver_user`
-   - **Password**: `geoserver_pass`
-3. Guardar y publicar las capas desde el schema `example_data`
-
-### Vía REST API:
-
-```bash
-# Crear workspace
-curl -u admin:geoserver -X POST \
-  http://localhost:8080/geoserver/rest/workspaces \
-  -H 'Content-Type: application/json' \
-  -d '{"workspace":{"name":"plugineta"}}'
-
-# Crear datastore
-curl -u admin:geoserver -X POST \
-  http://localhost:8080/geoserver/rest/workspaces/plugineta/datastores \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "dataStore": {
-      "name": "plugineta-db",
-      "connectionParameters": {
-        "host": "postgis",
-        "port": "5432",
-        "database": "gis_database",
-        "schema": "example_data",
-        "user": "geoserver_user",
-        "passwd": "geoserver_pass",
-        "dbtype": "postgis"
-      }
-    }
-  }'
-```
-
-## 🧪 Verificar Conexiones
-
-### PostgreSQL:
-```bash
-# Conectar con psql
 docker exec -it plugineta-postgis psql -U gis_user -d gis_database
 
-# Verificar tablas
 \dt example_data.*
-
-# Ver datos de ejemplo
 SELECT name, category, ST_AsText(the_geom) FROM example_data.points_of_interest;
 ```
 
-### LDAP:
+### LDAP
+
 ```bash
-# Buscar usuarios
 ldapsearch -x -H ldap://localhost:389 \
-  -D "cn=admin,dc=plugineta,dc=local" \
-  -w admin_password \
-  -b "ou=users,dc=plugineta,dc=local" \
-  "(objectClass=inetOrgPerson)"
+  -D "cn=admin,dc=plugineta,dc=local" -w admin_password \
+  -b "ou=users,dc=plugineta,dc=local" "(objectClass=inetOrgPerson)"
 
-# Verificar grupos
 ldapsearch -x -H ldap://localhost:389 \
-  -D "cn=admin,dc=plugineta,dc=local" \
-  -w admin_password \
-  -b "ou=groups,dc=plugineta,dc=local" \
-  "(objectClass=groupOfUniqueNames)"
+  -D "cn=admin,dc=plugineta,dc=local" -w admin_password \
+  -b "ou=groups,dc=plugineta,dc=local" "(objectClass=groupOfUniqueNames)"
 ```
 
-### GeoServer:
+### GeoServer
+
 ```bash
-# Verificar que GeoServer está corriendo
-curl http://localhost:8080/geoserver/web/
+curl -u admin:geoserver http://localhost:8080/geoserver/rest/workspaces.json
 
-# Listar workspaces
-curl -u admin:geoserver \
-  http://localhost:8080/geoserver/rest/workspaces.json | jq
+# la extension activa (PluginetaGeoserverExt) responde en:
+curl -u admin_gis:admin123 http://localhost:8080/geoserver/rest/plugineta/ping
 ```
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
-### GeoServer no inicia
+### GeoServer no inicia, o la extension no responde
+
 ```bash
-# Ver logs detallados
-docker-compose logs geoserver
-
-# Verificar que PostgreSQL está listo
-docker-compose ps postgis
-
-# Reiniciar solo GeoServer
-docker-compose restart geoserver
+docker compose logs geoserver
+docker compose ps db                # confirmar que Postgres esta healthy
+docker compose restart geoserver
 ```
+
+Si el problema es que los endpoints `/rest/plugineta/...` dan 404, ver la nota sobre compilar
+`PluginetaGeoserverExt`/`GeoMvdCoreAPI` en el [README principal](../README.md#3-compilar-el-backend-activo-extension-de-geoserver).
 
 ### LDAP no responde
-```bash
-# Ver logs de LDAP
-docker-compose logs ldap
 
-# Verificar conectividad
+```bash
+docker compose logs ldap
 docker exec plugineta-ldap ldapsearch -x -b "dc=plugineta,dc=local"
 ```
 
 ### PostgreSQL no acepta conexiones
-```bash
-# Ver logs
-docker-compose logs postgis
-
-# Verificar health status
-docker inspect plugineta-postgis | jq '.[0].State.Health'
-```
-
-## 📊 Monitoreo de Recursos
 
 ```bash
-# Ver uso de recursos de cada contenedor
-docker stats
-
-# Ver espacio usado por volúmenes
-docker system df -v
+docker compose logs db
+docker inspect plugineta-postgis --format '{{json .State.Health}}'
 ```
 
-## 🧹 Limpieza
+## Limpieza
 
 ```bash
-# Detener servicios sin eliminar datos
-docker-compose down
-
-# Detener y eliminar volúmenes (CUIDADO: elimina todos los datos)
-docker-compose down -v
-
-# Eliminar también redes y imágenes huérfanas
-docker-compose down -v --rmi local --remove-orphans
+docker compose down                                    # sin eliminar datos
+docker compose down -v                                 # CUIDADO: elimina todos los datos
+docker compose down -v --rmi local --remove-orphans    # + imagenes/redes huerfanas
 ```
 
-## 📝 Notas
+## Notas
 
-- Los datos persisten en volúmenes Docker entre reinicios
-- Las contraseñas son para desarrollo local, **NO usar en producción**
-- El LDAP está configurado sin TLS para simplificar el desarrollo
-- GeoServer puede tardar 1-2 minutos en estar completamente disponible
+- Los datos persisten en volumenes Docker entre reinicios.
+- Las contrasenas son para desarrollo local — **no usar en produccion**.
+- El LDAP esta configurado sin TLS para simplificar el desarrollo.
+- GeoServer puede tardar 1-2 minutos en estar completamente disponible la primera vez.
 
-## 🔐 Seguridad
+## Seguridad
 
-⚠️ **IMPORTANTE**: Esta configuración es SOLO para desarrollo local.
-
-Para producción debes:
-- Cambiar TODAS las contraseñas
-- Habilitar TLS/SSL en LDAP y GeoServer
-- Configurar firewalls y restricciones de red
-- Usar secrets management (Vault, etc.)
-- Configurar backups automáticos
+Esta configuracion es **solo para desarrollo local**. Para un despliegue real hay que cambiar
+todas las contrasenas, habilitar TLS/SSL, restringir red/firewall, y gestionar secretos
+apropiadamente — ver la seccion [Produccion, con un dominio propio](../README.md#produccion-con-un-dominio-propio)
+del README principal para lo especifico de exponer GeoServer con HTTPS y CSRF.
