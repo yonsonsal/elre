@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Curso de IA con Claude · IBF Negocios</title>
+<meta name="description" content="Curso de Inteligencia Artificial con Claude para IBF Negocios. Code4Business · Facilitado por Diego Maye.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --navy:#0B1F3A;
+  --navy-2:#102848;
+  --mid:#1E3A5F;
+  --warm:#F7F5F2;
+  --coral:#D97757;
+  --coral-2:#E8957A;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --W:1920px; --H:1080px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#06142A;color:var(--warm);font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow:hidden}
+button{font:inherit;color:inherit}
+
+/* ============ STAGE (16:9 escalado) ============ */
+#viewport{position:fixed;inset:0;overflow:hidden;background:#06142A}
+#stage{position:absolute;left:50%;top:50%;width:var(--W);height:var(--H);
+  transform-origin:center center;transform:translate(-50%,-50%) scale(.5)}
+
+/* ============ SLIDE BASE ============ */
+.slide{
+  --bg:var(--navy); --fg:var(--warm); --muted:rgba(247,245,242,.66);
+  --line:rgba(247,245,242,.14); --card:rgba(247,245,242,.045); --accent:var(--coral);
+  position:absolute;inset:0;overflow:hidden;background:var(--bg);color:var(--fg);
+  padding:120px 140px 130px;display:flex;flex-direction:column;
+  opacity:0;visibility:hidden;transform:translateX(60px);
+  transition:opacity .7s var(--ease),transform .8s var(--ease),visibility 0s linear .8s;
+}
+.slide.past{transform:translateX(-60px)}
+.slide.active{opacity:1;visibility:visible;transform:none;
+  transition:opacity .7s var(--ease),transform .8s var(--ease),visibility 0s}
+.slide.light{--bg:var(--warm);--fg:var(--navy);--muted:#4B5B72;
+  --line:rgba(11,31,58,.13);--card:#FFFFFF;--accent:#C4613F}
+.slide.mid{--bg:var(--mid)}
+
+/* Revelado escalonado */
+.r{opacity:0;transform:translateY(26px);
+  transition:opacity .7s var(--ease),transform .8s var(--ease)}
+.slide.active .r{opacity:1;transform:none;transition-delay:calc(var(--d,0) * 90ms + 220ms)}
+
+/* ============ TIPOGRAFÍA ============ */
+.eyebrow{font-size:24px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
+  display:flex;align-items:center;gap:20px}
+.eyebrow::before{content:"";width:56px;height:3px;background:var(--accent);border-radius:2px}
+h1,h2,h3{text-wrap:balance;font-weight:700;letter-spacing:-.025em;line-height:1.04}
+h2{font-size:84px;margin-top:28px;max-width:1500px}
+h3{font-size:38px;letter-spacing:-.015em;line-height:1.15}
+em.s{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--accent);letter-spacing:-.01em}
+p,li{font-size:34px;line-height:1.38;color:var(--muted)}
+.lead{font-size:40px;line-height:1.35;color:var(--fg);font-weight:400}
+.muted{color:var(--muted)}
+.accent{color:var(--accent)}
+
+/* ============ FOOTER ============ */
+.foot{position:absolute;left:140px;right:140px;bottom:52px;display:flex;justify-content:space-between;
+  align-items:center;font-size:20px;letter-spacing:.06em;color:var(--muted);opacity:.85}
+.foot .brandmini{display:flex;align-items:center;gap:14px;font-weight:600;letter-spacing:.02em}
+.foot .dot{width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.foot .pg{font-variant-numeric:tabular-nums;font-weight:600;display:none}
+
+/* ============ GEOMETRÍA DECORATIVA ============ */
+.geo{position:absolute;pointer-events:none}
+.grid-dots{position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(rgba(247,245,242,.12) 1.4px,transparent 1.6px);background-size:48px 48px;
+  -webkit-mask-image:radial-gradient(ellipse at 85% 30%,#000 0%,transparent 60%);
+          mask-image:radial-gradient(ellipse at 85% 30%,#000 0%,transparent 60%)}
+.light .grid-dots{background-image:radial-gradient(rgba(11,31,58,.14) 1.4px,transparent 1.6px)}
+.corner-bar{position:absolute;top:0;left:140px;width:120px;height:8px;background:var(--accent)}
+
+/* ============ 1 · PORTADA ============ */
+.cover{padding:110px 140px;justify-content:space-between;
+  background:radial-gradient(1200px 900px at 88% 40%,#17345C 0%,rgba(11,31,58,0) 70%),var(--navy)}
+.cover-top{display:flex;align-items:center;justify-content:space-between}
+.wordmark{display:flex;align-items:center;gap:18px;font-size:32px;font-weight:700;letter-spacing:-.01em}
+.wordmark .mk{width:46px;height:46px;border-radius:12px;background:var(--coral);display:grid;place-items:center;
+  color:var(--navy);font-weight:800;font-size:22px;letter-spacing:-.04em}
+.wordmark small{font-size:22px;font-weight:400;color:var(--muted);margin-left:6px}
+.partner{font-size:20px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  border:1px solid var(--line);padding:14px 24px;border-radius:999px}
+.cover h1{font-size:148px;line-height:.98;letter-spacing:-.04em;font-weight:700;max-width:1250px}
+.cover h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--coral);letter-spacing:-.02em}
+.cover .sub{font-size:40px;color:var(--warm);opacity:.88;margin-top:44px;font-weight:300}
+.cover-meta{display:flex;gap:0;align-items:stretch;border-top:1px solid var(--line);padding-top:36px}
+.cover-meta div{flex:1;padding-right:40px}
+.cover-meta div+div{padding-left:40px;border-left:1px solid var(--line)}
+.cover-meta span{display:block;font-size:19px;letter-spacing:.16em;text-transform:uppercase;color:var(--coral);font-weight:600;margin-bottom:10px}
+.cover-meta b{font-size:32px;font-weight:500}
+
+/* ============ 2 · OBJETIVOS (columnas numeradas) ============ */
+.cols4{display:grid;grid-template-columns:repeat(4,1fr);gap:48px;margin:auto 0}
+.obj{border-top:2px solid var(--line);padding-top:36px;position:relative}
+.obj::before{content:"";position:absolute;top:-2px;left:0;width:64px;height:2px;background:var(--accent)}
+.obj .n{font-size:26px;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums;letter-spacing:.06em}
+.obj h3{margin-top:22px;font-size:40px}
+
+/* ============ 3 · TIMELINE ============ */
+.tl{position:relative;margin-top:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:40px;padding-top:70px}
+.tl::before{content:"";position:absolute;top:22px;left:0;right:0;height:2px;background:var(--line)}
+.tl .node{position:absolute;top:10px;width:26px;height:26px;border-radius:50%;background:var(--bg);border:3px solid var(--coral)}
+.tl .step{position:relative}
+.tl .step .node{top:-60px;left:0}
+.tl .date{font-size:24px;letter-spacing:.12em;text-transform:uppercase;color:var(--coral);font-weight:600}
+.tl .sn{font-size:26px;color:var(--muted);margin-top:14px;font-weight:500}
+.tl h3{margin-top:8px;font-size:40px}
+.arc{display:grid;grid-template-columns:1fr 1fr 2fr;gap:40px;margin-top:64px;margin-bottom:auto}
+.arc div{display:flex;align-items:center;gap:18px;padding:22px 30px;border-radius:14px;
+  background:var(--card);border:1px solid var(--line);font-size:30px;font-weight:600}
+.arc div i{font-style:normal;color:var(--coral);font-size:30px}
+.arc div:last-child{background:rgba(217,119,87,.14);border-color:rgba(217,119,87,.4)}
+.arc small{font-size:22px;font-weight:400;color:var(--muted);margin-left:auto}
+
+/* ============ APERTURA DE SESIÓN ============ */
+.opener{padding:0;flex-direction:row;background:var(--navy)}
+.opener .left{width:760px;background:var(--mid);position:relative;display:flex;flex-direction:column;
+  justify-content:space-between;padding:120px 0 130px 140px;overflow:hidden}
+.opener .bignum{font-size:440px;font-weight:800;line-height:.8;letter-spacing:-.06em;color:var(--warm);position:relative}
+.opener .bignum::after{content:"";position:absolute;left:8px;bottom:-40px;width:140px;height:10px;background:var(--coral)}
+.opener .slabel{font-size:26px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--coral)}
+.opener .sdate{font-size:30px;color:var(--muted);margin-top:14px}
+.opener .right{flex:1;padding:120px 140px 130px 110px;display:flex;flex-direction:column;justify-content:center}
+.opener h2{font-size:80px;margin-top:0}
+.opener ul{list-style:none;margin-top:60px;display:grid;gap:0}
+.opener li{display:flex;gap:28px;align-items:baseline;padding:24px 0;border-top:1px solid var(--line);color:var(--fg);font-size:36px}
+.opener li:last-child{border-bottom:1px solid var(--line)}
+.opener li b{font-size:22px;color:var(--coral);font-weight:600;min-width:40px;font-variant-numeric:tabular-nums;letter-spacing:.06em}
+.opener .ring{position:absolute;right:-220px;top:-200px;width:620px;height:620px;border-radius:50%;
+  border:2px solid rgba(247,245,242,.1)}
+.opener .ring.b{right:-120px;top:-100px;width:420px;height:420px;border-color:rgba(217,119,87,.4)}
+
+/* ============ 5 · MUNDO IA ============ */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center;flex:1;margin-top:40px}
+.stack{display:grid;gap:30px}
+.stack .it{display:flex;gap:26px;align-items:flex-start}
+.stack .it::before{content:"";flex:0 0 14px;height:14px;margin-top:18px;border-radius:3px;background:var(--accent);transform:rotate(45deg)}
+.stack .it p{color:var(--fg)}
+.stack .it p span{color:var(--muted)}
+.orbit{position:relative;width:640px;height:640px;justify-self:center}
+.orbit .o{position:absolute;border-radius:50%;border:1.5px solid var(--line);left:50%;top:50%;transform:translate(-50%,-50%)}
+.orbit .chip{position:absolute;transform:translate(-50%,-50%);padding:18px 30px;border-radius:999px;background:var(--navy-2);
+  border:1px solid var(--line);font-size:28px;font-weight:600;white-space:nowrap}
+.orbit .chip small{display:block;font-size:18px;font-weight:400;color:var(--muted);letter-spacing:.04em}
+.orbit .chip.claude{background:var(--coral);color:var(--navy);border-color:var(--coral);padding:26px 44px;font-size:38px;
+  box-shadow:0 0 0 14px rgba(217,119,87,.14),0 0 0 30px rgba(217,119,87,.06)}
+.orbit .chip.claude small{color:rgba(11,31,58,.75)}
+
+/* ============ 6 · MODELO DE LENGUAJE ============ */
+.predict{margin-top:56px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:44px 56px;
+  display:grid;grid-template-columns:1.05fr 1fr;gap:60px;align-items:center;box-shadow:0 20px 60px -30px rgba(11,31,58,.25)}
+.predict .sent{font-size:44px;font-weight:500;color:var(--fg);line-height:1.3}
+.predict .sent .blank{display:inline-block;min-width:180px;margin-bottom:-6px;border-bottom:4px solid var(--accent);margin-left:8px}
+.predict .cap{font-size:22px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:18px}
+.bars{display:grid;gap:16px}
+.bar{display:grid;grid-template-columns:230px 1fr 80px;align-items:center;gap:20px;font-size:28px;color:var(--fg)}
+.bar .t{height:16px;border-radius:8px;background:rgba(11,31,58,.08);overflow:hidden}
+.bar .t i{display:block;height:100%;border-radius:8px;background:var(--accent);width:0;transition:width 1.1s var(--ease) .9s}
+.slide.active .bar .t i{width:var(--w)}
+.bar .v{font-variant-numeric:tabular-nums;color:var(--muted);text-align:right}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px}
+.two .c{padding:34px 40px;border-left:5px solid var(--accent);background:var(--card);border-radius:4px 16px 16px 4px}
+.two .c h3{font-size:34px}
+.two .c p{font-size:28px;margin-top:10px}
+
+/* ============ 7 · ANTHROPIC ============ */
+.fact{display:grid;grid-template-columns:640px 1fr;gap:110px;flex:1;align-items:center;margin-top:20px}
+.year{font-size:300px;font-weight:800;letter-spacing:-.06em;line-height:.85;color:transparent;
+  -webkit-text-stroke:3px var(--coral)}
+.year-cap{font-size:30px;color:var(--fg);margin-top:34px;font-weight:500}
+.year-cap span{display:block;color:var(--muted);font-weight:400;font-size:26px;margin-top:6px}
+.vlist{display:grid;gap:0}
+.vlist .row{display:grid;grid-template-columns:80px 1fr;gap:20px;padding:30px 0;border-top:1px solid var(--line)}
+.vlist .row:last-child{border-bottom:1px solid var(--line)}
+.vlist .row b{font-size:24px;color:var(--coral);font-weight:600;padding-top:8px;letter-spacing:.06em}
+.vlist .row p{color:var(--fg);font-size:34px}
+.vlist .row.hl p{color:var(--coral-2)}
+
+/* ============ 8 · POR QUÉ CLAUDE ============ */
+.why{display:grid;grid-template-columns:1.1fr 1fr;gap:110px;flex:1;align-items:center}
+.why .claim{font-family:var(--serif);font-size:84px;line-height:1.08;letter-spacing:-.02em;font-weight:400}
+.why .claim em{font-style:italic;color:var(--coral)}
+.why .lines{display:grid;gap:26px}
+.why .ln{display:flex;align-items:center;gap:30px;padding:34px 40px;border-radius:18px;background:var(--card);border:1px solid var(--line)}
+.why .ln svg{flex:0 0 56px;height:56px}
+.why .ln p{color:var(--fg);font-size:34px;font-weight:500}
+
+/* ============ 9 · TARJETAS POR FUNCIÓN ============ */
+.cards4{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin:auto 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:44px 40px 48px;min-height:500px;
+  display:flex;flex-direction:column;position:relative;overflow:hidden;box-shadow:0 24px 60px -36px rgba(11,31,58,.35)}
+.card::after{content:"";position:absolute;left:0;top:0;height:6px;width:100%;background:var(--accent);transform-origin:left;transform:scaleX(.18)}
+.card .ic{width:84px;height:84px;border-radius:20px;background:rgba(217,119,87,.13);display:grid;place-items:center}
+.card .ic svg{width:44px;height:44px}
+.card h3{margin-top:96px;font-size:42px}
+.card p{font-size:29px;margin-top:16px}
+
+/* ============ 10 · ESCALERA ============ */
+.stairs{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:auto;align-items:end}
+.stair{border-radius:20px 20px 0 0;padding:36px 36px 40px;background:var(--card);border:1px solid var(--line);border-bottom:0;
+  display:flex;flex-direction:column;justify-content:flex-start}
+.stair:nth-child(1){height:300px}
+.stair:nth-child(2){height:380px}
+.stair:nth-child(3){height:460px}
+.stair:nth-child(4){height:540px;background:rgba(217,119,87,.16);border-color:rgba(217,119,87,.45)}
+.stair .k{font-size:22px;letter-spacing:.16em;text-transform:uppercase;color:var(--coral);font-weight:600}
+.stair h3{margin-top:18px;font-size:38px}
+.stair p{font-size:27px;margin-top:12px}
+.stairs-base{height:2px;background:var(--coral);opacity:.6}
+.head-row{display:flex;justify-content:space-between;align-items:flex-end;gap:60px}
+.tag{display:inline-flex;align-items:center;gap:14px;font-size:22px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  padding:14px 24px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.tag i{width:10px;height:10px;border-radius:50%;background:var(--coral)}
+
+/* ============ 11/12 · INVITADOS ============ */
+.guest{display:grid;grid-template-columns:560px 1fr;gap:100px;flex:1;align-items:stretch;margin-top:10px}
+.guest.rev{grid-template-columns:1fr 560px}
+.gcard{border-radius:26px;background:var(--mid);padding:56px 52px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.light .gcard{background:var(--navy);color:var(--warm)}
+.gcard .mono{width:150px;height:150px;border-radius:50%;background:var(--coral);color:var(--navy);display:grid;place-items:center;
+  font-size:58px;font-weight:700;letter-spacing:-.03em}
+.gcard .with{font-size:22px;letter-spacing:.18em;text-transform:uppercase;color:var(--coral-2);font-weight:600;margin-top:auto}
+.gcard .gname{font-size:54px;font-weight:700;letter-spacing:-.025em;margin-top:14px;line-height:1.05}
+.gcard .grole{font-size:32px;color:rgba(247,245,242,.72);margin-top:10px}
+.gcard .arcdeco{position:absolute;right:-140px;top:-140px;width:420px;height:420px;border-radius:50%;border:2px solid rgba(217,119,87,.45)}
+.gcard .arcdeco.b{right:-60px;top:-60px;width:260px;height:260px;border-color:rgba(247,245,242,.12)}
+.gright{display:flex;flex-direction:column;justify-content:center}
+.gright h2{font-size:80px}
+.steps{list-style:none;margin-top:72px;display:grid;gap:0;counter-reset:s}
+.steps li{display:grid;grid-template-columns:90px 1fr;align-items:center;padding:26px 0;border-top:1px solid var(--line);color:var(--fg);font-size:34px}
+.steps li:last-child{border-bottom:1px solid var(--line)}
+.steps li::before{counter-increment:s;content:counter(s,decimal-leading-zero);font-size:24px;font-weight:600;color:var(--accent);letter-spacing:.06em}
+.sev{display:inline-flex;gap:8px;margin-left:18px;vertical-align:middle}
+.sev i{width:16px;height:16px;border-radius:4px;background:var(--coral)}
+.sev i:nth-child(2){opacity:.65}.sev i:nth-child(3){opacity:.35}
+
+/* ============ 13 · TAREA ============ */
+.task{display:grid;grid-template-columns:1fr 1.05fr;gap:110px;flex:1;align-items:center}
+.task .big{font-size:96px;font-weight:700;letter-spacing:-.035em;line-height:1.02;margin-top:28px}
+.task .note{margin-top:44px;font-size:32px}
+.checklist{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:24px 52px;box-shadow:0 30px 70px -40px rgba(11,31,58,.4)}
+.check{display:flex;align-items:center;gap:32px;padding:34px 0;border-bottom:1px dashed var(--line)}
+.check:last-child{border-bottom:0}
+.check .box{flex:0 0 52px;height:52px;border-radius:12px;border:3px solid var(--accent);display:grid;place-items:center}
+.check .box svg{width:30px;height:30px;stroke:var(--accent);stroke-width:3.5;fill:none;stroke-dasharray:40;stroke-dashoffset:40;
+  transition:stroke-dashoffset .6s var(--ease)}
+.slide.active .check .box svg{stroke-dashoffset:0;transition-delay:calc(var(--d,0) * 140ms + 700ms)}
+.check p{color:var(--fg);font-size:36px;font-weight:500}
+
+/* ============ 16 · CITA ============ */
+.quote{justify-content:center;background:radial-gradient(1100px 700px at 15% 85%,rgba(217,119,87,.16),transparent 70%),var(--navy)}
+.quote .qmark{font-family:var(--serif);font-size:300px;line-height:.6;color:var(--coral);height:120px;margin-top:70px}
+.quote blockquote{font-family:var(--serif);font-size:112px;line-height:1.06;letter-spacing:-.02em;max-width:1500px;margin-top:20px}
+.quote blockquote em{font-style:italic;color:var(--coral)}
+.quote .qrow{display:grid;grid-template-columns:repeat(3,1fr);gap:56px;margin-top:80px;max-width:1640px}
+.quote .qrow p{font-size:32px;color:var(--fg);padding-top:26px;border-top:2px solid var(--line);position:relative}
+.quote .qrow p::before{content:"";position:absolute;left:0;top:-2px;width:48px;height:2px;background:var(--coral)}
+
+/* ============ 17 · CIERRE ============ */
+.close{display:grid;grid-template-columns:1.25fr 1fr;gap:110px;flex:1;align-items:end;margin-top:20px}
+.close .thanks{display:flex;flex-direction:column;justify-content:flex-end}
+.close .thanks h1{font-size:200px;font-weight:800;letter-spacing:-.05em;line-height:.9}
+.close .thanks h1 span{display:block;font-family:var(--serif);font-style:italic;font-weight:400;color:var(--coral);letter-spacing:-.03em}
+.close .contact{margin-top:50px;font-size:30px;color:var(--muted);display:flex;gap:26px;align-items:center}
+.close .contact b{color:var(--fg);font-weight:600}
+.close .next{background:var(--mid);border-radius:26px;padding:52px 52px;display:flex;flex-direction:column}
+.close .next .eyebrow{font-size:21px}
+.close .next h3{font-size:46px;margin-top:22px}
+.close .next ul{list-style:none;margin-top:56px}
+.close .next li{display:flex;gap:24px;align-items:center;padding:26px 0;border-top:1px solid var(--line);color:var(--warm);font-size:32px;font-weight:500}
+.close .next li svg{flex:0 0 34px;height:34px}
+
+/* ============ UI (controles) ============ */
+.ui{position:fixed;z-index:20}
+#progress{top:0;left:0;right:0;height:3px;background:rgba(247,245,242,.08)}
+#progress i{display:block;height:100%;width:0;background:var(--coral);transition:width .6s var(--ease)}
+#controls{right:20px;bottom:18px;display:flex;align-items:center;gap:8px;padding:6px;border-radius:999px;
+  background:rgba(11,31,58,.72);border:1px solid rgba(247,245,242,.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  transition:opacity .4s;opacity:.85}
+#controls:hover{opacity:1}
+body.idle #controls{opacity:0}
+body.idle{cursor:none}
+#controls button{width:42px;height:42px;border:0;border-radius:50%;background:transparent;cursor:pointer;display:grid;place-items:center;
+  transition:background .2s}
+#controls button:hover:not(:disabled){background:rgba(217,119,87,.25)}
+#controls button:disabled{opacity:.3;cursor:default}
+#controls button:focus-visible{outline:2px solid var(--coral);outline-offset:2px}
+#controls svg{width:20px;height:20px;stroke:#F7F5F2;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+#counter{font-size:14px;font-variant-numeric:tabular-nums;letter-spacing:.06em;color:#F7F5F2;min-width:64px;text-align:center;font-weight:500}
+#counter b{color:var(--coral);font-weight:700}
+#hint{left:50%;bottom:22px;transform:translateX(-50%);font-size:13px;color:rgba(247,245,242,.6);letter-spacing:.04em;
+  background:rgba(11,31,58,.7);padding:8px 16px;border-radius:999px;transition:opacity .6s;pointer-events:none}
+#hint.hide{opacity:0}
+@media (max-width:640px){#hint{display:none} #controls{right:50%;transform:translateX(50%);bottom:12px}}
+
+@media (prefers-reduced-motion:reduce){
+  .slide,.r,.bar .t i,.check .box svg{transition:none!important}
+}
+
+/* ============ IMPRESIÓN / PDF ============ */
+@page{size:1920px 1080px;margin:0}
+@media print{
+  html,body{overflow:visible;height:auto;background:var(--navy)}
+  .ui{display:none!important}
+  #viewport{position:static;overflow:visible}
+  #stage{position:static;transform:none!important;width:var(--W);height:auto}
+  .slide{position:relative;width:var(--W);height:var(--H);opacity:1!important;visibility:visible!important;transform:none!important;
+    transition:none!important;break-after:page;page-break-after:always;break-inside:avoid}
+  .slide:last-child{break-after:auto;page-break-after:auto}
+  .r{opacity:1!important;transform:none!important;transition:none!important}
+  .foot .pg{display:inline}
+  .bar .t i{width:var(--w)!important;transition:none!important}
+  .check .box svg{stroke-dashoffset:0!important}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+}
+</style>
+</head>
+<body>
+<div id="viewport">
+<main id="stage" aria-live="polite">
+
+<!-- ================= 1 · PORTADA ================= -->
+<section class="slide cover" data-nofoot aria-label="Portada">
+  <svg class="geo" style="right:-260px;top:40px" width="1100" height="1100" viewBox="0 0 1100 1100" fill="none" aria-hidden="true">
+    <circle cx="550" cy="550" r="540" stroke="rgba(247,245,242,.07)" stroke-width="2"/>
+    <circle cx="550" cy="550" r="420" stroke="rgba(247,245,242,.09)" stroke-width="2"/>
+    <circle cx="550" cy="550" r="300" stroke="rgba(247,245,242,.11)" stroke-width="2"/>
+    <path d="M550 10 A540 540 0 0 1 1090 550" stroke="#D97757" stroke-width="6" stroke-linecap="round"/>
+    <path d="M130 550 A420 420 0 0 1 550 130" stroke="#D97757" stroke-width="3" stroke-linecap="round" opacity=".55"/>
+    <circle cx="550" cy="550" r="12" fill="#D97757"/>
+    <circle cx="1090" cy="550" r="10" fill="#D97757"/>
+  </svg>
+  <div class="grid-dots"></div>
+  <div class="cover-top r" style="--d:0">
+    <div class="wordmark"><span class="mk">C4</span>Code4Business <small>presenta</small></div>
+    <div class="partner">Claude Partner Network</div>
+  </div>
+  <div>
+    <h1 class="r" style="--d:1">Curso de IA<br>con <em>Claude</em><br>para IBF Negocios</h1>
+    <p class="sub r" style="--d:2">Programa de adopción de inteligencia artificial</p>
+  </div>
+  <div class="cover-meta r" style="--d:3">
+    <div><span>Presenta</span><b>Code4Business</b></div>
+    <div><span>Formato</span><b>Cuatro sesiones prácticas</b></div>
+    <div><span>Facilitador</span><b>Diego Maye</b></div>
+  </div>
+</section>
+
+<!-- ================= 2 · OBJETIVOS ================= -->
+<section class="slide" aria-label="Qué vamos a lograr juntos">
+  <div class="grid-dots"></div>
+  <div class="eyebrow r" style="--d:0">El objetivo del curso</div>
+  <h2 class="r" style="--d:1">Qué vamos a lograr <em class="s">juntos</em></h2>
+  <div class="cols4">
+    <div class="obj r" style="--d:2"><div class="n">01</div><h3>Entender qué es la IA y por qué importa ahora</h3></div>
+    <div class="obj r" style="--d:3"><div class="n">02</div><h3>Aprender a usar Claude en el día a día</h3></div>
+    <div class="obj r" style="--d:4"><div class="n">03</div><h3>Construir casos de uso para private equity</h3></div>
+    <div class="obj r" style="--d:5"><div class="n">04</div><h3>Salir con un plan de adopción para el portafolio</h3></div>
+  </div>
+</section>
+
+<!-- ================= 3 · TIMELINE ================= -->
+<section class="slide mid" aria-label="Las cuatro sesiones">
+  <div class="grid-dots"></div>
+  <div class="eyebrow r" style="--d:0">Agenda · Octubre</div>
+  <h2 class="r" style="--d:1">Las cuatro sesiones</h2>
+  <div class="tl">
+    <div class="step r" style="--d:2"><span class="node"></span><div class="date">Martes 6</div><div class="sn">Sesión 1</div><h3>Panorama general de la IA</h3></div>
+    <div class="step r" style="--d:3"><span class="node"></span><div class="date">Miércoles 7</div><div class="sn">Sesión 2</div><h3>Práctica y casos legales y financieros</h3></div>
+    <div class="step r" style="--d:4"><span class="node"></span><div class="date">Martes 13</div><div class="sn">Sesión 3</div><h3>Casos avanzados y agentes</h3></div>
+    <div class="step r" style="--d:5"><span class="node"></span><div class="date">Miércoles 14</div><div class="sn">Sesión 4</div><h3>Claude Code y plan de adopción</h3></div>
+  </div>
+  <div class="arc r" style="--d:6">
+    <div><i>→</i>Entender</div>
+    <div><i>→</i>Usar</div>
+    <div><i>→</i>Construir <small>el arco del programa</small></div>
+  </div>
+</section>
+
+<!-- ================= 4 · SESIÓN 1 ================= -->
+<section class="slide opener" data-nofoot aria-label="Sesión 1">
+  <div class="left">
+    <span class="ring"></span><span class="ring b"></span>
+    <div class="r" style="--d:0"><div class="slabel">Sesión</div><div class="sdate">Martes 6 de octubre</div></div>
+    <div class="bignum r" style="--d:1">01</div>
+  </div>
+  <div class="right">
+    <div class="eyebrow r" style="--d:1">Entender</div>
+    <h2 class="r" style="--d:2">Panorama general de la IA</h2>
+    <ul>
+      <li class="r" style="--d:3"><b>01</b>Entender qué es la IA sin tecnicismos</li>
+      <li class="r" style="--d:4"><b>02</b>El mapa del mundo IA actual</li>
+      <li class="r" style="--d:5"><b>03</b>Quién es Anthropic y por qué Claude</li>
+      <li class="r" style="--d:6"><b>04</b>Qué significa para un fondo que compra y mejora empresas</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 5 · MUNDO IA ================= -->
+<section class="slide" aria-label="El mundo de la IA hoy">
+  <div class="eyebrow r" style="--d:0">Contexto</div>
+  <h2 class="r" style="--d:1">El mundo de la IA <em class="s">hoy</em></h2>
+  <div class="split">
+    <div class="stack">
+      <div class="it r" style="--d:2"><p>ChatGPT de OpenAI <span>es el nombre más conocido.</span></p></div>
+      <div class="it r" style="--d:3"><p>Claude de Anthropic, Gemini de Google <span>y otros.</span></p></div>
+      <div class="it r" style="--d:4"><p><span>Cada uno tiene su</span> carácter y sus fortalezas.</p></div>
+      <div class="it r" style="--d:5"><p><span>El de Claude encaja con el</span> trabajo sobre datos y documentos.</p></div>
+    </div>
+    <div class="orbit r" style="--d:3" aria-hidden="true">
+      <span class="o" style="width:640px;height:640px"></span>
+      <span class="o" style="width:450px;height:450px"></span>
+      <span class="o" style="width:260px;height:260px;border-color:rgba(217,119,87,.35)"></span>
+      <span class="chip claude" style="left:50%;top:50%">Claude<small>Anthropic</small></span>
+      <span class="chip" style="left:50%;top:5%">ChatGPT<small>OpenAI</small></span>
+      <span class="chip" style="left:90%;top:70%">Gemini<small>Google</small></span>
+      <span class="chip" style="left:13%;top:72%">Otros<small>modelos</small></span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6 · MODELO DE LENGUAJE ================= -->
+<section class="slide light" aria-label="Qué es un modelo de lenguaje">
+  <div class="grid-dots"></div>
+  <div class="eyebrow r" style="--d:0">Sin tecnicismos</div>
+  <h2 class="r" style="--d:1">Qué es un modelo de lenguaje</h2>
+  <p class="lead r" style="--d:2;margin-top:26px;max-width:1500px">Un sistema entrenado con enormes cantidades de texto que <b>predice y genera lenguaje</b> de forma coherente.</p>
+  <div class="predict r" style="--d:3">
+    <div>
+      <div class="cap">Así “piensa”: predice la palabra siguiente</div>
+      <div class="sent">El fondo decidió<br>invertir en la<span class="blank"></span></div>
+    </div>
+    <div class="bars">
+      <div class="bar"><span>empresa</span><span class="t"><i style="--w:72%"></i></span><span class="v">72%</span></div>
+      <div class="bar"><span>compañía</span><span class="t"><i style="--w:18%"></i></span><span class="v">18%</span></div>
+      <div class="bar"><span>región</span><span class="t"><i style="--w:7%"></i></span><span class="v">7%</span></div>
+    </div>
+  </div>
+  <div class="two">
+    <div class="c r" style="--d:4"><h3>Qué hace bien y dónde se equivoca</h3><p>Redacta, resume y analiza muy bien; puede fallar en datos que no tiene.</p></div>
+    <div class="c r" style="--d:5"><h3>Por qué a veces “alucina” y cómo cuidarnos</h3><p>Genera lo más probable, no lo verificado: siempre revisar fuentes y cifras.</p></div>
+  </div>
+</section>
+
+<!-- ================= 7 · ANTHROPIC ================= -->
+<section class="slide" aria-label="Quién es Anthropic">
+  <div class="eyebrow r" style="--d:0">El origen</div>
+  <h2 class="r" style="--d:1">Quién es Anthropic</h2>
+  <div class="fact">
+    <div class="r" style="--d:2">
+      <div class="year">2021</div>
+      <div class="year-cap">Año de fundación de Anthropic</div>
+    </div>
+    <div class="vlist">
+      <div class="row r" style="--d:3"><b>01</b><p>Fundada en 2021 por un grupo que venía de OpenAI, liderado por Dario Amodei.</p></div>
+      <div class="row r" style="--d:4"><b>02</b><p>Buscaban un enfoque más centrado en seguridad.</p></div>
+      <div class="row r" style="--d:5"><b>03</b><p>Entrenar modelos grandes de forma cuidadosa y confiable.</p></div>
+      <div class="row hl r" style="--d:6"><b>04</b><p>Ese origen explica la fortaleza de Claude donde la precisión importa.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 8 · POR QUÉ CLAUDE ================= -->
+<section class="slide mid" aria-label="Por qué Claude para IBF">
+  <div class="grid-dots"></div>
+  <div class="eyebrow r" style="--d:0">Por qué Claude para IBF</div>
+  <div class="why">
+    <div class="claim r" style="--d:1">Una IA en la que se puede <em>confiar</em> con la información.</div>
+    <div class="lines">
+      <div class="ln r" style="--d:2">
+        <svg viewBox="0 0 56 56" fill="none" stroke="#D97757" stroke-width="3" stroke-linecap="round"><rect x="8" y="10" width="40" height="36" rx="5"/><path d="M8 22h40M8 34h40M22 10v36"/></svg>
+        <p>Fuerte con datos estructurados y documentos</p></div>
+      <div class="ln r" style="--d:3">
+        <svg viewBox="0 0 56 56" fill="none" stroke="#D97757" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M28 6l18 7v13c0 12-8 20-18 24C18 46 10 38 10 26V13z"/><path d="M20 28l6 6 11-12"/></svg>
+        <p>Confiable donde la precisión importa</p></div>
+      <div class="ln r" style="--d:4">
+        <svg viewBox="0 0 56 56" fill="none" stroke="#D97757" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M28 8v40M14 48h28M10 18h36M10 18l-6 14h12zM46 18l-6 14h12z"/></svg>
+        <p>Ideal para análisis financiero y legal</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 9 · CASOS POR FUNCIÓN ================= -->
+<section class="slide light" aria-label="Casos de uso por función">
+  <div class="eyebrow r" style="--d:0">Aplicado al portafolio</div>
+  <h2 class="r" style="--d:1">Casos de uso por función</h2>
+  <div class="cards4">
+    <div class="card r" style="--d:2">
+      <div class="ic"><svg viewBox="0 0 44 44" fill="none" stroke="#C4613F" stroke-width="3" stroke-linecap="round"><path d="M8 38V24M18 38V14M28 38V20M38 38V6"/></svg></div>
+      <h3>Finanzas</h3><p>Due diligence y normalización de balances.</p></div>
+    <div class="card r" style="--d:3">
+      <div class="ic"><svg viewBox="0 0 44 44" fill="none" stroke="#C4613F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="22" r="5"/><circle cx="34" cy="10" r="5"/><circle cx="34" cy="34" r="5"/><path d="M15 20l14-8M15 24l14 8"/></svg></div>
+      <h3>Operaciones</h3><p>Resúmenes y análisis de procesos.</p></div>
+    <div class="card r" style="--d:4">
+      <div class="ic"><svg viewBox="0 0 44 44" fill="none" stroke="#C4613F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 34l11-11 7 7 14-16"/><path d="M28 14h10v10"/></svg></div>
+      <h3>Ventas</h3><p>Propuestas y seguimiento comercial.</p></div>
+    <div class="card r" style="--d:5">
+      <div class="ic"><svg viewBox="0 0 44 44" fill="none" stroke="#C4613F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 10h28a3 3 0 0 1 3 3v15a3 3 0 0 1-3 3H20l-8 7v-7H8a3 3 0 0 1-3-3V13a3 3 0 0 1 3-3z"/><path d="M14 19h16M14 24h10"/></svg></div>
+      <h3>Atención al cliente</h3><p>Respuestas y soporte.</p></div>
+  </div>
+</section>
+
+<!-- ================= 10 · SESIÓN 2 ================= -->
+<section class="slide opener" data-nofoot aria-label="Sesión 2">
+  <div class="left">
+    <span class="ring"></span><span class="ring b"></span>
+    <div class="r" style="--d:0"><div class="slabel">Sesión</div><div class="sdate">Miércoles 7 de octubre</div></div>
+    <div class="bignum r" style="--d:1">02</div>
+  </div>
+  <div class="right">
+    <div class="eyebrow r" style="--d:1">Usar</div>
+    <h2 class="r" style="--d:2">Manos a la obra</h2>
+    <ul>
+      <li class="r" style="--d:3"><b>01</b>Empezar conversando: preguntas, redacción y análisis</li>
+      <li class="r" style="--d:4"><b>02</b>Subir un escalón: operar con el computador</li>
+      <li class="r" style="--d:5"><b>03</b>Conocer Cowork de Claude</li>
+      <li class="r" style="--d:6"><b>04</b>Invitados especiales de legal y finanzas</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 11 · LEGAL ================= -->
+<section class="slide" aria-label="Claude for Legal">
+  <div class="guest">
+    <div class="gcard r" style="--d:0">
+      <span class="arcdeco"></span><span class="arcdeco b"></span>
+      <div class="mono">IV</div>
+      <div class="with">Invitado especial</div>
+      <div class="gname">Ignacio Vargas</div>
+      <div class="grole">Abogado</div>
+    </div>
+    <div class="gright">
+      <div class="eyebrow r" style="--d:1">Sesión 2 · Caso legal</div>
+      <h2 class="r" style="--d:2">Claude for <em class="s">Legal</em></h2>
+      <ol class="steps">
+        <li class="r" style="--d:3">Revisión de un contrato de compraventa de acciones</li>
+        <li class="r" style="--d:4"><span>Detección de cláusulas de riesgo ordenadas por gravedad<span class="sev"><i></i><i></i><i></i></span></span></li>
+        <li class="r" style="--d:5">Conectar lo legal con el valor de la empresa</li>
+        <li class="r" style="--d:6">Redacción de la propuesta de negociación</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 12 · FINANZAS ================= -->
+<section class="slide light" aria-label="Claude for Finance">
+  <div class="guest rev">
+    <div class="gright">
+      <div class="eyebrow r" style="--d:1">Sesión 2 · Caso financiero</div>
+      <h2 class="r" style="--d:2">Claude for <em class="s">Finance</em></h2>
+      <ol class="steps">
+        <li class="r" style="--d:3">Due diligence sobre estados financieros</li>
+        <li class="r" style="--d:4">Detección de tendencias y señales de alerta</li>
+        <li class="r" style="--d:5">Normalización de balances del portafolio</li>
+        <li class="r" style="--d:6">Resumen ejecutivo para inversores</li>
+      </ol>
+    </div>
+    <div class="gcard r" style="--d:0">
+      <span class="arcdeco"></span><span class="arcdeco b"></span>
+      <div class="mono">JB</div>
+      <div class="with">Invitada especial</div>
+      <div class="gname">Juliana Bararini</div>
+      <div class="grole">Contadora</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 13 · TAREA ================= -->
+<section class="slide mid" aria-label="Tarea para la semana">
+  <div class="grid-dots"></div>
+  <div class="task">
+    <div>
+      <div class="eyebrow r" style="--d:0">Entre sesiones</div>
+      <div class="big r" style="--d:1">Tarea para la <em class="s">semana</em></div>
+      <p class="note r" style="--d:2">Lo que traigan es el material de trabajo de la Sesión 3.</p>
+    </div>
+    <div class="checklist r" style="--d:2">
+      <div class="check" style="--d:1"><span class="box"><svg viewBox="0 0 30 30"><path d="M6 15l6 6 12-13"/></svg></span><p>Usar Claude en algo del día a día</p></div>
+      <div class="check" style="--d:2"><span class="box"><svg viewBox="0 0 30 30"><path d="M6 15l6 6 12-13"/></svg></span><p>Traer el resultado a la próxima sesión</p></div>
+      <div class="check" style="--d:3"><span class="box"><svg viewBox="0 0 30 30"><path d="M6 15l6 6 12-13"/></svg></span><p>Anotar dudas y hallazgos</p></div>
+      <div class="check" style="--d:4"><span class="box"><svg viewBox="0 0 30 30"><path d="M6 15l6 6 12-13"/></svg></span><p>Compartir qué funcionó y qué no</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 14 · SESIÓN 3 ================= -->
+<section class="slide opener" data-nofoot aria-label="Sesión 3">
+  <div class="left">
+    <span class="ring"></span><span class="ring b"></span>
+    <div class="r" style="--d:0"><div class="slabel">Sesión</div><div class="sdate">Martes 13 de octubre</div></div>
+    <div class="bignum r" style="--d:1">03</div>
+  </div>
+  <div class="right">
+    <div class="eyebrow r" style="--d:1">Construir</div>
+    <h2 class="r" style="--d:2">Casos avanzados y agentes</h2>
+    <ul>
+      <li class="r" style="--d:3"><b>01</b>Revisar qué hicieron con la tarea</li>
+      <li class="r" style="--d:4"><b>02</b>Resolver dudas reales de uso</li>
+      <li class="r" style="--d:5"><b>03</b>Casos de uso avanzados</li>
+      <li class="r" style="--d:6"><b>04</b>La idea de agentes de IA que trabajan por nosotros</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 15 · SESIÓN 4 ================= -->
+<section class="slide opener" data-nofoot aria-label="Sesión 4">
+  <div class="left">
+    <span class="ring"></span><span class="ring b"></span>
+    <div class="r" style="--d:0"><div class="slabel">Sesión</div><div class="sdate">Miércoles 14 de octubre</div></div>
+    <div class="bignum r" style="--d:1">04</div>
+  </div>
+  <div class="right">
+    <div class="eyebrow r" style="--d:1">Construir</div>
+    <h2 class="r" style="--d:2">Claude Code y adopción</h2>
+    <ul>
+      <li class="r" style="--d:3"><b>01</b>Qué es Claude Code y para qué sirve</li>
+      <li class="r" style="--d:4"><b>02</b>Visión a futuro de la IA en los negocios</li>
+      <li class="r" style="--d:5"><b>03</b>Plan concreto de adopción en el portafolio</li>
+      <li class="r" style="--d:6"><b>04</b>Salir con algo accionable para cada empresa</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 16 · CITA ================= -->
+<section class="slide quote" aria-label="El criterio humano sigue al mando">
+  <div class="eyebrow r" style="--d:0">El criterio humano sigue al mando</div>
+  <div class="qmark r" style="--d:1" aria-hidden="true">“</div>
+  <blockquote class="r" style="--d:2">La decisión final siempre es <em>humana.</em></blockquote>
+  <div class="qrow">
+    <p class="r" style="--d:3">La IA acelera y no deja pasar detalles.</p>
+    <p class="r" style="--d:4">No reemplaza el criterio profesional.</p>
+    <p class="r" style="--d:5">Confianza en vez de resistencia.</p>
+  </div>
+</section>
+
+<!-- ================= 17 · CIERRE ================= -->
+<section class="slide" aria-label="Próximos pasos y cierre">
+  <svg class="geo" style="right:-380px;top:-460px" width="900" height="900" viewBox="0 0 900 900" fill="none" aria-hidden="true">
+    <circle cx="450" cy="450" r="440" stroke="rgba(247,245,242,.06)" stroke-width="2"/>
+    <circle cx="450" cy="450" r="320" stroke="rgba(247,245,242,.08)" stroke-width="2"/>
+    <path d="M450 10 A440 440 0 0 1 890 450" stroke="#D97757" stroke-width="5" stroke-linecap="round"/>
+  </svg>
+  <div class="close">
+    <div class="thanks">
+      <div class="eyebrow r" style="--d:0">Cierre</div>
+      <h1 class="r" style="--d:1;margin-top:40px">Gracias<span>· Preguntas</span></h1>
+      <div class="contact r" style="--d:2"><b>Diego Maye</b><span>·</span><span>Code4Business</span></div>
+    </div>
+    <div class="next r" style="--d:3">
+      <div class="eyebrow">Próximos pasos</div>
+      <h3>Con Code4Business</h3>
+      <ul>
+        <li><svg viewBox="0 0 34 34" fill="none" stroke="#D97757" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 17h22M20 9l8 8-8 8"/></svg>Acompañamiento en la adopción</li>
+        <li><svg viewBox="0 0 34 34" fill="none" stroke="#D97757" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 17h22M20 9l8 8-8 8"/></svg>Configuración de Claude Team</li>
+        <li><svg viewBox="0 0 34 34" fill="none" stroke="#D97757" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 17h22M20 9l8 8-8 8"/></svg>Casos a medida para el portafolio</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<!-- ================= UI ================= -->
+<div id="progress" class="ui" aria-hidden="true"><i></i></div>
+<nav id="controls" class="ui" aria-label="Navegación de diapositivas">
+  <button id="prev" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+  <span id="counter" aria-live="polite"><b>1</b> / 17</span>
+  <button id="next" aria-label="Siguiente"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+  <button id="fs" aria-label="Pantalla completa (F)"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+</nav>
+<div id="hint" class="ui">← → o espacio para navegar · F pantalla completa</div>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage');
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var total=slides.length, cur=0;
+  var bar=document.querySelector('#progress i'), counter=document.getElementById('counter');
+  var prevB=document.getElementById('prev'), nextB=document.getElementById('next'), fsB=document.getElementById('fs');
+  function pad(n){return (n<10?'0':'')+n}
+
+  // Pie de página en cada slide de contenido
+  slides.forEach(function(s,i){
+    if(s.hasAttribute('data-nofoot')) return;
+    var f=document.createElement('footer'); f.className='foot';
+    f.innerHTML='<span class="brandmini"><i class="dot"></i>Code4Business · IBF Negocios</span><span class="pg">'+pad(i+1)+' / '+total+'</span>';
+    s.appendChild(f);
+  });
+
+  function fit(){
+    var s=Math.min(window.innerWidth/1920, window.innerHeight/1080);
+    stage.style.transform='translate(-50%,-50%) scale('+s+')';
+  }
+  function go(n){
+    n=Math.max(0,Math.min(total-1,n)); cur=n;
+    slides.forEach(function(s,i){
+      s.classList.toggle('active',i===n); s.classList.toggle('past',i<n);
+      s.setAttribute('aria-hidden',i===n?'false':'true');
+    });
+    bar.style.width=((n+1)/total*100)+'%';
+    counter.innerHTML='<b>'+(n+1)+'</b> / '+total;
+    prevB.disabled=n===0; nextB.disabled=n===total-1;
+    if(history.replaceState) history.replaceState(null,'','#'+(n+1));
+  }
+  function next(){go(cur+1)} function prev(){go(cur-1)}
+  function toggleFS(){
+    var d=document, el=d.documentElement;
+    if(d.fullscreenElement||d.webkitFullscreenElement){(d.exitFullscreen||d.webkitExitFullscreen).call(d)}
+    else{(el.requestFullscreen||el.webkitRequestFullscreen).call(el)}
+  }
+
+  document.addEventListener('keydown',function(e){
+    if(e.altKey||e.ctrlKey||e.metaKey) return;
+    switch(e.key){
+      case 'ArrowRight': case 'ArrowDown': case 'PageDown': case ' ': case 'Spacebar': case 'Enter':
+        e.preventDefault(); next(); break;
+      case 'ArrowLeft': case 'ArrowUp': case 'PageUp': case 'Backspace':
+        e.preventDefault(); prev(); break;
+      case 'Home': e.preventDefault(); go(0); break;
+      case 'End': e.preventDefault(); go(total-1); break;
+      case 'f': case 'F': e.preventDefault(); toggleFS(); break;
+    }
+    hideHint();
+  });
+  prevB.addEventListener('click',function(){prev();this.blur()});
+  nextB.addEventListener('click',function(){next();this.blur()});
+  fsB.addEventListener('click',function(){toggleFS();this.blur()});
+
+  // Swipe en móvil
+  var sx=0,sy=0,st=0;
+  document.addEventListener('touchstart',function(e){var t=e.changedTouches[0];sx=t.clientX;sy=t.clientY;st=Date.now()},{passive:true});
+  document.addEventListener('touchend',function(e){
+    var t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;
+    if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.2&&Date.now()-st<800){dx<0?next():prev();hideHint()}
+  },{passive:true});
+
+  // Pista inicial y auto-ocultado de controles
+  var hint=document.getElementById('hint');
+  function hideHint(){hint.classList.add('hide')}
+  setTimeout(hideHint,4500);
+  var idleT;
+  function wake(){document.body.classList.remove('idle');clearTimeout(idleT);idleT=setTimeout(function(){document.body.classList.add('idle')},2800)}
+  ['mousemove','touchstart','keydown'].forEach(function(ev){document.addEventListener(ev,wake,{passive:true})});
+  wake();
+
+  window.addEventListener('resize',fit);
+  window.addEventListener('hashchange',function(){var h=parseInt(location.hash.slice(1),10);if(h&&h-1!==cur)go(h-1)});
+  fit();
+  var h=parseInt(location.hash.slice(1),10);
+  go(h?h-1:0);
+})();
+</script>
+</body>
+</html>
