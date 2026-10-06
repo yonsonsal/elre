@@ -499,6 +499,14 @@ canvas.pcv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;
 .agr.brk .tb i{background:rgba(247,245,242,.25)}
 @media print{.agr .tb i{width:var(--w)!important}}
 
+/* Bloque 01 condensado */
+.nn4 .tip{grid-template-columns:170px 1fr;padding:20px 0}
+.nn4 .tip p{font-size:27px}
+.relu{display:inline-block;width:90px;height:45px;vertical-align:middle;margin-left:10px;color:var(--fg)}
+.mini{display:grid;grid-template-columns:repeat(3,auto);gap:34px;margin-top:34px;padding-top:24px;border-top:1px solid var(--line)}
+.mini b{display:block;font-size:40px;font-weight:800;letter-spacing:-.03em;color:var(--coral)}
+.mini span{display:block;font-size:22px;color:var(--muted);margin-top:4px}
+
 /* Speaker notes (hidden in slides) */
 aside.notes{display:none}
 
@@ -634,14 +642,14 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
   <div class="eyebrow r" style="--d:0">Hoy · 2 horas</div>
   <h2 class="r" style="--d:1">El recorrido de <em class="s">hoy</em></h2>
   <div class="agl">
-    <div class="agr r" style="--d:2"><span class="st">0:00</span><span class="nn">00</span><span class="tt">Bienvenida y presentación</span><span class="tb"><i style="--w:17%"></i></span><span class="mm">5 min</span></div>
-    <div class="agr r" style="--d:3"><span class="st">0:05</span><span class="nn">01</span><span class="tt">De las neuronas al chat</span><span class="tb"><i style="--w:100%"></i></span><span class="mm">30 min</span></div>
-    <div class="agr r" style="--d:4"><span class="st">0:35</span><span class="nn">02</span><span class="tt">Los laboratorios y sus modelos</span><span class="tb"><i style="--w:67%"></i></span><span class="mm">20 min</span></div>
-    <div class="agr brk r" style="--d:5"><span class="st">0:55</span><span class="nn">☕</span><span class="tt">Recreo</span><span class="tb"><i style="--w:33%"></i></span><span class="mm">10 min</span></div>
-    <div class="agr r" style="--d:6"><span class="st">1:05</span><span class="nn">03</span><span class="tt">Agentes: de responder a hacer</span><span class="tb"><i style="--w:50%"></i></span><span class="mm">15 min</span></div>
-    <div class="agr r" style="--d:7"><span class="st">1:20</span><span class="nn">04</span><span class="tt">Cómo está hecho un agente</span><span class="tb"><i style="--w:67%"></i></span><span class="mm">20 min</span></div>
-    <div class="agr r" style="--d:8"><span class="st">1:40</span><span class="nn">05</span><span class="tt">Caso práctico: private equity</span><span class="tb"><i style="--w:50%"></i></span><span class="mm">15 min</span></div>
-    <div class="agr r" style="--d:9"><span class="st">1:55</span><span class="nn">✓</span><span class="tt">Cierre y tarea</span><span class="tb"><i style="--w:17%"></i></span><span class="mm">5 min</span></div>
+    <div class="agr r" style="--d:2"><span class="st">0:00</span><span class="nn">00</span><span class="tt">Bienvenida y presentación</span><span class="tb"><i style="--w:20%"></i></span><span class="mm">5 min</span></div>
+    <div class="agr r" style="--d:3"><span class="st">0:05</span><span class="nn">01</span><span class="tt">De los vectores y neuronas al chat</span><span class="tb"><i style="--w:60%"></i></span><span class="mm">15 min</span></div>
+    <div class="agr r" style="--d:4"><span class="st">0:20</span><span class="nn">02</span><span class="tt">Los laboratorios y sus modelos</span><span class="tb"><i style="--w:80%"></i></span><span class="mm">20 min</span></div>
+    <div class="agr brk r" style="--d:5"><span class="st">0:40</span><span class="nn">☕</span><span class="tt">Coffee break</span><span class="tb"><i style="--w:40%"></i></span><span class="mm">10 min</span></div>
+    <div class="agr r" style="--d:6"><span class="st">0:50</span><span class="nn">03</span><span class="tt">Agentes varios (Claude entre ellos)</span><span class="tb"><i style="--w:60%"></i></span><span class="mm">15 min</span></div>
+    <div class="agr r" style="--d:7"><span class="st">1:05</span><span class="nn">04</span><span class="tt">Cómo está hecho un agente</span><span class="tb"><i style="--w:100%"></i></span><span class="mm">25 min</span></div>
+    <div class="agr r" style="--d:8"><span class="st">1:30</span><span class="nn">05</span><span class="tt">Caso práctico: private equity</span><span class="tb"><i style="--w:80%"></i></span><span class="mm">20 min</span></div>
+    <div class="agr r" style="--d:9"><span class="st">1:50</span><span class="nn">✓</span><span class="tt">Cierre y tarea</span><span class="tb"><i style="--w:40%"></i></span><span class="mm">10 min</span></div>
   </div>
   <aside class="notes" data-t="2 min">
     <ul><li>Contar el arco: primero entendemos de dónde sale esto, después quiénes lo hacen, después qué puede hacer hoy y cómo está armado.</li>
@@ -654,135 +662,13 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
      ===================================================== -->
 <section class="slide divider" data-nofoot data-pcv aria-label="Bloque 1">
   <div class="bnum">01</div>
-  <div class="kick r" style="--d:0"><span class="tag"><i></i>Bloque 01 · 30 min</span></div>
-  <h2 class="r" style="--d:1">De las neuronas <em class="s">al chat</em></h2>
-  <div class="what r" style="--d:2"><span>Regresiones encadenadas</span><span>Los protagonistas</span><span>Tokens y vectores</span><span>Predecir la siguiente palabra</span><span>El “eureka” del chat</span><span>Mezcla de expertos</span></div>
+  <div class="kick r" style="--d:0"><span class="tag"><i></i>Bloque 01 · 15 min</span></div>
+  <h2 class="r" style="--d:1">De los vectores y neuronas <em class="s">al chat</em></h2>
+  <div class="what r" style="--d:2"><span>Los protagonistas</span><span>La red neuronal</span><span>Tokens y vectores</span><span>Predecir la siguiente palabra</span><span>El “eureka” del chat</span><span>Mezcla de expertos</span></div>
   <aside class="notes" data-t="—"><ul><li>Mensaje del bloque: la IA de hoy no es magia, es estadística a una escala enorme.</li></ul></aside>
 </section>
 
-<section class="slide light" data-block="01 · De las neuronas al chat" aria-label="Regresión lineal">
-  <div class="eyebrow r" style="--d:0">El ladrillo básico</div>
-  <h2 class="r" style="--d:1">Todo empieza con una <em class="s">regresión lineal</em></h2>
-  <div class="grid2" style="grid-template-columns:1fr 760px;gap:70px">
-    <div>
-      <p class="lead r" style="--d:2;margin-top:0">Una función que aprende de ejemplos: mira datos del pasado y ajusta sus números para <b>equivocarse lo menos posible</b>.</p>
-      <div class="formula r" style="--d:3">Valor ≈ <i>múltiplo</i> × EBITDA + <i>ajuste</i>
-        <small>En general: y = <span class="acc">w</span> · x + <span class="acc">b</span> — los “pesos” w y b son lo que se aprende.</small></div>
-    </div>
-    <svg class="r" style="--d:2" viewBox="0 0 760 560" width="760" height="560" aria-label="Gráfico de dispersión con recta ajustada">
-      <line x1="70" y1="490" x2="730" y2="490" stroke="#0B1F3A" stroke-opacity=".3" stroke-width="2"/>
-      <line x1="70" y1="490" x2="70" y2="30" stroke="#0B1F3A" stroke-opacity=".3" stroke-width="2"/>
-      <text x="730" y="530" text-anchor="end" font-size="22" fill="#4B5B72">EBITDA</text>
-      <text x="40" y="40" font-size="22" fill="#4B5B72" transform="rotate(-90 40 40)" text-anchor="end">Valor de la empresa</text>
-      <g fill="#0B1F3A" fill-opacity=".75">
-        <circle class="pop" style="--d:1" cx="120" cy="440" r="9"/><circle class="pop" style="--d:2" cx="170" cy="400" r="9"/>
-        <circle class="pop" style="--d:3" cx="210" cy="420" r="9"/><circle class="pop" style="--d:4" cx="260" cy="360" r="9"/>
-        <circle class="pop" style="--d:5" cx="300" cy="330" r="9"/><circle class="pop" style="--d:6" cx="350" cy="345" r="9"/>
-        <circle class="pop" style="--d:7" cx="400" cy="280" r="9"/><circle class="pop" style="--d:8" cx="450" cy="250" r="9"/>
-        <circle class="pop" style="--d:9" cx="500" cy="270" r="9"/><circle class="pop" style="--d:10" cx="550" cy="200" r="9"/>
-        <circle class="pop" style="--d:11" cx="600" cy="170" r="9"/><circle class="pop" style="--d:12" cx="660" cy="120" r="9"/>
-      </g>
-      <g class="draw"><line x1="90" y1="465" x2="710" y2="95" stroke="#C4613F" stroke-width="6" stroke-linecap="round" style="--len:740"/></g>
-    </svg>
-  </div>
-  <aside class="notes" data-t="3 min">
-    <ul><li>Ejemplo cercano para un fondo: el múltiplo de EBITDA es una regresión lineal mental.</li>
-    <li>“Aprender” = encontrar el múltiplo y el ajuste que mejor explican los ejemplos.</li>
-    <li>Guardar la idea de “pesos”: los modelos de IA tienen miles de millones de estos números.</li></ul>
-  </aside>
-</section>
-
-<section class="slide" data-block="01 · De las neuronas al chat" aria-label="La neurona">
-  <div class="eyebrow r" style="--d:0">Una neurona artificial</div>
-  <h2 class="r" style="--d:1">Una regresión con una <em class="s">curva</em> al final</h2>
-  <div class="grid2" style="grid-template-columns:1.25fr 1fr">
-    <svg class="r" style="--d:2" viewBox="0 0 980 520" width="980" height="520" aria-label="Diagrama de neurona">
-      <g font-size="26" fill="#F7F5F2" font-weight="600">
-        <g class="pop" style="--d:1"><circle cx="80" cy="110" r="46" fill="#102848" stroke="rgba(247,245,242,.3)" stroke-width="2"/><text x="80" y="119" text-anchor="middle">x₁</text></g>
-        <g class="pop" style="--d:2"><circle cx="80" cy="260" r="46" fill="#102848" stroke="rgba(247,245,242,.3)" stroke-width="2"/><text x="80" y="269" text-anchor="middle">x₂</text></g>
-        <g class="pop" style="--d:3"><circle cx="80" cy="410" r="46" fill="#102848" stroke="rgba(247,245,242,.3)" stroke-width="2"/><text x="80" y="419" text-anchor="middle">x₃</text></g>
-      </g>
-      <g class="draw" stroke="#D97757" stroke-width="3" fill="none">
-        <path d="M126 110 L414 240" style="--len:320"/><path d="M126 260 L410 260" style="--len:290"/><path d="M126 410 L414 280" style="--len:320"/>
-      </g>
-      <g font-size="22" fill="#E8957A" font-style="italic" font-family="Source Serif 4">
-        <text x="250" y="150">w₁</text><text x="250" y="248">w₂</text><text x="250" y="380">w₃</text>
-      </g>
-      <g class="pop" style="--d:5"><circle cx="480" cy="260" r="72" fill="#1E3A5F" stroke="#D97757" stroke-width="3"/><text x="480" y="275" text-anchor="middle" font-size="48" fill="#F7F5F2">Σ</text></g>
-      <text x="480" y="372" text-anchor="middle" font-size="20" fill="rgba(247,245,242,.6)">suma ponderada</text>
-      <g class="draw" stroke="#D97757" stroke-width="3" fill="none"><path d="M552 260 L620 260" style="--len:70"/></g>
-      <g class="pop" style="--d:7"><rect x="620" y="190" width="170" height="140" rx="20" fill="#1E3A5F" stroke="rgba(247,245,242,.3)" stroke-width="2"/>
-        <path d="M640 300 C690 300 690 300 705 260 C720 220 720 220 770 220" stroke="#F7F5F2" stroke-width="4" fill="none"/></g>
-      <text x="705" y="372" text-anchor="middle" font-size="20" fill="rgba(247,245,242,.6)">activación</text>
-      <g class="draw" stroke="#D97757" stroke-width="3" fill="none"><path d="M790 260 L880 260" style="--len:90"/></g>
-      <g class="pop" style="--d:9"><circle cx="920" cy="260" r="40" fill="#D97757"/><text x="920" y="270" text-anchor="middle" font-size="26" fill="#0B1F3A" font-weight="700">y</text></g>
-    </svg>
-    <div class="tips">
-      <div class="tip r" style="--d:3"><b class="k">ENTRA</b><p>Varios datos de entrada (x₁, x₂, x₃).</p></div>
-      <div class="tip r" style="--d:4"><b class="k">PESA</b><p>Cada uno se multiplica por su peso y se suma: <b>una regresión lineal</b>.</p></div>
-      <div class="tip r" style="--d:5"><b class="k">DECIDE</b><p>Una curva decide cuánto “se activa”. Eso le permite aprender relaciones que no son líneas rectas.</p></div>
-    </div>
-  </div>
-  <aside class="notes" data-t="3 min">
-    <ul><li>Idea de 1958 (el perceptrón de Frank Rosenblatt). No es nueva: lo nuevo es la escala.</li>
-    <li>La “activación” es lo que permite que, al encadenar muchas, la red aprenda cosas no lineales.</li></ul>
-  </aside>
-</section>
-
-<section class="slide" data-block="01 · De las neuronas al chat" aria-label="Red neuronal">
-  <div class="eyebrow r" style="--d:0">Una red neuronal</div>
-  <h2 class="r" style="--d:1">Funciones <em class="s">encadenadas</em>: la salida de una es la entrada de la otra</h2>
-  <div class="grid2" style="grid-template-columns:1.35fr 1fr;margin-top:20px">
-    <svg class="r" style="--d:2" id="net" viewBox="0 0 1000 560" width="1000" height="560" aria-label="Diagrama de red neuronal de cuatro capas"></svg>
-    <div>
-      <div class="stats" style="grid-template-columns:1fr;gap:34px;margin:0">
-        <div class="stat r" style="--d:3;padding:0;border:0"><div class="big" style="font-size:96px">175.000<small> M</small></div><div class="lbl">de pesos (“parámetros”) tenía GPT‑3 en 2020</div></div>
-        <div class="stat r" style="--d:4;padding:0;border:0"><div class="big" style="font-size:96px;color:var(--coral)">Billones</div><div class="lbl">de cálculos por cada palabra que genera un modelo actual</div></div>
-      </div>
-    </div>
-  </div>
-  <aside class="notes" data-t="3 min">
-    <ul><li>Capas: cada columna de círculos es una capa de neuronas; cada línea es un peso.</li>
-    <li>Un modelo moderno tiene cientos de miles de millones de pesos. Nadie los programa a mano: se aprenden.</li>
-    <li>Ese es el sentido de “red”: muchas regresiones conectadas.</li></ul>
-  </aside>
-</section>
-
-<section class="slide light" data-block="01 · De las neuronas al chat" aria-label="Cómo aprende">
-  <div class="eyebrow r" style="--d:0">Entrenar</div>
-  <h2 class="r" style="--d:1">Aprender = medir el error y <em class="s">ajustar</em></h2>
-  <div class="flow">
-    <div class="fl r" style="--d:2"><div class="k">Paso 1</div><h3>Predecir</h3><p>La red da una respuesta con los pesos que tiene.</p></div>
-    <div class="fl r" style="--d:3"><div class="k">Paso 2</div><h3>Comparar</h3><p>Se compara con la respuesta real del ejemplo.</p></div>
-    <div class="fl r" style="--d:4"><div class="k">Paso 3</div><h3>Medir el error</h3><p>¿Cuánto se equivocó y en qué dirección?</p></div>
-    <div class="fl r" style="--d:5"><div class="k">Paso 4</div><h3>Ajustar los pesos</h3><p>Cada peso se mueve un poquito para equivocarse menos.</p></div>
-  </div>
-  <p class="r" style="--d:6;font-size:30px;color:var(--fg)">Repetido <b>miles de millones de veces</b> sobre enormes cantidades de texto. A esto se le llama entrenamiento <span class="small" style="color:var(--muted)">(técnicamente: <i>backpropagation</i> y descenso por gradiente).</span></p>
-  <aside class="notes" data-t="2 min">
-    <ul><li>“Midiendo las medidas”: el modelo nunca sabe la respuesta; solo sabe cuánto se equivocó y corrige.</li>
-    <li>Analogía: un analista junior que recibe correcciones en cada informe, millones de veces.</li></ul>
-  </aside>
-</section>
-
-<section class="slide" data-block="01 · De las neuronas al chat" aria-label="La escalera de la predicción">
-  <div class="eyebrow r" style="--d:0">La escalera de la predicción</div>
-  <h2 class="r" style="--d:1">Primero la letra, después la palabra… <em class="s">después textos enteros</em></h2>
-  <div class="ladder">
-    <div class="rung r" style="--d:2"><div class="y">1948</div><h3>La letra</h3><p>Claude Shannon predice letras con estadística.</p><div class="ex">Montevide<u>o</u></div></div>
-    <div class="rung r" style="--d:3"><div class="y">2003</div><h3>La palabra</h3><p>Primeros modelos de lenguaje con redes neuronales.</p><div class="ex">El fondo compró la <u>empresa</u></div></div>
-    <div class="rung r" style="--d:4"><div class="y">2017</div><h3>La oración</h3><p>El “Transformer” de Google: mira todo el contexto a la vez.</p><div class="ex">Traducí: “We closed the deal” → <u>Cerramos el trato</u></div></div>
-    <div class="rung r" style="--d:5"><div class="y">2019 →</div><h3>Textos enteros</h3><p>GPT‑2 y GPT‑3 escriben párrafos coherentes.</p><div class="ex">Escribí un memo de inversión sobre… <u>[2 páginas]</u></div></div>
-  </div>
-  <div class="ground"></div>
-  <aside class="notes" data-t="4 min">
-    <ul><li>Shannon (el padre de la teoría de la información) ya en 1948 generaba texto prediciendo letras.</li>
-    <li>2003: Yoshua Bengio usa una red neuronal para predecir la siguiente palabra.</li>
-    <li>2017: el paper “Attention Is All You Need” (Google) presenta el Transformer: la “T” de GPT.</li>
-    <li>2019–2020: GPT‑2 y GPT‑3 de OpenAI. Misma idea, mucho más grande.</li></ul>
-  </aside>
-</section>
-
-<section class="slide" data-block="01 · De las neuronas al chat" aria-label="Los protagonistas de la ciencia">
+<section class="slide" data-block="01 · Vectores y neuronas" aria-label="Los protagonistas de la ciencia">
   <div class="dots"></div>
   <div class="eyebrow r" style="--d:0">Los protagonistas</div>
   <h2 class="r" style="--d:1">Las personas detrás de <em class="s">la idea</em></h2>
@@ -797,42 +683,46 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
     <div class="person ant r" style="--d:9"><div class="av">AV</div><div><div class="yr">2017</div><h3>Vaswani y equipo</h3><p>Ocho autores de Google crean el Transformer.</p></div></div>
   </div>
   <p class="note-foot r" style="--d:10">Hinton, LeCun y Bengio recibieron juntos el Premio Turing 2018: los “padrinos” del aprendizaje profundo.</p>
-  <aside class="notes" data-t="3 min">
+  <aside class="notes" data-t="2 min">
     <ul><li>Contar como una historia de 70 años: casi todas las ideas existían; faltaban datos (internet) y cómputo (chips gráficos).</li>
     <li>2012 es el punto de quiebre: AlexNet (Krizhevsky, Sutskever, Hinton) gana el concurso de ImageNet con redes neuronales entrenadas en GPUs.</li>
     <li>Sutskever después cofunda OpenAI y en 2024 funda Safe Superintelligence (SSI).</li></ul>
   </aside>
 </section>
 
-<section class="slide" data-block="01 · De las neuronas al chat" aria-label="Tokens">
-  <div class="eyebrow r" style="--d:0">Cómo lee un modelo</div>
-  <h2 class="r" style="--d:1">No lee palabras: lee <em class="s">tokens</em></h2>
-  <div class="tkz">
-    <div class="src r" style="--d:2">“Code4Business analiza el EBITDA de IBF Negocios.”</div>
-    <div class="chips" id="chips"></div>
+<section class="slide" data-block="01 · Vectores y neuronas" aria-label="De la regresión a la red neuronal">
+  <div class="eyebrow r" style="--d:0">Cómo funciona por dentro</div>
+  <h2 class="r" style="--d:1">De la regresión a la <em class="s">red neuronal</em></h2>
+  <div class="grid2" style="grid-template-columns:1fr 760px;gap:60px;margin-top:10px">
+    <svg class="r" style="--d:2;width:100%;height:auto" id="net" viewBox="0 0 1000 560" aria-label="Red neuronal de cuatro capas con señales viajando"></svg>
+    <div class="tips nn4">
+      <div class="tip r" style="--d:3"><b class="k">REGRESIÓN</b><p>y = <span class="acc">w</span>·x + <span class="acc">b</span>: aprende “pesos” de ejemplos, como un múltiplo de EBITDA.</p></div>
+      <div class="tip r" style="--d:4"><b class="k">NEURONA</b><p>Suma ponderada + una activación. La más clásica es <b>ReLU</b>: max(0, x)
+        <svg class="relu" viewBox="0 0 120 60" aria-hidden="true"><line x1="4" y1="52" x2="116" y2="52" stroke="currentColor" stroke-opacity=".3" stroke-width="2"/><line x1="60" y1="4" x2="60" y2="56" stroke="currentColor" stroke-opacity=".3" stroke-width="2"/><path d="M6 52 L60 52 L112 8" fill="none" stroke="#D97757" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></p></div>
+      <div class="tip r" style="--d:5"><b class="k">RED</b><p>Capas de neuronas: la salida de una es la entrada de la siguiente.</p></div>
+      <div class="tip r" style="--d:6"><b class="k">ENTRENAR</b><p>Predecir, medir el error y ajustar los pesos. Miles de millones de veces.</p></div>
+    </div>
   </div>
-  <div class="tstats">
-    <div class="card r" style="--d:4"><h3>≈ ¾ <span class="acc">palabra</span></h3><p>mide en promedio un token en inglés; en español suelen hacer falta algunos más.</p></div>
-    <div class="card r" style="--d:5"><h3>1 millón</h3><p>de tokens puede leer Claude de una vez: unas 750.000 palabras.</p></div>
-    <div class="card r" style="--d:6"><h3>Se paga <span class="acc">por token</span></h3><p>Lo que entra (tus documentos) y lo que sale (la respuesta).</p></div>
-  </div>
-  <aside class="notes" data-t="3 min">
-    <ul><li>Un token es un pedazo de texto: a veces una palabra entera, a veces una sílaba o un signo.</li>
-    <li>El texto se corta en tokens y cada token recibe un número de identificación. El corte exacto depende de cada modelo: el del slide es ilustrativo.</li>
-    <li>Por qué importa: los límites (cuánto puede leer) y los precios se miden en tokens.</li></ul>
+  <p class="note-foot r" style="--d:7">GPT‑3 (2020) ya tenía 175.000 millones de pesos. Los modelos actuales, cientos de miles de millones o más.</p>
+  <aside class="notes" data-t="4 min">
+    <ul><li>Regresión: el múltiplo de EBITDA es una regresión lineal mental. “Aprender” = encontrar los pesos que mejor explican los ejemplos.</li>
+    <li>Neurona: regresión + activación. ReLU deja pasar los positivos y apaga los negativos; esa “curva” permite aprender cosas no lineales.</li>
+    <li>Red: dejar que corran los pulsos del diagrama: cada capa alimenta a la siguiente.</li>
+    <li>Entrenar: el modelo nunca “sabe” la respuesta; mide cuánto se equivocó y corrige (backpropagation).</li></ul>
   </aside>
 </section>
 
-<section class="slide light" data-block="01 · De las neuronas al chat" aria-label="Vectores">
-  <div class="eyebrow r" style="--d:0">El mapa del significado</div>
-  <h2 class="r" style="--d:1">Cada token se convierte en un <em class="s">vector</em></h2>
-  <div class="grid2" style="grid-template-columns:1fr 820px;gap:60px">
+<section class="slide light" data-block="01 · Vectores y neuronas" aria-label="Tokens y vectores">
+  <div class="eyebrow r" style="--d:0">Cómo lee un modelo</div>
+  <h2 class="r" style="--d:1">Texto → <em class="s">tokens</em> → <em class="s">vectores</em></h2>
+  <div class="tkz" style="margin-top:22px"><div class="chips" id="chips" style="margin-top:0;min-height:100px"></div></div>
+  <div class="grid2" style="grid-template-columns:1fr 600px;gap:60px;margin-top:0">
     <div class="vecL">
-      <p class="r" style="--d:2;font-size:32px;color:var(--fg)">Un vector es una lista de números que ubica el significado de cada token en un <b>mapa con miles de dimensiones</b>. Lo parecido queda cerca.</p>
-      <div class="vbox r" style="--d:3"><span class="w">EBITDA</span><span class="arr">→</span><span class="nums" id="vnums">[ <i>0.21</i>, <i>−0.83</i>, <i>0.47</i>, <i>0.05</i>, … ]</span></div>
-      <div class="king r" style="--d:4">Rey − Hombre + Mujer ≈ <em>Reina</em><small>Con vectores se puede “sumar y restar” significado (word2vec, Google, 2013).</small></div>
+      <p class="r" style="--d:3;font-size:29px;color:var(--fg)">Cada <b>token</b> (un pedazo de palabra) se convierte en un <b>vector</b>: una lista de miles de números que ubica su significado en un mapa. Lo parecido queda cerca.</p>
+      <div class="vbox r" style="--d:4"><span class="w">EBITDA</span><span class="arr">→</span><span class="nums" id="vnums">[ <i>0.21</i>, <i>−0.83</i>, <i>0.47</i>, <i>0.05</i>, … ]</span></div>
+      <div class="king r" style="--d:5;margin-top:30px">Rey − Hombre + Mujer ≈ <em>Reina</em><small>Con vectores se puede “sumar y restar” significado (word2vec, 2013).</small></div>
     </div>
-    <svg class="vmap" viewBox="0 0 820 640" aria-label="Mapa de palabras agrupadas por significado">
+    <svg class="vmap" style="width:600px;height:468px" viewBox="0 0 820 640" aria-label="Mapa de palabras agrupadas por significado">
       <g stroke="rgba(11,31,58,.07)" stroke-width="1">
         <line x1="0" y1="160" x2="820" y2="160"/><line x1="0" y1="320" x2="820" y2="320"/><line x1="0" y1="480" x2="820" y2="480"/>
         <line x1="205" y1="0" x2="205" y2="640"/><line x1="410" y1="0" x2="410" y2="640"/><line x1="615" y1="0" x2="615" y2="640"/>
@@ -854,27 +744,27 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
     </svg>
   </div>
   <aside class="notes" data-t="4 min">
-    <ul><li>Después de cortar en tokens, cada token se transforma en un vector: miles de números que representan su significado.</li>
-    <li>El dibujo es en 2 dimensiones; los modelos usan miles. Palabras que se usan en contextos parecidos quedan cerca (EBITDA cerca de margen).</li>
-    <li>Así el modelo “entiende” que contrato y SPA están relacionados aunque sean palabras distintas. También es la base de la búsqueda por significado en documentos.</li></ul>
+    <ul><li>Tokens: el texto se corta en pedazos y cada uno recibe un número. El corte del slide es ilustrativo; cambia según el modelo.</li>
+    <li>Un token mide en promedio ¾ de palabra en inglés (en español, algo menos). Claude lee hasta 1 millón de tokens: unas 750.000 palabras. Se paga por token.</li>
+    <li>Vectores: el mapa está en 2 dimensiones; los modelos usan miles. EBITDA queda cerca de margen; contrato cerca de SPA.</li></ul>
   </aside>
 </section>
 
-<section class="slide" data-block="01 · De las neuronas al chat" aria-label="Generar texto">
+<section class="slide" data-block="01 · Vectores y neuronas" aria-label="Generar texto">
   <div class="eyebrow r" style="--d:0">El truco</div>
   <h2 class="r" style="--d:1">Generar = predecir la siguiente palabra, <em class="s">una y otra vez</em></h2>
   <div class="gen">
     <div class="tokens" id="tokens" data-words="El|fondo|analiza|la|empresa|antes|de|invertir|y|propone|un|plan|de|mejora|."></div>
     <div class="loop-row r" style="--d:3"><span class="st">Texto hasta ahora</span><span class="ar">→</span><span class="st">Modelo</span><span class="ar">→</span><span class="st">Siguiente palabra</span><span class="ar">↺</span><span>se agrega al texto y se repite</span></div>
   </div>
-  <aside class="notes" data-t="2 min">
+  <aside class="notes" data-t="1 min">
     <ul><li>Dejar que la animación corra: cada palabra nueva vuelve a entrar como contexto.</li>
     <li>Técnicamente predice “tokens” (pedazos de palabras), pero la idea es la misma.</li></ul>
   </aside>
 </section>
 
-<section class="slide" data-block="01 · De las neuronas al chat" aria-label="Eureka del chat">
-  <div class="eyebrow r" style="--d:0">El descubrimiento</div>
+<section class="slide" data-block="01 · Vectores y neuronas" aria-label="Eureka del chat">
+  <div class="eyebrow r" style="--d:0">El descubrimiento · 2022</div>
   <div class="grid2" style="grid-template-columns:1.1fr 1fr;gap:80px">
     <div class="doc r" style="--d:1">
       <div class="q"><b>P:</b> ¿Cuál es la capital de Uruguay?</div>
@@ -887,32 +777,19 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
     <div>
       <div class="eureka r" style="--d:2">¡Eureka!</div>
       <p class="lead r" style="--d:3">Si el texto tiene forma de <b>pregunta → respuesta</b>, el modelo simplemente “continúa”… y responde.</p>
-      <p class="r" style="--d:4;margin-top:26px">Se lo afinó con muchísimos ejemplos de conversaciones y con personas que califican sus respuestas. Así nació el <b>chat</b>.</p>
+      <p class="r" style="--d:4;margin-top:22px">Se lo afinó con muchísimos ejemplos de conversaciones y con personas que califican sus respuestas. Así nació el <b>chat</b>.</p>
+      <div class="mini r" style="--d:5"><div><b>30/11/2022</b><span>nace ChatGPT</span></div><div><b>5 días</b><span>1 millón de usuarios</span></div><div><b>~2 meses</b><span>100 millones</span></div></div>
     </div>
   </div>
   <aside class="notes" data-t="3 min">
     <ul><li>Contar como experimento: si le das un documento de preguntas y respuestas y lo dejás abierto en una pregunta, el modelo la completa.</li>
     <li>Después se lo entrenó a propósito con diálogos y con feedback humano (RLHF: aprendizaje por refuerzo con retroalimentación humana).</li>
-    <li>El modelo “sabe más o menos qué responder” porque vio enormes cantidades de preguntas y respuestas.</li></ul>
+    <li>El modelo “sabe más o menos qué responder” porque vio enormes cantidades de preguntas y respuestas.</li>
+    <li>Lo que cambió en 2022 no fue la tecnología (GPT‑3 ya existía) sino la interfaz: una caja de chat. En 2023 llegan Claude y Bard (hoy Gemini).</li></ul>
   </aside>
 </section>
 
-<section class="slide mid" data-block="01 · De las neuronas al chat" aria-label="Lanzamiento de ChatGPT">
-  <div class="dots"></div>
-  <div class="eyebrow r" style="--d:0">30 de noviembre de 2022</div>
-  <h2 class="r" style="--d:1">Nace <em class="s">ChatGPT</em> y el mundo se entera</h2>
-  <div class="stats">
-    <div class="stat r" style="--d:2"><div class="big">5<small> días</small></div><div class="lbl">para llegar a 1 millón de usuarios</div></div>
-    <div class="stat r" style="--d:3"><div class="big">~2<small> meses</small></div><div class="lbl">para llegar a 100 millones: el producto de consumo de crecimiento más rápido hasta entonces</div></div>
-    <div class="stat r" style="--d:4"><div class="big">2023</div><div class="lbl">Anthropic lanza Claude y Google lanza Bard (hoy Gemini)</div></div>
-  </div>
-  <aside class="notes" data-t="2 min">
-    <ul><li>Lo que cambió no fue tanto la tecnología (GPT‑3 ya existía desde 2020) sino la interfaz: una caja de chat.</li>
-    <li>Pregunta al grupo: ¿cuándo lo usaron por primera vez?</li></ul>
-  </aside>
-</section>
-
-<section class="slide" data-block="01 · De las neuronas al chat" aria-label="Mezcla de expertos">
+<section class="slide" data-block="01 · Vectores y neuronas" aria-label="Mezcla de expertos">
   <div class="eyebrow r" style="--d:0">Cómo escalan los modelos grandes</div>
   <h2 class="r" style="--d:1">Mezcla de expertos <em class="s">(Mixture of Experts)</em></h2>
   <div class="grid2" style="grid-template-columns:1.3fr 1fr;gap:70px">
@@ -934,35 +811,9 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
     </div>
   </div>
   <p class="note-foot r" style="--d:6">Simplificación: en la práctica los expertos no se dividen tan prolijamente por tema como en el dibujo.</p>
-  <aside class="notes" data-t="3 min">
+  <aside class="notes" data-t="2 min">
     <ul><li>Se llama MoE (Mixture of Experts). Lo usan por ejemplo Mixtral y DeepSeek; se cree que varios modelos de frontera también.</li>
     <li>La intuición de “un experto por dominio” sirve para explicarlo, pero el reparto real es más fino y lo aprende el modelo solo.</li></ul>
-  </aside>
-</section>
-
-<section class="slide light" data-block="01 · De las neuronas al chat" aria-label="Alucinaciones">
-  <div class="eyebrow r" style="--d:0">Lo que hay que saber</div>
-  <h2 class="r" style="--d:1">Predice lo más <em class="s">probable</em>, no lo verificado</h2>
-  <div class="grid2">
-    <div class="card r" style="--d:2">
-      <p class="small" style="letter-spacing:.14em;text-transform:uppercase;font-weight:600">El fondo decidió invertir en la…</p>
-      <div class="bars" style="margin-top:26px">
-        <div class="bar"><span>empresa</span><span class="t"><i style="--w:72%"></i></span><span class="v">72%</span></div>
-        <div class="bar"><span>compañía</span><span class="t"><i style="--w:18%"></i></span><span class="v">18%</span></div>
-        <div class="bar"><span>región</span><span class="t"><i style="--w:7%"></i></span><span class="v">7%</span></div>
-      </div>
-      <p class="note-foot">Ejemplo ilustrativo.</p>
-    </div>
-    <div class="tips">
-      <div class="tip r" style="--d:3"><b class="k">RIESGO</b><p>Si no tiene el dato, puede <b>“alucinar”</b>: inventar algo que suena correcto.</p></div>
-      <div class="tip r" style="--d:4"><b class="k">CUIDADO 1</b><p>Darle los documentos en vez de pedirle que “recuerde”.</p></div>
-      <div class="tip r" style="--d:5"><b class="k">CUIDADO 2</b><p>Pedirle que cite de dónde saca cada cifra.</p></div>
-      <div class="tip r" style="--d:6"><b class="k">CUIDADO 3</b><p>Revisar siempre números, nombres y fechas antes de usarlos.</p></div>
-    </div>
-  </div>
-  <aside class="notes" data-t="2 min">
-    <ul><li>Cierre del bloque 1: entender el mecanismo explica tanto lo bueno como los errores.</li>
-    <li>Regla de oro para el fondo: la IA hace el primer borrador; la persona firma.</li></ul>
   </aside>
 </section>
 
@@ -1084,8 +935,8 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
 </section>
 
 
-<section class="slide break" data-nofoot data-pcv aria-label="Recreo">
-  <div class="eyebrow r" style="--d:0;justify-content:center">Recreo</div>
+<section class="slide break" data-nofoot data-pcv aria-label="Coffee break">
+  <div class="eyebrow r" style="--d:0;justify-content:center">Coffee break</div>
   <div class="clock r" style="--d:1" id="clock" data-min="10">10:00</div>
   <h2 class="r" style="--d:2">Volvemos en diez minutos</h2>
   <p class="r" style="--d:3">A la vuelta: agentes que no solo responden, sino que hacen.</p>
@@ -1098,7 +949,7 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
 <section class="slide divider" data-nofoot data-pcv aria-label="Bloque 3">
   <div class="bnum">03</div>
   <div class="kick r" style="--d:0"><span class="tag"><i></i>Bloque 03 · 15 min</span></div>
-  <h2 class="r" style="--d:1">Agentes: de responder <em class="s">a hacer</em></h2>
+  <h2 class="r" style="--d:1">Agentes varios <em class="s">(Claude entre ellos)</em></h2>
   <div class="what r" style="--d:2"><span>Chat vs. agente</span><span>El mapa de agentes</span><span>Qué pueden hacer hoy</span></div>
   <aside class="notes" data-t="—"><ul><li>El salto de 2025–2026: la IA ya no solo contesta, ejecuta tareas de varios pasos.</li></ul></aside>
 </section>
@@ -1153,7 +1004,7 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
      ===================================================== -->
 <section class="slide divider" data-nofoot data-pcv aria-label="Bloque 4">
   <div class="bnum">04</div>
-  <div class="kick r" style="--d:0"><span class="tag"><i></i>Bloque 04 · 20 min</span></div>
+  <div class="kick r" style="--d:0"><span class="tag"><i></i>Bloque 04 · 25 min</span></div>
   <h2 class="r" style="--d:1">Cómo está hecho <em class="s">un agente</em></h2>
   <div class="what r" style="--d:2"><span>Skills</span><span>MCP y conectores</span><span>Memoria</span><span>Rutinas</span><span>Artefactos</span><span>Customize y plugins</span></div>
   <aside class="notes" data-t="—"><ul><li>Bloque para abrir el capó: estas son las piezas que después vamos a configurar para IBF.</li></ul></aside>
@@ -1346,9 +1197,9 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
      ===================================================== -->
 <section class="slide divider" data-nofoot data-pcv aria-label="Bloque 5">
   <div class="bnum">05</div>
-  <div class="kick r" style="--d:0"><span class="tag"><i></i>Bloque 05 · 15 min</span></div>
+  <div class="kick r" style="--d:0"><span class="tag"><i></i>Bloque 05 · 20 min</span></div>
   <h2 class="r" style="--d:1">Caso práctico: <em class="s">private equity</em></h2>
-  <div class="what r" style="--d:2"><span>La IA ya está en el sector</span><span>Primera lectura de un data room</span><span>Probalo vos</span></div>
+  <div class="what r" style="--d:2"><span>La IA ya está en el sector</span><span>Primera lectura de un data room</span><span>Cuidado con las alucinaciones</span><span>Probalo vos</span></div>
   <aside class="notes" data-t="—"><ul><li>Bajamos todo lo anterior a un caso de IBF.</li></ul></aside>
 </section>
 
@@ -1382,6 +1233,32 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
   <aside class="notes" data-t="4 min">
     <ul><li>Hacerlo en vivo con un CIM público o de ejemplo (nunca con datos confidenciales en la demo).</li>
     <li>Mostrar cómo pedirle que cite la página de cada cifra.</li></ul>
+  </aside>
+</section>
+
+<section class="slide light" data-block="05 · Caso práctico" aria-label="Alucinaciones">
+  <div class="eyebrow r" style="--d:0">Lo que hay que saber</div>
+  <h2 class="r" style="--d:1">Predice lo más <em class="s">probable</em>, no lo verificado</h2>
+  <div class="grid2">
+    <div class="card r" style="--d:2">
+      <p class="small" style="letter-spacing:.14em;text-transform:uppercase;font-weight:600">El fondo decidió invertir en la…</p>
+      <div class="bars" style="margin-top:26px">
+        <div class="bar"><span>empresa</span><span class="t"><i style="--w:72%"></i></span><span class="v">72%</span></div>
+        <div class="bar"><span>compañía</span><span class="t"><i style="--w:18%"></i></span><span class="v">18%</span></div>
+        <div class="bar"><span>región</span><span class="t"><i style="--w:7%"></i></span><span class="v">7%</span></div>
+      </div>
+      <p class="note-foot">Ejemplo ilustrativo.</p>
+    </div>
+    <div class="tips">
+      <div class="tip r" style="--d:3"><b class="k">RIESGO</b><p>Si no tiene el dato, puede <b>“alucinar”</b>: inventar algo que suena correcto.</p></div>
+      <div class="tip r" style="--d:4"><b class="k">CUIDADO 1</b><p>Darle los documentos en vez de pedirle que “recuerde”.</p></div>
+      <div class="tip r" style="--d:5"><b class="k">CUIDADO 2</b><p>Pedirle que cite de dónde saca cada cifra.</p></div>
+      <div class="tip r" style="--d:6"><b class="k">CUIDADO 3</b><p>Revisar siempre números, nombres y fechas antes de usarlos.</p></div>
+    </div>
+  </div>
+  <aside class="notes" data-t="2 min">
+    <ul><li>Cierre del bloque 1: entender el mecanismo explica tanto lo bueno como los errores.</li>
+    <li>Regla de oro para el fondo: la IA hace el primer borrador; la persona firma.</li></ul>
   </aside>
 </section>
 
