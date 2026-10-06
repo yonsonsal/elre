@@ -434,22 +434,39 @@ canvas.pcv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;
 
 
 /* Quién soy */
-.aboutme{display:grid;grid-template-columns:520px 1fr;gap:100px;flex:1;align-items:center}
-.aboutme .ph{position:relative;width:460px;height:460px;justify-self:center}
+.aboutme{display:grid;grid-template-columns:1fr 760px;gap:80px;flex:1;align-items:center}
+.aboutme .hd{display:flex;align-items:center;gap:40px;margin-top:30px}
+.aboutme .ph{position:relative;width:210px;height:210px;flex:0 0 210px}
 .aboutme .ph .ring1{position:absolute;inset:0;border-radius:50%;border:2px dashed rgba(217,119,87,.55);animation:spin 50s linear infinite}
-.aboutme .ph .ring2{position:absolute;inset:-34px;border-radius:50%;border:2px solid transparent;border-top-color:var(--coral);border-left-color:rgba(217,119,87,.35);animation:spin 9s linear infinite reverse}
-.aboutme .ph .face{position:absolute;inset:40px;border-radius:50%;background:linear-gradient(140deg,#2A4A75,#102848);display:grid;place-items:center;
-  font-size:150px;font-weight:800;letter-spacing:-.05em;color:var(--warm);overflow:hidden;box-shadow:0 30px 80px -30px rgba(0,0,0,.6)}
-.aboutme .ph .badge{position:absolute;right:-10px;bottom:30px;width:120px;height:120px;border-radius:28px;background:var(--navy);border:2px solid var(--coral);display:grid;place-items:center}
-.aboutme .ph .badge .logo{width:84px;height:84px}
-.aboutme .name{font-size:110px;font-weight:800;letter-spacing:-.045em;line-height:.95;margin-top:22px}
-.aboutme .role{font-size:34px;color:var(--fg);margin-top:20px;font-weight:500}
-.aboutme .role span{color:var(--coral)}
-.aboutme ul{list-style:none;margin-top:40px;display:grid;gap:0}
-.aboutme li{font-size:29px;color:var(--fg);padding:18px 0 18px 44px;border-top:1px solid var(--line);position:relative;line-height:1.35}
+.aboutme .ph .ring2{position:absolute;inset:-18px;border-radius:50%;border:2px solid transparent;border-top-color:var(--coral);border-left-color:rgba(217,119,87,.35);animation:spin 9s linear infinite reverse}
+.aboutme .ph .face{position:absolute;inset:18px;border-radius:50%;background:linear-gradient(140deg,#2A4A75,#102848);display:grid;place-items:center;
+  font-size:68px;font-weight:800;letter-spacing:-.05em;color:var(--warm);overflow:hidden}
+.aboutme .name{font-size:92px;font-weight:800;letter-spacing:-.045em;line-height:.95}
+.aboutme .role{font-size:26px;color:var(--muted);margin-top:14px;white-space:nowrap}
+.aboutme .nums{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:44px}
+.aboutme .nums div{border-top:3px solid var(--coral);padding-top:18px}
+.aboutme .nums b{display:block;font-size:84px;font-weight:800;letter-spacing:-.05em;line-height:1;color:var(--fg)}
+.aboutme .nums b small{font-size:36px;letter-spacing:-.02em}
+.aboutme .nums span{display:block;font-size:25px;color:var(--muted);margin-top:10px;line-height:1.3}
+.aboutme ul{list-style:none;margin-top:34px;display:grid;gap:0}
+.aboutme li{font-size:28px;color:var(--fg);padding:16px 0 16px 40px;border-top:1px solid var(--line);position:relative;line-height:1.3}
 .aboutme li:last-child{border-bottom:1px solid var(--line)}
-.aboutme li::before{content:"";position:absolute;left:4px;top:30px;width:14px;height:14px;border-radius:3px;background:var(--coral);transform:rotate(45deg)}
+.aboutme li::before{content:"";position:absolute;left:4px;top:27px;width:13px;height:13px;border-radius:3px;background:var(--coral);transform:rotate(45deg)}
 .aboutme li span{color:var(--muted)}
+.c4card{border-radius:28px;background:linear-gradient(160deg,#16335A,#0E2443);border:1px solid rgba(217,119,87,.45);padding:48px 50px;position:relative;overflow:hidden;
+  box-shadow:0 40px 90px -40px rgba(0,0,0,.6)}
+.c4card::after{content:"";position:absolute;right:-120px;top:-120px;width:340px;height:340px;border-radius:50%;border:2px solid rgba(217,119,87,.35);animation:spin 30s linear infinite;border-top-color:var(--coral)}
+.c4card .top{display:flex;align-items:center;gap:24px}
+.c4card .top .logo{width:96px;height:96px}
+.c4card .top h3{font-size:48px}
+.c4card .top .tg{display:inline-block;margin-top:8px;font-size:19px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--navy);background:var(--coral);padding:7px 14px;border-radius:999px}
+.c4card .desc{font-size:31px;color:var(--warm);margin-top:30px;line-height:1.35}
+.c4card .inds{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.c4card .inds span{font-size:22px;padding:10px 18px;border-radius:999px;background:rgba(247,245,242,.07);border:1px solid var(--line);color:var(--warm)}
+.c4card .bdg{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px}
+.c4card .bdg div{padding:20px 22px;border-radius:16px;background:rgba(247,245,242,.05);border:1px solid var(--line)}
+.c4card .bdg small{display:block;font-size:17px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--coral)}
+.c4card .bdg b{display:block;font-size:27px;margin-top:6px;color:var(--warm)}
 
 /* Speaker notes (hidden in slides) */
 aside.notes{display:none}
@@ -550,27 +567,36 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
 <section class="slide" data-block="Presentación" aria-label="Quién soy">
   <div class="dots"></div>
   <div class="aboutme">
-    <div class="ph r" style="--d:1">
-      <div class="ring2"></div><div class="ring1"></div>
-      <div class="face">DM</div>
-      <div class="badge"><svg class="logo"><use href="#c4b-logo"/></svg></div>
-    </div>
     <div>
       <div class="eyebrow r" style="--d:0">Quién les habla</div>
-      <div class="name r" style="--d:2">Diego Maye</div>
-      <div class="role r" style="--d:3">Cofundador de <span>Code4Business</span> · AI Advisor</div>
+      <div class="hd r" style="--d:1">
+        <div class="ph"><div class="ring2"></div><div class="ring1"></div><div class="face">DM</div></div>
+        <div><div class="name">Diego Maye</div><div class="role">Cofundador de Code4Business · AI Advisor</div></div>
+      </div>
+      <div class="nums">
+        <div class="r" style="--d:2"><b>20<small> años</small></b><span>desarrollando software</span></div>
+        <div class="r" style="--d:3"><b>15<small> años</small></b><span>en Verifone, como Cloud Engineering Manager</span></div>
+      </div>
       <ul>
-        <li class="r" style="--d:4">Desarrollador y emprendedor de Montevideo. <span>Más de una década construyendo software.</span></li>
-        <li class="r" style="--d:5">Code4Business: empresa de software <b>“AI First”</b>. <span>Finanzas, seguros, industria y energía.</span></li>
-        <li class="r" style="--d:6">Agentes de IA en producción: <span>ciberseguridad con Claude, detección de voces falsas, scoring de seguros.</span></li>
-        <li class="r" style="--d:7">Miembro del <b>Claude Partner Network</b> de Anthropic.</li>
+        <li class="r" style="--d:4">Máster en Ciencia de Datos e Inteligencia Artificial</li>
+        <li class="r" style="--d:5">Especialización en Matemática y Estadística <span>· MIT</span></li>
+        <li class="r" style="--d:6">Miembro del <b>Claude Partner Network</b> de Anthropic</li>
       </ul>
+    </div>
+    <div class="c4card r" style="--d:4">
+      <div class="top"><svg class="logo"><use href="#c4b-logo"/></svg><div><h3>Code4Business</h3><span class="tg">AI Software Boutique</span></div></div>
+      <p class="desc">Desarrollo de software a medida y <b style="color:var(--coral-2)">agentes inteligentes</b> para empresas.</p>
+      <div class="inds"><span>Finanzas</span><span>Seguros</span><span>Industria</span><span>Energía</span><span>Gobierno</span></div>
+      <div class="bdg">
+        <div><small>Ecosistema</small><b>Hub de empresas de Cubo Itaú</b></div>
+        <div><small>Anthropic</small><b>Claude Registered Partner</b></div>
+      </div>
     </div>
   </div>
   <aside class="notes" data-t="3 min">
-    <ul><li>REVISAR antes de presentar: título (cofundador, CTO o CEO), años de experiencia y proyectos a mencionar. Datos tomados de perfiles públicos (LinkedIn, GitHub, Clutch).</li>
-    <li>Contar en primera persona por qué Code4Business apostó por Claude.</li>
-    <li>Para poner una foto: reemplazar las iniciales “DM” por una imagen.</li></ul>
+    <ul><li>Presentarse en primera persona: 20 años de software, 15 en Verifone (pagos), formación en datos e IA.</li>
+    <li>Code4Business: boutique de software con IA; desarrollos a medida y agentes. Contar un caso concreto de agente en producción.</li>
+    <li>Por qué Claude: somos partner registrado de Anthropic y lo usamos todos los días.</li></ul>
   </aside>
 </section>
 
