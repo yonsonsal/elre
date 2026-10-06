@@ -22,6 +22,7 @@
   --W:1920px; --H:1080px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%}
 html,body{height:100%;background:#06142A;color:var(--warm);font-family:var(--sans);
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow:hidden}
 button{font:inherit;color:inherit}
@@ -482,6 +483,22 @@ canvas.pcv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;
 .cubo .cw{font-size:52px;font-weight:800;letter-spacing:-.04em;color:var(--warm);line-height:1}
 .cubo .it{width:58px;height:58px;border-radius:12px;background:#EC7000;color:#003399;display:grid;place-items:center;font-size:21px;font-weight:800;letter-spacing:-.02em}
 
+
+/* Agenda en filas */
+.agl{margin-top:auto;margin-bottom:auto;display:grid;gap:0}
+.agr{display:grid;grid-template-columns:110px 110px 1fr 560px 130px;align-items:center;gap:20px;padding:15px 0;border-top:1px solid var(--line)}
+.agr:last-child{border-bottom:1px solid var(--line)}
+.agr .st{font-family:var(--mono);font-size:24px;color:var(--faint)}
+.agr .nn{font-size:44px;font-weight:800;letter-spacing:-.03em;color:var(--coral);line-height:1}
+.agr .tt{font-size:36px;font-weight:600;color:var(--fg);letter-spacing:-.01em}
+.agr .tb{height:14px;border-radius:7px;background:rgba(247,245,242,.07);overflow:hidden}
+.agr .tb i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,var(--coral),var(--coral-2));width:0;transition:width 1s var(--ease)}
+.slide.active .agr .tb i{width:var(--w);transition-delay:calc(var(--d) * 90ms + 500ms)}
+.agr .mm{font-size:24px;font-weight:600;color:var(--muted);text-align:right;letter-spacing:.04em}
+.agr.brk .nn{font-size:36px}.agr.brk .tt{color:var(--muted);font-weight:500;font-style:italic}
+.agr.brk .tb i{background:rgba(247,245,242,.25)}
+@media print{.agr .tb i{width:var(--w)!important}}
+
 /* Speaker notes (hidden in slides) */
 aside.notes{display:none}
 
@@ -603,7 +620,6 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
         <div class="plogo"><svg class="am" viewBox="0 0 46 32" aria-label="Anthropic"><path d="M32.73 0H25.7846L38.4499 32H45.3953L32.73 0Z" fill="currentColor"/><path d="M12.6653 0L0 32H7.08167L9.67193 25.28H22.9219L25.5122 32H32.5939L19.9286 0H12.6653ZM11.9626 19.3371L16.2969 8.09143L20.6313 19.3371H11.9626Z" fill="currentColor"/></svg><div class="at"><small>Anthropic</small><b>Claude Registered Partner</b></div></div>
         <div class="plogo"><div class="cubo" aria-label="Cubo Itaú"><span class="cw">cubo</span><span class="it">itaú</span></div></div>
       </div>
-      </div>
     </div>
   </div>
   <aside class="notes" data-t="3 min">
@@ -617,14 +633,15 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
   <div class="dots"></div>
   <div class="eyebrow r" style="--d:0">Hoy · 2 horas</div>
   <h2 class="r" style="--d:1">El recorrido de <em class="s">hoy</em></h2>
-  <div class="agenda r" style="--d:2">
-    <div class="ag"><div class="t">30 MIN</div><div class="n">01</div><h3>De las neuronas al chat</h3><div class="bar" style="width:75%"></div></div>
-    <div class="ag"><div class="t">20 MIN</div><div class="n">02</div><h3>Los laboratorios y sus modelos</h3><div class="bar" style="width:50%"></div></div>
-    <div class="ag brk"><div class="t">10 MIN</div><div class="n">—</div><h3>Recreo</h3><div class="bar" style="width:25%"></div></div>
-    <div class="ag"><div class="t">15 MIN</div><div class="n">03</div><h3>Agentes: de responder a hacer</h3><div class="bar" style="width:38%"></div></div>
-    <div class="ag"><div class="t">20 MIN</div><div class="n">04</div><h3>Cómo está hecho un agente</h3><div class="bar" style="width:50%"></div></div>
-    <div class="ag"><div class="t">15 MIN</div><div class="n">05</div><h3>Caso práctico: private equity</h3><div class="bar" style="width:38%"></div></div>
-    <div class="ag"><div class="t">5 MIN</div><div class="n">✓</div><h3>Cierre y tarea</h3><div class="bar" style="width:12%"></div></div>
+  <div class="agl">
+    <div class="agr r" style="--d:2"><span class="st">0:00</span><span class="nn">00</span><span class="tt">Bienvenida y presentación</span><span class="tb"><i style="--w:17%"></i></span><span class="mm">5 min</span></div>
+    <div class="agr r" style="--d:3"><span class="st">0:05</span><span class="nn">01</span><span class="tt">De las neuronas al chat</span><span class="tb"><i style="--w:100%"></i></span><span class="mm">30 min</span></div>
+    <div class="agr r" style="--d:4"><span class="st">0:35</span><span class="nn">02</span><span class="tt">Los laboratorios y sus modelos</span><span class="tb"><i style="--w:67%"></i></span><span class="mm">20 min</span></div>
+    <div class="agr brk r" style="--d:5"><span class="st">0:55</span><span class="nn">☕</span><span class="tt">Recreo</span><span class="tb"><i style="--w:33%"></i></span><span class="mm">10 min</span></div>
+    <div class="agr r" style="--d:6"><span class="st">1:05</span><span class="nn">03</span><span class="tt">Agentes: de responder a hacer</span><span class="tb"><i style="--w:50%"></i></span><span class="mm">15 min</span></div>
+    <div class="agr r" style="--d:7"><span class="st">1:20</span><span class="nn">04</span><span class="tt">Cómo está hecho un agente</span><span class="tb"><i style="--w:67%"></i></span><span class="mm">20 min</span></div>
+    <div class="agr r" style="--d:8"><span class="st">1:40</span><span class="nn">05</span><span class="tt">Caso práctico: private equity</span><span class="tb"><i style="--w:50%"></i></span><span class="mm">15 min</span></div>
+    <div class="agr r" style="--d:9"><span class="st">1:55</span><span class="nn">✓</span><span class="tt">Cierre y tarea</span><span class="tb"><i style="--w:17%"></i></span><span class="mm">5 min</span></div>
   </div>
   <aside class="notes" data-t="2 min">
     <ul><li>Contar el arco: primero entendemos de dónde sale esto, después quiénes lo hacen, después qué puede hacer hoy y cómo está armado.</li>
