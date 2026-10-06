@@ -1,0 +1,1327 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sesión 1 · Entender la IA</title>
+<meta name="description" content="Curso de IA con Claude para IBF Negocios · Sesión 1: Entender la IA. Code4Business · Diego Maye.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400;1,8..60,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   TOKENS
+   ========================================================= */
+:root{
+  --navy:#0B1F3A; --navy-2:#102848; --navy-3:#0E2443; --mid:#1E3A5F;
+  --warm:#F7F5F2; --coral:#D97757; --coral-2:#E8957A; --coral-deep:#C4613F;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --W:1920px; --H:1080px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#06142A;color:var(--warm);font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow:hidden}
+button{font:inherit;color:inherit}
+
+#viewport{position:fixed;inset:0;overflow:hidden;background:#06142A}
+#stage{position:absolute;left:50%;top:50%;width:var(--W);height:var(--H);transform-origin:center;transform:translate(-50%,-50%) scale(.5)}
+
+/* =========================================================
+   SLIDE BASE
+   ========================================================= */
+.slide{
+  --bg:var(--navy); --fg:var(--warm); --muted:rgba(247,245,242,.66); --faint:rgba(247,245,242,.38);
+  --line:rgba(247,245,242,.14); --card:rgba(247,245,242,.05); --card-b:rgba(247,245,242,.12); --accent:var(--coral);
+  position:absolute;inset:0;overflow:hidden;background:var(--bg);color:var(--fg);
+  padding:110px 140px 130px;display:flex;flex-direction:column;
+  opacity:0;visibility:hidden;transform:translateX(60px);
+  transition:opacity .7s var(--ease),transform .8s var(--ease),visibility 0s linear .8s}
+.slide.past{transform:translateX(-60px)}
+.slide.active{opacity:1;visibility:visible;transform:none;transition:opacity .7s var(--ease),transform .8s var(--ease),visibility 0s}
+.slide.light{--bg:var(--warm);--fg:var(--navy);--muted:#4B5B72;--faint:#8A97AA;--line:rgba(11,31,58,.13);--card:#FFFFFF;--card-b:rgba(11,31,58,.10);--accent:var(--coral-deep)}
+.slide.mid{--bg:var(--mid);--card:rgba(247,245,242,.06)}
+
+.r{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .8s var(--ease)}
+.slide.active .r{opacity:1;transform:none;transition-delay:calc(var(--d,0) * 90ms + 200ms)}
+
+/* =========================================================
+   TYPE
+   ========================================================= */
+.eyebrow{font-size:23px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:20px}
+.eyebrow::before{content:"";width:56px;height:3px;background:var(--accent);border-radius:2px}
+h1,h2,h3{text-wrap:balance;font-weight:700;letter-spacing:-.025em;line-height:1.04}
+h2{font-size:78px;margin-top:24px;max-width:1560px}
+h3{font-size:36px;letter-spacing:-.015em;line-height:1.15}
+em.s{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--accent);letter-spacing:-.01em}
+p{font-size:32px;line-height:1.4;color:var(--muted);text-wrap:pretty}
+.lead{font-size:38px;line-height:1.35;color:var(--fg);font-weight:400;max-width:1500px;margin-top:24px}
+.fg{color:var(--fg)} .acc{color:var(--accent)} b{font-weight:600;color:var(--fg)}
+.small{font-size:24px}
+.note-foot{font-size:21px;color:var(--faint);margin-top:18px}
+.mono{font-family:var(--mono)}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.foot{position:absolute;left:140px;right:140px;bottom:50px;display:flex;justify-content:space-between;align-items:center;
+  font-size:19px;letter-spacing:.06em;color:var(--muted);opacity:.85}
+.foot .bm{display:flex;align-items:center;gap:14px;font-weight:600;letter-spacing:.02em}
+.foot .dot{width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.foot .blk{text-transform:uppercase;letter-spacing:.16em;font-size:17px;font-weight:600;margin-right:230px}
+.foot .pg{display:none;font-variant-numeric:tabular-nums;font-weight:600}
+
+/* =========================================================
+   DECOR
+   ========================================================= */
+.geo{position:absolute;pointer-events:none}
+.dots{position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(rgba(247,245,242,.12) 1.4px,transparent 1.6px);background-size:48px 48px;
+  -webkit-mask-image:radial-gradient(ellipse at 85% 25%,#000 0%,transparent 60%);mask-image:radial-gradient(ellipse at 85% 25%,#000 0%,transparent 60%)}
+.light .dots{background-image:radial-gradient(rgba(11,31,58,.14) 1.4px,transparent 1.6px)}
+
+.card{background:var(--card);border:1px solid var(--card-b);border-radius:22px;padding:36px 38px}
+.light .card{box-shadow:0 24px 60px -38px rgba(11,31,58,.35)}
+.tag{display:inline-flex;align-items:center;gap:12px;font-size:20px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  padding:12px 22px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.tag i{width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:center;flex:1}
+.grid2.t{align-items:start}
+.push{margin-top:auto}
+.center{margin:auto 0}
+
+/* =========================================================
+   PORTADA
+   ========================================================= */
+.cover{padding:110px 140px;justify-content:space-between;background:radial-gradient(1200px 900px at 86% 40%,#17345C 0%,rgba(11,31,58,0) 70%),var(--navy)}
+.cover-top{display:flex;align-items:center;justify-content:space-between}
+.wordmark{display:flex;align-items:center;gap:18px;font-size:30px;font-weight:700}
+.wordmark .mk{width:46px;height:46px;border-radius:12px;background:var(--coral);display:grid;place-items:center;color:var(--navy);font-weight:800;font-size:21px;letter-spacing:-.04em}
+.wordmark small{font-size:22px;font-weight:400;color:var(--muted);margin-left:4px}
+.cover .snum{font-size:26px;letter-spacing:.24em;text-transform:uppercase;color:var(--coral);font-weight:600}
+.cover h1{font-size:150px;line-height:.96;letter-spacing:-.045em;margin-top:26px}
+.cover h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--coral);letter-spacing:-.02em}
+.cover .sub{font-size:40px;font-weight:300;color:var(--warm);opacity:.9;margin-top:36px}
+.meta{display:flex;border-top:1px solid var(--line);padding-top:34px}
+.meta div{flex:1;padding-right:36px}
+.meta div+div{padding-left:36px;border-left:1px solid var(--line)}
+.meta span{display:block;font-size:18px;letter-spacing:.16em;text-transform:uppercase;color:var(--coral);font-weight:600;margin-bottom:10px}
+.meta b{font-size:30px;font-weight:500}
+
+/* =========================================================
+   AGENDA
+   ========================================================= */
+.agenda{display:grid;grid-template-columns:repeat(7,1fr);gap:0;margin-top:auto;margin-bottom:auto;align-items:stretch}
+.ag{position:relative;padding:28px 26px 30px;border-left:1px solid var(--line);display:flex;flex-direction:column;gap:10px;min-width:0}
+.ag:first-child{border-left:0;padding-left:0}
+.ag .t{font-size:20px;font-weight:600;color:var(--accent);letter-spacing:.08em;font-variant-numeric:tabular-nums}
+.ag .n{font-size:96px;font-weight:800;letter-spacing:-.04em;line-height:1}
+.ag h3{font-size:31px;line-height:1.2;min-height:150px}
+.ag .bar{height:6px;border-radius:3px;background:var(--accent);margin-top:auto}
+.ag.brk .n{color:var(--faint)} .ag.brk .bar{background:var(--line)}
+.ag.brk h3{color:var(--muted);font-weight:500}
+
+/* =========================================================
+   BLOCK DIVIDER
+   ========================================================= */
+.divider{background:var(--mid);justify-content:center}
+.divider .bnum{position:absolute;right:90px;bottom:-110px;font-size:720px;font-weight:800;letter-spacing:-.06em;line-height:1;
+  color:transparent;-webkit-text-stroke:3px rgba(217,119,87,.55)}
+.divider .kick{display:flex;gap:18px;align-items:center}
+.divider h2{font-size:120px;letter-spacing:-.04em;max-width:1150px;margin-top:30px;line-height:.98}
+.divider .what{margin-top:56px;display:flex;gap:16px;flex-wrap:wrap;max-width:1150px}
+.divider .what span{font-size:26px;padding:14px 26px;border-radius:999px;background:rgba(247,245,242,.07);border:1px solid var(--line)}
+
+/* =========================================================
+   DIAGRAM HELPERS (SVG)
+   ========================================================= */
+svg text{font-family:var(--sans)}
+.draw path,.draw line{stroke-dasharray:var(--len,1200);stroke-dashoffset:var(--len,1200);transition:stroke-dashoffset 1.6s var(--ease) .5s}
+.slide.active .draw path,.slide.active .draw line{stroke-dashoffset:0}
+.pop{opacity:0;transform:scale(.6);transform-box:fill-box;transform-origin:center;transition:opacity .5s var(--ease),transform .6s var(--ease)}
+.slide.active .pop{opacity:1;transform:none;transition-delay:calc(var(--d,0) * 70ms + 300ms)}
+
+.formula{font-family:var(--serif);font-size:56px;color:var(--fg);letter-spacing:-.01em;margin-top:30px}
+.formula i{color:var(--accent);font-style:italic}
+.formula small{display:block;font-family:var(--sans);font-size:24px;color:var(--muted);margin-top:12px;letter-spacing:0}
+
+/* Ladder */
+.ladder{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;align-items:end;margin-top:auto}
+.rung{border-radius:20px 20px 0 0;background:var(--card);border:1px solid var(--card-b);border-bottom:0;padding:32px 32px 36px;display:flex;flex-direction:column}
+.rung:nth-child(1){height:330px}.rung:nth-child(2){height:420px}.rung:nth-child(3){height:510px}
+.rung:nth-child(4){height:600px;background:rgba(217,119,87,.15);border-color:rgba(217,119,87,.45)}
+.rung .y{font-size:22px;font-weight:600;letter-spacing:.14em;color:var(--accent)}
+.rung h3{font-size:40px;margin-top:10px}
+.rung .ex{margin-top:auto;font-family:var(--mono);font-size:23px;line-height:1.45;color:var(--fg);background:rgba(0,0,0,.18);border-radius:12px;padding:16px 18px}
+.rung .ex u{text-decoration:none;color:var(--coral-2);font-weight:500}
+.rung p{font-size:24px;margin-top:10px}
+.ground{height:2px;background:var(--coral);opacity:.6}
+
+/* Token generation */
+.gen{margin-top:auto;margin-bottom:auto}
+.tokens{display:flex;flex-wrap:wrap;gap:16px;align-items:center;min-height:120px}
+.tok{font-size:54px;font-weight:600;padding:14px 26px;border-radius:16px;background:var(--card);border:1px solid var(--card-b);display:none}
+.tok.on{display:inline-block;animation:tokin .4s var(--ease)}
+@keyframes tokin{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.tok.new{background:var(--coral);color:var(--navy);border-color:var(--coral)}
+.cursor{width:22px;height:70px;background:var(--coral);border-radius:4px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.loop-row{display:flex;gap:26px;align-items:center;margin-top:64px;font-size:28px;color:var(--muted)}
+.loop-row .st{padding:18px 26px;border-radius:14px;border:1px solid var(--line);color:var(--fg);font-weight:500}
+.loop-row .ar{color:var(--accent);font-size:34px}
+
+/* Chat doc */
+.doc{background:#FFFFFF;color:var(--navy);border-radius:22px;padding:40px 46px;font-family:var(--mono);font-size:26px;line-height:1.55;
+  box-shadow:0 40px 90px -40px rgba(0,0,0,.6)}
+.doc .q{color:#4B5B72}.doc .q b{color:var(--coral-deep);font-weight:500}
+.doc .a{margin-bottom:14px}.doc .a b{color:var(--navy);font-weight:500}
+.doc .typing{color:var(--navy);border-right:3px solid var(--coral-deep);white-space:pre-wrap}
+.eureka{font-family:var(--serif);font-style:italic;font-size:120px;color:var(--coral);line-height:1}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:auto;margin-bottom:auto}
+.stat{padding:0 50px;border-left:1px solid var(--line)}
+.stat:first-child{padding-left:0;border-left:0}
+.stat .big{font-size:150px;font-weight:800;letter-spacing:-.05em;line-height:1;color:var(--fg)}
+.stat .big small{font-size:60px;letter-spacing:-.02em}
+.stat .lbl{font-size:30px;color:var(--muted);margin-top:18px;line-height:1.3}
+.stat:nth-child(3) .big{color:var(--coral)}
+
+/* MoE */
+.moe svg{width:100%;height:auto;display:block}
+.exp rect{transition:fill .35s,stroke .35s}
+.exp.lit rect{fill:var(--coral);stroke:var(--coral)}
+.exp.lit text{fill:var(--navy)}
+.route{opacity:.15;transition:opacity .35s}
+.route.lit{opacity:1}
+
+/* Bars */
+.bars{display:grid;gap:18px}
+.bar{display:grid;grid-template-columns:220px 1fr 80px;align-items:center;gap:20px;font-size:28px;color:var(--fg)}
+.bar .t{height:16px;border-radius:8px;background:var(--line);overflow:hidden}
+.bar .t i{display:block;height:100%;border-radius:8px;background:var(--accent);width:0;transition:width 1.1s var(--ease) .8s}
+.slide.active .bar .t i{width:var(--w)}
+.bar .v{font-variant-numeric:tabular-nums;color:var(--muted);text-align:right}
+
+/* Checklist */
+.tips{display:grid;gap:0}
+.tip{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:24px 0;border-top:1px solid var(--line);align-items:baseline}
+.tip:last-child{border-bottom:1px solid var(--line)}
+.tip b.k{font-size:22px;color:var(--accent);letter-spacing:.06em}
+.tip p{color:var(--fg);font-size:30px}
+
+/* Timeline (labs) */
+.tline{position:relative;margin-top:auto;margin-bottom:auto;display:grid;grid-template-columns:repeat(6,1fr);gap:22px;padding-top:66px}
+.tline::before{content:"";position:absolute;left:0;right:0;top:18px;height:2px;background:var(--line)}
+.ev{position:relative}
+.ev::before{content:"";position:absolute;top:-58px;left:0;width:22px;height:22px;border-radius:50%;background:var(--bg);border:3px solid var(--coral)}
+.ev.hl::before{background:var(--coral)}
+.ev .y{font-size:54px;font-weight:800;letter-spacing:-.03em}
+.ev h3{font-size:32px;margin-top:12px;line-height:1.2}
+.ev p{font-size:25px;margin-top:10px;line-height:1.38}
+
+/* Versus */
+.vs{display:grid;grid-template-columns:1fr 120px 1fr;align-items:stretch;flex:1;margin-top:34px}
+.vs .side{padding:44px 48px;border-radius:24px;background:var(--card);border:1px solid var(--card-b);display:flex;flex-direction:column}
+.vs .side.ant{background:rgba(217,119,87,.12);border-color:rgba(217,119,87,.45)}
+.vs .mid-x{display:grid;place-items:center;font-family:var(--serif);font-style:italic;font-size:54px;color:var(--faint)}
+.vs .who{font-size:22px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--accent)}
+.vs h3{font-size:52px;margin-top:12px}
+.vs .lead2{font-size:31px;color:var(--muted);margin-top:8px}
+.vs ul{list-style:none;margin-top:auto;display:grid;gap:14px}
+.vs li{font-size:31px;color:var(--fg);display:flex;gap:16px;align-items:baseline}
+.vs li::before{content:"";flex:0 0 10px;height:10px;border-radius:2px;background:var(--accent);transform:rotate(45deg) translateY(-3px)}
+
+/* Lab grid */
+.labs{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:auto;margin-bottom:auto}
+.lab{border-radius:22px;padding:34px 32px 34px;background:var(--card);border:1px solid var(--card-b);display:flex;flex-direction:column;min-height:560px}
+.lab.me{background:rgba(217,119,87,.13);border-color:rgba(217,119,87,.5)}
+.lab .co{font-size:20px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--accent)}
+.lab h3{font-size:46px;margin-top:8px}
+.lab ul{list-style:none;margin-top:24px;display:grid;gap:14px}
+.lab li{font-size:28px;color:var(--fg);line-height:1.3;padding-left:20px;position:relative}
+.lab li::before{content:"";position:absolute;left:0;top:15px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.lab li span{color:var(--muted)}
+.lab .foot2{margin-top:auto;padding-top:20px;font-size:23px;color:var(--muted);border-top:1px solid var(--line)}
+
+/* Tiers */
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:auto;margin-bottom:auto;align-items:end}
+.tier{border-radius:22px;padding:36px 34px 40px;min-height:400px;background:var(--card);border:1px solid var(--card-b);display:flex;flex-direction:column}
+.tier .lvl{display:flex;gap:6px;margin-bottom:20px}
+.tier .lvl i{width:28px;height:8px;border-radius:4px;background:var(--line)}
+.tier .lvl i.f{background:var(--accent)}
+.tier h3{font-size:52px}
+.tier .role{font-size:22px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-top:6px}
+.tier p{font-size:29px;margin-top:18px}
+
+/* Agent loop */
+.aloop{position:relative;width:640px;height:640px;justify-self:center}
+.aloop .ring{position:absolute;inset:60px;border-radius:50%;border:2px dashed rgba(217,119,87,.5);animation:spin 40s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.aloop .core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:220px;height:220px;border-radius:50%;
+  background:var(--coral);color:var(--navy);display:grid;place-items:center;text-align:center;font-size:30px;font-weight:700;line-height:1.1;
+  box-shadow:0 0 0 18px rgba(217,119,87,.13)}
+.aloop .nd{position:absolute;transform:translate(-50%,-50%);padding:16px 26px;border-radius:999px;background:var(--navy-2);border:1px solid var(--line);
+  font-size:27px;font-weight:600;white-space:nowrap}
+.aloop .nd small{display:block;font-size:18px;font-weight:400;color:var(--muted)}
+
+/* Agent map */
+.amap{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:auto;margin-bottom:auto}
+.acol{border-radius:22px;padding:36px 38px;background:var(--card);border:1px solid var(--card-b)}
+.acol .k{font-size:20px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--accent)}
+.acol h3{font-size:42px;margin-top:8px}
+.acol .it{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:22px 0;border-top:1px solid var(--line);margin-top:0}
+.acol .it:first-of-type{margin-top:18px}
+.acol .it b{font-size:34px}
+.acol .it span{font-size:23px;color:var(--muted);text-align:right}
+
+/* Anatomy */
+.anat{position:relative;flex:1;margin-top:10px}
+.anat svg{position:absolute;inset:0;width:100%;height:100%}
+.anat .hub{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:290px;height:290px;border-radius:50%;
+  background:var(--coral);color:var(--navy);display:grid;place-items:center;text-align:center;box-shadow:0 0 0 22px rgba(217,119,87,.12),0 0 0 46px rgba(217,119,87,.05)}
+.anat .hub b{display:block;font-size:44px;color:var(--navy);font-weight:800;letter-spacing:-.02em}
+.anat .hub span{font-size:22px;font-weight:500}
+.anat .pt{position:absolute;width:470px;padding:24px 28px;border-radius:18px;background:var(--navy-2);border:1px solid var(--line)}
+.anat .pt h3{font-size:36px;display:flex;align-items:center;gap:14px}
+.anat .pt h3 i{font-style:normal;font-size:18px;font-weight:600;letter-spacing:.1em;color:var(--accent)}
+.anat .pt p{font-size:26px;margin-top:8px;line-height:1.35}
+
+/* Component detail */
+.comp{display:grid;grid-template-columns:1fr 1.05fr;gap:90px;flex:1;align-items:center;margin-top:10px}
+.comp .what{font-size:36px;color:var(--fg);line-height:1.35;margin-top:30px}
+.comp .ana{margin-top:34px;display:flex;gap:20px;align-items:flex-start;padding:26px 30px;border-radius:18px;background:rgba(217,119,87,.1);border:1px solid rgba(217,119,87,.35)}
+.comp .ana b{font-size:20px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);white-space:nowrap;padding-top:6px}
+.comp .ana p{font-size:28px;color:var(--fg)}
+.file{border-radius:20px;overflow:hidden;background:#0A1830;border:1px solid var(--line);box-shadow:0 40px 90px -40px rgba(0,0,0,.6)}
+.light .file{background:#0B1F3A}
+.file .bar0{display:flex;align-items:center;gap:10px;padding:16px 22px;border-bottom:1px solid rgba(247,245,242,.1);font-family:var(--mono);font-size:19px;color:rgba(247,245,242,.6)}
+.file .bar0 i{width:12px;height:12px;border-radius:50%;background:rgba(247,245,242,.18)}
+.file .bar0 i:first-child{background:var(--coral)}
+.file pre{margin:0;padding:26px 30px;font-family:var(--mono);font-size:22px;line-height:1.6;color:#E6E9EF;white-space:pre-wrap}
+.file pre .c{color:#7F8EA6}.file pre .k{color:var(--coral-2)}.file pre .s{color:#9FD3B6}
+
+.flow{display:flex;align-items:stretch;gap:0;margin-top:auto;margin-bottom:auto}
+.fl{flex:1;padding:40px 36px 44px;min-height:300px;border-radius:20px;background:var(--card);border:1px solid var(--card-b);position:relative}
+.fl + .fl{margin-left:56px}
+.fl + .fl::before{content:"→";position:absolute;left:-46px;top:50%;transform:translateY(-50%);font-size:40px;color:var(--accent)}
+.fl .k{font-size:20px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--accent)}
+.fl h3{font-size:42px;margin-top:12px}
+.fl p{font-size:29px;margin-top:14px}
+
+/* Plug diagram (MCP) */
+.plug{position:relative;width:100%;height:600px}
+.plug .c{position:absolute;left:0;top:50%;transform:translateY(-50%);width:220px;height:220px;border-radius:50%;background:var(--coral);color:var(--navy);
+  display:grid;place-items:center;font-size:40px;font-weight:800}
+.plug .m{position:absolute;left:270px;top:50%;transform:translateY(-50%);width:120px;height:440px;border-radius:24px;border:2px solid var(--coral);
+  display:grid;place-items:center;font-size:30px;font-weight:700;color:var(--coral);writing-mode:vertical-rl;letter-spacing:.2em}
+.plug .s{position:absolute;left:480px;width:360px;padding:16px 24px;border-radius:14px;background:var(--card);border:1px solid var(--card-b);font-size:26px;font-weight:600}
+.plug .s small{display:block;font-size:18px;color:var(--muted);font-weight:400}
+
+/* Demo / live */
+.live{display:inline-flex;align-items:center;gap:14px;font-size:22px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#fff;
+  background:#C0392B;padding:12px 22px;border-radius:999px}
+.live i{width:12px;height:12px;border-radius:50%;background:#fff;animation:pulse 1.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.7)}100%{box-shadow:0 0 0 14px rgba(255,255,255,0)}}
+.steps{list-style:none;display:grid;gap:0;counter-reset:s}
+.steps li{position:relative;padding:22px 0 22px 80px;border-top:1px solid var(--line);color:var(--fg);font-size:34px;font-weight:500}
+.steps li:last-child{border-bottom:1px solid var(--line)}
+.steps li::before{position:absolute;left:0;top:32px;counter-increment:s;content:counter(s,decimal-leading-zero);font-size:22px;font-weight:600;color:var(--accent);letter-spacing:.06em}
+.steps li span{display:block;font-size:26px;font-weight:400;color:var(--muted);margin-top:4px}
+
+/* Prompt box */
+.prompt{border-radius:22px;background:#0A1830;border:1px solid rgba(217,119,87,.45);padding:34px 40px;font-family:var(--mono);font-size:23px;line-height:1.6;color:#E6E9EF;white-space:pre-wrap;position:relative}
+.prompt .lbl{position:absolute;top:-17px;left:30px;background:var(--coral);color:var(--navy);font-family:var(--sans);font-size:17px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:6px 14px;border-radius:999px}
+.prompt .v{color:var(--coral-2)}
+
+/* Break */
+.break{justify-content:center;align-items:center;text-align:center;background:radial-gradient(900px 700px at 50% 50%,rgba(217,119,87,.16),transparent 70%),var(--navy)}
+.break .clock{font-size:300px;font-weight:800;letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}
+.break h2{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--coral);font-size:110px;margin-top:0}
+.break p{margin-top:20px}
+
+/* Quote */
+.quote{justify-content:center}
+.quote blockquote{font-family:var(--serif);font-size:96px;line-height:1.08;letter-spacing:-.02em;max-width:1500px}
+.quote blockquote em{font-style:italic;color:var(--coral)}
+
+/* Recap */
+.recap{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;margin-top:auto;margin-bottom:auto}
+.rc{border-top:3px solid var(--accent);padding-top:24px}
+.rc .n{font-size:22px;color:var(--accent);font-weight:600;letter-spacing:.06em}
+.rc h3{font-size:38px;margin-top:12px}
+.rc p{font-size:28px;margin-top:12px}
+
+/* Closing */
+.close-h{font-size:190px;font-weight:800;letter-spacing:-.05em;line-height:.9}
+.close-h span{display:block;font-family:var(--serif);font-style:italic;font-weight:400;color:var(--coral);letter-spacing:-.03em}
+
+/* Speaker notes (hidden in slides) */
+aside.notes{display:none}
+
+/* =========================================================
+   UI
+   ========================================================= */
+.ui{position:fixed;z-index:20}
+#progress{top:0;left:0;right:0;height:3px;background:rgba(247,245,242,.08)}
+#progress i{display:block;height:100%;width:0;background:var(--coral);transition:width .6s var(--ease)}
+#controls{right:20px;bottom:18px;display:flex;align-items:center;gap:6px;padding:6px;border-radius:999px;background:rgba(11,31,58,.75);
+  border:1px solid rgba(247,245,242,.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:opacity .4s;opacity:.9}
+#controls:hover{opacity:1}
+body.idle #controls{opacity:0} body.idle{cursor:none}
+#controls button{width:42px;height:42px;border:0;border-radius:50%;background:transparent;cursor:pointer;display:grid;place-items:center;transition:background .2s}
+#controls button:hover:not(:disabled){background:rgba(217,119,87,.25)}
+#controls button:disabled{opacity:.3;cursor:default}
+#controls button.on{background:rgba(217,119,87,.3)}
+#controls button:focus-visible{outline:2px solid var(--coral);outline-offset:2px}
+#controls svg{width:20px;height:20px;stroke:#F7F5F2;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+#counter{font-size:14px;font-variant-numeric:tabular-nums;letter-spacing:.06em;color:#F7F5F2;min-width:64px;text-align:center;font-weight:500}
+#counter b{color:var(--coral);font-weight:700}
+#hint{left:50%;bottom:22px;transform:translateX(-50%);font-size:13px;color:rgba(247,245,242,.65);background:rgba(11,31,58,.75);padding:8px 16px;border-radius:999px;transition:opacity .6s;pointer-events:none;white-space:nowrap}
+#hint.hide{opacity:0}
+#notes{left:20px;bottom:76px;width:min(560px,calc(100vw - 40px));max-height:46vh;overflow:auto;padding:20px 22px;border-radius:16px;
+  background:rgba(6,20,42,.94);border:1px solid rgba(217,119,87,.4);color:#F7F5F2;font-size:15px;line-height:1.55;display:none;
+  box-shadow:0 20px 50px rgba(0,0,0,.45)}
+#notes.show{display:block}
+#notes h4{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--coral);margin-bottom:8px}
+#notes ul{padding-left:18px} #notes li{margin:4px 0}
+#notes .tm{float:right;font-size:12px;color:rgba(247,245,242,.6)}
+@media (max-width:640px){#hint{display:none}#controls{right:50%;transform:translateX(50%);bottom:10px}}
+@media (prefers-reduced-motion:reduce){.slide,.r,.pop,.bar .t i,.draw path,.draw line,.tok{transition:none!important}.aloop .ring,.cursor{animation:none}}
+
+/* =========================================================
+   PRINT / PDF
+   ========================================================= */
+@page{size:1920px 1080px;margin:0}
+@media print{
+  html,body{overflow:visible;height:auto;background:var(--navy)}
+  .ui{display:none!important}
+  #viewport{position:static;overflow:visible}
+  #stage{position:static;transform:none!important;width:var(--W);height:auto}
+  .slide{position:relative;width:var(--W);height:var(--H);opacity:1!important;visibility:visible!important;transform:none!important;transition:none!important;break-after:page;page-break-after:always}
+  .slide:last-child{break-after:auto;page-break-after:auto}
+  .r,.pop,.tok{opacity:1!important;transform:none!important;transition:none!important}
+  .draw path,.draw line{stroke-dashoffset:0!important}
+  .bar .t i{width:var(--w)!important}
+  .foot .pg{display:inline}
+  .cursor{display:none}
+  .tok{display:inline-block!important;animation:none!important}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+}
+</style>
+</head>
+<body>
+<div id="viewport"><main id="stage">
+
+<!-- =====================================================
+     APERTURA
+     ===================================================== -->
+<section class="slide cover" data-nofoot aria-label="Portada Sesión 1">
+  <svg class="geo" style="right:-260px;top:30px" width="1100" height="1100" viewBox="0 0 1100 1100" fill="none" aria-hidden="true">
+    <circle cx="550" cy="550" r="540" stroke="rgba(247,245,242,.07)" stroke-width="2"/>
+    <circle cx="550" cy="550" r="420" stroke="rgba(247,245,242,.09)" stroke-width="2"/>
+    <circle cx="550" cy="550" r="300" stroke="rgba(247,245,242,.11)" stroke-width="2"/>
+    <path d="M550 10 A540 540 0 0 1 1090 550" stroke="#D97757" stroke-width="6" stroke-linecap="round"/>
+    <path d="M130 550 A420 420 0 0 1 550 130" stroke="#D97757" stroke-width="3" stroke-linecap="round" opacity=".55"/>
+    <circle cx="550" cy="550" r="12" fill="#D97757"/><circle cx="1090" cy="550" r="10" fill="#D97757"/>
+  </svg>
+  <div class="dots"></div>
+  <div class="cover-top r" style="--d:0">
+    <div class="wordmark"><span class="mk">C4</span>Code4Business <small>× IBF Negocios</small></div>
+    <span class="tag"><i></i>Curso de IA con Claude</span>
+  </div>
+  <div>
+    <div class="snum r" style="--d:1">Sesión 01 de 04</div>
+    <h1 class="r" style="--d:2">Entender<br>la <em>IA</em></h1>
+    <p class="sub r" style="--d:3">Qué es, quién es quién y por qué Claude</p>
+  </div>
+  <div class="meta r" style="--d:4">
+    <div><span>Fecha</span><b>Martes 6 de octubre</b></div>
+    <div><span>Duración</span><b>2 horas</b></div>
+    <div><span>Facilitador</span><b>Diego Maye · Code4Business</b></div>
+  </div>
+  <aside class="notes" data-t="2 min">
+    <ul><li>Bienvenida. Presentarse y presentar a Code4Business (Claude Partner Network).</li>
+    <li>Hoy no hay que saber nada técnico: el objetivo es entender cómo funciona y quiénes son los jugadores.</li>
+    <li>Ronda rápida: ¿quién ya usó ChatGPT o Claude? ¿Para qué?</li></ul>
+  </aside>
+</section>
+
+<section class="slide" data-block="Agenda" aria-label="Agenda de hoy">
+  <div class="dots"></div>
+  <div class="eyebrow r" style="--d:0">Hoy · 2 horas</div>
+  <h2 class="r" style="--d:1">El recorrido de <em class="s">hoy</em></h2>
+  <div class="agenda r" style="--d:2">
+    <div class="ag"><div class="t">25 MIN</div><div class="n">01</div><h3>De las neuronas al chat</h3><div class="bar" style="width:62%"></div></div>
+    <div class="ag"><div class="t">20 MIN</div><div class="n">02</div><h3>Los laboratorios y sus modelos</h3><div class="bar" style="width:50%"></div></div>
+    <div class="ag brk"><div class="t">10 MIN</div><div class="n">—</div><h3>Recreo</h3><div class="bar" style="width:25%"></div></div>
+    <div class="ag"><div class="t">15 MIN</div><div class="n">03</div><h3>Agentes: de responder a hacer</h3><div class="bar" style="width:38%"></div></div>
+    <div class="ag"><div class="t">25 MIN</div><div class="n">04</div><h3>Cómo está hecho un agente</h3><div class="bar" style="width:62%"></div></div>
+    <div class="ag"><div class="t">20 MIN</div><div class="n">05</div><h3>Caso práctico: private equity</h3><div class="bar" style="width:50%"></div></div>
+    <div class="ag"><div class="t">5 MIN</div><div class="n">✓</div><h3>Cierre y tarea</h3><div class="bar" style="width:12%"></div></div>
+  </div>
+  <aside class="notes" data-t="2 min">
+    <ul><li>Contar el arco: primero entendemos de dónde sale esto, después quiénes lo hacen, después qué puede hacer hoy y cómo está armado.</li>
+    <li>Terminamos con un caso real de private equity, en vivo.</li></ul>
+  </aside>
+</section>
+
+<!-- =====================================================
+     BLOQUE 01 · DE LAS NEURONAS AL CHAT
+     ===================================================== -->
+<section class="slide divider" data-nofoot aria-label="Bloque 1">
+  <div class="bnum">01</div>
+  <div class="kick r" style="--d:0"><span class="tag"><i></i>Bloque 01 · 25 min</span></div>
+  <h2 class="r" style="--d:1">De las neuronas <em class="s">al chat</em></h2>
+  <div class="what r" style="--d:2"><span>Regresiones encadenadas</span><span>Predecir la siguiente palabra</span><span>El “eureka” del chat</span><span>Mezcla de expertos</span></div>
+  <aside class="notes" data-t="—"><ul><li>Mensaje del bloque: la IA de hoy no es magia, es estadística a una escala enorme.</li></ul></aside>
+</section>
+
+<section class="slide light" data-block="01 · De las neuronas al chat" aria-label="Regresión lineal">
+  <div class="eyebrow r" style="--d:0">El ladrillo básico</div>
+  <h2 class="r" style="--d:1">Todo empieza con una <em class="s">regresión lineal</em></h2>
+  <div class="grid2" style="grid-template-columns:1fr 760px;gap:70px">
+    <div>
+      <p class="lead r" style="--d:2;margin-top:0">Una función que aprende de ejemplos: mira datos del pasado y ajusta sus números para <b>equivocarse lo menos posible</b>.</p>
+      <div class="formula r" style="--d:3">Valor ≈ <i>múltiplo</i> × EBITDA + <i>ajuste</i>
+        <small>En general: y = <span class="acc">w</span> · x + <span class="acc">b</span> — los “pesos” w y b son lo que se aprende.</small></div>
+    </div>
+    <svg class="r" style="--d:2" viewBox="0 0 760 560" width="760" height="560" aria-label="Gráfico de dispersión con recta ajustada">
+      <line x1="70" y1="490" x2="730" y2="490" stroke="#0B1F3A" stroke-opacity=".3" stroke-width="2"/>
+      <line x1="70" y1="490" x2="70" y2="30" stroke="#0B1F3A" stroke-opacity=".3" stroke-width="2"/>
+      <text x="730" y="530" text-anchor="end" font-size="22" fill="#4B5B72">EBITDA</text>
+      <text x="40" y="40" font-size="22" fill="#4B5B72" transform="rotate(-90 40 40)" text-anchor="end">Valor de la empresa</text>
+      <g fill="#0B1F3A" fill-opacity=".75">
+        <circle class="pop" style="--d:1" cx="120" cy="440" r="9"/><circle class="pop" style="--d:2" cx="170" cy="400" r="9"/>
+        <circle class="pop" style="--d:3" cx="210" cy="420" r="9"/><circle class="pop" style="--d:4" cx="260" cy="360" r="9"/>
+        <circle class="pop" style="--d:5" cx="300" cy="330" r="9"/><circle class="pop" style="--d:6" cx="350" cy="345" r="9"/>
+        <circle class="pop" style="--d:7" cx="400" cy="280" r="9"/><circle class="pop" style="--d:8" cx="450" cy="250" r="9"/>
+        <circle class="pop" style="--d:9" cx="500" cy="270" r="9"/><circle class="pop" style="--d:10" cx="550" cy="200" r="9"/>
+        <circle class="pop" style="--d:11" cx="600" cy="170" r="9"/><circle class="pop" style="--d:12" cx="660" cy="120" r="9"/>
+      </g>
+      <g class="draw"><line x1="90" y1="465" x2="710" y2="95" stroke="#C4613F" stroke-width="6" stroke-linecap="round" style="--len:740"/></g>
+    </svg>
+  </div>
+  <aside class="notes" data-t="3 min">
+    <ul><li>Ejemplo cercano para un fondo: el múltiplo de EBITDA es una regresión lineal mental.</li>
+    <li>“Aprender” = encontrar el múltiplo y el ajuste que mejor explican los ejemplos.</li>
+    <li>Guardar la idea de “pesos”: los modelos de IA tienen miles de millones de estos números.</li></ul>
+  </aside>
+</section>
+
+<section class="slide" data-block="01 · De las neuronas al chat" aria-label="La neurona">
+  <div class="eyebrow r" style="--d:0">Una neurona artificial</div>
+  <h2 class="r" style="--d:1">Una regresión con una <em class="s">curva</em> al final</h2>
+  <div class="grid2" style="grid-template-columns:1.25fr 1fr">
+    <svg class="r" style="--d:2" viewBox="0 0 980 520" width="980" height="520" aria-label="Diagrama de neurona">
+      <g font-size="26" fill="#F7F5F2" font-weight="600">
+        <g class="pop" style="--d:1"><circle cx="80" cy="110" r="46" fill="#102848" stroke="rgba(247,245,242,.3)" stroke-width="2"/><text x="80" y="119" text-anchor="middle">x₁</text></g>
+        <g class="pop" style="--d:2"><circle cx="80" cy="260" r="46" fill="#102848" stroke="rgba(247,245,242,.3)" stroke-width="2"/><text x="80" y="269" text-anchor="middle">x₂</text></g>
+        <g class="pop" style="--d:3"><circle cx="80" cy="410" r="46" fill="#102848" stroke="rgba(247,245,242,.3)" stroke-width="2"/><text x="80" y="419" text-anchor="middle">x₃</text></g>
+      </g>
+      <g class="draw" stroke="#D97757" stroke-width="3" fill="none">
+        <path d="M126 110 L414 240" style="--len:320"/><path d="M126 260 L410 260" style="--len:290"/><path d="M126 410 L414 280" style="--len:320"/>
+      </g>
+      <g font-size="22" fill="#E8957A" font-style="italic" font-family="Source Serif 4">
+        <text x="250" y="150">w₁</text><text x="250" y="248">w₂</text><text x="250" y="380">w₃</text>
+      </g>
+      <g class="pop" style="--d:5"><circle cx="480" cy="260" r="72" fill="#1E3A5F" stroke="#D97757" stroke-width="3"/><text x="480" y="275" text-anchor="middle" font-size="48" fill="#F7F5F2">Σ</text></g>
+      <text x="480" y="372" text-anchor="middle" font-size="20" fill="rgba(247,245,242,.6)">suma ponderada</text>
+      <g class="draw" stroke="#D97757" stroke-width="3" fill="none"><path d="M552 260 L620 260" style="--len:70"/></g>
+      <g class="pop" style="--d:7"><rect x="620" y="190" width="170" height="140" rx="20" fill="#1E3A5F" stroke="rgba(247,245,242,.3)" stroke-width="2"/>
+        <path d="M640 300 C690 300 690 300 705 260 C720 220 720 220 770 220" stroke="#F7F5F2" stroke-width="4" fill="none"/></g>
+      <text x="705" y="372" text-anchor="middle" font-size="20" fill="rgba(247,245,242,.6)">activación</text>
+      <g class="draw" stroke="#D97757" stroke-width="3" fill="none"><path d="M790 260 L880 260" style="--len:90"/></g>
+      <g class="pop" style="--d:9"><circle cx="920" cy="260" r="40" fill="#D97757"/><text x="920" y="270" text-anchor="middle" font-size="26" fill="#0B1F3A" font-weight="700">y</text></g>
+    </svg>
+    <div class="tips">
+      <div class="tip r" style="--d:3"><b class="k">ENTRA</b><p>Varios datos de entrada (x₁, x₂, x₃).</p></div>
+      <div class="tip r" style="--d:4"><b class="k">PESA</b><p>Cada uno se multiplica por su peso y se suma: <b>una regresión lineal</b>.</p></div>
+      <div class="tip r" style="--d:5"><b class="k">DECIDE</b><p>Una curva decide cuánto “se activa”. Eso le permite aprender relaciones que no son líneas rectas.</p></div>
+    </div>
+  </div>
+  <aside class="notes" data-t="3 min">
+    <ul><li>Idea de 1958 (el perceptrón de Frank Rosenblatt). No es nueva: lo nuevo es la escala.</li>
+    <li>La “activación” es lo que permite que, al encadenar muchas, la red aprenda cosas no lineales.</li></ul>
+  </aside>
+</section>
+
+<section class="slide" data-block="01 · De las neuronas al chat" aria-label="Red neuronal">
+  <div class="eyebrow r" style="--d:0">Una red neuronal</div>
+  <h2 class="r" style="--d:1">Funciones <em class="s">encadenadas</em>: la salida de una es la entrada de la otra</h2>
+  <div class="grid2" style="grid-template-columns:1.35fr 1fr;margin-top:20px">
+    <svg class="r" style="--d:2" id="net" viewBox="0 0 1000 560" width="1000" height="560" aria-label="Diagrama de red neuronal de cuatro capas"></svg>
+    <div>
+      <div class="stats" style="grid-template-columns:1fr;gap:34px;margin:0">
+        <div class="stat r" style="--d:3;padding:0;border:0"><div class="big" style="font-size:96px">175.000<small> M</small></div><div class="lbl">de pesos (“parámetros”) tenía GPT‑3 en 2020</div></div>
+        <div class="stat r" style="--d:4;padding:0;border:0"><div class="big" style="font-size:96px;color:var(--coral)">Billones</div><div class="lbl">de cálculos por cada palabra que genera un modelo actual</div></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" data-t="3 min">
+    <ul><li>Capas: cada columna de círculos es una capa de neuronas; cada línea es un peso.</li>
+    <li>Un modelo moderno tiene cientos de miles de millones de pesos. Nadie los programa a mano: se aprenden.</li>
+    <li>Ese es el sentido de “red”: muchas regresiones conectadas.</li></ul>
+  </aside>
+</section>
+
+<section class="slide light" data-block="01 · De las neuronas al chat" aria-label="Cómo aprende">
+  <div class="eyebrow r" style="--d:0">Entrenar</div>
+  <h2 class="r" style="--d:1">Aprender = medir el error y <em class="s">ajustar</em></h2>
+  <div class="flow">
+    <div class="fl r" style="--d:2"><div class="k">Paso 1</div><h3>Predecir</h3><p>La red da una respuesta con los pesos que tiene.</p></div>
+    <div class="fl r" style="--d:3"><div class="k">Paso 2</div><h3>Comparar</h3><p>Se compara con la respuesta real del ejemplo.</p></div>
+    <div class="fl r" style="--d:4"><div class="k">Paso 3</div><h3>Medir el error</h3><p>¿Cuánto se equivocó y en qué dirección?</p></div>
+    <div class="fl r" style="--d:5"><div class="k">Paso 4</div><h3>Ajustar los pesos</h3><p>Cada peso se mueve un poquito para equivocarse menos.</p></div>
+  </div>
+  <p class="r" style="--d:6;font-size:30px;color:var(--fg)">Repetido <b>miles de millones de veces</b> sobre enormes cantidades de texto. A esto se le llama entrenamiento <span class="small" style="color:var(--muted)">(técnicamente: <i>backpropagation</i> y descenso por gradiente).</span></p>
+  <aside class="notes" data-t="2 min">
+    <ul><li>“Midiendo las medidas”: el modelo nunca sabe la respuesta; solo sabe cuánto se equivocó y corrige.</li>
+    <li>Analogía: un analista junior que recibe correcciones en cada informe, millones de veces.</li></ul>
+  </aside>
+</section>
+
+<section class="slide" data-block="01 · De las neuronas al chat" aria-label="La escalera de la predicción">
+  <div class="eyebrow r" style="--d:0">La escalera de la predicción</div>
+  <h2 class="r" style="--d:1">Primero la letra, después la palabra… <em class="s">después textos enteros</em></h2>
+  <div class="ladder">
+    <div class="rung r" style="--d:2"><div class="y">1948</div><h3>La letra</h3><p>Claude Shannon predice letras con estadística.</p><div class="ex">Montevide<u>o</u></div></div>
+    <div class="rung r" style="--d:3"><div class="y">2003</div><h3>La palabra</h3><p>Primeros modelos de lenguaje con redes neuronales.</p><div class="ex">El fondo compró la <u>empresa</u></div></div>
+    <div class="rung r" style="--d:4"><div class="y">2017</div><h3>La oración</h3><p>El “Transformer” de Google: mira todo el contexto a la vez.</p><div class="ex">Traducí: “We closed the deal” → <u>Cerramos el trato</u></div></div>
+    <div class="rung r" style="--d:5"><div class="y">2019 →</div><h3>Textos enteros</h3><p>GPT‑2 y GPT‑3 escriben párrafos coherentes.</p><div class="ex">Escribí un memo de inversión sobre… <u>[2 páginas]</u></div></div>
+  </div>
+  <div class="ground"></div>
+  <aside class="notes" data-t="4 min">
+    <ul><li>Shannon (el padre de la teoría de la información) ya en 1948 generaba texto prediciendo letras.</li>
+    <li>2003: Yoshua Bengio usa una red neuronal para predecir la siguiente palabra.</li>
+    <li>2017: el paper “Attention Is All You Need” (Google) presenta el Transformer: la “T” de GPT.</li>
+    <li>2019–2020: GPT‑2 y GPT‑3 de OpenAI. Misma idea, mucho más grande.</li></ul>
+  </aside>
+</section>
+
+<section class="slide" data-block="01 · De las neuronas al chat" aria-label="Generar texto">
+  <div class="eyebrow r" style="--d:0">El truco</div>
+  <h2 class="r" style="--d:1">Generar = predecir la siguiente palabra, <em class="s">una y otra vez</em></h2>
+  <div class="gen">
+    <div class="tokens" id="tokens" data-words="El|fondo|analiza|la|empresa|antes|de|invertir|y|propone|un|plan|de|mejora|."></div>
+    <div class="loop-row r" style="--d:3"><span class="st">Texto hasta ahora</span><span class="ar">→</span><span class="st">Modelo</span><span class="ar">→</span><span class="st">Siguiente palabra</span><span class="ar">↺</span><span>se agrega al texto y se repite</span></div>
+  </div>
+  <aside class="notes" data-t="2 min">
+    <ul><li>Dejar que la animación corra: cada palabra nueva vuelve a entrar como contexto.</li>
+    <li>Técnicamente predice “tokens” (pedazos de palabras), pero la idea es la misma.</li></ul>
+  </aside>
+</section>
+
+<section class="slide" data-block="01 · De las neuronas al chat" aria-label="Eureka del chat">
+  <div class="eyebrow r" style="--d:0">El descubrimiento</div>
+  <div class="grid2" style="grid-template-columns:1.1fr 1fr;gap:80px">
+    <div class="doc r" style="--d:1">
+      <div class="q"><b>P:</b> ¿Cuál es la capital de Uruguay?</div>
+      <div class="a"><b>R:</b> Montevideo.</div>
+      <div class="q"><b>P:</b> ¿Qué es el EBITDA?</div>
+      <div class="a"><b>R:</b> El resultado antes de intereses, impuestos, depreciaciones y amortizaciones.</div>
+      <div class="q"><b>P:</b> ¿Qué hace un fondo de private equity?</div>
+      <div class="a"><b>R:</b> <span class="typing" id="typing" data-text="Invierte en empresas que no cotizan en bolsa, las ayuda a crecer y después vende su participación."></span></div>
+    </div>
+    <div>
+      <div class="eureka r" style="--d:2">¡Eureka!</div>
+      <p class="lead r" style="--d:3">Si el texto tiene forma de <b>pregunta → respuesta</b>, el modelo simplemente “continúa”… y responde.</p>
+      <p class="r" style="--d:4;margin-top:26px">Se lo afinó con muchísimos ejemplos de conversaciones y con personas que califican sus respuestas. Así nació el <b>chat</b>.</p>
+    </div>
+  </div>
+  <aside class="notes" data-t="3 min">
+    <ul><li>Contar como experimento: si le das un documento de preguntas y respuestas y lo dejás abierto en una pregunta, el modelo la completa.</li>
+    <li>Después se lo entrenó a propósito con diálogos y con feedback humano (RLHF: aprendizaje por refuerzo con retroalimentación humana).</li>
+    <li>El modelo “sabe más o menos qué responder” porque vio enormes cantidades de preguntas y respuestas.</li></ul>
+  </aside>
+</section>
+
+<section class="slide mid" data-block="01 · De las neuronas al chat" aria-label="Lanzamiento de ChatGPT">
+  <div class="dots"></div>
+  <div class="eyebrow r" style="--d:0">30 de noviembre de 2022</div>
+  <h2 class="r" style="--d:1">Nace <em class="s">ChatGPT</em> y el mundo se entera</h2>
+  <div class="stats">
+    <div class="stat r" style="--d:2"><div class="big">5<small> días</small></div><div class="lbl">para llegar a 1 millón de usuarios</div></div>
+    <div class="stat r" style="--d:3"><div class="big">~2<small> meses</small></div><div class="lbl">para llegar a 100 millones: el producto de consumo de crecimiento más rápido hasta entonces</div></div>
+    <div class="stat r" style="--d:4"><div class="big">2023</div><div class="lbl">Anthropic lanza Claude y Google lanza Bard (hoy Gemini)</div></div>
+  </div>
+  <aside class="notes" data-t="2 min">
+    <ul><li>Lo que cambió no fue tanto la tecnología (GPT‑3 ya existía desde 2020) sino la interfaz: una caja de chat.</li>
+    <li>Pregunta al grupo: ¿cuándo lo usaron por primera vez?</li></ul>
+  </aside>
+</section>
+
+<section class="slide" data-block="01 · De las neuronas al chat" aria-label="Mezcla de expertos">
+  <div class="eyebrow r" style="--d:0">Cómo escalan los modelos grandes</div>
+  <h2 class="r" style="--d:1">Mezcla de expertos <em class="s">(Mixture of Experts)</em></h2>
+  <div class="grid2" style="grid-template-columns:1.3fr 1fr;gap:70px">
+    <div class="moe r" style="--d:2">
+      <svg viewBox="0 0 980 560" aria-label="Router que envía cada palabra a dos expertos">
+        <rect x="10" y="230" width="190" height="100" rx="18" fill="#102848" stroke="rgba(247,245,242,.3)" stroke-width="2"/>
+        <text x="105" y="273" text-anchor="middle" font-size="22" fill="rgba(247,245,242,.7)">palabra</text>
+        <text x="105" y="305" text-anchor="middle" font-size="26" font-weight="700" fill="#F7F5F2" id="moeWord">EBITDA</text>
+        <line x1="200" y1="280" x2="290" y2="280" stroke="#D97757" stroke-width="3"/>
+        <circle cx="350" cy="280" r="60" fill="#D97757"/><text x="350" y="289" text-anchor="middle" font-size="24" font-weight="700" fill="#0B1F3A">Router</text>
+        <g id="moeRoutes" stroke="#D97757" stroke-width="3"></g>
+        <g id="moeExperts"></g>
+      </svg>
+    </div>
+    <div class="tips">
+      <div class="tip r" style="--d:3"><b class="k">IDEA</b><p>En vez de un solo cerebro gigante, muchos <b>“expertos”</b> más chicos.</p></div>
+      <div class="tip r" style="--d:4"><b class="k">ROUTER</b><p>Para cada palabra, un “router” elige qué pocos expertos se activan.</p></div>
+      <div class="tip r" style="--d:5"><b class="k">VENTAJA</b><p>Modelos enormes que responden rápido y cuestan menos: solo trabaja una parte a la vez.</p></div>
+    </div>
+  </div>
+  <p class="note-foot r" style="--d:6">Simplificación: en la práctica los expertos no se dividen tan prolijamente por tema como en el dibujo.</p>
+  <aside class="notes" data-t="3 min">
+    <ul><li>Se llama MoE (Mixture of Experts). Lo usan por ejemplo Mixtral y DeepSeek; se cree que varios modelos de frontera también.</li>
+    <li>La intuición de “un experto por dominio” sirve para explicarlo, pero el reparto real es más fino y lo aprende el modelo solo.</li></ul>
+  </aside>
+</section>
+
+<section class="slide light" data-block="01 · De las neuronas al chat" aria-label="Alucinaciones">
+  <div class="eyebrow r" style="--d:0">Lo que hay que saber</div>
+  <h2 class="r" style="--d:1">Predice lo más <em class="s">probable</em>, no lo verificado</h2>
+  <div class="grid2">
+    <div class="card r" style="--d:2">
+      <p class="small" style="letter-spacing:.14em;text-transform:uppercase;font-weight:600">El fondo decidió invertir en la…</p>
+      <div class="bars" style="margin-top:26px">
+        <div class="bar"><span>empresa</span><span class="t"><i style="--w:72%"></i></span><span class="v">72%</span></div>
+        <div class="bar"><span>compañía</span><span class="t"><i style="--w:18%"></i></span><span class="v">18%</span></div>
+        <div class="bar"><span>región</span><span class="t"><i style="--w:7%"></i></span><span class="v">7%</span></div>
+      </div>
+      <p class="note-foot">Ejemplo ilustrativo.</p>
+    </div>
+    <div class="tips">
+      <div class="tip r" style="--d:3"><b class="k">RIESGO</b><p>Si no tiene el dato, puede <b>“alucinar”</b>: inventar algo que suena correcto.</p></div>
+      <div class="tip r" style="--d:4"><b class="k">CUIDADO 1</b><p>Darle los documentos en vez de pedirle que “recuerde”.</p></div>
+      <div class="tip r" style="--d:5"><b class="k">CUIDADO 2</b><p>Pedirle que cite de dónde saca cada cifra.</p></div>
+      <div class="tip r" style="--d:6"><b class="k">CUIDADO 3</b><p>Revisar siempre números, nombres y fechas antes de usarlos.</p></div>
+    </div>
+  </div>
+  <aside class="notes" data-t="2 min">
+    <ul><li>Cierre del bloque 1: entender el mecanismo explica tanto lo bueno como los errores.</li>
+    <li>Regla de oro para el fondo: la IA hace el primer borrador; la persona firma.</li></ul>
+  </aside>
+</section>
+
+<!-- =====================================================
+     BLOQUE 02 · LABORATORIOS Y MODELOS
+     ===================================================== -->
+<section class="slide divider" data-nofoot aria-label="Bloque 2">
+  <div class="bnum">02</div>
+  <div class="kick r" style="--d:0"><span class="tag"><i></i>Bloque 02 · 20 min</span></div>
+  <h2 class="r" style="--d:1">Los laboratorios <em class="s">y sus modelos</em></h2>
+  <div class="what r" style="--d:2"><span>DeepMind, OpenAI, Anthropic</span><span>Dos filosofías</span><span>Los modelos de hoy</span><span>La familia Claude</span></div>
+  <aside class="notes" data-t="—"><ul><li>De la tecnología a las personas y empresas que la construyen.</li></ul></aside>
+</section>
+
+<section class="slide" data-block="02 · Laboratorios y modelos" aria-label="Línea de tiempo de los laboratorios">
+  <div class="eyebrow r" style="--d:0">Quién es quién</div>
+  <h2 class="r" style="--d:1">El origen de los <em class="s">laboratorios</em></h2>
+  <div class="tline">
+    <div class="ev r" style="--d:2"><div class="y">2010</div><h3>Nace DeepMind</h3><p>Londres. Demis Hassabis, Shane Legg y Mustafa Suleyman.</p></div>
+    <div class="ev r" style="--d:3"><div class="y">2014</div><h3>Google compra DeepMind</h3><p>Hoy es Google DeepMind, detrás de Gemini.</p></div>
+    <div class="ev r" style="--d:4"><div class="y">2015</div><h3>Nace OpenAI</h3><p>Sin fines de lucro. Sam Altman, Elon Musk, Greg Brockman, Ilya Sutskever y otros.</p></div>
+    <div class="ev r" style="--d:5"><div class="y">2018</div><h3>Musk se va</h3><p>Deja el directorio de OpenAI. Años después funda xAI (Grok).</p></div>
+    <div class="ev hl r" style="--d:6"><div class="y">2021</div><h3>Nace Anthropic</h3><p>Dario Amodei, su hermana Daniela y otros ex‑OpenAI. Foco en seguridad.</p></div>
+    <div class="ev r" style="--d:7"><div class="y">2022–23</div><h3>ChatGPT y Claude</h3><p>Llegan al público los primeros asistentes conversacionales.</p></div>
+  </div>
+  <aside class="notes" data-t="4 min">
+    <ul><li>DeepMind se hizo famosa con AlphaGo (2016) y AlphaFold (proteínas, Premio Nobel de Química 2024 para Hassabis y Jumper).</li>
+    <li>OpenAI nace como contrapeso a Google, sin fines de lucro; después crea una estructura con fines de lucro y entra Microsoft.</li>
+    <li>Dario Amodei era VP de investigación en OpenAI; se va con un grupo porque quería poner la seguridad en el centro.</li></ul>
+  </aside>
+</section>
+
+<section class="slide" data-block="02 · Laboratorios y modelos" aria-label="Dos filosofías">
+  <div class="eyebrow r" style="--d:0">Dos énfasis distintos</div>
+  <h2 class="r" style="--d:1">OpenAI y Anthropic: <em class="s">dos filosofías</em></h2>
+  <div class="vs">
+    <div class="side r" style="--d:2">
+      <div class="who">OpenAI · Sam Altman</div>
+      <h3>Producto primero</h3>
+      <p class="lead2">Llegar a cientos de millones de personas.</p>
+      <ul><li>ChatGPT como producto de consumo masivo</li><li>Muchas funciones para el usuario final</li><li>Imagen, voz, video, compras, apps</li></ul>
+    </div>
+    <div class="mid-x r" style="--d:3">vs</div>
+    <div class="side ant r" style="--d:4">
+      <div class="who">Anthropic · Dario Amodei</div>
+      <h3>Modelo y confianza primero</h3>
+      <p class="lead2">Modelos más capaces, seguros y precisos.</p>
+      <ul><li>Investigación en seguridad y en entender cómo “piensan” los modelos</li><li>Foco en empresas, datos y trabajo profesional</li><li>Estándares abiertos: MCP, Skills, CLAUDE.md</li></ul>
+    </div>
+  </div>
+  <aside class="notes" data-t="4 min">
+    <ul><li>Es una simplificación útil, no un juicio: ambos hacen de todo, pero el énfasis se nota.</li>
+    <li>Anthropic creó MCP (el estándar para conectar la IA con sistemas), que después adoptaron OpenAI y Google.</li>
+    <li>Para un fondo: lo que importa es precisión con documentos y datos, y control de la información.</li></ul>
+  </aside>
+</section>
+
+<section class="slide" data-block="02 · Laboratorios y modelos" aria-label="Los modelos hoy">
+  <div class="eyebrow r" style="--d:0">Octubre 2026</div>
+  <h2 class="r" style="--d:1">Los modelos de <em class="s">hoy</em></h2>
+  <div class="labs">
+    <div class="lab r" style="--d:2"><div class="co">OpenAI</div><h3>GPT‑6</h3>
+      <ul><li>Astra <span>· el más potente (sep 2026)</span></li><li>Sol / 6.1 Sol <span>· intermedio</span></li><li>Luna <span>· rápido y económico</span></li></ul>
+      <div class="foot2">Ojo: “Astra” también es un proyecto de Google.</div></div>
+    <div class="lab me r" style="--d:3"><div class="co">Anthropic</div><h3>Claude</h3>
+      <ul><li>Fable 5.1 <span>· el más capaz</span></li><li>Opus 5.5 <span>· el recomendado</span></li><li>Sonnet 5.5 <span>· rápido</span></li><li>Haiku 4.5 <span>· el más liviano</span></li></ul>
+      <div class="foot2">Hasta 1 millón de tokens de contexto: cientos de páginas a la vez.</div></div>
+    <div class="lab r" style="--d:4"><div class="co">Google DeepMind</div><h3>Gemini</h3>
+      <ul><li>Gemini 4 Argon <span>· anunciado, acceso restringido</span></li><li>Gemini 3.1 Pro</li><li>Gemini 3.5 / 3.6 Flash</li></ul>
+      <div class="foot2">Project Astra: asistente que ve y escucha en tiempo real.</div></div>
+    <div class="lab r" style="--d:5"><div class="co">China y otros</div><h3>Muchos jugadores</h3>
+      <ul><li>DeepSeek V4 <span>· pesos abiertos</span></li><li>Qwen <span>· Alibaba</span></li><li>Kimi <span>· Moonshot</span> · GLM <span>· Zhipu</span></li><li>Grok <span>· xAI</span> · Mistral <span>· Francia</span></li></ul>
+      <div class="foot2">Muchos chinos publican sus modelos abiertos.</div></div>
+  </div>
+  <p class="note-foot r" style="--d:6">Este mercado cambia cada mes. Datos de OpenAI, Google y laboratorios chinos según prensa especializada a octubre 2026.</p>
+  <aside class="notes" data-t="5 min">
+    <ul><li>OpenAI: GPT‑6 Astra salió el 3/9/2026; Sol y Luna el 22/9; GPT‑6.1 Sol en el DevDay (29/9). La generación anterior (GPT‑5.6) tenía un nivel “Terra”.</li>
+    <li>Anthropic: Fable es una categoría por encima de Opus. Es el mismo modelo que “Mythos”, que tiene salvaguardas distintas y se reserva a socios de ciberseguridad.</li>
+    <li>Google: Gemini 4 Argon se anunció el 30/9, por ahora solo para socios. Lo público es 3.1 Pro y la línea Flash.</li>
+    <li>China: DeepSeek V4 (abril 2026, licencia abierta), Qwen3.8, Kimi K3, GLM‑5.3, MiniMax M3. Meta dejó Llama y pasó a un modelo cerrado (Muse Spark).</li></ul>
+  </aside>
+</section>
+
+<section class="slide light" data-block="02 · Laboratorios y modelos" aria-label="La familia Claude">
+  <div class="eyebrow r" style="--d:0">Anthropic</div>
+  <h2 class="r" style="--d:1">La familia <em class="s">Claude</em>: un modelo para cada trabajo</h2>
+  <div class="tiers">
+    <div class="tier r" style="--d:2"><div class="lvl"><i class="f"></i><i></i><i></i><i></i></div><h3>Haiku 4.5</h3><div class="role">El más liviano</div><p>Respuestas inmediatas y alto volumen: clasificar, extraer, responder.</p></div>
+    <div class="tier r" style="--d:3"><div class="lvl"><i class="f"></i><i class="f"></i><i></i><i></i></div><h3>Sonnet 5.5</h3><div class="role">Rápido</div><p>Muy capaz y ágil para el trabajo de todos los días.</p></div>
+    <div class="tier r" style="--d:4"><div class="lvl"><i class="f"></i><i class="f"></i><i class="f"></i><i></i></div><h3>Opus 5.5</h3><div class="role">El recomendado</div><p>Análisis profundo de documentos, finanzas y temas legales.</p></div>
+    <div class="tier r" style="--d:5;background:rgba(196,97,63,.1);border-color:rgba(196,97,63,.45)"><div class="lvl"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i></div><h3>Fable 5.1</h3><div class="role">El más capaz</div><p>Para los problemas más difíciles y los trabajos largos.</p></div>
+  </div>
+  <p class="r" style="--d:6;font-size:28px">Más capacidad = más tiempo de respuesta y más costo. <b>La clave es elegir el modelo según la tarea.</b></p>
+  <aside class="notes" data-t="3 min">
+    <ul><li>Analogía: no mandás al socio senior a ordenar carpetas ni al pasante a negociar un SPA.</li>
+    <li>Precios API por millón de tokens (entrada/salida): Haiku 1/5 USD, Sonnet 2/10, Opus 4/20, Fable 10/50.</li>
+    <li>En Claude.ai se elige el modelo desde el selector de la conversación.</li></ul>
+  </aside>
+</section>
+
+
+<section class="slide break" data-nofoot aria-label="Recreo">
+  <div class="eyebrow r" style="--d:0;justify-content:center">Recreo</div>
+  <div class="clock r" style="--d:1" id="clock" data-min="10">10:00</div>
+  <h2 class="r" style="--d:2">Volvemos en diez minutos</h2>
+  <p class="r" style="--d:3">A la vuelta: agentes que no solo responden, sino que hacen.</p>
+  <aside class="notes" data-t="10 min"><ul><li>El temporizador arranca solo al llegar a este slide. Tecla R lo reinicia.</li></ul></aside>
+</section>
+
+<!-- =====================================================
+     BLOQUE 03 · AGENTES
+     ===================================================== -->
+<section class="slide divider" data-nofoot aria-label="Bloque 3">
+  <div class="bnum">03</div>
+  <div class="kick r" style="--d:0"><span class="tag"><i></i>Bloque 03 · 15 min</span></div>
+  <h2 class="r" style="--d:1">Agentes: de responder <em class="s">a hacer</em></h2>
+  <div class="what r" style="--d:2"><span>Chat vs. agente</span><span>El mapa de agentes</span><span>Qué pueden hacer hoy</span></div>
+  <aside class="notes" data-t="—"><ul><li>El salto de 2025–2026: la IA ya no solo contesta, ejecuta tareas de varios pasos.</li></ul></aside>
+</section>
+
+<section class="slide" data-block="03 · Agentes" aria-label="Qué es un agente">
+  <div class="eyebrow r" style="--d:0">La diferencia</div>
+  <h2 class="r" style="--d:1">Un chat <em class="s">responde</em>. Un agente <em class="s">trabaja</em>.</h2>
+  <div class="grid2" style="grid-template-columns:1fr 700px;gap:60px">
+    <div class="tips">
+      <div class="tip r" style="--d:2"><b class="k">CHAT</b><p>Le hacés una pregunta, te da una respuesta. Vos hacés el resto.</p></div>
+      <div class="tip r" style="--d:3"><b class="k">AGENTE</b><p>Le das un <b>objetivo</b>. Planifica, usa herramientas, revisa lo que hizo y te entrega el resultado.</p></div>
+      <div class="tip r" style="--d:4"><b class="k">EJEMPLO</b><p>“Armame un resumen de las 5 empresas del portafolio con sus ventas del trimestre, en Excel y con gráficos.”</p></div>
+    </div>
+    <div class="aloop r" style="--d:3">
+      <div class="ring"></div>
+      <div class="core">Objetivo</div>
+      <div class="nd" style="left:50%;top:6%">1 · Planificar<small>divide en pasos</small></div>
+      <div class="nd" style="left:92%;top:42%">2 · Actuar<small>usa herramientas</small></div>
+      <div class="nd" style="left:72%;top:92%">3 · Revisar<small>¿salió bien?</small></div>
+      <div class="nd" style="left:24%;top:88%">4 · Ajustar<small>corrige</small></div>
+      <div class="nd" style="left:9%;top:40%">5 · Entregar<small>archivo, mail…</small></div>
+    </div>
+  </div>
+  <aside class="notes" data-t="5 min">
+    <ul><li>Un agente = modelo + herramientas + un ciclo de trabajo (planificar, actuar, revisar).</li>
+    <li>Puede trabajar minutos u horas, y pide aprobación antes de acciones sensibles.</li></ul>
+  </aside>
+</section>
+
+<section class="slide light" data-block="03 · Agentes" aria-label="Mapa de agentes">
+  <div class="eyebrow r" style="--d:0">El mapa</div>
+  <h2 class="r" style="--d:1">Los agentes que hay que <em class="s">conocer</em></h2>
+  <div class="amap">
+    <div class="acol r" style="--d:2"><div class="k">Para conversar</div><h3>Asistentes</h3>
+      <div class="it"><b>ChatGPT</b><span>OpenAI</span></div><div class="it"><b>Claude</b><span>Anthropic</span></div><div class="it"><b>Gemini</b><span>Google</span></div></div>
+    <div class="acol r" style="--d:3"><div class="k">Para trabajar</div><h3>Agentes de oficina</h3>
+      <div class="it"><b>Claude Cowork</b><span>Anthropic</span></div><div class="it"><b>ChatGPT Work</b><span>OpenAI</span></div><div class="it"><b>Claude in Chrome</b><span>navegador</span></div><div class="it"><b>Manus</b><span>Meta</span></div></div>
+    <div class="acol r" style="--d:4"><div class="k">Para construir</div><h3>Código y abiertos</h3>
+      <div class="it"><b>Claude Code</b><span>Anthropic</span></div><div class="it"><b>Codex</b><span>OpenAI</span></div><div class="it"><b>OpenClaw</b><span>código abierto</span></div></div>
+  </div>
+  <aside class="notes" data-t="5 min">
+    <ul><li>Claude Cowork: agente para trabajo de oficina en varios pasos; usa archivos, navegador, entrega Excel y PowerPoint; puede programar tareas. Se está unificando con el chat.</li>
+    <li>ChatGPT Work (julio 2026): equivalente de OpenAI. Codex: agente de programación de OpenAI.</li>
+    <li>Manus: agente general de una startup de Singapur; Meta la compró en diciembre 2025.</li>
+    <li>OpenClaw: agente personal de código abierto (antes Clawdbot/Moltbot) que se usa desde WhatsApp o Telegram; su creador se sumó a OpenAI.</li>
+    <li>Claude Code lo vemos a fondo en la Sesión 4.</li></ul>
+  </aside>
+</section>
+
+<!-- =====================================================
+     BLOQUE 04 · COMPONENTES
+     ===================================================== -->
+<section class="slide divider" data-nofoot aria-label="Bloque 4">
+  <div class="bnum">04</div>
+  <div class="kick r" style="--d:0"><span class="tag"><i></i>Bloque 04 · 25 min</span></div>
+  <h2 class="r" style="--d:1">Cómo está hecho <em class="s">un agente</em></h2>
+  <div class="what r" style="--d:2"><span>Skills</span><span>MCP y conectores</span><span>Memoria</span><span>Rutinas</span><span>Artefactos</span><span>Customize y plugins</span></div>
+  <aside class="notes" data-t="—"><ul><li>Bloque para abrir el capó: estas son las piezas que después vamos a configurar para IBF.</li></ul></aside>
+</section>
+
+<section class="slide" data-block="04 · Componentes" aria-label="Anatomía de un agente">
+  <div class="eyebrow r" style="--d:0">Anatomía</div>
+  <h2 class="r" style="--d:1">Las piezas de un <em class="s">agente</em></h2>
+  <div class="anat" style="flex:none;height:640px;margin-top:20px">
+    <svg viewBox="0 0 1640 640" preserveAspectRatio="none" aria-hidden="true">
+      <g class="draw" stroke="rgba(217,119,87,.55)" stroke-width="2.5" fill="none">
+        <path d="M680 260 L470 75" style="--len:300"/><path d="M675 320 L470 320" style="--len:220"/><path d="M680 380 L470 565" style="--len:300"/>
+        <path d="M960 260 L1170 75" style="--len:300"/><path d="M965 320 L1170 320" style="--len:220"/><path d="M960 380 L1170 565" style="--len:300"/>
+      </g>
+    </svg>
+    <div class="hub r" style="--d:2"><div><b>Modelo</b><span>el “cerebro”</span></div></div>
+    <div class="pt r" style="--d:3;left:0;top:0"><h3><i>01</i>Skills</h3><p>Saber hacer: procedimientos y formatos.</p></div>
+    <div class="pt r" style="--d:4;left:0;top:250px"><h3><i>02</i>Conectores · MCP</h3><p>Acceso a tus sistemas: mail, Drive, CRM.</p></div>
+    <div class="pt r" style="--d:5;left:0;bottom:0"><h3><i>03</i>Memoria y proyectos</h3><p>Contexto que recuerda entre conversaciones.</p></div>
+    <div class="pt r" style="--d:6;right:0;top:0"><h3><i>04</i>Herramientas</h3><p>Buscar en la web, ejecutar código, usar el navegador.</p></div>
+    <div class="pt r" style="--d:7;right:0;top:250px"><h3><i>05</i>Rutinas</h3><p>Trabaja solo, con horario o ante un evento.</p></div>
+    <div class="pt r" style="--d:8;right:0;bottom:0"><h3><i>06</i>Artefactos</h3><p>Lo que entrega: documentos, páginas, apps.</p></div>
+  </div>
+  <aside class="notes" data-t="3 min">
+    <ul><li>El modelo es el cerebro; el resto es lo que lo convierte en un compañero de trabajo útil.</li>
+    <li>Además: subagentes (ayudantes en paralelo) y permisos (la persona aprueba las acciones sensibles).</li></ul>
+  </aside>
+</section>
+
+<section class="slide light" data-block="04 · Componentes" aria-label="Skills">
+  <div class="eyebrow r" style="--d:0">Pieza 01</div>
+  <div class="comp">
+    <div>
+      <h2 class="r" style="--d:1;margin-top:0">Skills: el <em class="s">manual de procedimientos</em></h2>
+      <p class="what r" style="--d:2">Una carpeta con instrucciones (y, si hace falta, plantillas o scripts) que Claude <b>lee solo cuando la tarea lo necesita</b>.</p>
+      <div class="ana r" style="--d:3"><b>Ejemplo</b><p>“Memo de inversión con el formato de IBF”: cada vez que alguien pida un memo, sale igual.</p></div>
+    </div>
+    <div class="file r" style="--d:3">
+      <div class="bar0"><i></i><i></i><i></i>&nbsp; memo-de-inversion/SKILL.md</div>
+<pre><span class="c">---</span>
+<span class="k">name:</span> memo-de-inversion
+<span class="k">description:</span> <span class="s">Redacta memos de inversión para
+  el comité de IBF. Usar cuando se pida un memo,
+  un IC memo o un resumen de oportunidad.</span>
+<span class="c">---</span>
+
+# Estructura obligatoria
+1. Tesis de inversión (máx. 5 líneas)
+2. La empresa y su mercado
+3. Números clave: ventas, EBITDA, deuda
+4. Riesgos ordenados por gravedad
+5. Preguntas abiertas para el management
+
+# Reglas
+- Citar la página del CIM de cada cifra.
+- Montos en USD, con separador de miles.</pre>
+    </div>
+  </div>
+  <aside class="notes" data-t="4 min">
+    <ul><li>Archivo real: SKILL.md con un nombre y una descripción; Claude la carga solo cuando la descripción coincide con lo que se pide.</li>
+    <li>Claude ya trae skills para Excel, PowerPoint, Word y PDF. Se gestionan en Customize › Skills.</li>
+    <li>Ejemplo ilustrativo armado para IBF, no es una skill existente.</li></ul>
+  </aside>
+</section>
+
+<section class="slide" data-block="04 · Componentes" aria-label="MCP y conectores">
+  <div class="eyebrow r" style="--d:0">Pieza 02</div>
+  <div class="comp" style="grid-template-columns:1fr 840px">
+    <div>
+      <h2 class="r" style="--d:1;margin-top:0">MCP: el <em class="s">USB‑C</em> de la IA</h2>
+      <p class="what r" style="--d:2">Un estándar abierto para conectar la IA con tus sistemas y datos. Lo creó Anthropic en noviembre de 2024; hoy lo adoptaron OpenAI, Google y Microsoft.</p>
+      <div class="ana r" style="--d:3"><b>Conectores</b><p>Integraciones listas, basadas en MCP. Para cada acción elegís: <b>permitir</b>, <b>pedir aprobación</b> o <b>bloquear</b>.</p></div>
+    </div>
+    <div class="plug r" style="--d:3">
+      <svg style="position:absolute;inset:0" width="840" height="600" aria-hidden="true"><g class="draw" stroke="#D97757" stroke-width="2.5" fill="none">
+        <path d="M220 300 L270 300" style="--len:60"/>
+        <path d="M390 300 C440 300 440 68 480 68" style="--len:300"/><path d="M390 300 C440 300 440 184 480 184" style="--len:200"/>
+        <path d="M390 300 L480 300" style="--len:100"/><path d="M390 300 C440 300 440 416 480 416" style="--len:200"/><path d="M390 300 C440 300 440 532 480 532" style="--len:300"/></g></svg>
+      <div class="c">Claude</div>
+      <div class="m">MCP</div>
+      <div class="s" style="top:30px">Gmail · Outlook<small>correo</small></div>
+      <div class="s" style="top:146px">Google Drive · Box<small>documentos</small></div>
+      <div class="s" style="top:262px">Slack · Teams<small>comunicación</small></div>
+      <div class="s" style="top:378px">FactSet · PitchBook<small>datos financieros</small></div>
+      <div class="s" style="top:494px">ERP · CRM propios<small>a medida</small></div>
+    </div>
+  </div>
+  <aside class="notes" data-t="4 min">
+    <ul><li>MCP = Model Context Protocol. En diciembre de 2025 Anthropic lo donó a la Agentic AI Foundation (Linux Foundation), cofundada con OpenAI y Block.</li>
+    <li>Conectores en Claude: Gmail, Drive, Slack, Notion, Box, FactSet y más; se gestionan en Customize › Connectors.</li>
+    <li>Para un fondo: el control de permisos por acción es clave.</li></ul>
+  </aside>
+</section>
+
+<section class="slide light" data-block="04 · Componentes" aria-label="Memoria y proyectos">
+  <div class="eyebrow r" style="--d:0">Pieza 03</div>
+  <h2 class="r" style="--d:1">Memoria: que no haya que <em class="s">explicar todo de nuevo</em></h2>
+  <div class="cards3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:auto;margin-bottom:auto">
+    <div class="card r" style="--d:2"><div class="tag" style="border:0;padding:0"><i></i>Memoria</div><h3 style="margin-top:20px;font-size:44px">Lo que aprende de vos</h3><p style="margin-top:16px;font-size:30px">Guarda datos de tus conversaciones por tema. Le podés decir “recordá esto”, y ver o borrar lo que sabe.</p></div>
+    <div class="card r" style="--d:3"><div class="tag" style="border:0;padding:0"><i></i>Proyectos</div><h3 style="margin-top:20px;font-size:44px">Un espacio por tema</h3><p style="margin-top:16px;font-size:30px">Instrucciones y documentos propios. Ej.: proyecto “Deal X” con el CIM, el modelo y las notas. Cada proyecto tiene su memoria.</p></div>
+    <div class="card r" style="--d:4"><div class="tag" style="border:0;padding:0"><i></i>CLAUDE.md</div><h3 style="margin-top:20px;font-size:44px">La memoria escrita</h3><p style="margin-top:16px;font-size:30px">Un archivo de texto con las reglas del equipo que Claude lee siempre antes de trabajar. Nació en Claude Code.</p></div>
+  </div>
+  <aside class="notes" data-t="3 min">
+    <ul><li>La memoria se puede desactivar; los proyectos tienen memoria separada (lo de un deal no se mezcla con otro).</li>
+    <li>CLAUDE.md: idea de Anthropic que después copiaron otras herramientas.</li></ul>
+  </aside>
+</section>
+
+<section class="slide" data-block="04 · Componentes" aria-label="Rutinas">
+  <div class="eyebrow r" style="--d:0">Pieza 05</div>
+  <h2 class="r" style="--d:1">Rutinas: Claude trabaja <em class="s">mientras no estás</em></h2>
+  <div class="flow">
+    <div class="fl r" style="--d:2"><div class="k">Disparador</div><h3>Cuándo</h3><p>Un horario (todos los lunes 8:00), un evento o un llamado desde otro sistema.</p></div>
+    <div class="fl r" style="--d:3"><div class="k">Instrucción</div><h3>Qué</h3><p>Un pedido guardado, con los conectores que puede usar.</p></div>
+    <div class="fl r" style="--d:4"><div class="k">Ejecución</div><h3>Dónde</h3><p>En la nube de Anthropic, aunque tu computadora esté apagada.</p></div>
+    <div class="fl r" style="--d:5;background:rgba(217,119,87,.13);border-color:rgba(217,119,87,.45)"><div class="k">Resultado</div><h3>Entrega</h3><p>Un mail, un Excel, un mensaje en Slack o un documento.</p></div>
+  </div>
+  <div class="prompt r" style="--d:6;margin-bottom:10px"><span class="lbl">Ejemplo</span>Todos los lunes a las 8:00 → leer los reportes de las empresas del portafolio en Drive → armar un resumen de ventas y alertas → enviarlo por mail al equipo.</div>
+  <aside class="notes" data-t="4 min">
+    <ul><li>En Claude Code se llaman rutinas (se crean con /schedule); en Cowork, tareas programadas.</li>
+    <li>Ideas para IBF: resumen semanal del portafolio, alerta cuando llega un documento nuevo al data room, recordatorio de vencimientos de contratos.</li></ul>
+  </aside>
+</section>
+
+<section class="slide mid" data-block="04 · Componentes" aria-label="Artefactos">
+  <div class="dots"></div>
+  <div class="eyebrow r" style="--d:0">Pieza 06</div>
+  <div class="grid2" style="grid-template-columns:1.2fr 1fr">
+    <div>
+      <h2 class="r" style="--d:1;margin-top:0">Artefactos: lo que Claude <em class="s">entrega</em></h2>
+      <p class="what r" style="--d:2;font-size:34px;color:var(--fg);margin-top:30px">Documentos, páginas, tableros o pequeñas apps que se ven al lado de la conversación, se editan y se <b>comparten con un link</b>.</p>
+      <p class="r" style="--d:3;margin-top:24px">En Team y Enterprise se comparten dentro de la organización.</p>
+    </div>
+    <div class="card r" style="--d:3;text-align:center;padding:60px 40px;background:rgba(217,119,87,.12);border-color:rgba(217,119,87,.45)">
+      <div style="font-size:24px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--coral)">Dato curioso</div>
+      <div style="font-family:var(--serif);font-size:62px;line-height:1.1;margin-top:24px">Esta presentación <em style="color:var(--coral)">es un artefacto</em>.</div>
+      <p style="margin-top:24px;font-size:26px">Claude la diseñó, la revisó slide por slide y la publicó.</p>
+    </div>
+  </div>
+  <aside class="notes" data-t="2 min">
+    <ul><li>Mostrar el link de la presentación en el navegador.</li>
+    <li>Otros ejemplos: un tablero de KPIs, una calculadora de valuación, un checklist de due diligence compartido.</li></ul>
+  </aside>
+</section>
+
+<section class="slide" data-block="04 · Componentes" aria-label="Customize, plugins y Dispatch">
+  <div class="eyebrow r" style="--d:0">Dónde se configura todo</div>
+  <h2 class="r" style="--d:1">Customize, plugins y <em class="s">Dispatch</em></h2>
+  <div class="amap">
+    <div class="acol r" style="--d:2"><div class="k">Customize</div><h3>El panel de control</h3>
+      <p style="font-size:28px;margin-top:16px">Sección del menú lateral que reúne todo en un lugar:</p>
+      <div class="it"><b>Plugins</b><span>paquetes</span></div><div class="it"><b>Skills</b><span>procedimientos</span></div><div class="it"><b>Conectores</b><span>sistemas</span></div></div>
+    <div class="acol r" style="--d:3;background:rgba(217,119,87,.12);border-color:rgba(217,119,87,.45)"><div class="k">Plugins</div><h3>Un kit por rol</h3>
+      <p style="font-size:28px;margin-top:16px">Junta skills, conectores, comandos y ayudantes para un rol, listos para instalar.</p>
+      <div class="it"><b>Private Equity</b><span>plugin oficial</span></div><p style="font-size:25px;margin-top:6px">Sourcing, memos para comité, checklists de due diligence, tableros del portafolio.</p></div>
+    <div class="acol r" style="--d:4"><div class="k">Dispatch</div><h3>El coordinador</h3>
+      <p style="font-size:28px;margin-top:16px">Un agente de Cowork que recibe un objetivo, lo divide en tareas y las reparte. Se le puede encargar trabajo desde el celular.</p>
+      <p style="font-size:23px;margin-top:16px;color:var(--faint)">Hoy solo en planes Pro y Max, cerrado a usuarios nuevos. No está en Team.</p></div>
+  </div>
+  <aside class="notes" data-t="4 min">
+    <ul><li>Customize = Plugins + Skills + Conectores. Ahí se instala el plugin de Private Equity.</li>
+    <li>Ojo: Dispatch NO es parte de Claude Team hoy. En Team lo central es la administración: hasta 150 puestos, puestos Standard (USD 20/mes) y Premium (USD 100/mes), facturación anual.</li>
+    <li>Enterprise suma SSO/SCIM, registros de auditoría, retención de datos a medida y roles.</li></ul>
+  </aside>
+</section>
+
+<section class="slide light" data-block="04 · Componentes" aria-label="Demo en vivo">
+  <div class="grid2" style="grid-template-columns:1fr 1.1fr;gap:100px">
+    <div>
+      <span class="live r" style="--d:0"><i></i>En vivo</span>
+      <h2 class="r" style="--d:1;margin-top:34px">Un recorrido por <em class="s">Claude</em></h2>
+      <p class="lead r" style="--d:2">Abrimos Claude y vemos cada pieza funcionando.</p>
+    </div>
+    <ol class="steps">
+      <li class="r" style="--d:2">Elegir el modelo<span>Opus 5.5 vs. Haiku 4.5 con la misma pregunta</span></li>
+      <li class="r" style="--d:3">Customize › Conectores<span>conectar Drive o Gmail y ver los permisos</span></li>
+      <li class="r" style="--d:4">Customize › Skills y Plugins<span>instalar el plugin de Private Equity</span></li>
+      <li class="r" style="--d:5">Crear un proyecto<span>subir un documento y darle instrucciones</span></li>
+      <li class="r" style="--d:6">Programar una tarea<span>un resumen que llegue todos los lunes</span></li>
+    </ol>
+  </div>
+  <aside class="notes" data-t="6 min">
+    <ul><li>Tener la cuenta abierta antes de empezar. Si algo falla, mostrar capturas.</li>
+    <li>No conectar cuentas reales de IBF en la demo; usar una cuenta de prueba.</li></ul>
+  </aside>
+</section>
+
+<!-- =====================================================
+     BLOQUE 05 · CASO PRÁCTICO
+     ===================================================== -->
+<section class="slide divider" data-nofoot aria-label="Bloque 5">
+  <div class="bnum">05</div>
+  <div class="kick r" style="--d:0"><span class="tag"><i></i>Bloque 05 · 20 min</span></div>
+  <h2 class="r" style="--d:1">Caso práctico: <em class="s">private equity</em></h2>
+  <div class="what r" style="--d:2"><span>La IA ya está en el sector</span><span>Primera lectura de un data room</span><span>Probalo vos</span></div>
+  <aside class="notes" data-t="—"><ul><li>Bajamos todo lo anterior a un caso de IBF.</li></ul></aside>
+</section>
+
+<section class="slide" data-block="05 · Caso práctico" aria-label="La IA en private equity">
+  <div class="eyebrow r" style="--d:0">No es futuro</div>
+  <h2 class="r" style="--d:1">La IA ya llegó al <em class="s">private equity</em></h2>
+  <div class="tline" style="grid-template-columns:repeat(4,1fr);gap:40px">
+    <div class="ev r" style="--d:2"><div class="y">Jul 2025</div><h3>Claude for Financial Services</h3><p>Con datos de PitchBook, FactSet, S&amp;P Global y Morningstar, y un complemento para Excel.</p></div>
+    <div class="ev r" style="--d:3"><div class="y">2026</div><h3>Plugin oficial de Private Equity</h3><p>Sourcing, memos para comité, due diligence y tableros del portafolio.</p></div>
+    <div class="ev hl r" style="--d:4"><div class="y">May 2026</div><h3>Anthropic + Blackstone, H&amp;F y Goldman</h3><p>Empresa conjunta de USD 1.500 M para llevar IA a las empresas de los portafolios.</p></div>
+    <div class="ev r" style="--d:5"><div class="y">May 2026</div><h3>KPMG</h3><p>Socio preferido de Anthropic para private equity.</p></div>
+  </div>
+  <aside class="notes" data-t="3 min">
+    <ul><li>Anthropic también ofrece paquetes de due diligence que convierten documentos del data room en Excel (financieros, clientes, contratos).</li>
+    <li>Caso citado públicamente: AIG comprimió más de 5 veces el tiempo de revisión de negocios.</li>
+    <li>Mensaje: los grandes fondos ya lo están usando en el deal y en el portafolio.</li></ul>
+  </aside>
+</section>
+
+<section class="slide light" data-block="05 · Caso práctico" aria-label="Caso data room">
+  <div class="eyebrow r" style="--d:0">El caso</div>
+  <h2 class="r" style="--d:1">Primera lectura de un <em class="s">data room</em> en una tarde</h2>
+  <p class="lead r" style="--d:2;margin-top:18px">Llega una oportunidad: un CIM de 80 páginas y tres años de balances. Hay que decidir si vale la pena avanzar.</p>
+  <div class="flow" style="margin-top:auto">
+    <div class="fl r" style="--d:3"><div class="k">01 · Subir</div><h3>Los documentos</h3><p>A un proyecto “Deal X”, con las instrucciones del fondo.</p></div>
+    <div class="fl r" style="--d:4"><div class="k">02 · Resumir</div><h3>Tesis y KPIs</h3><p>Resumen ejecutivo, ventas, márgenes, deuda, clientes.</p></div>
+    <div class="fl r" style="--d:5"><div class="k">03 · Alertar</div><h3>Señales rojas</h3><p>Tendencias raras, concentración, ajustes al EBITDA.</p></div>
+    <div class="fl r" style="--d:6;background:rgba(196,97,63,.1);border-color:rgba(196,97,63,.45)"><div class="k">04 · Preparar</div><h3>Preguntas y memo</h3><p>Lista para el management y un borrador de memo.</p></div>
+  </div>
+  <p class="note-foot r" style="--d:7">El analista revisa y decide: Claude hace el primer borrador, la persona firma.</p>
+  <aside class="notes" data-t="4 min">
+    <ul><li>Hacerlo en vivo con un CIM público o de ejemplo (nunca con datos confidenciales en la demo).</li>
+    <li>Mostrar cómo pedirle que cite la página de cada cifra.</li></ul>
+  </aside>
+</section>
+
+<section class="slide" data-block="05 · Caso práctico" aria-label="Probalo ahora">
+  <div class="grid2" style="grid-template-columns:.8fr 1.2fr;gap:80px">
+    <div>
+      <span class="live r" style="--d:0;background:var(--coral);color:var(--navy)"><i style="background:var(--navy)"></i>Probalo ahora</span>
+      <h2 class="r" style="--d:1;margin-top:34px">Tu primer <em class="s">análisis</em></h2>
+      <p class="r" style="--d:2;margin-top:24px">Subí un balance o un informe (de ejemplo) y pegá este pedido. Cambiá lo que está en <span class="acc">coral</span>.</p>
+    </div>
+    <div class="prompt r" style="--d:3"><span class="lbl">Pedido para copiar</span>Sos un analista de private equity. Te adjunto <span class="v">[el balance / el CIM]</span> de <span class="v">[empresa]</span>.
+
+1. Resumí el negocio en 5 líneas.
+2. Armá una tabla con ventas, EBITDA y margen de los últimos <span class="v">3</span> años.
+3. Listá las 5 señales de alerta más importantes, ordenadas por gravedad.
+4. Proponé 5 preguntas para el management.
+
+Citá la página de cada cifra. Si un dato no está en el documento, decilo en vez de suponerlo.</div>
+  </div>
+  <aside class="notes" data-t="8 min">
+    <ul><li>Darles 5–6 minutos. Recorrer la sala y ayudar.</li>
+    <li>Remarcar la última línea: así se reducen las alucinaciones.</li>
+    <li>Dos o tres personas cuentan qué les salió.</li></ul>
+  </aside>
+</section>
+
+<!-- =====================================================
+     CIERRE
+     ===================================================== -->
+<section class="slide light" data-block="Cierre" aria-label="Lo que vimos hoy">
+  <div class="eyebrow r" style="--d:0">Lo que nos llevamos</div>
+  <h2 class="r" style="--d:1">Lo que vimos <em class="s">hoy</em></h2>
+  <div class="recap">
+    <div class="rc r" style="--d:2"><div class="n">01</div><h3>No es magia</h3><p>Regresiones encadenadas que predicen la siguiente palabra.</p></div>
+    <div class="rc r" style="--d:3"><div class="n">02</div><h3>Quién es quién</h3><p>OpenAI, Google y Anthropic, con énfasis distintos.</p></div>
+    <div class="rc r" style="--d:4"><div class="n">03</div><h3>De responder a hacer</h3><p>Los agentes ejecutan tareas de varios pasos.</p></div>
+    <div class="rc r" style="--d:5"><div class="n">04</div><h3>Las piezas</h3><p>Skills, conectores, memoria, rutinas y artefactos.</p></div>
+    <div class="rc r" style="--d:6"><div class="n">05</div><h3>Ya en el sector</h3><p>Data rooms, memos y portafolio.</p></div>
+  </div>
+  <aside class="notes" data-t="2 min"><ul><li>Repasar rápido. Preguntar qué fue lo que más les sorprendió.</li></ul></aside>
+</section>
+
+<section class="slide mid" data-block="Cierre" aria-label="Para mañana">
+  <div class="dots"></div>
+  <div class="grid2">
+    <div>
+      <div class="eyebrow r" style="--d:0">Antes de mañana</div>
+      <h2 class="r" style="--d:1">Para la <em class="s">Sesión 2</em></h2>
+      <p class="lead r" style="--d:2">Miércoles 7 de octubre · <b>Manos a la obra con Claude</b></p>
+    </div>
+    <div class="tips">
+      <div class="tip r" style="--d:3"><b class="k">01</b><p>Entrar a Claude con tu cuenta y probar que funciona.</p></div>
+      <div class="tip r" style="--d:4"><b class="k">02</b><p>Hacerle una pregunta real de tu trabajo.</p></div>
+      <div class="tip r" style="--d:5"><b class="k">03</b><p>Traer un documento de ejemplo (no confidencial) para practicar.</p></div>
+    </div>
+  </div>
+  <aside class="notes" data-t="1 min"><ul><li>Confirmar que todos tienen acceso a Claude antes de la Sesión 2.</li></ul></aside>
+</section>
+
+<section class="slide" data-nofoot aria-label="Preguntas">
+  <svg class="geo" style="right:-380px;top:-460px" width="900" height="900" viewBox="0 0 900 900" fill="none" aria-hidden="true">
+    <circle cx="450" cy="450" r="440" stroke="rgba(247,245,242,.06)" stroke-width="2"/><circle cx="450" cy="450" r="320" stroke="rgba(247,245,242,.08)" stroke-width="2"/>
+    <path d="M10 450 A440 440 0 0 0 450 890" stroke="#D97757" stroke-width="5" stroke-linecap="round"/></svg>
+  <div style="margin-top:auto">
+    <div class="eyebrow r" style="--d:0">Sesión 01 · Cierre</div>
+    <div class="close-h r" style="--d:1;margin-top:36px">Gracias<span>· Preguntas</span></div>
+    <p class="r" style="--d:2;margin-top:44px;font-size:30px"><b>Diego Maye</b> · Code4Business · Claude Partner Network</p>
+  </div>
+  <aside class="notes" data-t="—"><ul><li>Abrir preguntas. Recordar el horario de mañana.</li></ul></aside>
+</section>
+
+
+</main></div>
+
+<div id="progress" class="ui" aria-hidden="true"><i></i></div>
+<nav id="controls" class="ui" aria-label="Navegación">
+  <button id="prev" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+  <span id="counter" aria-live="polite"></span>
+  <button id="next" aria-label="Siguiente"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+  <button id="nt" aria-label="Notas del facilitador (N)"><svg viewBox="0 0 24 24"><path d="M5 4h14v16H5zM9 9h6M9 13h6M9 17h3"/></svg></button>
+  <button id="fs" aria-label="Pantalla completa (F)"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+</nav>
+<div id="notes" class="ui" aria-live="polite"></div>
+<div id="hint" class="ui">← → o espacio para navegar · F pantalla completa · N notas</div>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage');
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var total=slides.length,cur=0;
+  var bar=document.querySelector('#progress i'),counter=document.getElementById('counter');
+  var prevB=document.getElementById('prev'),nextB=document.getElementById('next'),fsB=document.getElementById('fs'),ntB=document.getElementById('nt');
+  var notes=document.getElementById('notes');
+  function pad(n){return(n<10?'0':'')+n}
+
+  slides.forEach(function(s,i){
+    if(s.hasAttribute('data-nofoot'))return;
+    var f=document.createElement('footer');f.className='foot';
+    f.innerHTML='<span class="bm"><i class="dot"></i>Sesión 01 · Entender la IA</span><span><span class="blk">'+(s.getAttribute('data-block')||'')+'</span><span class="pg">'+pad(i+1)+' / '+total+'</span></span>';
+    s.appendChild(f);
+  });
+
+  /* ---------- Red neuronal (SVG) ---------- */
+  (function(){
+    var svg=document.getElementById('net');if(!svg)return;
+    var L=[3,5,5,2],X=[90,370,650,910],out='',ns='';
+    var pos=L.map(function(n,li){var gap=540/(n+1);var a=[];for(var k=0;k<n;k++)a.push([X[li],10+gap*(k+1)]);return a});
+    for(var li=0;li<L.length-1;li++)pos[li].forEach(function(p){pos[li+1].forEach(function(q){
+      out+='<line x1="'+p[0]+'" y1="'+p[1]+'" x2="'+q[0]+'" y2="'+q[1]+'" stroke="rgba(217,119,87,.45)" stroke-width="2" style="--len:320"/>'})});
+    var d=0;pos.forEach(function(col,li){col.forEach(function(p){d++;
+      ns+='<circle class="pop" style="--d:'+d+'" cx="'+p[0]+'" cy="'+p[1]+'" r="30" fill="'+(li===0||li===3?'#D97757':'#1E3A5F')+'" stroke="rgba(247,245,242,.35)" stroke-width="2"/>'})});
+    var lab=['Entrada','Capa 1','Capa 2','Salida'].map(function(t,i){return '<text x="'+X[i]+'" y="555" text-anchor="middle" font-size="22" fill="rgba(247,245,242,.6)">'+t+'</text>'}).join('');
+    svg.innerHTML='<g class="draw">'+out+'</g>'+ns+lab;
+  })();
+
+  /* ---------- MoE (SVG) ---------- */
+  var moe=(function(){
+    var eg=document.getElementById('moeExperts'),rg=document.getElementById('moeRoutes');if(!eg)return null;
+    var names=['Finanzas','Legal','Código','Idiomas','Matemática','Historia','Ciencia','Redacción'],h='',r='';
+    names.forEach(function(n,i){var y=20+i*67;
+      h+='<g class="exp" data-i="'+i+'"><rect x="620" y="'+y+'" width="330" height="54" rx="14" fill="#102848" stroke="rgba(247,245,242,.25)" stroke-width="2"/><text x="785" y="'+(y+35)+'" text-anchor="middle" font-size="22" font-weight="600" fill="#F7F5F2">Experto · '+n+'</text></g>';
+      r+='<line class="route" data-i="'+i+'" x1="410" y1="280" x2="620" y2="'+(y+27)+'"/>';});
+    eg.innerHTML=h;rg.innerHTML=r;
+    var seq=[['EBITDA',[0,4]],['cláusula',[1,7]],['Python',[2,4]],['contrato',[1,0]],['traducir',[3,7]],['ROI',[0,4]]],k=0,t=null;
+    function step(){var s=seq[k%seq.length];k++;document.getElementById('moeWord').textContent=s[0];
+      [].forEach.call(document.querySelectorAll('.exp'),function(e){e.classList.toggle('lit',s[1].indexOf(+e.getAttribute('data-i'))>=0)});
+      [].forEach.call(document.querySelectorAll('.route'),function(e){e.classList.toggle('lit',s[1].indexOf(+e.getAttribute('data-i'))>=0)});}
+    return{start:function(){if(t)return;step();t=setInterval(step,1600)},stop:function(){clearInterval(t);t=null}};
+  })();
+
+  /* ---------- Generación token a token ---------- */
+  var gen=(function(){
+    var box=document.getElementById('tokens');if(!box)return null;
+    var w=box.getAttribute('data-words').split('|'),t=null;
+    box.innerHTML=w.map(function(x){return '<span class="tok">'+x+'</span>'}).join('')+'<span class="cursor"></span>';
+    var toks=box.querySelectorAll('.tok');
+    function reset(){[].forEach.call(toks,function(e){e.classList.remove('on','new')})}
+    function run(){reset();var i=0;clearInterval(t);t=setInterval(function(){
+      if(i>0)toks[i-1].classList.remove('new');
+      if(i>=toks.length){clearInterval(t);t=setTimeout(run,2600);return}
+      toks[i].classList.add('on','new');i++},520)}
+    return{start:function(){run()},stop:function(){clearInterval(t);clearTimeout(t);reset()},all:function(){[].forEach.call(toks,function(e){e.classList.add('on')})}};
+  })();
+
+  /* ---------- Tipeo del chat ---------- */
+  var typ=(function(){
+    var el=document.getElementById('typing');if(!el)return null;
+    var txt=el.getAttribute('data-text'),t=null;
+    return{start:function(){var i=0;el.textContent='';clearInterval(t);setTimeout(function(){t=setInterval(function(){el.textContent=txt.slice(0,++i);if(i>=txt.length)clearInterval(t)},38)},1200)},
+      stop:function(){clearInterval(t)},all:function(){el.textContent=txt}};
+  })();
+
+  /* ---------- Temporizador del recreo ---------- */
+  var clock=(function(){
+    var el=document.getElementById('clock');if(!el)return null;
+    var mins=+el.getAttribute('data-min'),end=null,t=null;
+    function draw(){var s=Math.max(0,Math.round((end-Date.now())/1000));el.textContent=Math.floor(s/60)+':'+pad(s%60);if(s===0)clearInterval(t)}
+    return{start:function(){if(!end){end=Date.now()+mins*60000}clearInterval(t);draw();t=setInterval(draw,500)},
+      reset:function(){end=Date.now()+mins*60000;draw()},stop:function(){clearInterval(t)}};
+  })();
+
+  var hooks={tokens:gen,typing:typ,moeWord:moe,clock:clock};
+  function runHooks(slide,on){
+    Object.keys(hooks).forEach(function(id){var h=hooks[id];if(!h)return;var el=document.getElementById(id);
+      if(el&&slide.contains(el)){on?h.start():h.stop()}});
+  }
+
+  function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform='translate(-50%,-50%) scale('+s+')'}
+  function renderNotes(){
+    var a=slides[cur].querySelector('aside.notes');
+    notes.innerHTML='<h4>Notas · slide '+(cur+1)+(a&&a.getAttribute('data-t')?'<span class="tm">⏱ '+a.getAttribute('data-t')+'</span>':'')+'</h4>'+(a?a.innerHTML:'<p>Sin notas.</p>');
+  }
+  function go(n){
+    n=Math.max(0,Math.min(total-1,n));
+    if(slides[cur])runHooks(slides[cur],false);
+    cur=n;
+    slides.forEach(function(s,i){s.classList.toggle('active',i===n);s.classList.toggle('past',i<n);s.setAttribute('aria-hidden',i===n?'false':'true')});
+    runHooks(slides[n],true);
+    bar.style.width=((n+1)/total*100)+'%';
+    counter.innerHTML='<b>'+(n+1)+'</b> / '+total;
+    prevB.disabled=n===0;nextB.disabled=n===total-1;
+    renderNotes();
+    if(history.replaceState)history.replaceState(null,'','#'+(n+1));
+  }
+  function next(){go(cur+1)}function prev(){go(cur-1)}
+  function toggleFS(){var d=document,el=d.documentElement;
+    if(d.fullscreenElement||d.webkitFullscreenElement){(d.exitFullscreen||d.webkitExitFullscreen).call(d)}else{(el.requestFullscreen||el.webkitRequestFullscreen).call(el)}}
+  function toggleNotes(){notes.classList.toggle('show');ntB.classList.toggle('on',notes.classList.contains('show'))}
+
+  document.addEventListener('keydown',function(e){
+    if(e.altKey||e.ctrlKey||e.metaKey)return;
+    switch(e.key){
+      case'ArrowRight':case'ArrowDown':case'PageDown':case' ':case'Spacebar':case'Enter':e.preventDefault();next();break;
+      case'ArrowLeft':case'ArrowUp':case'PageUp':case'Backspace':e.preventDefault();prev();break;
+      case'Home':e.preventDefault();go(0);break;
+      case'End':e.preventDefault();go(total-1);break;
+      case'f':case'F':e.preventDefault();toggleFS();break;
+      case'n':case'N':e.preventDefault();toggleNotes();break;
+      case'r':case'R':if(clock&&slides[cur].contains(document.getElementById('clock'))){clock.reset()}break;
+    }
+    hint.classList.add('hide');
+  });
+  prevB.onclick=function(){prev();this.blur()};nextB.onclick=function(){next();this.blur()};
+  fsB.onclick=function(){toggleFS();this.blur()};ntB.onclick=function(){toggleNotes();this.blur()};
+
+  var sx=0,sy=0,st=0;
+  document.addEventListener('touchstart',function(e){var t=e.changedTouches[0];sx=t.clientX;sy=t.clientY;st=Date.now()},{passive:true});
+  document.addEventListener('touchend',function(e){if(e.target.closest&&e.target.closest('#notes,#controls'))return;var t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;
+    if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.2&&Date.now()-st<800){dx<0?next():prev();hint.classList.add('hide')}},{passive:true});
+
+  var hint=document.getElementById('hint');setTimeout(function(){hint.classList.add('hide')},5000);
+  var idleT;function wake(){document.body.classList.remove('idle');clearTimeout(idleT);idleT=setTimeout(function(){if(!notes.classList.contains('show'))document.body.classList.add('idle')},2800)}
+  ['mousemove','touchstart','keydown'].forEach(function(ev){document.addEventListener(ev,wake,{passive:true})});wake();
+
+  window.addEventListener('beforeprint',function(){gen&&gen.all();typ&&typ.all()});
+  window.addEventListener('resize',fit);
+  window.addEventListener('hashchange',function(){var h=parseInt(location.hash.slice(1),10);if(h&&h-1!==cur)go(h-1)});
+  fit();var h0=parseInt(location.hash.slice(1),10);go(h0?h0-1:0);
+})();
+</script>
+</body>
+</html>
