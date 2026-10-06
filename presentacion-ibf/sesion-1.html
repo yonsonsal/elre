@@ -435,7 +435,7 @@ canvas.pcv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;
 
 
 /* Quién soy */
-.aboutme{display:grid;grid-template-columns:1fr 760px;gap:80px;flex:1;align-items:center}
+.aboutme{display:grid;grid-template-columns:1fr 820px;gap:70px;flex:1;align-items:center}
 .aboutme .hd{display:flex;align-items:center;gap:40px;margin-top:30px}
 .aboutme .ph{position:relative;width:250px;height:250px;flex:0 0 250px}
 .aboutme .ph .ring1{position:absolute;inset:0;border-radius:50%;border:2px dashed rgba(217,119,87,.55);animation:spin 50s linear infinite}
@@ -454,16 +454,16 @@ canvas.pcv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;
 .aboutme li:last-child{border-bottom:1px solid var(--line)}
 .aboutme li::before{content:"";position:absolute;left:4px;top:27px;width:13px;height:13px;border-radius:3px;background:var(--coral);transform:rotate(45deg)}
 .aboutme li span{color:var(--muted)}
-.c4card{border-radius:28px;background:linear-gradient(160deg,#16335A,#0E2443);border:1px solid rgba(217,119,87,.45);padding:48px 50px;position:relative;overflow:hidden;
+.c4card{border-radius:28px;background:linear-gradient(160deg,#16335A,#0E2443);border:1px solid rgba(217,119,87,.45);padding:54px 56px 58px;position:relative;overflow:hidden;
   box-shadow:0 40px 90px -40px rgba(0,0,0,.6)}
 .c4card::after{content:"";position:absolute;right:-120px;top:-120px;width:340px;height:340px;border-radius:50%;border:2px solid rgba(217,119,87,.35);animation:spin 30s linear infinite;border-top-color:var(--coral)}
 .c4card .top{display:flex;align-items:center;gap:24px}
 .c4card .top .logo{width:96px;height:96px}
 .c4card .top h3{font-size:48px}
 .c4card .top .tg{display:inline-block;margin-top:8px;font-size:19px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--navy);background:var(--coral);padding:7px 14px;border-radius:999px}
-.c4card .desc{font-size:31px;color:var(--warm);margin-top:30px;line-height:1.35}
-.c4card .inds{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
-.c4card .inds span{font-size:22px;padding:10px 18px;border-radius:999px;background:rgba(247,245,242,.07);border:1px solid var(--line);color:var(--warm)}
+.c4card .desc{font-size:32px;color:var(--warm);margin-top:40px;line-height:1.4}
+.c4card .inds{display:flex;flex-wrap:nowrap;gap:10px;margin-top:34px}
+.c4card .inds span{font-size:20px;padding:9px 15px;white-space:nowrap;border-radius:999px;background:rgba(247,245,242,.07);border:1px solid var(--line);color:var(--warm)}
 .c4card .bdg{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px}
 .c4card .bdg div{padding:20px 22px;border-radius:16px;background:rgba(247,245,242,.05);border:1px solid var(--line)}
 .c4card .bdg small{display:block;font-size:17px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--coral)}
@@ -473,11 +473,11 @@ canvas.pcv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;
 .aboutme ul.big li{font-size:31px;padding:20px 0 20px 44px}
 .aboutme ul.big li::before{top:32px}
 .aboutme ul.big li b.n{color:var(--coral);font-weight:800}
-.plogos{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px}
-.plogo{height:136px;border-radius:18px;background:rgba(247,245,242,.05);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;gap:18px;padding:0 24px}
-.plogo .am{width:58px;height:40px;color:var(--warm);flex:0 0 auto}
+.plogos{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px}
+.plogo{height:150px;border-radius:18px;background:rgba(247,245,242,.05);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;gap:18px;padding:0 24px}
+.plogo .am{width:66px;height:46px;color:var(--warm);flex:0 0 auto}
 .plogo .at{font-size:22px;line-height:1.15;color:var(--warm)}
-.plogo .at b{display:block;font-size:25px;letter-spacing:-.01em;margin-top:4px}
+.plogo .at b{display:block;font-size:32px;letter-spacing:-.01em;margin-top:6px;white-space:nowrap}
 .plogo .at small{font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:var(--coral-2);font-weight:600}
 .cubo{display:flex;align-items:center;gap:14px}
 .cubo .cw{font-size:52px;font-weight:800;letter-spacing:-.04em;color:var(--warm);line-height:1}
@@ -617,7 +617,7 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
       <p class="desc">Desarrollo de software inteligente y <b style="color:var(--coral-2)">agentes de IA</b> para empresas.</p>
       <div class="inds"><span>Finanzas</span><span>Seguros</span><span>Industria</span><span>Energía</span><span>Retail</span><span>Gobierno</span></div>
       <div class="plogos">
-        <div class="plogo"><svg class="am" viewBox="0 0 46 32" aria-label="Anthropic"><path d="M32.73 0H25.7846L38.4499 32H45.3953L32.73 0Z" fill="currentColor"/><path d="M12.6653 0L0 32H7.08167L9.67193 25.28H22.9219L25.5122 32H32.5939L19.9286 0H12.6653ZM11.9626 19.3371L16.2969 8.09143L20.6313 19.3371H11.9626Z" fill="currentColor"/></svg><div class="at"><small>Anthropic</small><b>Claude Registered Partner</b></div></div>
+        <div class="plogo"><svg class="am" viewBox="0 0 46 32" aria-label="Anthropic"><path d="M32.73 0H25.7846L38.4499 32H45.3953L32.73 0Z" fill="currentColor"/><path d="M12.6653 0L0 32H7.08167L9.67193 25.28H22.9219L25.5122 32H32.5939L19.9286 0H12.6653ZM11.9626 19.3371L16.2969 8.09143L20.6313 19.3371H11.9626Z" fill="currentColor"/></svg><div class="at"><small>Anthropic</small><b>Claude Partner</b></div></div>
         <div class="plogo"><div class="cubo" aria-label="Cubo Itaú"><span class="cw">cubo</span><span class="it">itaú</span></div></div>
       </div>
     </div>
