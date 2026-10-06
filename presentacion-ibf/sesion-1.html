@@ -236,7 +236,7 @@ svg text{font-family:var(--sans)}
 
 /* Lab grid */
 .labs{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:auto;margin-bottom:auto}
-.lab{border-radius:22px;padding:34px 32px 34px;background:var(--card);border:1px solid var(--card-b);display:flex;flex-direction:column;min-height:560px}
+.lab{border-radius:22px;padding:34px 32px 34px;background:var(--card);border:1px solid var(--card-b);display:flex;flex-direction:column;min-height:430px}
 .lab.me{background:rgba(217,119,87,.13);border-color:rgba(217,119,87,.5)}
 .lab .co{font-size:20px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--accent)}
 .lab h3{font-size:46px;margin-top:8px}
@@ -358,6 +358,99 @@ svg text{font-family:var(--sans)}
 .close-h{font-size:190px;font-weight:800;letter-spacing:-.05em;line-height:.9}
 .close-h span{display:block;font-family:var(--serif);font-style:italic;font-weight:400;color:var(--coral);letter-spacing:-.03em}
 
+
+/* =========================================================
+   LOGO (reemplazable en un solo lugar: <symbol id="c4b-logo">)
+   ========================================================= */
+.logo{display:inline-block;vertical-align:middle;color:var(--coral)}
+.wordmark .logo{width:64px;height:64px}
+.foot .logo{width:30px;height:30px;color:var(--accent)}
+
+/* =========================================================
+   PARTICLES (canvas animado)
+   ========================================================= */
+canvas.pcv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.9}
+
+/* Flujo animado en líneas */
+.flowing path,.flowing line{stroke-dasharray:6 14;animation:flow 1.1s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-40}}
+
+/* =========================================================
+   TOKENS
+   ========================================================= */
+.tkz{margin-top:50px}
+.tkz .src{font-size:52px;font-weight:500;color:var(--fg);letter-spacing:-.01em}
+.tkz .chips{display:flex;flex-wrap:wrap;gap:12px 6px;margin-top:40px;min-height:150px;align-items:flex-start}
+.tch{display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;transform:translateY(-30px) scale(.9)}
+.tch b{font-size:46px;font-weight:600;padding:12px 16px;border-radius:12px;white-space:pre;color:var(--navy)}
+.tch span{font-family:var(--mono);font-size:19px;color:var(--muted)}
+.slide.active .tch{opacity:1;transform:none;transition:opacity .45s var(--ease),transform .55s cubic-bezier(.3,1.5,.5,1);transition-delay:calc(var(--d) * 160ms + 700ms)}
+.tstats{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:auto}
+.tstats .card h3{font-size:50px;letter-spacing:-.03em}
+.tstats .card p{font-size:26px;margin-top:10px}
+
+/* =========================================================
+   VECTORES
+   ========================================================= */
+.vecL .vbox{margin-top:34px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.vecL .w{font-size:44px;font-weight:700;padding:14px 26px;border-radius:14px;background:var(--coral);color:var(--navy)}
+.vecL .arr{font-size:44px;color:var(--accent)}
+.vecL .nums{font-family:var(--mono);font-size:28px;color:var(--fg);padding:16px 22px;border-radius:14px;border:1px dashed rgba(217,119,87,.6);background:rgba(217,119,87,.08)}
+.vecL .nums i{font-style:normal;display:inline-block;min-width:3.6ch;text-align:right}
+.king{margin-top:44px;font-family:var(--serif);font-size:52px;color:var(--fg)}
+.king em{color:var(--coral);font-style:italic}
+.king small{display:block;font-family:var(--sans);font-size:22px;color:var(--muted);margin-top:8px}
+.vmap{width:820px;height:640px;justify-self:end}
+.vdot{opacity:0;transform:translate(410px,320px) scale(.2);transition:transform 1.3s cubic-bezier(.2,.8,.2,1),opacity .6s}
+.slide.active .vdot{opacity:1;transform:translate(var(--x),var(--y)) scale(1);transition-delay:calc(var(--d) * 70ms + 500ms)}
+.vclu{opacity:0;transition:opacity 1s .9s}
+.slide.active .vclu{opacity:1}
+.vlink{stroke-dasharray:6 10;animation:flow 1.2s linear infinite}
+
+/* =========================================================
+   PROTAGONISTAS
+   ========================================================= */
+.people{display:grid;grid-template-columns:repeat(4,1fr);gap:22px 26px;margin-top:auto;margin-bottom:auto}
+.person{display:grid;grid-template-columns:96px 1fr;gap:20px;align-items:center;padding:22px 24px;border-radius:20px;background:var(--card);border:1px solid var(--card-b)}
+.person .av{width:96px;height:96px;border-radius:50%;display:grid;place-items:center;font-size:34px;font-weight:700;letter-spacing:-.02em;position:relative;
+  background:linear-gradient(140deg,#2A4A75,#132B4D);color:var(--warm)}
+.person .av::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:2px solid transparent;border-top-color:var(--coral);border-right-color:rgba(217,119,87,.4);animation:spin 6s linear infinite}
+.person.ant .av{background:linear-gradient(140deg,#E8957A,#C4613F);color:var(--navy)}
+.person.goo .av{background:linear-gradient(140deg,#3B6EA8,#1E3A5F)}
+.person.oai .av{background:linear-gradient(140deg,#5A6B82,#2B3A50)}
+.person.nv .av{background:linear-gradient(140deg,#5E8C4A,#2F4D27)}
+.light .person .av{color:var(--warm)}
+.light .person.ant .av{color:var(--navy)}
+.person .yr{font-size:18px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--accent)}
+.person h3{font-size:31px;margin-top:4px}
+.person p{font-size:22px;margin-top:6px;line-height:1.35}
+
+/* Línea de tiempo que se dibuja */
+.tline::after{content:"";position:absolute;left:0;top:18px;height:2px;width:0;background:var(--coral);transition:width 2.2s var(--ease) .4s}
+.slide.active .tline::after{width:100%}
+
+/* Pulsos en la red */
+.pulse{fill:#F7F5F2;filter:drop-shadow(0 0 6px #D97757)}
+
+
+/* Quién soy */
+.aboutme{display:grid;grid-template-columns:520px 1fr;gap:100px;flex:1;align-items:center}
+.aboutme .ph{position:relative;width:460px;height:460px;justify-self:center}
+.aboutme .ph .ring1{position:absolute;inset:0;border-radius:50%;border:2px dashed rgba(217,119,87,.55);animation:spin 50s linear infinite}
+.aboutme .ph .ring2{position:absolute;inset:-34px;border-radius:50%;border:2px solid transparent;border-top-color:var(--coral);border-left-color:rgba(217,119,87,.35);animation:spin 9s linear infinite reverse}
+.aboutme .ph .face{position:absolute;inset:40px;border-radius:50%;background:linear-gradient(140deg,#2A4A75,#102848);display:grid;place-items:center;
+  font-size:150px;font-weight:800;letter-spacing:-.05em;color:var(--warm);overflow:hidden;box-shadow:0 30px 80px -30px rgba(0,0,0,.6)}
+.aboutme .ph .badge{position:absolute;right:-10px;bottom:30px;width:120px;height:120px;border-radius:28px;background:var(--navy);border:2px solid var(--coral);display:grid;place-items:center}
+.aboutme .ph .badge .logo{width:84px;height:84px}
+.aboutme .name{font-size:110px;font-weight:800;letter-spacing:-.045em;line-height:.95;margin-top:22px}
+.aboutme .role{font-size:34px;color:var(--fg);margin-top:20px;font-weight:500}
+.aboutme .role span{color:var(--coral)}
+.aboutme ul{list-style:none;margin-top:40px;display:grid;gap:0}
+.aboutme li{font-size:29px;color:var(--fg);padding:18px 0 18px 44px;border-top:1px solid var(--line);position:relative;line-height:1.35}
+.aboutme li:last-child{border-bottom:1px solid var(--line)}
+.aboutme li::before{content:"";position:absolute;left:4px;top:30px;width:14px;height:14px;border-radius:3px;background:var(--coral);transform:rotate(45deg)}
+.aboutme li span{color:var(--muted)}
+
 /* Speaker notes (hidden in slides) */
 aside.notes{display:none}
 
@@ -413,6 +506,11 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <!-- LOGO Code4Business (C4B). Se pinta con el color del texto (currentColor). -->
+  <defs><mask id="c4bm" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="256"><image href="data:image/png;base64,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" width="256" height="256"/></mask></defs>
+  <symbol id="c4b-logo" viewBox="0 0 256 256"><rect width="256" height="256" fill="currentColor" mask="url(#c4bm)"/></symbol>
+</svg>
 <div id="viewport"><main id="stage">
 
 <!-- =====================================================
@@ -427,9 +525,9 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
     <path d="M130 550 A420 420 0 0 1 550 130" stroke="#D97757" stroke-width="3" stroke-linecap="round" opacity=".55"/>
     <circle cx="550" cy="550" r="12" fill="#D97757"/><circle cx="1090" cy="550" r="10" fill="#D97757"/>
   </svg>
-  <div class="dots"></div>
+  <canvas class="pcv"></canvas>
   <div class="cover-top r" style="--d:0">
-    <div class="wordmark"><span class="mk">C4</span>Code4Business <small>× IBF Negocios</small></div>
+    <div class="wordmark"><svg class="logo"><use href="#c4b-logo"/></svg>Code4Business <small>× IBF Negocios</small></div>
     <span class="tag"><i></i>Curso de IA con Claude</span>
   </div>
   <div>
@@ -449,17 +547,44 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
   </aside>
 </section>
 
+<section class="slide" data-block="Presentación" aria-label="Quién soy">
+  <div class="dots"></div>
+  <div class="aboutme">
+    <div class="ph r" style="--d:1">
+      <div class="ring2"></div><div class="ring1"></div>
+      <div class="face">DM</div>
+      <div class="badge"><svg class="logo"><use href="#c4b-logo"/></svg></div>
+    </div>
+    <div>
+      <div class="eyebrow r" style="--d:0">Quién les habla</div>
+      <div class="name r" style="--d:2">Diego Maye</div>
+      <div class="role r" style="--d:3">Cofundador de <span>Code4Business</span> y de <span>Lolos AI</span> · AI Advisor</div>
+      <ul>
+        <li class="r" style="--d:4">Desarrollador y emprendedor de Montevideo. <span>Más de una década construyendo software.</span></li>
+        <li class="r" style="--d:5">Code4Business: empresa de software <b>“AI First”</b>. <span>Finanzas, seguros, industria y energía.</span></li>
+        <li class="r" style="--d:6">Agentes de IA en producción: <span>ciberseguridad con Claude, detección de voces falsas, scoring de seguros.</span></li>
+        <li class="r" style="--d:7">Miembro del <b>Claude Partner Network</b> de Anthropic.</li>
+      </ul>
+    </div>
+  </div>
+  <aside class="notes" data-t="3 min">
+    <ul><li>REVISAR antes de presentar: título (cofundador, CTO o CEO), años de experiencia y proyectos a mencionar. Datos tomados de perfiles públicos (LinkedIn, GitHub, Clutch).</li>
+    <li>Contar en primera persona por qué Code4Business apostó por Claude.</li>
+    <li>Para poner una foto: reemplazar las iniciales “DM” por una imagen.</li></ul>
+  </aside>
+</section>
+
 <section class="slide" data-block="Agenda" aria-label="Agenda de hoy">
   <div class="dots"></div>
   <div class="eyebrow r" style="--d:0">Hoy · 2 horas</div>
   <h2 class="r" style="--d:1">El recorrido de <em class="s">hoy</em></h2>
   <div class="agenda r" style="--d:2">
-    <div class="ag"><div class="t">25 MIN</div><div class="n">01</div><h3>De las neuronas al chat</h3><div class="bar" style="width:62%"></div></div>
+    <div class="ag"><div class="t">30 MIN</div><div class="n">01</div><h3>De las neuronas al chat</h3><div class="bar" style="width:75%"></div></div>
     <div class="ag"><div class="t">20 MIN</div><div class="n">02</div><h3>Los laboratorios y sus modelos</h3><div class="bar" style="width:50%"></div></div>
     <div class="ag brk"><div class="t">10 MIN</div><div class="n">—</div><h3>Recreo</h3><div class="bar" style="width:25%"></div></div>
     <div class="ag"><div class="t">15 MIN</div><div class="n">03</div><h3>Agentes: de responder a hacer</h3><div class="bar" style="width:38%"></div></div>
-    <div class="ag"><div class="t">25 MIN</div><div class="n">04</div><h3>Cómo está hecho un agente</h3><div class="bar" style="width:62%"></div></div>
-    <div class="ag"><div class="t">20 MIN</div><div class="n">05</div><h3>Caso práctico: private equity</h3><div class="bar" style="width:50%"></div></div>
+    <div class="ag"><div class="t">20 MIN</div><div class="n">04</div><h3>Cómo está hecho un agente</h3><div class="bar" style="width:50%"></div></div>
+    <div class="ag"><div class="t">15 MIN</div><div class="n">05</div><h3>Caso práctico: private equity</h3><div class="bar" style="width:38%"></div></div>
     <div class="ag"><div class="t">5 MIN</div><div class="n">✓</div><h3>Cierre y tarea</h3><div class="bar" style="width:12%"></div></div>
   </div>
   <aside class="notes" data-t="2 min">
@@ -471,11 +596,11 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
 <!-- =====================================================
      BLOQUE 01 · DE LAS NEURONAS AL CHAT
      ===================================================== -->
-<section class="slide divider" data-nofoot aria-label="Bloque 1">
+<section class="slide divider" data-nofoot data-pcv aria-label="Bloque 1">
   <div class="bnum">01</div>
-  <div class="kick r" style="--d:0"><span class="tag"><i></i>Bloque 01 · 25 min</span></div>
+  <div class="kick r" style="--d:0"><span class="tag"><i></i>Bloque 01 · 30 min</span></div>
   <h2 class="r" style="--d:1">De las neuronas <em class="s">al chat</em></h2>
-  <div class="what r" style="--d:2"><span>Regresiones encadenadas</span><span>Predecir la siguiente palabra</span><span>El “eureka” del chat</span><span>Mezcla de expertos</span></div>
+  <div class="what r" style="--d:2"><span>Regresiones encadenadas</span><span>Los protagonistas</span><span>Tokens y vectores</span><span>Predecir la siguiente palabra</span><span>El “eureka” del chat</span><span>Mezcla de expertos</span></div>
   <aside class="notes" data-t="—"><ul><li>Mensaje del bloque: la IA de hoy no es magia, es estadística a una escala enorme.</li></ul></aside>
 </section>
 
@@ -601,6 +726,84 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
   </aside>
 </section>
 
+<section class="slide" data-block="01 · De las neuronas al chat" aria-label="Los protagonistas de la ciencia">
+  <div class="dots"></div>
+  <div class="eyebrow r" style="--d:0">Los protagonistas</div>
+  <h2 class="r" style="--d:1">Las personas detrás de <em class="s">la idea</em></h2>
+  <div class="people">
+    <div class="person r" style="--d:2"><div class="av">CS</div><div><div class="yr">1948</div><h3>Claude Shannon</h3><p>Teoría de la información. Predice la siguiente letra.</p></div></div>
+    <div class="person r" style="--d:3"><div class="av">FR</div><div><div class="yr">1958</div><h3>Frank Rosenblatt</h3><p>El perceptrón: la primera neurona que aprende.</p></div></div>
+    <div class="person r" style="--d:4"><div class="av">GH</div><div><div class="yr">1986</div><h3>Geoffrey Hinton</h3><p>Populariza cómo entrenar redes. Nobel de Física 2024.</p></div></div>
+    <div class="person r" style="--d:5"><div class="av">YL</div><div><div class="yr">1989</div><h3>Yann LeCun</h3><p>Redes que aprenden a ver imágenes.</p></div></div>
+    <div class="person r" style="--d:6"><div class="av">YB</div><div><div class="yr">2003</div><h3>Yoshua Bengio</h3><p>Primer modelo de lenguaje con redes neuronales.</p></div></div>
+    <div class="person r" style="--d:7"><div class="av">FL</div><div><div class="yr">2009</div><h3>Fei‑Fei Li</h3><p>ImageNet: los datos que destrabaron el aprendizaje profundo.</p></div></div>
+    <div class="person r" style="--d:8"><div class="av">IS</div><div><div class="yr">2012</div><h3>Ilya Sutskever</h3><p>AlexNet con Hinton. Cofundador de OpenAI.</p></div></div>
+    <div class="person ant r" style="--d:9"><div class="av">AV</div><div><div class="yr">2017</div><h3>Vaswani y equipo</h3><p>Ocho autores de Google crean el Transformer.</p></div></div>
+  </div>
+  <p class="note-foot r" style="--d:10">Hinton, LeCun y Bengio recibieron juntos el Premio Turing 2018: los “padrinos” del aprendizaje profundo.</p>
+  <aside class="notes" data-t="3 min">
+    <ul><li>Contar como una historia de 70 años: casi todas las ideas existían; faltaban datos (internet) y cómputo (chips gráficos).</li>
+    <li>2012 es el punto de quiebre: AlexNet (Krizhevsky, Sutskever, Hinton) gana el concurso de ImageNet con redes neuronales entrenadas en GPUs.</li>
+    <li>Sutskever después cofunda OpenAI y en 2024 funda Safe Superintelligence (SSI).</li></ul>
+  </aside>
+</section>
+
+<section class="slide" data-block="01 · De las neuronas al chat" aria-label="Tokens">
+  <div class="eyebrow r" style="--d:0">Cómo lee un modelo</div>
+  <h2 class="r" style="--d:1">No lee palabras: lee <em class="s">tokens</em></h2>
+  <div class="tkz">
+    <div class="src r" style="--d:2">“Code4Business analiza el EBITDA de IBF Negocios.”</div>
+    <div class="chips" id="chips"></div>
+  </div>
+  <div class="tstats">
+    <div class="card r" style="--d:4"><h3>≈ ¾ <span class="acc">palabra</span></h3><p>mide en promedio un token en inglés; en español suelen hacer falta algunos más.</p></div>
+    <div class="card r" style="--d:5"><h3>1 millón</h3><p>de tokens puede leer Claude de una vez: unas 750.000 palabras.</p></div>
+    <div class="card r" style="--d:6"><h3>Se paga <span class="acc">por token</span></h3><p>Lo que entra (tus documentos) y lo que sale (la respuesta).</p></div>
+  </div>
+  <aside class="notes" data-t="3 min">
+    <ul><li>Un token es un pedazo de texto: a veces una palabra entera, a veces una sílaba o un signo.</li>
+    <li>El texto se corta en tokens y cada token recibe un número de identificación. El corte exacto depende de cada modelo: el del slide es ilustrativo.</li>
+    <li>Por qué importa: los límites (cuánto puede leer) y los precios se miden en tokens.</li></ul>
+  </aside>
+</section>
+
+<section class="slide light" data-block="01 · De las neuronas al chat" aria-label="Vectores">
+  <div class="eyebrow r" style="--d:0">El mapa del significado</div>
+  <h2 class="r" style="--d:1">Cada token se convierte en un <em class="s">vector</em></h2>
+  <div class="grid2" style="grid-template-columns:1fr 820px;gap:60px">
+    <div class="vecL">
+      <p class="r" style="--d:2;font-size:32px;color:var(--fg)">Un vector es una lista de números que ubica el significado de cada token en un <b>mapa con miles de dimensiones</b>. Lo parecido queda cerca.</p>
+      <div class="vbox r" style="--d:3"><span class="w">EBITDA</span><span class="arr">→</span><span class="nums" id="vnums">[ <i>0.21</i>, <i>−0.83</i>, <i>0.47</i>, <i>0.05</i>, … ]</span></div>
+      <div class="king r" style="--d:4">Rey − Hombre + Mujer ≈ <em>Reina</em><small>Con vectores se puede “sumar y restar” significado (word2vec, Google, 2013).</small></div>
+    </div>
+    <svg class="vmap" viewBox="0 0 820 640" aria-label="Mapa de palabras agrupadas por significado">
+      <g stroke="rgba(11,31,58,.07)" stroke-width="1">
+        <line x1="0" y1="160" x2="820" y2="160"/><line x1="0" y1="320" x2="820" y2="320"/><line x1="0" y1="480" x2="820" y2="480"/>
+        <line x1="205" y1="0" x2="205" y2="640"/><line x1="410" y1="0" x2="410" y2="640"/><line x1="615" y1="0" x2="615" y2="640"/>
+      </g>
+      <g class="vclu" fill-opacity=".08" stroke-width="2" stroke-dasharray="4 8">
+        <ellipse cx="200" cy="170" rx="175" ry="130" fill="#C4613F" stroke="#C4613F"/>
+        <ellipse cx="610" cy="180" rx="165" ry="120" fill="#1E3A5F" stroke="#1E3A5F"/>
+        <ellipse cx="230" cy="480" rx="165" ry="115" fill="#5E8C4A" stroke="#5E8C4A"/>
+        <ellipse cx="610" cy="480" rx="175" ry="115" fill="#8A6BB0" stroke="#8A6BB0"/>
+      </g>
+      <g class="vclu" font-size="18" font-weight="700" letter-spacing="2">
+        <text x="200" y="28" text-anchor="middle" fill="#C4613F">FINANZAS</text>
+        <text x="610" y="48" text-anchor="middle" fill="#1E3A5F">LEGAL</text>
+        <text x="230" y="350" text-anchor="middle" fill="#5E8C4A">MASCOTAS</text>
+        <text x="610" y="350" text-anchor="middle" fill="#8A6BB0">LUGARES</text>
+      </g>
+      <line class="vclu vlink" x1="140" y1="130" x2="250" y2="200" stroke="#C4613F" stroke-width="3"/>
+      <g font-size="23" font-weight="600" fill="#0B1F3A" id="vdots"></g>
+    </svg>
+  </div>
+  <aside class="notes" data-t="4 min">
+    <ul><li>Después de cortar en tokens, cada token se transforma en un vector: miles de números que representan su significado.</li>
+    <li>El dibujo es en 2 dimensiones; los modelos usan miles. Palabras que se usan en contextos parecidos quedan cerca (EBITDA cerca de margen).</li>
+    <li>Así el modelo “entiende” que contrato y SPA están relacionados aunque sean palabras distintas. También es la base de la búsqueda por significado en documentos.</li></ul>
+  </aside>
+</section>
+
 <section class="slide" data-block="01 · De las neuronas al chat" aria-label="Generar texto">
   <div class="eyebrow r" style="--d:0">El truco</div>
   <h2 class="r" style="--d:1">Generar = predecir la siguiente palabra, <em class="s">una y otra vez</em></h2>
@@ -710,11 +913,11 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
 <!-- =====================================================
      BLOQUE 02 · LABORATORIOS Y MODELOS
      ===================================================== -->
-<section class="slide divider" data-nofoot aria-label="Bloque 2">
+<section class="slide divider" data-nofoot data-pcv aria-label="Bloque 2">
   <div class="bnum">02</div>
   <div class="kick r" style="--d:0"><span class="tag"><i></i>Bloque 02 · 20 min</span></div>
   <h2 class="r" style="--d:1">Los laboratorios <em class="s">y sus modelos</em></h2>
-  <div class="what r" style="--d:2"><span>DeepMind, OpenAI, Anthropic</span><span>Dos filosofías</span><span>Los modelos de hoy</span><span>La familia Claude</span></div>
+  <div class="what r" style="--d:2"><span>DeepMind, OpenAI, Anthropic</span><span>Sus protagonistas</span><span>Dos filosofías</span><span>Los modelos de hoy</span><span>La familia Claude</span></div>
   <aside class="notes" data-t="—"><ul><li>De la tecnología a las personas y empresas que la construyen.</li></ul></aside>
 </section>
 
@@ -733,6 +936,26 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
     <ul><li>DeepMind se hizo famosa con AlphaGo (2016) y AlphaFold (proteínas, Premio Nobel de Química 2024 para Hassabis y Jumper).</li>
     <li>OpenAI nace como contrapeso a Google, sin fines de lucro; después crea una estructura con fines de lucro y entra Microsoft.</li>
     <li>Dario Amodei era VP de investigación en OpenAI; se va con un grupo porque quería poner la seguridad en el centro.</li></ul>
+  </aside>
+</section>
+
+<section class="slide light" data-block="02 · Laboratorios y modelos" aria-label="Los protagonistas de los laboratorios">
+  <div class="eyebrow r" style="--d:0">Los protagonistas</div>
+  <h2 class="r" style="--d:1">Quiénes manejan los <em class="s">laboratorios</em></h2>
+  <div class="people">
+    <div class="person goo r" style="--d:2"><div class="av">DH</div><div><div class="yr">Google DeepMind</div><h3>Demis Hassabis</h3><p>Cofundador y CEO. Nobel de Química 2024 por AlphaFold.</p></div></div>
+    <div class="person goo r" style="--d:3"><div class="av">MS</div><div><div class="yr">DeepMind → Microsoft</div><h3>Mustafa Suleyman</h3><p>Cofundador de DeepMind; hoy dirige Microsoft AI.</p></div></div>
+    <div class="person oai r" style="--d:4"><div class="av">SA</div><div><div class="yr">OpenAI</div><h3>Sam Altman</h3><p>Cofundador y CEO. La cara de ChatGPT.</p></div></div>
+    <div class="person oai r" style="--d:5"><div class="av">GB</div><div><div class="yr">OpenAI</div><h3>Greg Brockman</h3><p>Cofundador y presidente.</p></div></div>
+    <div class="person oai r" style="--d:6"><div class="av">EM</div><div><div class="yr">OpenAI → xAI</div><h3>Elon Musk</h3><p>Cofundador de OpenAI; se va en 2018 y después crea xAI (Grok).</p></div></div>
+    <div class="person ant r" style="--d:7"><div class="av">DA</div><div><div class="yr">Anthropic</div><h3>Dario Amodei</h3><p>Cofundador y CEO. Ex VP de investigación de OpenAI.</p></div></div>
+    <div class="person ant r" style="--d:8"><div class="av">DA</div><div><div class="yr">Anthropic</div><h3>Daniela Amodei</h3><p>Cofundadora y presidenta. Hermana de Dario.</p></div></div>
+    <div class="person nv r" style="--d:9"><div class="av">JH</div><div><div class="yr">NVIDIA</div><h3>Jensen Huang</h3><p>CEO. Fabrica los chips con los que se entrenan casi todos.</p></div></div>
+  </div>
+  <aside class="notes" data-t="3 min">
+    <ul><li>OpenAI y Musk: en mayo de 2026 un jurado falló en contra de la demanda de Musk contra OpenAI (Musk anunció que apela).</li>
+    <li>OpenAI se reestructuró en octubre de 2025 como empresa de beneficio público; Microsoft tiene cerca del 27%.</li>
+    <li>Anthropic la fundaron siete ex‑OpenAI encabezados por los hermanos Amodei.</li></ul>
   </aside>
 </section>
 
@@ -770,7 +993,7 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
       <div class="foot2">Ojo: “Astra” también es un proyecto de Google.</div></div>
     <div class="lab me r" style="--d:3"><div class="co">Anthropic</div><h3>Claude</h3>
       <ul><li>Fable 5.1 <span>· el más capaz</span></li><li>Opus 5.5 <span>· el recomendado</span></li><li>Sonnet 5.5 <span>· rápido</span></li><li>Haiku 4.5 <span>· el más liviano</span></li></ul>
-      <div class="foot2">Hasta 1 millón de tokens de contexto: cientos de páginas a la vez.</div></div>
+      <div class="foot2">Hasta 1 millón de tokens de contexto: unas 750.000 palabras a la vez.</div></div>
     <div class="lab r" style="--d:4"><div class="co">Google DeepMind</div><h3>Gemini</h3>
       <ul><li>Gemini 4 Argon <span>· anunciado, acceso restringido</span></li><li>Gemini 3.1 Pro</li><li>Gemini 3.5 / 3.6 Flash</li></ul>
       <div class="foot2">Project Astra: asistente que ve y escucha en tiempo real.</div></div>
@@ -805,7 +1028,7 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
 </section>
 
 
-<section class="slide break" data-nofoot aria-label="Recreo">
+<section class="slide break" data-nofoot data-pcv aria-label="Recreo">
   <div class="eyebrow r" style="--d:0;justify-content:center">Recreo</div>
   <div class="clock r" style="--d:1" id="clock" data-min="10">10:00</div>
   <h2 class="r" style="--d:2">Volvemos en diez minutos</h2>
@@ -816,7 +1039,7 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
 <!-- =====================================================
      BLOQUE 03 · AGENTES
      ===================================================== -->
-<section class="slide divider" data-nofoot aria-label="Bloque 3">
+<section class="slide divider" data-nofoot data-pcv aria-label="Bloque 3">
   <div class="bnum">03</div>
   <div class="kick r" style="--d:0"><span class="tag"><i></i>Bloque 03 · 15 min</span></div>
   <h2 class="r" style="--d:1">Agentes: de responder <em class="s">a hacer</em></h2>
@@ -872,9 +1095,9 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
 <!-- =====================================================
      BLOQUE 04 · COMPONENTES
      ===================================================== -->
-<section class="slide divider" data-nofoot aria-label="Bloque 4">
+<section class="slide divider" data-nofoot data-pcv aria-label="Bloque 4">
   <div class="bnum">04</div>
-  <div class="kick r" style="--d:0"><span class="tag"><i></i>Bloque 04 · 25 min</span></div>
+  <div class="kick r" style="--d:0"><span class="tag"><i></i>Bloque 04 · 20 min</span></div>
   <h2 class="r" style="--d:1">Cómo está hecho <em class="s">un agente</em></h2>
   <div class="what r" style="--d:2"><span>Skills</span><span>MCP y conectores</span><span>Memoria</span><span>Rutinas</span><span>Artefactos</span><span>Customize y plugins</span></div>
   <aside class="notes" data-t="—"><ul><li>Bloque para abrir el capó: estas son las piezas que después vamos a configurar para IBF.</li></ul></aside>
@@ -885,7 +1108,7 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
   <h2 class="r" style="--d:1">Las piezas de un <em class="s">agente</em></h2>
   <div class="anat" style="flex:none;height:640px;margin-top:20px">
     <svg viewBox="0 0 1640 640" preserveAspectRatio="none" aria-hidden="true">
-      <g class="draw" stroke="rgba(217,119,87,.55)" stroke-width="2.5" fill="none">
+      <g class="flowing" stroke="rgba(217,119,87,.75)" stroke-width="2.5" fill="none">
         <path d="M680 260 L470 75" style="--len:300"/><path d="M675 320 L470 320" style="--len:220"/><path d="M680 380 L470 565" style="--len:300"/>
         <path d="M960 260 L1170 75" style="--len:300"/><path d="M965 320 L1170 320" style="--len:220"/><path d="M960 380 L1170 565" style="--len:300"/>
       </g>
@@ -949,7 +1172,7 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
       <div class="ana r" style="--d:3"><b>Conectores</b><p>Integraciones listas, basadas en MCP. Para cada acción elegís: <b>permitir</b>, <b>pedir aprobación</b> o <b>bloquear</b>.</p></div>
     </div>
     <div class="plug r" style="--d:3">
-      <svg style="position:absolute;inset:0" width="840" height="600" aria-hidden="true"><g class="draw" stroke="#D97757" stroke-width="2.5" fill="none">
+      <svg style="position:absolute;inset:0" width="840" height="600" aria-hidden="true"><g class="flowing" stroke="#D97757" stroke-width="2.5" fill="none">
         <path d="M220 300 L270 300" style="--len:60"/>
         <path d="M390 300 C440 300 440 68 480 68" style="--len:300"/><path d="M390 300 C440 300 440 184 480 184" style="--len:200"/>
         <path d="M390 300 L480 300" style="--len:100"/><path d="M390 300 C440 300 440 416 480 416" style="--len:200"/><path d="M390 300 C440 300 440 532 480 532" style="--len:300"/></g></svg>
@@ -1065,9 +1288,9 @@ body.idle #controls{opacity:0} body.idle{cursor:none}
 <!-- =====================================================
      BLOQUE 05 · CASO PRÁCTICO
      ===================================================== -->
-<section class="slide divider" data-nofoot aria-label="Bloque 5">
+<section class="slide divider" data-nofoot data-pcv aria-label="Bloque 5">
   <div class="bnum">05</div>
-  <div class="kick r" style="--d:0"><span class="tag"><i></i>Bloque 05 · 20 min</span></div>
+  <div class="kick r" style="--d:0"><span class="tag"><i></i>Bloque 05 · 15 min</span></div>
   <h2 class="r" style="--d:1">Caso práctico: <em class="s">private equity</em></h2>
   <div class="what r" style="--d:2"><span>La IA ya está en el sector</span><span>Primera lectura de un data room</span><span>Probalo vos</span></div>
   <aside class="notes" data-t="—"><ul><li>Bajamos todo lo anterior a un caso de IBF.</li></ul></aside>
@@ -1162,14 +1385,14 @@ Citá la página de cada cifra. Si un dato no está en el documento, decilo en v
   <aside class="notes" data-t="1 min"><ul><li>Confirmar que todos tienen acceso a Claude antes de la Sesión 2.</li></ul></aside>
 </section>
 
-<section class="slide" data-nofoot aria-label="Preguntas">
+<section class="slide" data-nofoot data-pcv aria-label="Preguntas">
   <svg class="geo" style="right:-380px;top:-460px" width="900" height="900" viewBox="0 0 900 900" fill="none" aria-hidden="true">
     <circle cx="450" cy="450" r="440" stroke="rgba(247,245,242,.06)" stroke-width="2"/><circle cx="450" cy="450" r="320" stroke="rgba(247,245,242,.08)" stroke-width="2"/>
     <path d="M10 450 A440 440 0 0 0 450 890" stroke="#D97757" stroke-width="5" stroke-linecap="round"/></svg>
   <div style="margin-top:auto">
     <div class="eyebrow r" style="--d:0">Sesión 01 · Cierre</div>
     <div class="close-h r" style="--d:1;margin-top:36px">Gracias<span>· Preguntas</span></div>
-    <p class="r" style="--d:2;margin-top:44px;font-size:30px"><b>Diego Maye</b> · Code4Business · Claude Partner Network</p>
+    <p class="r" style="--d:2;margin-top:44px;font-size:30px;display:flex;align-items:center;gap:18px"><svg class="logo" style="width:48px;height:48px"><use href="#c4b-logo"/></svg><b>Diego Maye</b> · Code4Business · Claude Partner Network</p>
   </div>
   <aside class="notes" data-t="—"><ul><li>Abrir preguntas. Recordar el horario de mañana.</li></ul></aside>
 </section>
@@ -1201,7 +1424,7 @@ Citá la página de cada cifra. Si un dato no está en el documento, decilo en v
   slides.forEach(function(s,i){
     if(s.hasAttribute('data-nofoot'))return;
     var f=document.createElement('footer');f.className='foot';
-    f.innerHTML='<span class="bm"><i class="dot"></i>Sesión 01 · Entender la IA</span><span><span class="blk">'+(s.getAttribute('data-block')||'')+'</span><span class="pg">'+pad(i+1)+' / '+total+'</span></span>';
+    f.innerHTML='<span class="bm"><svg class="logo"><use href="#c4b-logo"/></svg>Code4Business · Sesión 01 · Entender la IA</span><span><span class="blk">'+(s.getAttribute('data-block')||'')+'</span><span class="pg">'+pad(i+1)+' / '+total+'</span></span>';
     s.appendChild(f);
   });
 
@@ -1264,10 +1487,68 @@ Citá la página de cada cifra. Si un dato no está en el documento, decilo en v
       reset:function(){end=Date.now()+mins*60000;draw()},stop:function(){clearInterval(t)}};
   })();
 
-  var hooks={tokens:gen,typing:typ,moeWord:moe,clock:clock};
+
+  /* ---------- Tokens ---------- */
+  (function(){
+    var box=document.getElementById('chips');if(!box)return;
+    var T=[['Code',8133],['4',19],['Business',22617],[' anal',3271],['iza',4355],[' el',1288],[' EB',41352],['IT',2043],['DA',5631],[' de',409],[' IBF',63110],[' Neg',36412],['ocios',27384],['.',13]];
+    var C=['#F2C6B4','#C9D8EE','#CFE3C4','#E4D3F0','#F5DFA8'];
+    box.innerHTML=T.map(function(t,i){return '<div class="tch" style="--d:'+i+'"><b style="background:'+C[i%C.length]+'">'+t[0].replace(/ /g,'·')+'</b><span>'+t[1]+'</span></div>'}).join('');
+  })();
+
+  /* ---------- Mapa de vectores ---------- */
+  (function(){
+    var g=document.getElementById('vdots');if(!g)return;
+    var D=[['EBITDA',140,130,'#C4613F'],['margen',250,200,'#C4613F'],['deuda',95,215,'#C4613F'],['ingresos',300,120,'#C4613F'],['flujo de caja',190,265,'#C4613F'],
+      ['contrato',540,140,'#1E3A5F'],['cláusula',680,120,'#1E3A5F'],['SPA',600,230,'#1E3A5F'],['garantía',720,220,'#1E3A5F'],
+      ['perro',160,450,'#5E8C4A'],['gato',290,430,'#5E8C4A'],['cachorro',220,540,'#5E8C4A'],
+      ['Montevideo',560,440,'#8A6BB0'],['Buenos Aires',630,500,'#8A6BB0'],['Punta del Este',540,545,'#8A6BB0']];
+    g.innerHTML=D.map(function(d,i){return '<g class="vdot" style="--x:'+d[1]+'px;--y:'+d[2]+'px;--d:'+i+'"><circle r="10" fill="'+d[3]+'"/><text x="16" y="8">'+d[0]+'</text></g>'}).join('');
+  })();
+  var vnum=(function(){
+    var el=document.getElementById('vnums');if(!el)return null;var t=null,is=el.querySelectorAll('i'),base=[.21,-.83,.47,.05];
+    function f(v){return (v<0?'−':'')+Math.abs(v).toFixed(2)}
+    return{start:function(){clearInterval(t);t=setInterval(function(){[].forEach.call(is,function(e,k){e.textContent=f(base[k]+(Math.random()-.5)*.06)})},700)},
+      stop:function(){clearInterval(t);[].forEach.call(is,function(e,k){e.textContent=f(base[k])})}};
+  })();
+
+  /* ---------- Pulsos en la red neuronal ---------- */
+  var netp=(function(){
+    var svg=document.getElementById('net');if(!svg)return null;
+    var lines=[].slice.call(svg.querySelectorAll('line')),ns='http://www.w3.org/2000/svg',P=[],raf=null,last=0;
+    var layer=document.createElementNS(ns,'g');svg.appendChild(layer);
+    function byX(x){return lines.filter(function(l){return Math.abs(+l.getAttribute('x1')-x)<1})}
+    function spawn(){var first=byX(90);var l=first[Math.floor(Math.random()*first.length)];
+      var c=document.createElementNS(ns,'circle');c.setAttribute('r','7');c.setAttribute('class','pulse');layer.appendChild(c);P.push({l:l,t:0,c:c})}
+    function tick(ts){var dt=Math.min(50,ts-(last||ts));last=ts;
+      if(Math.random()<.12)spawn();
+      P=P.filter(function(p){p.t+=dt/650;
+        if(p.t>=1){var x2=+p.l.getAttribute('x2'),nxt=byX(x2);if(!nxt.length){p.c.remove();return false}p.l=nxt[Math.floor(Math.random()*nxt.length)];p.t=0}
+        var x1=+p.l.getAttribute('x1'),y1=+p.l.getAttribute('y1'),x2b=+p.l.getAttribute('x2'),y2=+p.l.getAttribute('y2');
+        p.c.setAttribute('cx',x1+(x2b-x1)*p.t);p.c.setAttribute('cy',y1+(y2-y1)*p.t);return true});
+      raf=requestAnimationFrame(tick)}
+    return{start:function(){if(!raf){last=0;raf=requestAnimationFrame(tick)}},stop:function(){cancelAnimationFrame(raf);raf=null;P.forEach(function(p){p.c.remove()});P=[]}};
+  })();
+
+  /* ---------- Partículas (portada, separadores, cierre) ---------- */
+  slides.forEach(function(s){if(s.hasAttribute('data-pcv')&&!s.querySelector('canvas.pcv')){var c=document.createElement('canvas');c.className='pcv';s.insertBefore(c,s.firstChild)}});
+  var pcv=(function(){
+    var raf=null,cv=null,ctx=null,N=[];
+    function init(c){cv=c;cv.width=1920;cv.height=1080;ctx=cv.getContext('2d');N=[];
+      for(var i=0;i<70;i++)N.push({x:Math.random()*1920,y:Math.random()*1080,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5,r:Math.random()*2.2+1.2,hot:Math.random()<.15})}
+    function draw(){ctx.clearRect(0,0,1920,1080);
+      for(var i=0;i<N.length;i++){var a=N[i];a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>1920)a.vx*=-1;if(a.y<0||a.y>1080)a.vy*=-1;
+        for(var j=i+1;j<N.length;j++){var b=N[j],dx=a.x-b.x,dy=a.y-b.y,d=dx*dx+dy*dy;if(d<40000){ctx.strokeStyle='rgba(217,119,87,'+(0.22*(1-d/40000))+')';ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}}}
+      N.forEach(function(a){ctx.fillStyle=a.hot?'rgba(217,119,87,.9)':'rgba(247,245,242,.45)';ctx.beginPath();ctx.arc(a.x,a.y,a.r,0,7);ctx.fill()});
+      raf=requestAnimationFrame(draw)}
+    return{start:function(c){cancelAnimationFrame(raf);init(c);draw()},stop:function(){cancelAnimationFrame(raf);raf=null}};
+  })();
+
+  var hooks={tokens:gen,typing:typ,moeWord:moe,clock:clock,vnums:vnum,net:netp};
   function runHooks(slide,on){
     Object.keys(hooks).forEach(function(id){var h=hooks[id];if(!h)return;var el=document.getElementById(id);
       if(el&&slide.contains(el)){on?h.start():h.stop()}});
+    var c=slide.querySelector('canvas.pcv');if(c){on?pcv.start(c):pcv.stop()}
   }
 
   function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform='translate(-50%,-50%) scale('+s+')'}
