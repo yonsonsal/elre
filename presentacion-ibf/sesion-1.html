@@ -1502,7 +1502,7 @@ Citá la página de cada cifra. Si un dato no está en el documento, decilo en v
     return{start:function(c){cancelAnimationFrame(raf);init(c);draw()},stop:function(){cancelAnimationFrame(raf);raf=null}};
   })();
 
-  var hooks={tokens:gen,typing:typ,moeWord:moe,clock:clock,vnums:vnum,net:netp};
+  var hooks={tokens:gen,typing:typ,moeWord:moe,clock:clock,net:netp};
   function runHooks(slide,on){
     Object.keys(hooks).forEach(function(id){var h=hooks[id];if(!h)return;var el=document.getElementById(id);
       if(el&&slide.contains(el)){on?h.start():h.stop()}});
