@@ -1,0 +1,11 @@
+<layer>
+	<attribute name="gid" query_capable="false" label="GID" show="false" />
+	<attribute name="zoneName" query_capable="true" label="Zone Name" show="true"/>
+	<attribute name="zoneType" query_capable="true" label="Zone Type" show="true"/>
+	<attribute name="areaM2" query_capable="true" label="Area (m2)" show="true"/>
+	<attribute name="population" query_capable="true" label="Population" show="true"/>
+	<attribute name="createdAt" query_capable="false" show="false"/>
+	<attribute name="updatedAt" query_capable="false" show="false"/>
+	<attribute name="createdBy" query_capable="false" show="false"/>	
+	<attribute name="the_geom" query_capable="false" show="false"/>	
+</layer>

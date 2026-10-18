@@ -14,8 +14,9 @@ public class DatosCapa {
 	private String tipoOrigen;
 	private String URL;
 	private String formatToService;
-	
-	
+	private String epsg;
+
+
 	public String getNombreMostrar() {
 		return nombreMotrar;
 	}
@@ -70,5 +71,11 @@ public class DatosCapa {
 	}
 	public void setFormatToService(String formatToService) {
 		this.formatToService = formatToService;
+	}
+	public String getEpsg() {
+		return epsg;
+	}
+	public void setEpsg(String epsg) {
+		this.epsg = epsg;
 	}
 }

@@ -52,7 +52,7 @@ class ConfiguraCapasProyecto :
 		return retorno
 
 	@staticmethod
-	def configuraCapasProyecto():
+	def configuraCapasProyecto(nombreUsuario):
 		retorno = ""
 		if len(QgsProject.instance().mapLayers().values()) > 0:
 
@@ -73,7 +73,6 @@ class ConfiguraCapasProyecto :
 							workspace, layername = FuncionesGenericas.getLayerName(layer.name())
 							layer.setName(layername)
 
-						nombreUsuario = FuncionesGenericas.getUserLayer(layer.source())
 						nombreCapa = layer.name()
 
 						conf = ConfiguraCapasProyecto()

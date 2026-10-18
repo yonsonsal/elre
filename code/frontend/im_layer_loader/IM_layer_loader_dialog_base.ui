@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>IM - Carga y Configura Capas</string>
+   <string>Open Plugineta - Carga y Configura Capas</string>
   </property>
   <property name="modal">
    <bool>true</bool>
@@ -168,7 +168,20 @@
     <enum>Qt::DefaultContextMenu</enum>
    </property>
    <property name="text">
-    <string>Carto Base IM.</string>
+    <string>Carto Base Montevideo</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="cbox_capaBase4">
+   <property name="geometry">
+    <rect>
+     <x>480</x>
+     <y>200</y>
+     <width>161</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Capa base 4</string>
    </property>
   </widget>
   <widget class="QLabel" name="CapasBase">
@@ -399,6 +412,7 @@
   <zorder>cbox_OSM</zorder>
   <zorder>cbox_IDE</zorder>
   <zorder>cbox_IM</zorder>
+  <zorder>cbox_capaBase4</zorder>
   <zorder>CapasBase</zorder>
   <zorder>Separador</zorder>
   <zorder>cbox_recargar</zorder>
@@ -421,6 +435,7 @@
   <tabstop>cbox_OSM</tabstop>
   <tabstop>cbox_IDE</tabstop>
   <tabstop>cbox_IM</tabstop>
+  <tabstop>cbox_capaBase4</tabstop>
   <tabstop>button_box</tabstop>
   <tabstop>authUserAgain</tabstop>
  </tabstops>

@@ -373,7 +373,13 @@ public class ConfigParser{
 
 			dc.setWorkspace(getNodeValue(atri, "nombre"));
 			dc.setTipo(getNodeValue(atri, "tipo"));
-							
+
+			String epsg = getNodeValue(atri, "epsg");
+			if (epsg == null || epsg.isEmpty()) {
+				epsg = GetPropertyValues.getInstance().getValue("defaultEpsg");
+			}
+			dc.setEpsg(epsg);
+
 			if (dc.getTipo().equals("WFS")){
 				nodeListORI = ori.getElementsByTagName("style");//elemento
 				atri = nodeListORI.item(0);
@@ -437,7 +443,11 @@ public class ConfigParser{
 		
 		if (nodeListORI.getLength() != 0) {
 			capa.setNombreTabla(getNodeValue(nodeListORI.item(0), "nombre"));
-			
+
+			if (capa.getNombreTabla() != null && capa.getDatos() != null && capa.getDatos().getEpsg() != null) {
+				SridRegistry.put(capa.getNombreTabla(), capa.getDatos().getEpsg());
+			}
+
 			capa.setNombreSecuencia(getNodeValue(nodeListORI.item(0), "secuencia"));
 
 			capa.setPk(getNodeValue(nodeListORI.item(0), "pk"));

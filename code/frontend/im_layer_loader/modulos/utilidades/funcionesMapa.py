@@ -92,38 +92,34 @@ class FuncionesMapa :
         grupo.addLayer(layer)
 
     @staticmethod
-    def agregarCapasBase(capa, grupo):
-        url = ConfigProperties.getPropery("CapasBase", "url"+capa)
-        nombreCapa = ConfigProperties.getPropery("CapasBase", "nombre"+capa)
+    def agregarCapasBase(seccion, capa, grupo):
+        url = ConfigProperties.getPropery(seccion, "url"+capa)
+        nombreCapa = ConfigProperties.getPropery(seccion, "nombre"+capa)
         if not FuncionesMapa.existeCapaProyecto(nombreCapa):
             FuncionesMapa.cargaRasterLayerEnGrupo(url, nombreCapa, grupo)
 
     @staticmethod
-    def eliminarCapasBase(cargaCapaBaseDict):        
-        for capaBase in cargaCapaBaseDict.items():
-            capa = capaBase[0]
-            nombreCapa = ConfigProperties.getPropery("CapasBase", "nombre"+capa)
+    def eliminarCapasBase(cargaCapaBaseDict):
+        # cargaCapaBaseDict: capa -> (seccion, seCarga) - ver ConfigProperties.getCapasBaseParaWorkspaces
+        for capa, (seccion, seCarga) in cargaCapaBaseDict.items():
+            nombreCapa = ConfigProperties.getPropery(seccion, "nombre"+capa)
             FuncionesMapa.eliminaCapaProyecto(nombreCapa)
         root = QgsProject.instance().layerTreeRoot()
         for group in [child for child in root.children() if child.nodeType() == 0]:
             if group.name() == 'Mapas base':
-                root.removeChildNode(group)              
- 
+                root.removeChildNode(group)
+
     @staticmethod
-    def activoCapaBase():
-        #VOY A ESTABLECER UN ORDEN DE IMPORTANCIA PARA SABER CUAL CAPA BASE
-        #PRENDO EN CASO DE QUE HAYA MAS DE UNA
-
-        nombreCapaIM = ConfigProperties.getPropery("CapasBase", "nombreCapaBaseIM")
-        nombreCapaOSM = ConfigProperties.getPropery("CapasBase", "nombreCapaOSM")
-        nombreCapaIDE = ConfigProperties.getPropery("CapasBase", "nombreCapaIde")
-
-        if FuncionesMapa.existeCapaProyecto(nombreCapaIM):
-            FuncionesMapa.setVisibleCapaProyecto(nombreCapaIM, True)
-        elif FuncionesMapa.existeCapaProyecto(nombreCapaOSM):
-            FuncionesMapa.setVisibleCapaProyecto(nombreCapaOSM, True)
-        elif FuncionesMapa.existeCapaProyecto(nombreCapaIDE):
-            FuncionesMapa.setVisibleCapaProyecto(nombreCapaIDE, True)
+    def activoCapaBase(cargaCapaBaseDict):
+        #PRENDO LA PRIMERA CAPA BASE CONFIGURADA (Y TILDADA) QUE EXISTA EN EL PROYECTO -
+        #EL ORDEN DE IMPORTANCIA ES EL ORDEN EN QUE APARECEN EN EL ARCHIVO DE CONFIG
+        for capa, (seccion, seCarga) in cargaCapaBaseDict.items():
+            if not seCarga:
+                continue
+            nombreCapa = ConfigProperties.getPropery(seccion, "nombre"+capa)
+            if FuncionesMapa.existeCapaProyecto(nombreCapa):
+                FuncionesMapa.setVisibleCapaProyecto(nombreCapa, True)
+                break
 
     @staticmethod
     def cargaRasterLayer(url, nombreCapa):

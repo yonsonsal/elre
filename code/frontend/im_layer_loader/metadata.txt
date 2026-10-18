@@ -6,9 +6,9 @@
 name=Open Plugineta
 qgisMinimumVersion=3.0
 description=Plugin para cargar y gestionar capas geoespaciales
-version=0.65
-author=Intendencia de Montevideo
-email=gis@montevideo.gub.uy
+version=0.71
+author=Open Plugineta
+email=
 ambiente=local
 #ambiente=desarrollo
 #ambiente=produccion

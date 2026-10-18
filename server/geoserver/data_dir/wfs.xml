@@ -16,14 +16,10 @@
   <citeCompliant>false</citeCompliant>
   <schemaBaseURL>http://schemas.opengis.net</schemaBaseURL>
   <verbose>false</verbose>
+  <metadata>
+    <entry key="maxNumberOfFeaturesForPreview">50</entry>
+  </metadata>
   <gml>
-    <entry>
-      <version>V_10</version>
-      <gml>
-        <srsNameStyle>XML</srsNameStyle>
-        <overrideGMLAttributes>true</overrideGMLAttributes>
-      </gml>
-    </entry>
     <entry>
       <version>V_20</version>
       <gml>
@@ -36,6 +32,13 @@
       <gml>
         <srsNameStyle>URN</srsNameStyle>
         <overrideGMLAttributes>false</overrideGMLAttributes>
+      </gml>
+    </entry>
+    <entry>
+      <version>V_10</version>
+      <gml>
+        <srsNameStyle>XML</srsNameStyle>
+        <overrideGMLAttributes>true</overrideGMLAttributes>
       </gml>
     </entry>
   </gml>

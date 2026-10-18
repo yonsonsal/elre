@@ -87,6 +87,12 @@ services:
         - ./server/geoserver/data_dir:/opt/geoserver_data
         - ./server/geoserver/gwc:/opt/geoserver/gwc
         - ./server/geoserver/settings:/settings
+        # PluginetaGeoserverExt: extensión nativa de GeoServer (plan de migración de plataforma, Fase 1)
+        - ./geomvd/PluginetaGeoserverExt/target/PluginetaGeoserverExt-1.0.0-SNAPSHOT.jar:/usr/local/tomcat/webapps/geoserver/WEB-INF/lib/PluginetaGeoserverExt.jar
+        # GeoMvdCoreAPI: dependencia compile de la extensión, no se empaqueta dentro de su jar (hay que desplegarla aparte)
+        - ./geomvd/GeoMvdCoreAPI/target/GeoMvdCoreAPI-1.1.0-SNAPSHOT.jar:/usr/local/tomcat/webapps/geoserver/WEB-INF/lib/GeoMvdCoreAPI.jar
+        # gson: dependencia de GeoMvdCoreAPI que GeoServer no trae bundleada (ver Fase 0 del plan: log4j y org.json sí vienen ya, gson no)
+        - ./geomvd/PluginetaGeoserverExt/target/webapp-lib/gson-2.8.5.jar:/usr/local/tomcat/webapps/geoserver/WEB-INF/lib/gson-2.8.5.jar
       ports:
         - "${GEOSERVER_PORT:-8080}:8080"
       restart: on-failure
@@ -103,13 +109,35 @@ services:
         - GEOSERVER_CONTEXT_ROOT=${GEOSERVER_CONTEXT_ROOT:-geoserver}
         - ROOT_WEBAPP_REDIRECT=true
         - CONSOLE_HANDLER_LEVEL=${CONSOLE_HANDLER_LEVEL:-WARNING}
+        # URL que GeoServer usa para autoreferenciarse en capabilities documents, redirecciones de
+        # login, etc. (application property nativa de GeoServer, no es un invento de esta imagen).
+        # Sin esto, detrás de un tunnel (ngrok/Cloudflare) GeoServer sigue creyendo que es
+        # http://localhost:8080 y las redirecciones de login/enlaces internos rompen. Reusa
+        # PLUGINETA_PUBLIC_URL (la misma variable que ya hornea el plugin QGIS - ver
+        # plugin-repo-publisher abajo) para que un solo valor alcance para las dos cosas. Vacía =
+        # cae al comportamiento de siempre (localhost, uso local sin tunnel).
+        - PROXY_BASE_URL=${PLUGINETA_PUBLIC_URL:-http://localhost:${GEOSERVER_PORT:-8080}}/${GEOSERVER_CONTEXT_ROOT:-geoserver}
+        # El panel web de administración (Wicket) de GeoServer tiene proteccion CSRF que valida
+        # que el Origin/Referer del request coincida con un host conocido - detras de un tunnel
+        # (dominio distinto a localhost) esto bloquea acciones AJAX del admin (ej. editar reglas
+        # en Data Security) con "400 Bad Request" / "Origin does not correspond to request". Ver
+        # https://docs.geoserver.org/stable/en/user/security/webadmin/csrf.html. Whitelist por
+        # sufijo de dominio (no hace falta el host completo del tunel, cubre cualquier subdominio
+        # aleatorio de trycloudflare.com/ngrok-free.app sin tener que actualizarlo por sesion).
+        - GEOSERVER_CSRF_WHITELIST=${GEOSERVER_CSRF_WHITELIST:-trycloudflare.com,ngrok-free.app}
         # Configuración de base de datos PostgreSQL
         - POSTGRES_DB=${POSTGRES_DB:-gis_database}
         - POSTGRES_USER=${POSTGRES_USER:-gis_user}
         - POSTGRES_PASS=${POSTGRES_PASS:-gis_password}
         - POSTGRES_HOST=db
         - POSTGRES_PORT=5432
-        
+        # JNDI DataSource nativo de esta imagen de GeoServer (server.xml ya trae un <Resource>
+        # templateado con estas variables — ver plan de migración de plataforma, Fase 2).
+        # Usa nombres de variable distintos a los de arriba (USERNAME/PASSWORD, no USER/PASS).
+        - POSTGRES_JNDI_RESOURCE_NAME=jboss/datasources/pluginetaDS
+        - POSTGRES_USERNAME=${POSTGRES_USER:-gis_user}
+        - POSTGRES_PASSWORD=${POSTGRES_PASS:-gis_password}
+
       depends_on:
         db:
           condition: service_healthy
@@ -122,8 +150,58 @@ services:
         retries: 5
         start_period: 2m
 
+   # Cloudflare Tunnel - expone GeoServer (y por lo tanto el repo de plugins embebido) a
+   # internet con HTTPS, sin abrir puertos ni tener dominio propio. Reemplaza a ngrok: el free
+   # tier de ngrok interpone una pagina HTML de confirmacion ("interstitial") ante cualquier
+   # visitante sin el header ngrok-skip-browser-warning, lo cual traba tanto al instalador de
+   # QGIS (que baja plugins.xml/im_layer_loader.zip con un cliente HTTP simple, no un navegador)
+   # como al propio plugin corriendo. Un "quick tunnel" de Cloudflare no tiene ese problema y no
+   # requiere cuenta ni login - a cambio, la URL es efimera (cambia en cada arranque).
+   # Uso:
+   #   docker compose --profile tunnel up -d cloudflared
+   #   docker compose logs cloudflared | grep trycloudflare.com   # imprime la URL asignada
+   # Con esa URL: setear PLUGINETA_PUBLIC_URL en .env y luego
+   #   docker compose up -d geoserver                             # aplica PROXY_BASE_URL
+   #   docker compose --profile publish up plugin-repo-publisher  # hornea el plugin con esa URL
+   cloudflared:
+      profiles: ["tunnel"]
+      image: cloudflare/cloudflared:latest
+      container_name: plugineta-cloudflared
+      command: tunnel --no-autoupdate --url http://geoserver:8080
+      depends_on:
+        - geoserver
+      restart: on-failure
+
+   # Publica/actualiza el plugin QGIS que sirve el repositorio embebido en GeoServer
+   # (PluginetaRepoController, /rest/plugineta/repo/**) - opcionalmente con un host publico
+   # (ngrok, Cloudflare Tunnel) horneado en su config, via PLUGINETA_PUBLIC_URL en .env. Corre
+   # una vez y termina (no es un servicio de larga duracion), no bloquea el resto del stack, y
+   # no hace falta reiniciar geoserver despues (el controller lee el zip del disco en cada
+   # request). Ver code/frontend/publish-plugin-repo.sh. Se dispara a demanda:
+   #   docker compose --profile publish up plugin-repo-publisher
+   plugin-repo-publisher:
+      profiles: ["publish"]
+      image: alpine:3.20
+      container_name: plugineta-plugin-repo-publisher
+      environment:
+        - PLUGINETA_PUBLIC_URL=${PLUGINETA_PUBLIC_URL:-}
+        - PLUGIN_REPO_OUTPUT_DIR=/output
+      volumes:
+        - ./code/frontend:/frontend:ro
+        - ./server/geoserver/data_dir/plugineta-config/plugin-repo:/output
+      working_dir: /frontend
+      entrypoint: ["/bin/sh", "-c"]
+      command:
+        - "apk add --no-cache bash zip >/dev/null && bash publish-plugin-repo.sh"
+      restart: "no"
+
    # WildFly Application Server (Backend Java)
    wildfly:
+      # Dormida por defecto tras la migración de plataforma (Fase 4): ya no hace falta para que
+      # el plugin funcione (ver geomvd/PluginetaGeoserverExt). Sigue completa y sin tocar por si
+      # hace falta compararla o volver atrás — se levanta a demanda con:
+      #   docker compose --profile legacy up wildfly
+      profiles: ["legacy"]
       build:
         context: ./server/wildfly-docker
         dockerfile: Dockerfile
